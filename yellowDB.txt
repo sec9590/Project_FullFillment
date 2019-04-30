@@ -1,5 +1,5 @@
 create table member (
-  m_id varchar(10) unsigned not null,
+  m_id varchar(10) not null,
   m_password varchar(10) not null,
   m_name varchar(10) not null,
   m_tel varchar(20) not null,
@@ -19,7 +19,7 @@ create table product (
 ) auto_increment=1 default charset=utf8;
 desc product;
 
-create table order (
+create table orders (
   o_id int unsigned not null auto_increment,
   o_name varchar(10) not null,
   o_tel varchar(20) not null,
@@ -30,7 +30,7 @@ create table order (
   o_time datetime default current_timestamp,
   primary key(o_id)
 ) auto_increment=10001 default charset=utf8;
-desc order;
+desc orders;
 
 create table waybill (
   w_id int unsigned not null auto_increment,
