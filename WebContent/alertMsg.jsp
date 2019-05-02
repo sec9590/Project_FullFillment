@@ -4,15 +4,14 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Alert message</title>
+<title>Alert Message</title>
 </head>
 <body>
-
-<script type="text/javascript">
-	var message = "${requestScope.message}";
-	var returnUrl = "${requestScope.url}";
+<script>
+	var message = '${requestScope.message}';
+	var returnurl = '${requestScope.url}';
 	alert(message);
-	document.location.href = returnUrl; 
+	document.location.href = returnurl;
 </script>
 </body>
 </html>
