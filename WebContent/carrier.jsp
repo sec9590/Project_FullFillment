@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="java.util.*, member.*"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -12,6 +12,17 @@
     <!-- Core Style CSS -->
     <link rel="stylesheet" href="css/core-style.css">
     <link rel="stylesheet" href="style.css">
+    
+<%
+	
+	if(session.getAttribute("memberField") == null || session.getAttribute("memberField").equals("관리자")){
+		session.invalidate();
+		out.println("<script>alert('운송회사 전용입니다.'); location.href='admin.jsp';</script>");
+		out.flush(); 
+
+		//response.sendRedirect("admin.jsp");
+	} else {
+%>
 </head>
 <body>
  <!-- ##### Main Content Wrapper Start ##### -->
@@ -21,7 +32,11 @@
         <div class="mobile-nav">
             <!-- Navbar Brand -->
             <div class="amado-navbar-brand">
-                <a href="index.html"><img src="img/core-img/logo.png" alt=""></a>
+                <a href="index.jsp"><img src="img/core-img/logo.png" alt=""></a>
+                <div style="text-align:center">
+	                ${memberName}
+					<a href="/project02/memberProcServlet?action=logout">로그아웃</a>
+				</div>
             </div>
             <!-- Navbar Toggler -->
             <div class="amado-navbar-toggler">
@@ -37,13 +52,17 @@
             </div>
             <!-- Logo -->
             <div class="logo">
-                <a href="index.html"><img src="img/core-img/logo.png" alt=""></a>
+                <a href="index.jsp"><img src="img/core-img/logo.png" alt=""></a>
+                <div style="text-align:center">
+	                ${memberName}
+					<a href="/project02/memberProcServlet?action=logout">로그아웃</a>
+				</div>
             </div>
             <!-- Amado Nav -->
             <nav class="amado-nav">
                 <ul>
-                  <li><a href="index.html">HOME</a></li>
-                  <li><a href="admin.jsp">ADMIN</a></li>
+                  <li><a href="index.jsp">HOME</a></li>
+                  <li><a href="commodity.jsp">ADMIN</a></li>
                   <li><a href="buying.jsp">BUYING</a></li>
                   <li class="active"><a href="carrier.jsp">CARRIER</a></li>
                   <li><a href="signup.jsp">SIGN UP</a></li>
@@ -85,7 +104,7 @@
                     <div class="single_widget_area">
                         <!-- Logo -->
                         <div class="footer-logo mr-50">
-                            <a href="index.html"><img src="img/core-img/logo2.png" alt=""></a>
+                            <a href="index.jsp"><img src="img/core-img/logo2.png" alt=""></a>
                         </div>
                         <!-- Copywrite Text -->
                         <p class="copywrite"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
@@ -103,7 +122,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
                                 <div class="collapse navbar-collapse" id="footerNavContent">
                                     <ul class="navbar-nav ml-auto">
                                         <li class="nav-item active">
-                                            <a class="nav-link" href="index.html">HOME</a>
+                                            <a class="nav-link" href="index.jsp">HOME</a>
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link" href="admin.jsp">ADMIN</a>
@@ -143,4 +162,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
         
         
 </body>
+<%
+}
+%>
 </html>

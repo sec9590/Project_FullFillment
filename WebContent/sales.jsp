@@ -71,7 +71,11 @@
         <div class="mobile-nav">
             <!-- Navbar Brand -->
             <div class="amado-navbar-brand">
-                <a href="index.html"><img src="img/core-img/logo.png" alt=""></a>
+                <a href="index.jsp"><img src="img/core-img/logo.png" alt=""></a>
+                <div style="text-align:center">
+	                ${memberName}
+					<a href="/project02/memberProcServlet?action=logout">로그아웃</a>
+				</div>
             </div>
             <!-- Navbar Toggler -->
             <div class="amado-navbar-toggler">
@@ -87,12 +91,16 @@
             </div>
             <!-- Logo -->
             <div class="logo">
-                <a href="index.html"><img src="img/core-img/logo.png" alt=""></a>
+                <a href="index.jsp"><img src="img/core-img/logo.png" alt=""></a>
+                <div style="text-align:center">
+	                ${memberName}
+					<a href="/project02/memberProcServlet?action=logout">로그아웃</a>
+				</div>
             </div>
             <!-- Amado Nav -->
             <nav class="amado-nav">
                 <ul>
-                    <li><a href="index.html">HOME</a></li>
+                    <li><a href="index.jsp">HOME</a></li>
                     <li class="active"><a href="admin.jsp">ADMIN</a></li>
                     <li><a href="buying.jsp">BUYING</a></li>
                     <li><a href="carrier.jsp">CARRIER</a></li>
@@ -214,7 +222,7 @@
                     <div class="single_widget_area">
                         <!-- Logo -->
                         <div class="footer-logo mr-50">
-                            <a href="index.html"><img src="img/core-img/logo2.png" alt=""></a>
+                            <a href="index.jsp"><img src="img/core-img/logo2.png" alt=""></a>
                         </div>
                         <!-- Copywrite Text -->
                         <p class="copywrite"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
@@ -232,7 +240,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
                                 <div class="collapse navbar-collapse" id="footerNavContent">
                                     <ul class="navbar-nav ml-auto">
                                        <li class="nav-item active">
-                                            <a class="nav-link" href="index.html">HOME</a>
+                                            <a class="nav-link" href="index.jsp">HOME</a>
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link" href="admin.jsp">ADMIN</a>

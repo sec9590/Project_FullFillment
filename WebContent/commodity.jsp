@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="member.*"%>
+   
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -38,9 +39,12 @@
   <!--===============================================================================================-->
     <link rel="stylesheet" type="text/css" href="vendor/daterangepicker/daterangepicker.css">
   <!--===============================================================================================-->
-
-
-
+<%
+	if(session.getAttribute("memberField") == null){
+		response.sendRedirect("admin.jsp");
+	} else {
+%>
+		
 </head>
 
 <body>
@@ -72,6 +76,10 @@
             <!-- Navbar Brand -->
             <div class="amado-navbar-brand">
                 <a href="index.html"><img src="img/core-img/logo.png" alt=""></a>
+                <div style="text-align:center">
+	                ${memberName}
+					<a href="/project02/memberProcServlet?action=logout">로그아웃</a>
+				</div>
             </div>
             <!-- Navbar Toggler -->
             <div class="amado-navbar-toggler">
@@ -88,12 +96,16 @@
             <!-- Logo -->
             <div class="logo">
                 <a href="index.html"><img src="img/core-img/logo.png" alt=""></a>
+                <div style="text-align:center">
+	                ${memberName}
+					<a href="/project02/memberProcServlet?action=logout">로그아웃</a>
+				</div>
             </div>
             <!-- Amado Nav -->
             <nav class="amado-nav">
                 <ul>
                     <li><a href="index.html">Home</a></li>
-                    <li class="active"><a href="admin.jsp">ADMIN</a></li>
+                    <li class="active"><a href="commodity.jsp">ADMIN</a></li>
                     <li><a href="buying.jsp">BUYING</a></li>
                     <li><a href="carrier.jsp">CARRIER</a></li>
                     <li><a href="signup.jsp">SIGN UP</a></li>
@@ -124,7 +136,8 @@
                 </div>
             </div>
 
-            <div class="widget price mb-50"></div></div>
+            </div>
+
 
           <div class="amado_product_area section-padding-100">
             <div class="container-fluid">
@@ -279,4 +292,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     <!-- Active js -->
     <script src="js/active.js"></script>
 </body>
+<%
+	}
+%>
 </html>

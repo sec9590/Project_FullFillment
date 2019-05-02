@@ -1,6 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
+<<<<<<< HEAD
 	pageEncoding="UTF-8"%><%@ page import="product.*"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+=======
+    pageEncoding="UTF-8" import="member.*"%>
+    <%
+    	session.getAttribute("m_field");
+    %>
+>>>>>>> ffa7eac115d54c5c5928c99e242def98d8049fb6
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -128,12 +135,55 @@ tr, td {
 		</nav> </header>
 		<!-- Header Area End -->
 
+<<<<<<< HEAD
 		<div class="shop_sidebar_area">
 
 			<!-- ##### Single Widget ##### -->
 			<div class="widget catagory mb-50">
 				<!-- Widget Title -->
 				<h6 class="widget-title mb-30">관리자</h6>
+=======
+        <!-- Mobile Nav (max width 767px)-->
+        <div class="mobile-nav">
+            <!-- Navbar Brand -->
+            <div class="amado-navbar-brand">
+                <a href="index.html"><img src="img/core-img/logo.png" alt=""></a>
+                <div style="text-align:center">
+	                ${memberName}
+					<a href="/project02/memberProcServlet?action=logout">로그아웃</a>
+				</div>
+            </div>
+            <!-- Navbar Toggler -->
+            <div class="amado-navbar-toggler">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+
+        <!-- Header Area Start -->
+        <header class="header-area clearfix">
+            <!-- Close Icon -->
+            <div class="nav-close">
+                <i class="fa fa-close" aria-hidden="true"></i>
+            </div>
+            <!-- Logo -->
+            <div class="logo">
+                <a href="index.html"><img src="img/core-img/logo.png" alt=""></a>
+                <div style="text-align:center">
+	                ${memberName}
+					<a href="/project02/memberProcServlet?action=logout">로그아웃</a>
+				</div>
+            </div>
+            <!-- Amado Nav -->
+            <nav class="amado-nav">
+                <ul>
+                    <li><a href="index.html">HOME</a></li>
+                    <li class="active"><a href="admin.jsp">ADMIN</a></li>
+                    <li><a href="buying.jsp">BUYING</a></li>
+                    <li><a href="carrier.jsp">CARRIER</a></li>
+                    <li><a href="signup.jsp">SIGN UP</a></li>
+                </ul>
+            </nav>
+>>>>>>> ffa7eac115d54c5c5928c99e242def98d8049fb6
 
 				<!--  Catagories  -->
 				<div class="catagories-menu">
