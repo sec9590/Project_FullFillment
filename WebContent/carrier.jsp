@@ -103,20 +103,20 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
                                 <div class="collapse navbar-collapse" id="footerNavContent">
                                     <ul class="navbar-nav ml-auto">
                                         <li class="nav-item active">
-                                            <a class="nav-link" href="index.html">Home</a>
+                                            <a class="nav-link" href="index.html">HOME</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="shop.html">ADMIN</a>
+                                            <a class="nav-link" href="admin.jsp">ADMIN</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="product-details.html">BUYING</a>
+                                            <a class="nav-link" href="buying.jsp">BUYING</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="cart.html">CARRIER</a>
+                                            <a class="nav-link" href="carrier.jsp">CARRIER</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="checkout.html">SOGNUP</a>
-                                        </li>
+                                            <a class="nav-link" href="signup.jsp">SIGN UP</a>
+                                        </li>        
                                     </ul>
                                 </div>
                             </nav>

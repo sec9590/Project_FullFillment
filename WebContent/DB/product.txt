@@ -1,0 +1,441 @@
+Updatecheck<|||>3<|||>1
+DoUsageStatistics<|||>3<|||>1
+UpdatecheckLastrun<|||>1<|||>2019-04-29 09:30:22
+LastUsageStatisticCall<|||>1<|||>2019-04-29 09:30:25
+LastSessions<|||>1<|||>localhost
+LastActiveSession<|||>1<|||>localhost
+ColWidths_connform.ListSessions<|||>1<|||>163,50,50,50,50,50,53
+ColsVisible_connform.ListSessions<|||>1<|||>0
+ColPositions_connform.ListSessions<|||>1<|||>0,1,2,3,4,5,6
+ColSort_connform.ListSessions<|||>1<|||>0,0
+SQL Attr Comment Foreground<|||>3<|||>8421504
+SQL Attr Comment Background<|||>3<|||>536870911
+SQL Attr Comment Style<|||>3<|||>2
+SQL Attr ConditionalComment Foreground<|||>3<|||>8421504
+SQL Attr ConditionalComment Background<|||>3<|||>536870911
+SQL Attr ConditionalComment Style<|||>3<|||>2
+SQL Attr DataType Foreground<|||>3<|||>128
+SQL Attr DataType Background<|||>3<|||>536870911
+SQL Attr DataType Style<|||>3<|||>1
+SQL Attr DefaultPackages Foreground<|||>3<|||>536870911
+SQL Attr DefaultPackages Background<|||>3<|||>536870911
+SQL Attr DefaultPackages Style<|||>3<|||>1
+SQL Attr DelimitedIdentifier Foreground<|||>3<|||>32896
+SQL Attr DelimitedIdentifier Background<|||>3<|||>536870911
+SQL Attr DelimitedIdentifier Style<|||>3<|||>0
+SQL Attr Exception Foreground<|||>3<|||>536870911
+SQL Attr Exception Background<|||>3<|||>536870911
+SQL Attr Exception Style<|||>3<|||>2
+SQL Attr Function Foreground<|||>3<|||>8388608
+SQL Attr Function Background<|||>3<|||>536870911
+SQL Attr Function Style<|||>3<|||>1
+SQL Attr Identifier Foreground<|||>3<|||>32896
+SQL Attr Identifier Background<|||>3<|||>536870911
+SQL Attr Identifier Style<|||>3<|||>0
+SQL Attr Number Foreground<|||>3<|||>8388736
+SQL Attr Number Background<|||>3<|||>536870911
+SQL Attr Number Style<|||>3<|||>0
+SQL Attr PLSQL-ReservedWord Foreground<|||>3<|||>536870911
+SQL Attr PLSQL-ReservedWord Background<|||>3<|||>536870911
+SQL Attr PLSQL-ReservedWord Style<|||>3<|||>1
+SQL Attr ProcName Foreground<|||>3<|||>536870911
+SQL Attr ProcName Background<|||>3<|||>536870911
+SQL Attr ProcName Style<|||>3<|||>0
+SQL Attr ReservedWord Foreground<|||>3<|||>16711680
+SQL Attr ReservedWord Background<|||>3<|||>536870911
+SQL Attr ReservedWord Style<|||>3<|||>1
+SQL Attr Space Foreground<|||>3<|||>536870911
+SQL Attr Space Background<|||>3<|||>536870911
+SQL Attr Space Style<|||>3<|||>0
+SQL Attr SQLPlus-Command Foreground<|||>3<|||>536870911
+SQL Attr SQLPlus-Command Background<|||>3<|||>536870911
+SQL Attr SQLPlus-Command Style<|||>3<|||>1
+SQL Attr String Foreground<|||>3<|||>32768
+SQL Attr String Background<|||>3<|||>536870911
+SQL Attr String Style<|||>3<|||>0
+SQL Attr Symbol Foreground<|||>3<|||>16711680
+SQL Attr Symbol Background<|||>3<|||>536870911
+SQL Attr Symbol Style<|||>3<|||>0
+SQL Attr TableName Foreground<|||>3<|||>16711935
+SQL Attr TableName Background<|||>3<|||>536870911
+SQL Attr TableName Style<|||>3<|||>0
+SQL Attr Variable Foreground<|||>3<|||>8388736
+SQL Attr Variable Background<|||>3<|||>536870911
+SQL Attr Variable Style<|||>3<|||>0
+GUIFontName<|||>1<|||>D2Coding ligature
+GUIFontSize<|||>3<|||>10
+FieldEditor_Set<|||>3<|||>1
+LineBreakStyle<|||>3<|||>1
+FontName<|||>1<|||>D2Coding ligature
+FontSize<|||>3<|||>12
+CoolBand0Index<|||>3<|||>0
+CoolBand0Break<|||>3<|||>1
+CoolBand0Width<|||>3<|||>818
+CoolBand1Index<|||>3<|||>1
+CoolBand1Break<|||>3<|||>1
+CoolBand1Width<|||>3<|||>818
+sqloutheight<|||>3<|||>30
+MainWinMaximized<|||>3<|||>0
+MainWinOnMonitor<|||>3<|||>0
+ColWidths_MainForm.ListDatabases<|||>1<|||>150,80,50,50,50,50,50,50,50,50,120
+ColsVisible_MainForm.ListDatabases<|||>1<|||>0,1,2,3,4,5,6,7,8,9,10
+ColPositions_MainForm.ListDatabases<|||>1<|||>0,1,2,3,4,5,6,7,8,9,10
+ColSort_MainForm.ListDatabases<|||>1<|||>0,0
+ColWidths_MainForm.ListVariables<|||>1<|||>160,200,275
+ColsVisible_MainForm.ListVariables<|||>1<|||>0,1,2
+ColPositions_MainForm.ListVariables<|||>1<|||>0,1,2
+ColSort_MainForm.ListVariables<|||>1<|||>0,0
+ColWidths_MainForm.ListStatus<|||>1<|||>160,275,100,100
+ColsVisible_MainForm.ListStatus<|||>1<|||>0,1,2,3
+ColPositions_MainForm.ListStatus<|||>1<|||>0,1,2,3
+ColSort_MainForm.ListStatus<|||>1<|||>0,0
+ColWidths_MainForm.ListProcesses<|||>1<|||>70,80,80,80,80,50,50,10
+ColsVisible_MainForm.ListProcesses<|||>1<|||>0,1,2,3,4,5,6,7
+ColPositions_MainForm.ListProcesses<|||>1<|||>0,1,2,3,4,5,6,7
+ColSort_MainForm.ListProcesses<|||>1<|||>0,1
+ColWidths_MainForm.ListCommandStats<|||>1<|||>120,100,100,100,215
+ColsVisible_MainForm.ListCommandStats<|||>1<|||>0,1,2,3,4
+ColPositions_MainForm.ListCommandStats<|||>1<|||>0,1,2,3,4
+ColSort_MainForm.ListCommandStats<|||>1<|||>1,1
+ColWidths_MainForm.ListTables<|||>1<|||>120,70,70,120,120,70,100,50,70,70,70,70,70,90,120,70,70,70,50
+ColsVisible_MainForm.ListTables<|||>1<|||>0,1,2,3,4,5,6,18
+ColPositions_MainForm.ListTables<|||>1<|||>0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18
+ColSort_MainForm.ListTables<|||>1<|||>0,0
+ColWidths_frmTableEditor.listColumns<|||>1<|||>39,100,150,90,60,65,50,114,130,157,100,100
+ColsVisible_frmTableEditor.listColumns<|||>1<|||>0,1,2,3,4,5,6,7,8,9,10,11
+ColPositions_frmTableEditor.listColumns<|||>1<|||>0,1,2,3,4,5,6,7,8,9,10,11
+ColSort_frmTableEditor.listColumns<|||>1<|||>-1,0
+ColWidths_frmTableEditor.treeIndexes<|||>1<|||>431,100,80
+ColsVisible_frmTableEditor.treeIndexes<|||>1<|||>0,1,2
+ColPositions_frmTableEditor.treeIndexes<|||>1<|||>0,1,2
+ColSort_frmTableEditor.treeIndexes<|||>1<|||>-1,0
+ColWidths_frmTableEditor.listForeignKeys<|||>1<|||>203,80,100,80,80,80
+ColsVisible_frmTableEditor.listForeignKeys<|||>1<|||>0,1,2,3,4,5
+ColPositions_frmTableEditor.listForeignKeys<|||>1<|||>0,1,2,3,4,5
+ColSort_frmTableEditor.listForeignKeys<|||>1<|||>-1,0
+querymemoheight<|||>3<|||>92
+queryhelperswidth<|||>3<|||>10
+dbtreewidth<|||>3<|||>313
+MainWinLeft<|||>3<|||>594
+MainWinTop<|||>3<|||>0
+MainWinWidth<|||>3<|||>840
+MainWinHeight<|||>3<|||>524
+FileDialogEncoding_loaddataform<|||>3<|||>0
+loadfilename<|||>1<|||>D:\workspace\EGov\ezenMall\customers.csv
+CSVSeparatorV2<|||>1<|||>,
+SQLFile0<|||>1<|||>D:\workspace\EGov\ezenMall\products.sql
+SQLFile1<|||>1<|||>D:\workspace\EGov\ezenMall\ezenDB.sql
+Servers\localhost\SessionCreated<|||>1<|||>2019-03-29 15:19:42
+Servers\localhost\Host<|||>1<|||>127.0.0.1
+Servers\localhost\WindowsAuth<|||>3<|||>0
+Servers\localhost\User<|||>1<|||>javauser
+Servers\localhost\Password<|||>1<|||>6C637863777567742
+Servers\localhost\LoginPrompt<|||>3<|||>0
+Servers\localhost\Port<|||>1<|||>3306
+Servers\localhost\NetType<|||>3<|||>0
+Servers\localhost\Compressed<|||>3<|||>0
+Servers\localhost\LocalTimeZone<|||>3<|||>0
+Servers\localhost\QueryTimeout<|||>3<|||>0
+Servers\localhost\KeepAlive<|||>3<|||>0
+Servers\localhost\FullTableStatus<|||>3<|||>1
+Servers\localhost\Databases<|||>1<|||>
+Servers\localhost\Comment<|||>1<|||>
+Servers\localhost\StartupScriptFilename<|||>1<|||>
+Servers\localhost\TreeBackground<|||>3<|||>536870911
+Servers\localhost\SSHtunnelHost<|||>1<|||>
+Servers\localhost\SSHtunnelHostPort<|||>3<|||>0
+Servers\localhost\SSHtunnelUser<|||>1<|||>
+Servers\localhost\SSHtunnelPassword<|||>1<|||>8
+Servers\localhost\SSHtunnelTimeout<|||>3<|||>4
+Servers\localhost\SSHtunnelPrivateKey<|||>1<|||>
+Servers\localhost\SSHtunnelPort<|||>3<|||>3307
+Servers\localhost\SSL_Active<|||>3<|||>0
+Servers\localhost\SSL_Key<|||>1<|||>
+Servers\localhost\SSL_Cert<|||>1<|||>
+Servers\localhost\SSL_CA<|||>1<|||>
+Servers\localhost\SSL_Cipher<|||>1<|||>
+Servers\localhost\RefusedCount<|||>3<|||>1
+Servers\localhost\ServerVersionFull<|||>1<|||>5.7.25-log - MySQL Community Server (GPL)
+Servers\localhost\ConnectCount<|||>3<|||>30
+Servers\localhost\ServerVersion<|||>3<|||>50725
+Servers\localhost\LastConnect<|||>1<|||>2019-04-30 16:33:56
+Servers\localhost\lastUsedDB<|||>1<|||>world
+Servers\localhost\QueryHistory\42<|||>1<|||>2019-04-01 09:36:58|world|0|use world
+Servers\localhost\QueryHistory\50<|||>1<|||>2019-04-01 09:37:30|world|16|use world;<{{{><}}}><{{{><}}}>drop table tmp;
+Servers\localhost\QueryHistory\51<|||>1<|||>2019-04-01 09:43:32|world|16|create table if not exists address_book (<{{{><}}}>    no int(4) unsigned not null auto_increment,<{{{><}}}>    name varchar(10) not null,<{{{><}}}>    tel varchar(14),<{{{><}}}>    nickname varchar(20),<{{{><}}}>    primary key(no)<{{{><}}}>) auto_increment=10001 default charset=utf8;<{{{><}}}>
+Servers\localhost\QueryHistory\52<|||>1<|||>2019-04-01 10:04:09|world|15|CREATE TABLE `wp_options`(<{{{><}}}>`option_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,<{{{><}}}>`option_name` varchar(64) NOT NULL DEFAULT '',<{{{><}}}>`option_value` longtext NOT NULL,<{{{><}}}>`autoload` varchar(20) NOT NULL DEFAULT 'yes',<{{{><}}}>PRIMARY KEY (`option_id`),<{{{><}}}>UNIQUE KEY `option_name` (`option_name`)<{{{><}}}>) ENGINE=MyISAM AUTO_INCREMENT=1203 DEFAULT CHARSET=utf8;<{{{><}}}><{{{><}}}>
+Servers\localhost\QueryHistory\53<|||>1<|||>2019-04-01 10:05:03|world|16|show table status;<{{{><}}}>
+Servers\localhost\QueryHistory\54<|||>1<|||>2019-04-01 10:06:37|world|46|create table if not exists tmp (<{{{><}}}>    no int(4) unsigned not null auto_increment,<{{{><}}}>    name varchar(10) not null,<{{{><}}}>    tel varchar(14),<{{{><}}}>    nickname varchar(20),<{{{><}}}>    primary key(no)<{{{><}}}>) auto_increment=10001 default charset=utf8;<{{{><}}}>
+Servers\localhost\QueryHistory\55<|||>1<|||>2019-04-01 10:06:52|world|15|drop tables tmp;
+Servers\localhost\QueryHistory\11<|||>1<|||>2019-04-01 10:07:58|world|31|create table tmp (<{{{><}}}>	id int,<{{{><}}}>	name varchar(10)<{{{><}}}>);<{{{><}}}>
+Servers\localhost\QueryHistory\9<|||>1<|||>2019-04-01 10:08:26|world|16|rename table tmp to tmp_table;
+Servers\localhost\QueryHistory\56<|||>1<|||>2019-04-01 10:11:22|world|78|alter table address_book add gender char(2) not null;
+Servers\localhost\QueryHistory\20<|||>1<|||>2019-04-01 10:15:12|world|62|alter table address_book drop gender;
+Servers\localhost\QueryHistory\58<|||>1<|||>2019-04-01 10:17:10|world|63|alter table address_book add gender char(2) not null default '여' after name;
+Servers\localhost\QueryHistory\59<|||>1<|||>2019-04-01 10:21:05|world|78|alter table address_book change no aid int(8);<{{{><}}}><{{{><}}}>desc address_book;
+Servers\localhost\QueryHistory\61<|||>1<|||>2019-04-01 10:22:17|world|93|alter table address_book <{{{><}}}>change aid aid int(4) unsigned auto_increment;<{{{><}}}><{{{><}}}>desc address_book;
+Servers\localhost\QueryHistory\62<|||>1<|||>2019-04-01 10:22:39|world|31|alter table address_book <{{{><}}}>change aid aid int(4) unsigned not null auto_increment;<{{{><}}}><{{{><}}}>desc address_book;
+Servers\localhost\QueryHistory\63<|||>1<|||>2019-04-01 10:24:17|world|32|alter table address_book <{{{><}}}>change nickname address varchar(40);<{{{><}}}><{{{><}}}>desc address_book;
+Servers\localhost\QueryHistory\64<|||>1<|||>2019-04-01 10:28:40|world|108|alter table address_book <{{{><}}}><{{{><}}}>modify tel varchar(2) after address;<{{{><}}}><{{{><}}}>desc address_book;
+Servers\localhost\QueryHistory\65<|||>1<|||>2019-04-01 10:28:46|world|0|alter table address_book <{{{><}}}><{{{><}}}>modify tel varchar(14) after address;<{{{><}}}><{{{><}}}>desc address_book;
+Servers\localhost\QueryHistory\66<|||>1<|||>2019-04-01 10:29:29|world|62|alter table address_book <{{{><}}}><{{{><}}}>modify tel varchar(14) first;<{{{><}}}><{{{><}}}>desc address_book;
+Servers\localhost\QueryHistory\67<|||>1<|||>2019-04-01 10:30:27|world|62|alter table address_book <{{{><}}}><{{{><}}}>modify tel varchar(14) after gender;<{{{><}}}><{{{><}}}>desc address_book;
+Servers\localhost\QueryHistory\69<|||>1<|||>2019-04-01 10:37:50|world|0|select * from city limit 5;
+Servers\localhost\QueryHistory\70<|||>1<|||>2019-04-01 10:39:08|world|0|select * from city order by id desc limit 5;
+Servers\localhost\QueryHistory\71<|||>1<|||>2019-04-01 10:42:14|world|0|select * from city where countrycode='kor';
+Servers\localhost\QueryHistory\72<|||>1<|||>2019-04-01 10:43:44|world|16|select * from city where district='kyonggi';
+Servers\localhost\QueryHistory\73<|||>1<|||>2019-04-01 10:45:05|world|0|select name, population from city where district='kyonggi';
+Servers\localhost\QueryHistory\74<|||>1<|||>2019-04-01 10:45:35|world|16|select * from city where district='kyonggi'<{{{><}}}>and population>500000;
+Servers\localhost\QueryHistory\75<|||>1<|||>2019-04-01 10:48:33|world|0|select district from city where countrycode='kor';<{{{><}}}>
+Servers\localhost\QueryHistory\76<|||>1<|||>2019-04-01 10:49:35|world|0|select distinct district from city where countrycode='kor';<{{{><}}}>
+Servers\localhost\QueryHistory\77<|||>1<|||>2019-04-01 11:03:02|world|0|select * from mysql.help_keyword;<{{{><}}}>
+Servers\localhost\QueryHistory\78<|||>1<|||>2019-04-01 11:04:15|world|0|select * from city where district='chollanam' or <{{{><}}}>	district='chollabuk' or district='kwangju';<{{{><}}}>
+Servers\localhost\QueryHistory\79<|||>1<|||>2019-04-01 11:06:47|world|16|select * from city where <{{{><}}}>	countrycode='kor' and population>1000000 and population%2=0;<{{{><}}}>
+Servers\localhost\QueryHistory\80<|||>1<|||>2019-04-01 11:11:04|world|0|select * from city where <{{{><}}}>	countrycode='kor' and population between 1000000 and 2000000;<{{{><}}}>
+Servers\localhost\QueryHistory\81<|||>1<|||>2019-04-01 11:13:52|world|0|update city set population=1425835 where id=2335;<{{{><}}}>
+Servers\localhost\QueryHistory\82<|||>1<|||>2019-04-01 11:14:03|world|0|select * from city where countrycode='kor'and name like 'tae%';<{{{><}}}>
+Servers\localhost\QueryHistory\83<|||>1<|||>2019-04-01 11:15:04|world|0|select * from city where district='kyonggi' order by name;<{{{><}}}>
+Servers\localhost\QueryHistory\84<|||>1<|||>2019-04-01 11:20:58|world|0|select * from city where countrycode='kor' <{{{><}}}>and population>1000000 and not name like 'tae%';<{{{><}}}>
+Servers\localhost\QueryHistory\87<|||>1<|||>2019-04-01 11:22:38|world|0|select * from city where district='kyonggi' order by name;
+Servers\localhost\QueryHistory\85<|||>1<|||>2019-04-01 11:23:15|world|0|select * from city where district='kyonggi' order by name desc;
+Servers\localhost\QueryHistory\86<|||>1<|||>2019-04-01 11:24:44|world|0|select * from city where district='kyonggi' order by population desc;
+Servers\localhost\QueryHistory\88<|||>1<|||>2019-04-01 11:26:14|world|0|select * from city where district='kyonggi' order by population desc limit 1;
+Servers\localhost\QueryHistory\89<|||>1<|||>2019-04-01 11:26:35|world|0|select name from city where district='kyonggi' order by population desc limit 1;
+Servers\localhost\QueryHistory\90<|||>1<|||>2019-04-01 11:30:35|world|0|select * from city where countrycode='kor' order by district;<{{{><}}}>
+Servers\localhost\QueryHistory\91<|||>1<|||>2019-04-01 11:31:54|world|0|select * from city where countrycode='kor' order by district, population;<{{{><}}}>
+Servers\localhost\QueryHistory\92<|||>1<|||>2019-04-01 11:32:52|world|0|select * from city where countrycode='kor' order by district desc, population;<{{{><}}}>
+Servers\localhost\QueryHistory\93<|||>1<|||>2019-04-01 11:33:23|world|0|select * from city where countrycode='kor' order by district desc, population desc;<{{{><}}}>
+Servers\localhost\QueryHistory\94<|||>1<|||>2019-04-01 11:34:21|world|0|select count(*) from city where countrycode='kor';<{{{><}}}>
+Servers\localhost\QueryHistory\95<|||>1<|||>2019-04-01 11:35:35|world|0|select sum(population) from city where countrycode='kor';<{{{><}}}>
+Servers\localhost\QueryHistory\96<|||>1<|||>2019-04-01 11:37:29|world|0|select min(population) from city where countrycode='kor';<{{{><}}}>
+Servers\localhost\QueryHistory\97<|||>1<|||>2019-04-01 11:38:40|world|0|select name from city where countrycode='kor' order by population limit 1;<{{{><}}}>
+Servers\localhost\QueryHistory\98<|||>1<|||>2019-04-01 11:41:34|world|0|select min(population), max(population), avg(population), <{{{><}}}>	sum(population) from city where countrycode = 'kor';<{{{><}}}>
+Servers\localhost\QueryHistory\99<|||>1<|||>2019-04-01 11:42:29|world|0|select group_concat(name) from city where district='chungchongnam';
+Servers\localhost\QueryHistory\100<|||>1<|||>2019-04-01 11:43:28|world|0|select group_concat(name) from city where district='chungchongbuk';
+Servers\localhost\QueryHistory\102<|||>1<|||>2019-04-01 11:47:07|world|0|select group_concat(name) from city where countrycode='kor' and district=name;
+Servers\localhost\QueryHistory\101<|||>1<|||>2019-04-01 11:48:23|world|0|select group_concat(distinct district) from city <{{{><}}}>	where countrycode='kor';<{{{><}}}>
+Servers\localhost\QueryHistory\68<|||>1<|||>2019-04-01 11:50:40|world|16|select * from city;<{{{><}}}>
+Servers\localhost\QueryHistory\105<|||>1<|||>2019-04-01 12:01:35|world|0|select district, count(*) from city <{{{><}}}>	where countrycode='kor' group by district;<{{{><}}}>
+Servers\localhost\QueryHistory\106<|||>1<|||>2019-04-01 12:04:50|world|0|select district, count(*) from city where countrycode='kor'<{{{><}}}>	group by district having count(*)=6;<{{{><}}}>
+Servers\localhost\QueryHistory\107<|||>1<|||>2019-04-01 12:05:00|world|0|select district, count(*) from city <{{{><}}}>	where countrycode='kor' group by district;
+Servers\localhost\QueryHistory\108<|||>1<|||>2019-04-01 12:05:11|world|0|select district, count(*) from city where countrycode='kor'<{{{><}}}>	group by district having count(*)=6;
+Servers\localhost\QueryHistory\109<|||>1<|||>2019-04-01 12:07:11|world|0|select district, count(*) from city where countrycode='kor'<{{{><}}}>group by district having count(*)>=6 order by count(*) desc;<{{{><}}}>
+Servers\localhost\QueryHistory\110<|||>1<|||>2019-04-01 12:09:12|world|16|select countrycode, count(*) from city <{{{><}}}>	group by countrycode having count(*) >=50;<{{{><}}}>
+Servers\localhost\QueryHistory\111<|||>1<|||>2019-04-01 12:10:34|world|0|select countrycode, count(*) from city <{{{><}}}>	group by countrycode having count(*) >=50 order by count(*) desc;<{{{><}}}>
+Servers\localhost\QueryHistory\112<|||>1<|||>2019-04-01 12:12:45|world|16|select * from country limit 10;
+Servers\localhost\QueryHistory\113<|||>1<|||>2019-04-01 12:14:39|world|15|select city.Name, city.Population, country.Name from city<{{{><}}}>	inner join country on city.CountryCode = country.Code;<{{{><}}}>
+Servers\localhost\QueryHistory\114<|||>1<|||>2019-04-01 12:16:09|world|0|select city.Name, city.Population, country.Name from city<{{{><}}}>	inner join country on city.CountryCode = country.Code limit 10;<{{{><}}}>
+Servers\localhost\QueryHistory\115<|||>1<|||>2019-04-01 12:17:03|world|0|select city.Name, city.Population, country.Name from city<{{{><}}}>	inner join country on city.CountryCode = country.Code order by city.Population desc limit 10;<{{{><}}}>
+Servers\localhost\QueryHistory\116<|||>1<|||>2019-04-01 12:24:56|world|0|select city.Name, city.Population, country.Name from city<{{{><}}}>	inner join country on city.CountryCode = country.Code<{{{><}}}>	where city.CountryCode='kor';<{{{><}}}>
+Servers\localhost\QueryHistory\117<|||>1<|||>2019-04-01 12:25:45|world|0|select city.Name, city.Population, country.Name from city<{{{><}}}>	inner join country on city.CountryCode = country.Code<{{{><}}}>	where city.CountryCode='jpn';<{{{><}}}>
+Servers\localhost\QueryHistory\118<|||>1<|||>2019-04-01 12:28:16|world|16|select city.Name, city.Population, country.Name from city<{{{><}}}>	inner join country on city.CountryCode = country.Code <{{{><}}}>	where city.Population > 7000000;<{{{><}}}>
+Servers\localhost\QueryHistory\120<|||>1<|||>2019-04-01 12:32:05|world|0|select * from country where continent='Asia';
+Servers\localhost\QueryHistory\121<|||>1<|||>2019-04-01 12:32:23|world|0|select count(*) from country where continent='Asia';
+Servers\localhost\QueryHistory\123<|||>1<|||>2019-04-01 12:35:26|world|0|select Name, SurfaceArea from country;
+Servers\localhost\QueryHistory\124<|||>1<|||>2019-04-01 12:36:29|world|0|select continent, SurfaceArea from country;
+Servers\localhost\QueryHistory\125<|||>1<|||>2019-04-01 12:43:02|world|0|select continent, sum(surfacearea) from country group by continent;
+Servers\localhost\QueryHistory\126<|||>1<|||>2019-04-01 12:43:17|world|0|select continent, sum(surfacearea) from country group by continent order by continent;
+Servers\localhost\QueryHistory\127<|||>1<|||>2019-04-01 12:43:27|world|0|select continent, sum(surfacearea) from country group by continent order by continent desc;
+Servers\localhost\QueryHistory\128<|||>1<|||>2019-04-01 12:43:44|world|0|select continent, sum(surfacearea) from country group by continent order by sum(surfacearea) desc;
+Servers\localhost\QueryHistory\119<|||>1<|||>2019-04-01 12:45:48|world|16|select * from city;<{{{><}}}><{{{><}}}>
+Servers\localhost\QueryHistory\130<|||>1<|||>2019-04-01 12:47:10|world|0|select * from city;<{{{><}}}><{{{><}}}>select countrycode, sum(population) from city;
+Servers\localhost\QueryHistory\131<|||>1<|||>2019-04-01 12:47:43|world|32|select * from city;<{{{><}}}><{{{><}}}>select name, sum(population) from city;
+Servers\localhost\QueryHistory\132<|||>1<|||>2019-04-01 12:48:23|world|0|select * from city;<{{{><}}}><{{{><}}}>select name, sum(population) from city group by name order by  sum(population);
+Servers\localhost\QueryHistory\133<|||>1<|||>2019-04-01 12:48:48|world|16|select * from city;<{{{><}}}><{{{><}}}>select countrycode, sum(population) from city group by countrycode order by  sum(population);
+Servers\localhost\QueryHistory\134<|||>1<|||>2019-04-01 12:49:14|world|0|select * from city;<{{{><}}}><{{{><}}}>select countrycode, sum(population) from city group by countrycode order by sum(population) desc limit 10;
+Servers\localhost\QueryHistory\135<|||>1<|||>2019-04-01 14:01:41|world|0|select countrycode, sum(population) from city group by countrycode order by sum(population) desc limit 10;
+Servers\localhost\QueryHistory\136<|||>1<|||>2019-04-01 14:01:52|world|0|select countrycode, sum(population) from city group by name order by sum(population) desc limit 10;
+Servers\localhost\QueryHistory\137<|||>1<|||>2019-04-01 14:02:13|world|0|select countrycode, sum(population) from city <{{{><}}}>	group by countrycode order by sum(population) desc limit 10;
+Servers\localhost\QueryHistory\138<|||>1<|||>2019-04-01 14:04:30|world|16|select country.Name, sum(city.Population) from city <{{{><}}}>	inner join country on city.CountryCode = country.Code<{{{><}}}>	group by city.CountryCode<{{{><}}}>	order by sum(city.Population) desc limit 10;
+Servers\localhost\QueryHistory\12<|||>1<|||>2019-04-01 14:11:26|world|0|update city set name='Siheung'<{{{><}}}>	where countrycode='kor' and name='Shihung';
+Servers\localhost\QueryHistory\140<|||>1<|||>2019-04-01 14:12:32|world|16|update city set name='Siheung'<{{{><}}}>	where countrycode='kor' and name='Shihung';<{{{><}}}>	<{{{><}}}>select * from city where countrycode='kor' and name like 's%';
+Servers\localhost\QueryHistory\141<|||>1<|||>2019-04-01 14:13:59|world|0|update city set population=153443<{{{><}}}>	where id=2383;<{{{><}}}>	<{{{><}}}>select * from city where countrycode='kor' and name like 's%';
+Servers\localhost\QueryHistory\143<|||>1<|||>2019-04-01 14:18:06|world|125|alter table eagles add annual_income varchar(20);<{{{><}}}><{{{><}}}>select * from eagles;
+Servers\localhost\QueryHistory\144<|||>1<|||>2019-04-01 14:23:11|world|0|<{{{><}}}><{{{><}}}>select * from eagles;
+Servers\localhost\QueryHistory\48<|||>1<|||>2019-04-01 14:24:24|world|0|update eagles <{{{><}}}>set annual_income=58000 where back_no=14;<{{{><}}}><{{{><}}}>select * from eagles;
+Servers\localhost\QueryHistory\145<|||>1<|||>2019-04-01 14:27:40|world|0|update eagles <{{{><}}}>	set annual_income=32000 where back_no=29;<{{{><}}}><{{{><}}}>select * from eagles;
+Servers\localhost\QueryHistory\146<|||>1<|||>2019-04-01 14:29:51|world|0|update eagles <{{{><}}}>	set annual_income=38000 where back_no=53;<{{{><}}}><{{{><}}}>select * from eagles;
+Servers\localhost\QueryHistory\148<|||>1<|||>2019-04-01 14:30:51|world|0|update eagles <{{{><}}}>	set annual_income=27000 where back_no=56;<{{{><}}}><{{{><}}}>select * from eagles;
+Servers\localhost\QueryHistory\147<|||>1<|||>2019-04-01 14:31:12|world|0|update eagles <{{{><}}}>	set annual_income=27000 where back_no=32;<{{{><}}}><{{{><}}}>select * from eagles;
+Servers\localhost\QueryHistory\149<|||>1<|||>2019-04-01 14:32:57|world|0|update eagles <{{{><}}}>	set annual_income=27000 where back_no=104;<{{{><}}}><{{{><}}}>select * from eagles;
+Servers\localhost\QueryHistory\150<|||>1<|||>2019-04-01 14:34:38|world|109|alter table eagles change annual_income annual_income int(10);<{{{><}}}><{{{><}}}>select * from eagles;
+Servers\localhost\QueryHistory\151<|||>1<|||>2019-04-01 14:35:54|world|0|update eagles <{{{><}}}>	set annual_income=27000 where back_no=5;<{{{><}}}><{{{><}}}>select * from eagles;
+Servers\localhost\QueryHistory\152<|||>1<|||>2019-04-01 14:35:59|world|16|update eagles <{{{><}}}>	set annual_income=27000 where back_no=39;<{{{><}}}><{{{><}}}>select * from eagles;
+Servers\localhost\QueryHistory\153<|||>1<|||>2019-04-01 14:36:04|world|15|update eagles <{{{><}}}>	set annual_income=27000 where back_no=92;<{{{><}}}><{{{><}}}>select * from eagles;
+Servers\localhost\QueryHistory\154<|||>1<|||>2019-04-01 14:36:14|world|0|update eagles <{{{><}}}>	set annual_income=27000 where back_no=108;<{{{><}}}><{{{><}}}>select * from eagles;
+Servers\localhost\QueryHistory\155<|||>1<|||>2019-04-01 14:38:27|world|16|insert into city values (default, 'Gimpo', 'KOR', 'Kyonggi', 200001);<{{{><}}}><{{{><}}}>
+Servers\localhost\QueryHistory\156<|||>1<|||>2019-04-01 14:39:28|world|16|insert into city values (default, 'Gimpo', 'KOR', 'Kyonggi', 200001);<{{{><}}}><{{{><}}}>select * from city where district='kyonggi';
+Servers\localhost\QueryHistory\157<|||>1<|||>2019-04-01 14:41:41|world|15|insert into city (name, countrycode, district, population)<{{{><}}}>	values ('Hwasong', 'KOR', 'Kyonggi', 312345);<{{{><}}}><{{{><}}}><{{{><}}}>select * from city where district='kyonggi';
+Servers\localhost\QueryHistory\158<|||>1<|||>2019-04-01 15:01:58|world|46|create table citycopy like city;
+Servers\localhost\QueryHistory\159<|||>1<|||>2019-04-01 15:02:13|world|141|insert into citycopy select * from city;<{{{><}}}>select * from citycopy;<{{{><}}}>
+Servers\localhost\QueryHistory\161<|||>1<|||>2019-04-01 15:05:12|world|15|insert into city (name, countrycode, district, population)<{{{><}}}>	values ('Osan', 'KOR', 'Kyonggi', 201234), <{{{><}}}>	('Pochon', 'KOR', 'Kyonggi', 156789);<{{{><}}}>select * from city order by id desc limit 5;<{{{><}}}>
+Servers\localhost\QueryHistory\162<|||>1<|||>2019-04-01 15:05:45|world|16|delete from city where id=4081;
+Servers\localhost\QueryHistory\163<|||>1<|||>2019-04-01 15:05:52|world|0|select * from city order by id desc limit 3;<{{{><}}}>
+Servers\localhost\QueryHistory\160<|||>1<|||>2019-04-01 15:06:00|world|0|select * from city order by id desc limit 5;<{{{><}}}>
+Servers\localhost\QueryHistory\164<|||>1<|||>2019-04-01 15:09:03|world|0|delete from city where id=4082;<{{{><}}}>select * from city order by id desc limit 3;<{{{><}}}>
+Servers\localhost\QueryHistory\57<|||>1<|||>2019-04-01 15:13:19|world|0|create view LargeCity as select * from city <{{{><}}}>	where population>7000000 with check option;<{{{><}}}>
+Servers\localhost\QueryHistory\166<|||>1<|||>2019-04-01 15:13:41|world|15|select * from LargeCity;
+Servers\localhost\QueryHistory\165<|||>1<|||>2019-04-01 15:16:05|world|15|create view KoreanCity as select id, name, district, population <{{{><}}}>	from city where countrycode='kor';<{{{><}}}>
+Servers\localhost\QueryHistory\168<|||>1<|||>2019-04-01 15:16:16|world|0|select * from KoreanCity;
+Servers\localhost\QueryHistory\170<|||>1<|||>2019-04-01 15:17:45|world|0|drop view KoreanCity;
+Servers\localhost\QueryHistory\171<|||>1<|||>2019-04-01 15:18:17|world|0|create view KoreanCity as select id, name, district, population <{{{><}}}>	from city where countrycode='kor' with check option;<{{{><}}}>select * from KoreanCity ;<{{{><}}}>
+Servers\localhost\QueryHistory\172<|||>1<|||>2019-04-01 15:18:42|world|0|desc KoreanCity;
+Servers\localhost\QueryHistory\167<|||>1<|||>2019-04-01 15:22:06|world|15|select district, name, population from koreancity as c1 <{{{><}}}>	where population > (select avg(population) from koreancity as c2 <{{{><}}}>	where c1.district = c2.district group by district);<{{{><}}}>
+Servers\localhost\QueryHistory\139<|||>1<|||>2019-04-02 09:09:34|world|47|Create table date_table(<{{{><}}}>	id int auto_increment primary key,<{{{><}}}>	datetime datetime default now()<{{{><}}}>) auto_increment=101;<{{{><}}}>
+Servers\localhost\QueryHistory\174<|||>1<|||>2019-04-02 09:10:03|world|15|Insert into date_table (datetime) values<{{{><}}}>	('2017-08-28 17:22:21'), ('2017-02-15 10:33:24'),<{{{><}}}>	('2017-12-25 12:28:24'), ('2017-08-05 15:34:55');<{{{><}}}>Insert into date_table values(default, default);<{{{><}}}>
+Servers\localhost\QueryHistory\169<|||>1<|||>2019-04-02 09:15:08|world|0|Select datetime from date_table where id=101;<{{{><}}}>
+Servers\localhost\QueryHistory\176<|||>1<|||>2019-04-02 09:15:53|world|0|Select date_format(datetime, '%y-%m-%d') from date_table where id=101;
+Servers\localhost\QueryHistory\177<|||>1<|||>2019-04-02 09:18:50|world|0|Select date_format(datetime, '%p %h:%i:%s') from date_table where id=103;
+Servers\localhost\QueryHistory\178<|||>1<|||>2019-04-02 09:21:35|world|0|select now(), curdate(), curtime();
+Servers\localhost\QueryHistory\179<|||>1<|||>2019-04-02 09:22:50|world|0|select date_add(now(), interval 2 month);
+Servers\localhost\QueryHistory\180<|||>1<|||>2019-04-02 09:23:33|world|0|select date_sub(now(), interval 2 month);
+Servers\localhost\QueryHistory\181<|||>1<|||>2019-04-02 09:25:30|world|0|select to_days('2019-11-14') - to_days(now());
+Servers\localhost\QueryHistory\182<|||>1<|||>2019-04-02 09:28:10|world|16|select dayofweek(datetime) from date_table;
+Servers\localhost\QueryHistory\183<|||>1<|||>2019-04-02 09:34:03|world|0|select date(datetime), time(datetime) from date_table;
+Servers\localhost\QueryHistory\184<|||>1<|||>2019-04-02 09:39:08|world|0|desc countrylanguage;
+Servers\localhost\QueryHistory\185<|||>1<|||>2019-04-02 09:43:40|world|15|select cl.*, co.Name from countrylanguage as cl<{{{><}}}>	inner join country as co on cl.CountryCode=co.code<{{{><}}}>	where language = 'korean';<{{{><}}}>
+Servers\localhost\QueryHistory\186<|||>1<|||>2019-04-02 09:45:30|world|0|select city.*, country.Name from city left outer join country <{{{><}}}>	  on city.CountryCode=country.Code where city.CountryCode='kor';<{{{><}}}>
+Servers\localhost\QueryHistory\187<|||>1<|||>2019-04-02 09:46:14|world|0|select city.*, co.Name from city left outer join country as co<{{{><}}}>	  on city.CountryCode=co.Code where city.CountryCode='kor';<{{{><}}}>
+Servers\localhost\QueryHistory\188<|||>1<|||>2019-04-02 10:03:50|world|32|CREATE TABLE girl_group ( <{{{><}}}>	_id INT PRIMARY KEY AUTO_INCREMENT, <{{{><}}}>	name VARCHAR(32) NOT NULL, <{{{><}}}>	debut DATE NOT NULL, <{{{><}}}>	hit_song_id INT <{{{><}}}>) DEFAULT CHARSET=utf8;<{{{><}}}>
+Servers\localhost\QueryHistory\189<|||>1<|||>2019-04-02 10:05:51|world|31|CREATE TABLE song ( <{{{><}}}>	_id INT PRIMARY KEY AUTO_INCREMENT, <{{{><}}}>	title VARCHAR(32) NOT NULL, <{{{><}}}>	lyrics VARCHAR(32) <{{{><}}}>) DEFAULT CHARSET=utf8;<{{{><}}}>
+Servers\localhost\QueryHistory\190<|||>1<|||>2019-04-02 10:06:20|world|0|INSERT INTO song (_id, title, lyrics) <{{{><}}}>	VALUES (101, 'Tell Me', 'tell me tell me tetetete tel me');<{{{><}}}>INSERT INTO song (title, lyrics) <{{{><}}}>	VALUES ('Gee', 'GEE GEE GEE GEE GEE BABY BABY'),<{{{><}}}>	('미스터', '이름이 뭐야 미스터'), <{{{><}}}>	('Abracadabra', '이러다 미쳐 내가 여리여리'),<{{{><}}}>	('8282', 'Give me a call Baby baby'), ('기대해', '기대해'),<{{{><}}}>	('I Don\'t car', '다른 여자들의 다리를'), <{{{><}}}>	('Bad Girl Good Girl', '앞에선 한 마디 말도'), ('피노키오', '뉴예삐오'),<{{{><}}}>	('별빛달빛', '너는 내 별빛 내 마음의 별빛'), <{{{><}}}>	('A', 'A 워오우 워오우워 우우우'),<{{{><}}}>	('나혼자', '나 혼자 밥을 먹고 나 혼자 영화 보고'), ('LUV', '설레이나요 '),<{{{><}}}>	('짧은치마', '짧은 치마를 입고 내가 길을 걸으면'),<{{{><}}}>	('위아래', '위 아래 위위 아래'), ('Dumb Dumb' , '너 땜에 하루종일');<{{{><}}}>
+Servers\localhost\QueryHistory\191<|||>1<|||>2019-04-02 10:13:41|world|15|INSERT INTO girl_group (name, debut, hit_song_id) <{{{><}}}>	VALUES ('원더걸스', '2007-09-12', 101),<{{{><}}}>	('소녀시대', '2009-06-03', 102), ('카라', '2009-07-30', 103),<{{{><}}}>	('브라운아이드걸스', '2008-01-17', 104), ('다비치', '2009-02-27', 105),<{{{><}}}>	('2NE1', '2009-07-08', 107), ('f(x)', '2011-04-20', 109),<{{{><}}}>	('시크릿', '2011-01-06', 110), ('레인보우', '2010-08-12', 111);<{{{><}}}>	<{{{><}}}>INSERT INTO girl_group (name, debut) <{{{><}}}>	VALUES ('애프터스쿨', '2009-11-25'), ('포미닛', '2009-08-28');<{{{><}}}>
+Servers\localhost\QueryHistory\193<|||>1<|||>2019-04-02 10:22:38|world|16|update girl_group set debut='2007-02-10' where _id=1;<{{{><}}}><{{{><}}}>select * from girl_group;
+Servers\localhost\QueryHistory\194<|||>1<|||>2019-04-02 10:22:54|world|0|update girl_group set debut='2007-02-10' where _id=1;<{{{><}}}>update girl_group set debut='2007-08-02' where _id=2;<{{{><}}}>select * from girl_group;
+Servers\localhost\QueryHistory\195<|||>1<|||>2019-04-02 10:24:16|world|0|SELECT gg._id, gg.name, s.title <{{{><}}}>FROM girl_group AS gg <{{{><}}}>INNER JOIN song AS s 		# JOIN song AS s <{{{><}}}>ON s._id = gg.hit_song_id;<{{{><}}}>
+Servers\localhost\QueryHistory\196<|||>1<|||>2019-04-02 10:24:51|world|0|SELECT gg._id, gg.name, s.title <{{{><}}}>	FROM girl_group AS gg <{{{><}}}>	INNER JOIN song AS s 				# JOIN song AS s <{{{><}}}>	ON s._id = gg.hit_song_id;			# WHERE s._id = gg.hit_song_id;<{{{><}}}><{{{><}}}>
+Servers\localhost\QueryHistory\197<|||>1<|||>2019-04-02 10:30:57|world|0|SELECT gg._id, gg.name, s.title <{{{><}}}>	FROM girl_group AS gg <{{{><}}}>	LEFT OUTER JOIN song AS s 	# LEFT JOIN song AS s<{{{><}}}>	ON s._id = gg.hit_song_id;<{{{><}}}>
+Servers\localhost\QueryHistory\198<|||>1<|||>2019-04-02 10:31:10|world|0|SELECT s._id, s.title, gg.name <{{{><}}}>	FROM girl_group AS gg <{{{><}}}>	RIGHT OUTER JOIN song AS s 	# RIGHT JOIN song AS s <{{{><}}}>	ON s._id = gg.hit_song_id;<{{{><}}}>
+Servers\localhost\QueryHistory\199<|||>1<|||>2019-04-02 10:33:44|world|0|select * from girl_group;
+Servers\localhost\QueryHistory\192<|||>1<|||>2019-04-02 10:37:05|world|15|delete from girl_group where _id between 10 and 27;<{{{><}}}><{{{><}}}>select * from girl_group;
+Servers\localhost\QueryHistory\200<|||>1<|||>2019-04-02 10:38:22|world|0|select * from girl_group where debut between '2009-01-01' and '2009-12-31';<{{{><}}}><{{{><}}}>select * from girl_group;
+Servers\localhost\QueryHistory\201<|||>1<|||>2019-04-02 10:47:37|world|0|SELECT gg._id, gg.name, s.title <{{{><}}}>FROM girl_group AS gg <{{{><}}}>INNER JOIN song AS s 		# JOIN song AS s <{{{><}}}>ON s._id = gg.hit_song_id;	# WHERE s._id = gg.hit_song_id;<{{{><}}}>
+Servers\localhost\QueryHistory\202<|||>1<|||>2019-04-02 10:50:32|world|0|select gg.name, gg.debut, song.title from girl_group as gg    inner join song on gg.hit_song_id=song._id    where debut between '2009-01-01' and '2009-12-31';<{{{><}}}>
+Servers\localhost\QueryHistory\203<|||>1<|||>2019-04-02 10:50:54|world|0|select gg.name, gg.debut, song.title from girl_group as gg<{{{><}}}>    inner join song on gg.hit_song_id=song._id<{{{><}}}>	 where debut between '2009-01-01' and '2009-12-31';<{{{><}}}>
+Servers\localhost\QueryHistory\122<|||>1<|||>2019-04-02 10:55:25|world|0|select * from country;<{{{><}}}><{{{><}}}>select sum(gnp) from country;
+Servers\localhost\QueryHistory\205<|||>1<|||>2019-04-02 10:55:41|world|0|select * from country;<{{{><}}}><{{{><}}}>select sum(gnp), avg(gnp) from country;
+Servers\localhost\QueryHistory\206<|||>1<|||>2019-04-02 10:56:22|world|0|select * from country;<{{{><}}}><{{{><}}}>select continent, sum(gnp) from country;
+Servers\localhost\QueryHistory\207<|||>1<|||>2019-04-02 10:56:48|world|0|select * from country;<{{{><}}}><{{{><}}}>select continent, gnp from country;
+Servers\localhost\QueryHistory\208<|||>1<|||>2019-04-02 10:58:09|world|0|select * from country;<{{{><}}}><{{{><}}}>select continent, count(*), sum(gnp), avg(gnp) <{{{><}}}>	from country group by continent;
+Servers\localhost\QueryHistory\209<|||>1<|||>2019-04-02 11:00:08|world|16|select * from country;<{{{><}}}><{{{><}}}>select city.Name, city.Population, country.Name from city<{{{><}}}>inner join country on city.CountryCode = country.Code <{{{><}}}>	where city.CountryCode='Asia';<{{{><}}}>
+Servers\localhost\QueryHistory\210<|||>1<|||>2019-04-02 11:08:10|world|0|<{{{><}}}>select city.Name, city.Population, cl.Language from city<{{{><}}}>    inner join countrylanguage as cl<{{{><}}}>	 on city.CountryCode=cl.CountryCode   <{{{><}}}>	 where cl.IsOfficial='T'    <{{{><}}}>	 order by population desc limit 10;<{{{><}}}><{{{><}}}>
+Servers\localhost\QueryHistory\211<|||>1<|||>2019-04-02 11:08:50|world|0|desc country;
+Servers\localhost\QueryHistory\173<|||>1<|||>2019-04-02 11:18:06|world|0|select co.continent, co.Name, city.Name, city.Population<{{{><}}}>	from country as co inner join city<{{{><}}}>	on co.Code=city.CountryCode<{{{><}}}>	where continent = 'Asia'<{{{><}}}>	order by city.Population desc limit 10;<{{{><}}}>
+Servers\localhost\QueryHistory\213<|||>1<|||>2019-04-02 14:37:26|world|0|select * from date_table;
+Servers\localhost\QueryHistory\214<|||>1<|||>2019-04-02 14:42:27|world|0|desc date_table;
+Servers\localhost\QueryHistory\215<|||>1<|||>2019-04-02 14:49:53|world|0|select id, DATE_FORMAT(datetime, '%t') from date_table;
+Servers\localhost\QueryHistory\216<|||>1<|||>2019-04-02 14:50:00|world|0|select id, DATE_FORMAT(datetime, '%T') from date_table;
+Servers\localhost\QueryHistory\217<|||>1<|||>2019-04-02 14:50:30|world|0|select id, DATE_FORMAT(datetime, '%Y %c/%e') from date_table;
+Servers\localhost\QueryHistory\218<|||>1<|||>2019-04-02 14:50:39|world|0|select id, DATE_FORMAT(datetime, '%Y %c %e %t') from date_table;
+Servers\localhost\QueryHistory\221<|||>1<|||>2019-04-02 14:51:44|world|0|select id, DATE_FORMAT(datetime, '%Y-%d-%e %T') from date_table;
+Servers\localhost\QueryHistory\222<|||>1<|||>2019-04-02 14:52:16|world|0|select id, DATE_FORMAT(datetime, '%Y-%c-%e %T') from date_table;
+Servers\localhost\QueryHistory\223<|||>1<|||>2019-04-02 14:53:09|world|0|select id, DATE_FORMAT(datetime, '%Y %E %e %T') from date_table;
+Servers\localhost\QueryHistory\220<|||>1<|||>2019-04-02 14:53:19|world|0|select id, DATE_FORMAT(datetime, '%Y %e %e %T') from date_table;
+Servers\localhost\QueryHistory\225<|||>1<|||>2019-04-02 14:53:24|world|0|select id, DATE_FORMAT(datetime, '%Y %d %e %T') from date_table;
+Servers\localhost\QueryHistory\224<|||>1<|||>2019-04-02 14:53:51|world|0|select id, DATE_FORMAT(datetime, '%Y %c %e %T') from date_table;
+Servers\localhost\QueryHistory\219<|||>1<|||>2019-04-02 15:00:19|world|0|select id, DATE_FORMAT(datetime, '%Y %m %e %T') from date_table;
+Servers\localhost\QueryHistory\226<|||>1<|||>2019-04-02 15:00:28|world|0|select id, DATE_FORMAT(datetime, '%Y - %m - %e %T') from date_table;
+Servers\localhost\QueryHistory\227<|||>1<|||>2019-04-02 15:00:35|world|0|select id, DATE_FORMAT(datetime, '%Y-%m-%e %T') from date_table;
+Servers\localhost\QueryHistory\228<|||>1<|||>2019-04-02 17:40:41|world|0|select * from song;
+Servers\localhost\QueryHistory\142<|||>1<|||>2019-04-03 11:50:36|world|31|create table if not exists member(<{{{><}}}>id int(4) unsigned not null auto_increment,<{{{><}}}>passowrd varchar(10) not null,<{{{><}}}>name varchar(10) not null,<{{{><}}}>birthday date not null,<{{{><}}}>address varchar(50),<{{{><}}}>primary key(id)<{{{><}}}>) auto_increment=10001 default charset=utf8;<{{{><}}}>
+Servers\localhost\QueryHistory\232<|||>1<|||>2019-04-03 12:02:41|world|32|create table if not exists member(<{{{><}}}>id int(4) unsigned not null auto_increment,<{{{><}}}>passowrd varchar(10) not null,<{{{><}}}>name varchar(10) not null,<{{{><}}}>birthday date not null,<{{{><}}}>address varchar(50),<{{{><}}}>primary key(id)<{{{><}}}>) auto_increment=100001 default charset=utf8;
+Servers\localhost\QueryHistory\175<|||>1<|||>2019-04-03 14:07:08|world|109|alter table member change passowrd password varchar(10);<{{{><}}}><{{{><}}}>select * from member;
+Servers\localhost\QueryHistory\231<|||>1<|||>2019-04-03 14:12:48|world|31|create table if not exists member(<{{{><}}}>id int(4) unsigned not null auto_increment,<{{{><}}}>pass varchar(10) not null,<{{{><}}}>name varchar(10) not null,<{{{><}}}>birthday date not null,<{{{><}}}>address varchar(50),<{{{><}}}>primary key(id)<{{{><}}}>) auto_increment=100001 default charset=utf8;
+Servers\localhost\QueryHistory\235<|||>1<|||>2019-04-04 09:27:55|world|31|create table if not exists bbs(<{{{><}}}>id int(6) unsigned not null auto_increment,<{{{><}}}>memberid int(6) unsigned not null,<{{{><}}}>title varchar(50) not null,<{{{><}}}>date datetime not null DEFAULT CURRENT_TIMESTAMP,<{{{><}}}>content varchar(400),<{{{><}}}>primary key(id),<{{{><}}}>foreign key(memberid) references member (id)<{{{><}}}>) auto_increment=100001 default charset=utf8; <{{{><}}}>
+Servers\localhost\QueryHistory\238<|||>1<|||>2019-04-04 10:51:57|world|47|create table bbs (<{{{><}}}>  id int unsigned not null auto_increment,<{{{><}}}>  memberId int unsigned not null,<{{{><}}}>  title varchar(50) not null,<{{{><}}}>  date datetime not null default current_timestamp,<{{{><}}}>  content varchar(400),<{{{><}}}>  primary key(id),<{{{><}}}>  foreign key(memberId) references member(id)<{{{><}}}>) default charset=utf8;
+Servers\localhost\QueryHistory\236<|||>1<|||>2019-04-04 14:46:53|world|0|set foreign_key_checks=0;
+Servers\localhost\QueryHistory\241<|||>1<|||>2019-04-04 14:47:31|world|0|set foreign_key_checks=1;
+Servers\localhost\QueryHistory\230<|||>1<|||>2019-04-04 15:43:14|world|15|drop table address_book;
+Servers\localhost\QueryHistory\49<|||>1<|||>2019-04-04 15:44:25|world|702|create table if not exists address_book (<{{{><}}}>    addr_no int(11) unsigned not null auto_increment,<{{{><}}}>    name varchar(10) not null,<{{{><}}}>    tel varchar(14),<{{{><}}}>    nickname varchar(20),<{{{><}}}>    primary key(addr_no)<{{{><}}}>) default charset=utf8;<{{{><}}}>
+Servers\localhost\QueryHistory\243<|||>1<|||>2019-04-04 15:45:57|world|15|desc address_book;
+Servers\localhost\QueryHistory\60<|||>1<|||>2019-04-04 15:54:51|world|0|create database ezen<{{{><}}}>default character set utf8<{{{><}}}>default collate utf8_general_ci;
+Servers\localhost\QueryHistory\244<|||>1<|||>2019-04-04 15:58:00|ezen|31|create table if not exists Member (<{{{><}}}>    member_id int(4) unsigned not null auto_increment,<{{{><}}}>    password varchar(16) not null,<{{{><}}}>    name varchar(8) not null,<{{{><}}}>    birthday date,<{{{><}}}>    tel varchar(16) not null,<{{{><}}}>    primary key(member_id)<{{{><}}}>) auto_increment=1001 default charset=utf8;<{{{><}}}>
+Servers\localhost\QueryHistory\246<|||>1<|||>2019-04-04 16:03:28|ezen|78|alter table Member add reg_date datetime after birthday;
+Servers\localhost\QueryHistory\247<|||>1<|||>2019-04-04 16:03:45|ezen|0|desc Member;
+Servers\localhost\QueryHistory\248<|||>1<|||>2019-04-04 16:06:46|ezen|0|desc Member_table;
+Servers\localhost\QueryHistory\233<|||>1<|||>2019-04-04 16:08:28|ezen|0|<{{{><}}}><{{{><}}}>desc Member_table;
+Servers\localhost\QueryHistory\240<|||>1<|||>2019-04-18 11:08:29|world|109|alter table member add hashed varchar(256);
+Servers\localhost\QueryHistory\254<|||>1<|||>2019-04-18 11:50:09|world|0|update member set pass='1234';
+Servers\localhost\QueryHistory\242<|||>1<|||>2019-04-18 11:53:05|world|0|update member set pass='*';
+Servers\localhost\QueryHistory\255<|||>1<|||>2019-04-19 09:35:53|world|0|delete from member where id=100012;<{{{><}}}><{{{><}}}>select * from member;
+Servers\localhost\QueryHistory\250<|||>1<|||>2019-04-19 10:52:33|ezen|0|desc member_table;
+Servers\localhost\QueryHistory\251<|||>1<|||>2019-04-19 10:55:46|world|31|create table if not exists Student (<{{{><}}}>    s_id int(8) unsigned not null auto_increment,<{{{><}}}>    s_name varchar(8) not null,<{{{><}}}>    dept_id int(4) unsigned not null,<{{{><}}}>    email varchar(40),<{{{><}}}>    primary key(s_id)<{{{><}}}>) auto_increment=1001 default charset=utf8;<{{{><}}}>
+Servers\localhost\QueryHistory\257<|||>1<|||>2019-04-19 10:56:01|world|0|create table if not exists Student (<{{{><}}}>    s_id int(8) unsigned not null auto_increment,<{{{><}}}>    s_name varchar(8) not null,<{{{><}}}>    dept_id int(4) unsigned not null,<{{{><}}}>    email varchar(40),<{{{><}}}>    primary key(s_id)<{{{><}}}>) auto_increment=1001 default charset=utf8;<{{{><}}}><{{{><}}}>select * from Student;<{{{><}}}>
+Servers\localhost\QueryHistory\260<|||>1<|||>2019-04-19 11:00:30|world|47|alter table Student add hs_id int(8) unsigned not null after dept_id;<{{{><}}}><{{{><}}}>desc Student;
+Servers\localhost\QueryHistory\261<|||>1<|||>2019-04-19 11:02:46|world|62|alter table Student add s_tel varchar(16) not null after email;<{{{><}}}><{{{><}}}>
+Servers\localhost\QueryHistory\259<|||>1<|||>2019-04-19 11:05:53|world|15|alter table Student change email s_eamil varchar(40);<{{{><}}}><{{{><}}}><{{{><}}}>desc Student;
+Servers\localhost\QueryHistory\263<|||>1<|||>2019-04-19 11:16:41|world|16|alter table Student change s_eamil s_email varchar(40);
+Servers\localhost\QueryHistory\262<|||>1<|||>2019-04-19 11:20:55|world|62|alter table Student change s_tel s_tel varchar(16);
+Servers\localhost\QueryHistory\265<|||>1<|||>2019-04-19 11:21:15|world|0|desc Student;
+Servers\localhost\QueryHistory\264<|||>1<|||>2019-04-19 11:23:15|world|15|insert into student (s_name, dept_id, hs_id, s_email, s_tel)<{{{><}}}>values ('정근우',602, 50001, 'kwchung@naver.com', '010-2345-1234'),<{{{><}}}>('이용규',601, 50002, 'yklee@kakao.com', '010-2345-2345'),<{{{><}}}>('김태균',101, 50003, 'tkkim@eagles.com', '010-3456-3456'),<{{{><}}}>('호잉',201, 90001, 'hoying@google.com', '010-3456-4567'),<{{{><}}}>('이태양',603, 50004, 'sunlee@naver.com', '010-5678-5678');
+Servers\localhost\QueryHistory\266<|||>1<|||>2019-04-19 11:23:30|world|0|select * from Student;
+Servers\localhost\QueryHistory\258<|||>1<|||>2019-04-19 11:26:11|world|0|<{{{><}}}>select * from Student;
+Servers\localhost\QueryHistory\267<|||>1<|||>2019-04-19 11:26:35|world|0|delete from Student where s_id=10003;<{{{><}}}>select * from Student;
+Servers\localhost\QueryHistory\268<|||>1<|||>2019-04-19 11:27:04|world|0|delete from Student where s_id=1003;<{{{><}}}>select * from Student;
+Servers\localhost\QueryHistory\269<|||>1<|||>2019-04-19 11:31:46|world|0|update Student set s_name='천사' where s_id=1004; <{{{><}}}>select * from Student order by s_name asc;
+Servers\localhost\QueryHistory\270<|||>1<|||>2019-04-19 11:34:11|world|15|select continent, count(*), sum(gnp), avg(gnp)<{{{><}}}>from country group by continent;<{{{><}}}>
+Servers\localhost\QueryHistory\212<|||>1<|||>2019-04-19 11:37:44|world|0|select continent, count(*), sum(population), avg(gnp)<{{{><}}}>from country group by continent;
+Servers\localhost\QueryHistory\272<|||>1<|||>2019-04-19 11:38:00|world|0|select continent, count(*), sum(population), avg(gnp)<{{{><}}}>from country group by continent desc;
+Servers\localhost\QueryHistory\274<|||>1<|||>2019-04-19 11:38:38|world|0|select continent, count(*), sum(population), avg(gnp)<{{{><}}}>from country order by avg(gnp);
+Servers\localhost\QueryHistory\275<|||>1<|||>2019-04-19 11:39:40|world|0|select continent, count(*), sum(population), avg(gnp)<{{{><}}}>from country order by avg(gnp) desc;
+Servers\localhost\QueryHistory\273<|||>1<|||>2019-04-19 11:39:50|world|0|select continent, count(*), sum(population), avg(gnp)<{{{><}}}>from country order by avg(gnp) desc limit 5;
+Servers\localhost\QueryHistory\276<|||>1<|||>2019-04-19 11:41:17|world|0|select continent, count(*), sum(population), avg(gnp)<{{{><}}}>from country group by continent order by avg(gnp) desc;
+Servers\localhost\QueryHistory\277<|||>1<|||>2019-04-19 11:45:01|world|0|desc city;
+Servers\localhost\QueryHistory\103<|||>1<|||>2019-04-19 11:50:15|world|0|create view MillionCity as<{{{><}}}>select Name, population<{{{><}}}>from city<{{{><}}}>where population>1000000;<{{{><}}}><{{{><}}}>select * from MillionCity;
+Servers\localhost\QueryHistory\278<|||>1<|||>2019-04-19 11:53:02|world|0|select * from country;
+Servers\localhost\QueryHistory\271<|||>1<|||>2019-04-19 11:53:23|world|0|select co.continent, co.Name, city.Name, city.Population<{{{><}}}>from country as co inner join city<{{{><}}}>on co.Code=city.CountryCode<{{{><}}}>where continent = 'Europe'<{{{><}}}>order by city.Population desc limit 10;
+Servers\localhost\QueryHistory\229<|||>1<|||>2019-04-19 16:19:04|world|16|select * from city;
+Servers\localhost\QueryHistory\204<|||>1<|||>2019-04-19 16:19:15|world|0|select * from city where 'asia';
+Servers\localhost\QueryHistory\280<|||>1<|||>2019-04-19 16:19:24|world|0|select * from city where name='asia';
+Servers\localhost\QueryHistory\281<|||>1<|||>2019-04-19 16:21:06|world|0|select * from city where countrycode='kor';<{{{><}}}>
+Servers\localhost\QueryHistory\104<|||>1<|||>2019-04-19 17:27:34|world|0|select * from eagles;<{{{><}}}>
+Servers\localhost\QueryHistory\282<|||>1<|||>2019-04-19 17:38:44|world|0|select * from eagles;
+Servers\localhost\QueryHistory\245<|||>1<|||>2019-04-23 15:06:48|world|0|select *from member;
+Servers\localhost\QueryHistory\283<|||>1<|||>2019-04-23 15:07:56|world|0|select *from bbs;
+Servers\localhost\QueryHistory\237<|||>1<|||>2019-04-23 15:15:47|world|31|create table if not exists member (<{{{><}}}>    			id int(4) unsigned not null auto_increment,<{{{><}}}>    			pass varchar(10) not null,<{{{><}}}>    			name varchar(10) not null,<{{{><}}}>    			birthday date not null,<{{{><}}}>    			address varchar(50),<{{{><}}}>    			hashed varchar(400),<{{{><}}}>    			primary key(id)<{{{><}}}>				 )<{{{><}}}>				auto_increment=10001 default charset=utf8;<{{{><}}}>
+Servers\localhost\QueryHistory\284<|||>1<|||>2019-04-23 15:46:31|world|31|<{{{><}}}>create table if not exists member (<{{{><}}}>    			id int(4) unsigned not null auto_increment,<{{{><}}}>    			pass varchar(10) not null,<{{{><}}}>    			name varchar(10) not null,<{{{><}}}>    			birthday date not null,<{{{><}}}>    			address varchar(50),<{{{><}}}>    			hashed varchar(400),<{{{><}}}>    			primary key(id)<{{{><}}}>				 )<{{{><}}}>				auto_increment=10001 default charset=utf8;
+Servers\localhost\QueryHistory\239<|||>1<|||>2019-04-23 16:08:23|world|31|create table if not exists member (<{{{><}}}>    			id int(4) unsigned not null auto_increment primary key,<{{{><}}}>    			pass varchar(10) not null,<{{{><}}}>    			name varchar(10) not null,<{{{><}}}>    			birthday date not null,<{{{><}}}>    			address varchar(50),<{{{><}}}>    			hashed varchar(400)<{{{><}}}><{{{><}}}>				 )<{{{><}}}>				auto_increment=10001 default charset=utf8;
+Servers\localhost\QueryHistory\289<|||>1<|||>2019-04-23 16:08:34|world|47|create table if not exists bbs (<{{{><}}}>    			id int unsigned not null auto_increment,<{{{><}}}>    			memberId int unsigned not null,<{{{><}}}>    			title varchar(50) not null,<{{{><}}}>    			date datetime not null default current_timestamp,<{{{><}}}>    			content varchar(400),<{{{><}}}>    			primary key(id),<{{{><}}}>    			foreign key(memberId) references member(id))<{{{><}}}>				default charset=utf8;
+Servers\localhost\QueryHistory\286<|||>1<|||>2019-04-23 16:13:24|world|78|create table if not exists member (<{{{><}}}>    			id int(4) unsigned not null auto_increment primary key,<{{{><}}}>    			pass varchar(10) not null,<{{{><}}}>    			name varchar(10) not null,<{{{><}}}>    			birthday date not null,<{{{><}}}>    			address varchar(50),<{{{><}}}>    			hashed varchar(400) )<{{{><}}}>				auto_increment=10001 default charset=utf8;
+Servers\localhost\QueryHistory\290<|||>1<|||>2019-04-23 16:13:34|world|47|create table if not exists bbs (<{{{><}}}>    			id int unsigned not null auto_increment primary key,<{{{><}}}>    			memberId int unsigned not null, <{{{><}}}>    			title varchar(50) not null,<{{{><}}}>    			date datetime not null default current_timestamp,<{{{><}}}>    			content varchar(400),<{{{><}}}>    			foreign key(memberId) references member(id))<{{{><}}}>				default charset=utf8;
+Servers\localhost\QueryHistory\291<|||>1<|||>2019-04-23 16:17:09|world|0|<{{{><}}}><{{{><}}}>select * from bbs;
+Servers\localhost\QueryHistory\292<|||>1<|||>2019-04-23 16:21:48|world|16|drop table bbs;
+Servers\localhost\QueryHistory\293<|||>1<|||>2019-04-23 16:25:43|mysql|47|create table if not exists member (<{{{><}}}>    			id int(4) unsigned not null auto_increment,<{{{><}}}>    			pass varchar(10) not null,<{{{><}}}>    			name varchar(10) not null,<{{{><}}}>    			birthday date not null,<{{{><}}}>    			address varchar(50),<{{{><}}}>    			hashed varchar(400),<{{{><}}}>    			primary key(id)<{{{><}}}>				 )<{{{><}}}>			<{{{><}}}>			auto_increment=10001 default charset=utf8;
+Servers\localhost\QueryHistory\253<|||>1<|||>2019-04-23 16:25:58|mysql|31|create table if not exists bbs (<{{{><}}}>    			id int unsigned not null auto_increment,<{{{><}}}>    			memberId int unsigned not null,<{{{><}}}>    			title varchar(50) not null,<{{{><}}}>    			date datetime not null default current_timestamp,<{{{><}}}>    			content varchar(400),<{{{><}}}>    			primary key(id),<{{{><}}}>    			foreign key(memberId) references member(id))<{{{><}}}>				default charset=utf8;<{{{><}}}>
+Servers\localhost\QueryHistory\287<|||>1<|||>2019-04-23 16:26:51|mysql|0|show tables;<{{{><}}}>
+Servers\localhost\QueryHistory\1<|||>1<|||>2019-04-23 16:27:50|world|31|create table if not exists bbs (<{{{><}}}>    			id int unsigned not null auto_increment,<{{{><}}}>    			memberId int unsigned not null,<{{{><}}}>    			title varchar(50) not null,<{{{><}}}>    			date datetime not null default current_timestamp,<{{{><}}}>    			content varchar(400),<{{{><}}}>    			primary key(id))<{{{><}}}>    			<{{{><}}}>				default charset=utf8;
+Servers\localhost\QueryHistory\288<|||>1<|||>2019-04-23 17:06:33|world|0|delete from bbs where id=5;
+Servers\localhost\QueryHistory\295<|||>1<|||>2019-04-23 17:06:45|world|0|delete from bbs where id=6;<{{{><}}}><{{{><}}}>select * from bbs;
+Servers\localhost\QueryHistory\296<|||>1<|||>2019-04-23 17:06:49|world|0|delete from bbs where id=1;<{{{><}}}><{{{><}}}>select * from bbs;
+Servers\localhost\QueryHistory\297<|||>1<|||>2019-04-23 17:06:52|world|0|delete from bbs where id=2;<{{{><}}}><{{{><}}}>select * from bbs;
+Servers\localhost\QueryHistory\298<|||>1<|||>2019-04-23 17:06:55|world|0|delete from bbs where id=3;<{{{><}}}><{{{><}}}>select * from bbs;
+Servers\localhost\QueryHistory\299<|||>1<|||>2019-04-23 17:06:57|world|0|delete from bbs where id=4;<{{{><}}}><{{{><}}}>select * from bbs;
+Servers\localhost\QueryHistory\300<|||>1<|||>2019-04-23 17:06:59|world|0|delete from bbs where id=7;<{{{><}}}><{{{><}}}>select * from bbs;
+Servers\localhost\QueryHistory\301<|||>1<|||>2019-04-23 17:07:02|world|0|delete from bbs where id=8;<{{{><}}}><{{{><}}}>select * from bbs;
+Servers\localhost\QueryHistory\302<|||>1<|||>2019-04-23 17:07:04|world|0|delete from bbs where id=9;<{{{><}}}><{{{><}}}>select * from bbs;
+Servers\localhost\QueryHistory\303<|||>1<|||>2019-04-24 12:49:44|world|0|select * from bbs;
+Servers\localhost\QueryHistory\2<|||>1<|||>2019-04-29 09:31:03|ezen|0|use ezen;<{{{><}}}><{{{><}}}>show tables;
+Servers\localhost\QueryHistory\5<|||>1<|||>2019-04-29 09:44:57|ezen|16|insert into products values<{{{><}}}>(30001,'아두이노 우노',12000,'../img/ArduinoUno.jpg','오픈 소스(Open Source)를 기반으로 한 단일보드'),<{{{><}}}>(30002,'아두이노 듀에',20000,'../img/ArduinoDue.jpg','아두이노 듀에'),<{{{><}}}>(30003,'아두이노 트레',28000,'../img/ArduinoTre.jpg','아두이노 트레'),<{{{><}}}>(30004,'아두이노 메가 2560',36000,'../img/ArduinoMega2560.jpg','아두이노 메가 2560'),<{{{><}}}>(30005,'아두이노 윤',25000,'../img/ArduinoYun.jpg','아두이노 윤'),<{{{><}}}>(30006,'아두이노 마이크로',15000,'../img/ArduinoMicro.jpg','아두이노 마이크로'),<{{{><}}}>(30007,'아두이노 미니',10000,'../img/ArduinoMini.jpg','아두이노 미니'),<{{{><}}}>(30008,'아두이노 프로미니',13000,'../img/ArduinoProMini.jpg','아두이노 프로미니'),<{{{><}}}>(30009,'아두이노 나노',6000,'../img/ArduinoNano.jpg','아두이노 나노'),<{{{><}}}>(30010,'아두이노 릴리패드',8000,'../img/ArduinoLilyPad.jpg','아두이노 릴리패드'),<{{{><}}}>(30011,'온습도 센서',1200,'../img/DHT11.jpg','온습도 센서'),<{{{><}}}>(30012,'음향 센서',1500,'../img/AUDIO.jpg','음향 센서'),<{{{><}}}>(30013,'광 센서',300,'../img/CDS.jpg','광 센서'),<{{{><}}}>(30014,'일산화탄소 센서',800,'../img/CO.jpg','일산화탄소 센서'),<{{{><}}}>(30015,'적외선 센서',1300,'../img/PIR.jpg','적외선 센서'),<{{{><}}}>(30016,'자이로 센서',2400,'../img/GYRO.jpg','자이로 센서'),<{{{><}}}>(30017,'기압 고도 온도 센서',3200,'../img/AAT.jpg','기압 고도 온도 센서'),<{{{><}}}>(30018,'가속도 센서',2800,'../img/ADXL.jpg','가속도 센서'),<{{{><}}}>(30019,'초음파 센서',1600,'../img/US.jpg','초음파 센서'),<{{{><}}}>(30020,'비접촉 온도 센서',4200,'../img/GY-906.jpg','비접촉 온도 센서'),<{{{><}}}>(30021,'릴레이',1700,'../img/RELAY.jpg','릴레이'),<{{{><}}}>(30022,'서보 모터',2500,'../img/ServoMotor.jpg','서보 모터'),<{{{><}}}>(30023,'DC 모터',3100,'../img/DCMotor.jpg','DC 모터'),<{{{><}}}>(30024,'스텝 모터',3400,'../img/StepMotor.jpg','스텝 모터'),<{{{><}}}>(30025,'솔레노이드 밸브',5600,'../img/SolenoidValve.jpg','솔레노이드 밸브');<{{{><}}}>
+Servers\localhost\QueryHistory\7<|||>1<|||>2019-04-29 10:25:55|ezen|0|select * from customers;
+Servers\localhost\QueryHistory\4<|||>1<|||>2019-04-30 15:25:58|world|0|use world;
+Servers\localhost\QueryHistory\8<|||>1<|||>2019-04-30 15:26:04|world|16|desc bbs;
+Servers\localhost\QueryHistory\10<|||>1<|||>2019-04-30 16:34:51|world|0|CREATE DATABASE yellow default CHARACTER SET UTF8; <{{{><}}}>
+Servers\localhost\QueryHistory\13<|||>1<|||>2019-04-30 16:35:17|yellow|0|use yellow;<{{{><}}}>
+Servers\localhost\QueryHistory\14<|||>1<|||>2019-04-30 16:37:35|yellow|16|drop table member;
+Servers\localhost\QueryHistory\15<|||>1<|||>2019-04-30 16:37:40|yellow|15|drop table product;
+Servers\localhost\QueryHistory\3<|||>1<|||>2019-04-30 16:40:45|yellow|46|create table waybill (<{{{><}}}>  w_id int unsigned not null auto_increment,<{{{><}}}>  o_id int(20) not null,<{{{><}}}>  o_name varchar(10) not null,<{{{><}}}>  o_tel varchar(20) not null,<{{{><}}}>  o_address varchar(80) not null,<{{{><}}}>  p_name varchar(10) not null,<{{{><}}}>  o_quantity int not null, <{{{><}}}>  primary key(w_id)<{{{><}}}>) auto_increment=90001 default charset=utf8;<{{{><}}}>desc waybill;
+Servers\localhost\QueryHistory\17<|||>1<|||>2019-04-30 16:40:52|yellow|0|show tables;
+Servers\localhost\QueryHistory\16<|||>1<|||>2019-04-30 16:41:07|yellow|0|desc orders;
+Servers\localhost\QueryHistory\18<|||>1<|||>2019-04-30 16:44:20|yellow|0|desc member;
+Servers\localhost\QueryHistory\19<|||>1<|||>2019-04-30 16:45:51|yellow|15|insert into member(`m_id`,`m_password`,`m_name`,`m_tel`,`m_field`) values('admin', '1234', '관리자','010-1234-5678','관리자');
+Servers\localhost\QueryHistory\21<|||>1<|||>2019-04-30 16:46:00|yellow|0|select * from member;
+Servers\localhost\QueryHistory\22<|||>1<|||>2019-04-30 16:48:16|yellow|15|desc product
+Servers\localhost\QueryHistory\23<|||>1<|||>2019-04-30 16:51:23|ezen|0|use ezen;
+Servers\localhost\QueryHistory\24<|||>1<|||>2019-04-30 16:51:46|ezen|0|select * from products;
+Servers\localhost\QueryHistory\6<|||>1<|||>2019-04-30 16:52:50|yellow|0|use yellow;
+Servers\localhost\QueryHistory\25<|||>1<|||>2019-04-30 16:53:02|yellow|0|select*from product;
+Servers\localhost\QueryHistory\27<|||>1<|||>2019-04-30 17:03:29|yellow|78|alter table product add buycode varchar(10) not null; 
+Servers\localhost\QueryHistory\26<|||>1<|||>2019-04-30 17:08:17|yellow|0|desc product;
+Servers\localhost\QueryHistory\28<|||>1<|||>2019-04-30 17:09:27|yellow|0|insert into product(`p_name`, `p_img`, `p_price`, `p_quantity`,`buycode`) values('DANCI 1인소파', '../img/bg-img/1.jpg', '300000',15, 'A');
+Servers\localhost\QueryHistory\30<|||>1<|||>2019-04-30 17:12:54|yellow|109|alter table product change p_name p_name varchar(40);
+Servers\localhost\QueryHistory\31<|||>1<|||>2019-04-30 17:13:57|yellow|0|select * from product;

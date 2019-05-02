@@ -125,9 +125,9 @@
                 <!--  Catagories  -->
                 <div class="catagories-menu">
                     <ul>
-                        <li class="active"><a href="commodity.html">재고내역</a></li>
-                        <li><a href="#">주문내역</a></li>
-                        <li><a href="sales.html">판매내역</a></li>
+                        <li class="active"><a href="commodity.jsp">재고내역</a></li>
+                        <li><a href="order.jsp">주문내역</a></li>
+                        <li><a href="sales.jsp">판매내역</a></li>
                         <li><a href="#">발주내역</a></li>
                         <li><a href="#">운송내역</a></li>
                         <li><a href="#">매출총이익</a></li>
