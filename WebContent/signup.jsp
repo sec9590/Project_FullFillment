@@ -111,7 +111,7 @@
                         	<h2>Sign Up</h2>
                         </div>
 
-                        <form name="Signupform" action="/project02/member/memberProcServlet?action=signup" method="post">
+                        <form name="Signupform" action="/project02/memberProcServlet?action=signup" method="post">
                         	<div class="row" >
                             	<div class="col-12 mb-3">
                                  	<input type="text" class="form-control" name="m_id" value="" placeholder="ID">
@@ -127,9 +127,16 @@
                                 </div>
 
                                 <div class="col-12">
-                                	<table width=500>
+                                	<table>
                                 		<tr>
-                                			<th><label>거래 항목</label></th>
+                                			<th><label>분    류</label></th>
+                                			<td><label><input type="radio" name="m_job" value="1" >&nbsp;구매처</label></td>
+                                			<td><label><input type="radio" name="m_job" value="2" >&nbsp;운송회사</label></td>
+                                		</tr>
+                                		<tr>
+                                			<th><label>구매처 선택 - 거래 항목</label></th>
+                                		</tr>
+                                		<tr>
                                 			<td><label><input type="radio" name="m_field" value="A" >&nbsp;의자</label></td>
                                 			<td><label><input type="radio" name="m_field" value="B" >&nbsp;침대</label></td>
                                 			<td><label><input type="radio" name="m_field" value="C" >&nbsp;테이블</label></td>
@@ -137,11 +144,13 @@
                                 			<td><label><input type="radio" name="m_field" value="E" >&nbsp;조명/리빙</label></td>
                                 		</tr>
                                 		<tr>
-                                			<th><label>운송 지역</label></th>
-                                			<td><label><input type="radio" name="m_field" value="서울경기" >&nbsp;서울,경기권</label></td>
-                                			<td><label><input type="radio" name="m_field" value="대전세종충청" >&nbsp;대전,세종,충청권</label></td>
-                                			<td><label><input type="radio" name="m_field" value="광주전라" >&nbsp;광주,전라권</label></td>
-                                			<td><label><input type="radio" name="m_field" value="부산대구울산경상" >&nbsp;부산,대구,울산,경상권</label></td>
+                                			<th><label>운송회사 선택 - 운송 지역</label></th>
+                                		</tr>
+                                		<tr>
+                                			<td><label><input type="radio" name="m_field" value="서울경기" >&nbsp;경기권</label></td>
+                                			<td><label><input type="radio" name="m_field" value="대전세종충청" >&nbsp;충청권</label></td>
+                                			<td><label><input type="radio" name="m_field" value="광주전라" >&nbsp;전라권</label></td>
+                                			<td><label><input type="radio" name="m_field" value="부산대구울산경상" >&nbsp;경상권</label></td>
                                 			<td><label><input type="radio" name="m_field" value="강원" >&nbsp;강원도</label></td>
                                 		</tr>
                                 	</table>

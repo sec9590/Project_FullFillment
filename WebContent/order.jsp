@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="member.*"%>
+    <%
+    	session.getAttribute("m_field");
+    %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>    <meta charset="UTF-8">
@@ -77,6 +80,10 @@
             <!-- Navbar Brand -->
             <div class="amado-navbar-brand">
                 <a href="index.html"><img src="img/core-img/logo.png" alt=""></a>
+                <div style="text-align:center">
+	                ${memberName}
+					<a href="/project02/memberProcServlet?action=logout">로그아웃</a>
+				</div>
             </div>
             <!-- Navbar Toggler -->
             <div class="amado-navbar-toggler">
@@ -93,6 +100,10 @@
             <!-- Logo -->
             <div class="logo">
                 <a href="index.html"><img src="img/core-img/logo.png" alt=""></a>
+                <div style="text-align:center">
+	                ${memberName}
+					<a href="/project02/memberProcServlet?action=logout">로그아웃</a>
+				</div>
             </div>
             <!-- Amado Nav -->
             <nav class="amado-nav">

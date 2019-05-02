@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="member.*"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -10,7 +10,7 @@
     <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
     <!-- Title  -->
-    <title>Yellow Container : admin</title>
+    <title>Yellow Container : login</title>
 
     <!-- Favicon  -->
     <link rel="icon" href="img/core-img/favicon.ico">
@@ -70,7 +70,7 @@
         <div class="mobile-nav">
             <!-- Navbar Brand -->
             <div class="amado-navbar-brand">
-                <a href="index.html"><img src="img/core-img/logo.png" alt=""></a>
+                <a href="index.jsp"><img src="img/core-img/logo.png" alt=""></a>
             </div>
             <!-- Navbar Toggler -->
             <div class="amado-navbar-toggler">
@@ -86,16 +86,16 @@
             </div>
             <!-- Logo -->
             <div class="logo">
-                <a href="index.html"><img src="img/core-img/logo.png" alt=""></a>
+                <a href="index.jsp"><img src="img/core-img/logo.png" alt=""></a>
             </div>
             <!-- Amado Nav -->
             <nav class="amado-nav">
                 <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li class="active"><a href="admin.jsp">ADMIN</a></li>
+                    <li><a href="index.jsp">Home</a></li>
+                    <li><a href="admin.jsp">ADMIN</a></li>
                     <li><a href="buying.jsp">BUYING</a></li>
                     <li><a href="carrier.jsp">CARRIER</a></li>
-                    <li><a href="signup.jsp">Sign Up</a></li>
+                    <li><a href="signup.jsp">SIGN UP</a></li>
                 </ul>
             </nav>
 
@@ -115,14 +115,14 @@
         </header>
         <!-- Header Area End -->
 
-        <div class="shop_sidebar_area">
+        <div class="shop_sidebar_area" style="background-color:#ffffff;">
 
             <!-- ##### Single Widget ##### -->
-            <div class="widget catagory mb-50">
-                <!-- Widget Title -->
+            <!-- <div class="widget catagory mb-50">
+                Widget Title
                 <h6 class="widget-title mb-30">관리자</h6>
 
-                <!--  Catagories  -->
+                 Catagories 
                 <div class="catagories-menu">
                     <ul>
                         <li class="active"><a href="commodity.jsp">재고내역</a></li>
@@ -133,18 +133,19 @@
                         <li><a href="#">매출총이익</a></li>
                     </ul>
                 </div>
+            </div> -->
+
+            <!-- <div class="widget price mb-50"></div> -->
             </div>
 
-            <div class="widget price mb-50"></div></div>
-
           <div class="amado_product_area section-padding-100">
-            <div class="container-fluid">
+           <!--  <div class="container-fluid">
                 <div class="row">
                     <div class="col-12">
                         <div class="product-topbar d-xl-flex align-items-end justify-content-between">
                         </div>
                     </div>
-                </div>
+                </div> -->
 
                 <div class="row">
                     <!-- Single Product Area -->
@@ -154,7 +155,7 @@
                             <div>
                               <div>
                                 <div>
-                                  <form class="login100-form validate-form">
+                                  <form class="login100-form validate-form" name="Loginform" action="/project02/memberProcServlet?action=login" method=post>
                                     <span class="login100-form-title p-b-70">
                                       Welcome
                                     </span>
@@ -163,12 +164,12 @@
                                     </span>
 
                                     <div class="wrap-input100 validate-input m-t-85 m-b-35" data-validate = "Enter username">
-                                      <input class="input100" type="text" name="username">
-                                      <span class="focus-input100" data-placeholder="Username"></span>
+                                      <input class="input100" type="text" name="m_id">
+                                      <span class="focus-input100" data-placeholder="ID"></span>
                                     </div>
 
                                     <div class="wrap-input100 validate-input m-b-50" data-validate="Enter password">
-                                      <input class="input100" type="password" name="pass">
+                                      <input class="input100" type="password" name="m_password">
                                       <span class="focus-input100" data-placeholder="Password"></span>
                                     </div>
 
@@ -202,7 +203,7 @@
                     <div class="single_widget_area">
                         <!-- Logo -->
                         <div class="footer-logo mr-50">
-                            <a href="index.html"><img src="img/core-img/logo2.png" alt=""></a>
+                            <a href="index.jsp"><img src="img/core-img/logo2.png" alt=""></a>
                         </div>
                         <!-- Copywrite Text -->
                         <p class="copywrite"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
@@ -220,7 +221,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
                                 <div class="collapse navbar-collapse" id="footerNavContent">
                                     <ul class="navbar-nav ml-auto">
                                        <li class="nav-item active">
-                                            <a class="nav-link" href="index.html">HOME</a>
+                                            <a class="nav-link" href="index.jsp">HOME</a>
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link" href="admin.jsp">ADMIN</a>
