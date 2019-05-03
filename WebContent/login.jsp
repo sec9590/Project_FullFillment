@@ -92,10 +92,8 @@
             <nav class="amado-nav">
                 <ul>
                     <li><a href="index.jsp">Home</a></li>
-                    <li><a href="admin.jsp">ADMIN</a></li>
-                    <li><a href="buying.jsp">BUYING</a></li>
-                    <li><a href="carrier.jsp">CARRIER</a></li>
                     <li><a href="signup.jsp">SIGN UP</a></li>
+                    <li class="active"><a href="login.jsp">LOGIN</a></li>
                 </ul>
             </nav>
 
@@ -224,7 +222,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
                                             <a class="nav-link" href="index.jsp">HOME</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="admin.jsp">ADMIN</a>
+                                            <a class="nav-link" href="commodity.jsp">ADMIN</a>
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link" href="buying.jsp">BUYING</a>

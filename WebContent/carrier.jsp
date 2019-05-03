@@ -13,16 +13,6 @@
     <link rel="stylesheet" href="css/core-style.css">
     <link rel="stylesheet" href="style.css">
     
-<%
-	
-	if(session.getAttribute("memberField") == null || session.getAttribute("memberField").equals("관리자")){
-		session.invalidate();
-		out.println("<script>alert('운송회사 전용입니다.'); location.href='admin.jsp';</script>");
-		out.flush(); 
-
-		//response.sendRedirect("admin.jsp");
-	} else {
-%>
 </head>
 <body>
  <!-- ##### Main Content Wrapper Start ##### -->
@@ -62,7 +52,7 @@
             <nav class="amado-nav">
                 <ul>
                   <li><a href="index.jsp">HOME</a></li>
-                  <li><a href="commodity.jsp">ADMIN</a></li>
+                  <li><a href="memberProcServlet?action=commodity">ADMIN</a></li>
                   <li><a href="buying.jsp">BUYING</a></li>
                   <li class="active"><a href="carrier.jsp">CARRIER</a></li>
                   <li><a href="signup.jsp">SIGN UP</a></li>
@@ -159,10 +149,5 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     <script src="js/active.js"></script>
         
         
-        
-        
 </body>
-<%
-}
-%>
 </html>

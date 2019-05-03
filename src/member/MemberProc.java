@@ -1,8 +1,6 @@
 package member;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -13,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 
-@WebServlet("/member/memberProcServlet")
+@WebServlet("/memberProcServlet")
 public class MemberProc extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -36,11 +34,11 @@ public class MemberProc extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		HttpSession session = request.getSession();
 		String action = request.getParameter("action");
-		List<String> pageList = new ArrayList<String>();
 		String m_id = null;
 		String m_password = null;
 		String m_name = null;
 		String m_tel = null;
+		String m_job = null;
 		String m_field = null;
 		
 		switch(action) {
@@ -68,7 +66,24 @@ public class MemberProc extends HttpServlet {
 				member = mDao.searchById(m_id);
 				session.setAttribute("memberId", m_id);
 				session.setAttribute("memberName", member.getM_name());
-				response.sendRedirect("main.jsp");
+				session.setAttribute("memberJob", member.getM_job());
+				session.setAttribute("memberField", member.getM_field());
+				
+				String pg = member.getM_job();
+				switch(pg) {
+				case "0" :
+					response.sendRedirect("commodity.jsp");
+					break;
+				case "1" :
+					response.sendRedirect("buying.jsp");
+					break;
+				case "2" :
+					response.sendRedirect("carrier.jsp");
+					break;
+				}
+			
+				System.out.println("로그인 성공");
+				
 			} else {
 				request.setAttribute("message", errorMessage);
 				request.setAttribute("url", "login.jsp");
@@ -79,9 +94,8 @@ public class MemberProc extends HttpServlet {
 			break;
 			
 		case "logout":			// 로그아웃할 때
-			session.removeAttribute("memberId");
-			session.removeAttribute("memberName");
-			response.sendRedirect("login.jsp");
+			session.invalidate();
+			response.sendRedirect("index.jsp");
 			break;
 			
 		case "signup":		// 회원 가입
@@ -89,19 +103,19 @@ public class MemberProc extends HttpServlet {
 			m_password = request.getParameter("m_password");
 			m_name = request.getParameter("m_name");
 			m_tel = request.getParameter("m_tel");
+			m_job = request.getParameter("m_job");
 			m_field = request.getParameter("m_field");
-			member = new MemberDTO(m_id, m_password, m_name, m_tel, m_field);
+			member = new MemberDTO(m_id, m_password, m_name, m_tel, m_job, m_field);
 			System.out.println(member.toString());
 			
 			mDao = new MemberDAO();
 			mDao.insertMember(member);
 
-			response.sendRedirect("login.jsp");
+			response.sendRedirect("index.jsp");
 			mDao.close();
 			break;
+			
 		}
-		
-		
 	}
 	
 }

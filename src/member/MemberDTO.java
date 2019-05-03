@@ -5,6 +5,7 @@ public class MemberDTO {
 	private String m_password;
 	private String m_name;
 	private String m_tel;
+	private String m_job;
 	private String m_field;
 	
 	public MemberDTO() {
@@ -12,11 +13,12 @@ public class MemberDTO {
 	}
 	
 	
-	public MemberDTO(String m_id, String m_password, String m_name, String m_tel, String m_field) {
+	public MemberDTO(String m_id, String m_password, String m_name, String m_tel, String m_job, String m_field) {
 		this.m_id = m_id;
 		this.m_password = m_password;
 		this.m_name = m_name;
 		this.m_tel = m_tel;
+		this.m_job = m_job;
 		this.m_field = m_field;
 	}
 
@@ -72,10 +74,20 @@ public class MemberDTO {
 
 
 
+	public String getM_job() {
+		return m_job;
+	}
+
+
+	public void setM_job(String m_job) {
+		this.m_job = m_job;
+	}
+
+
 	@Override
 	public String toString() {
 		return "MemberDTO [m_id=" + m_id + ", m_password=" + m_password + ", m_name=" + m_name + ", m_tel=" + m_tel
-				+ ", m_field=" + m_field + "]";
+				+ ", m_job=" + m_job + ", m_field=" + m_field + "]";
 	}
 	
 	

@@ -133,7 +133,8 @@ public class MemberDAO {
 				member.setM_password(rs.getString(2));
 				member.setM_name(rs.getString(3));
 				member.setM_tel(rs.getString(4));
-				member.setM_field(rs.getString(5));
+				member.setM_job(rs.getString(5));
+				member.setM_field(rs.getString(6));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -149,13 +150,13 @@ public class MemberDAO {
     }
     
     public MemberDTO searchById(String memberId) {
-    	String sql = "select * from member where m_id=" + memberId + ";";
+    	String sql = "select * from member where m_id='" + memberId + "';";
     	MemberDTO mDto = selectOne(sql);
     	return mDto;
     }
     
     public void insertMember(MemberDTO member) {
-    	String query = "insert into member(m_id, m_password, m_name, m_tel, m_field, hashed) values (?, ?, ?, ?, ?, ?);";
+    	String query = "insert into member(m_id, m_password, m_name, m_tel, m_job, m_field, hashed) values (?, ?, ?, ?, ?, ?, ?);";
     	PreparedStatement pStmt = null;
     	try {
     		String hashedPassword = BCrypt.hashpw(member.getM_password(), BCrypt.gensalt());
@@ -164,8 +165,9 @@ public class MemberDAO {
 			pStmt.setString(2, "*");
 			pStmt.setString(3, member.getM_name());
 			pStmt.setString(4, member.getM_tel());
-			pStmt.setString(5, member.getM_field());
-			pStmt.setString(6, hashedPassword);
+			pStmt.setString(5, member.getM_job());
+			pStmt.setString(6, member.getM_field());
+			pStmt.setString(7, hashedPassword);
 			
 			pStmt.executeUpdate();
 		} catch (Exception e) {

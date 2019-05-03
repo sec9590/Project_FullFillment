@@ -16,13 +16,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
-import com.oreilly.servlet.MultipartRequest;
 
+
+import com.oreilly.servlet.MultipartRequest;
 
 /**
  * Servlet implementation class OrdersProc
  */
-@WebServlet("/product/OrdersProcServelt")
+@WebServlet("/OrdersProcServlet")
 public class OrdersProc extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -44,96 +45,145 @@ public class OrdersProc extends HttpServlet {
 	}
 
 	protected void doAction(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {				
+			throws ServletException, IOException {
+		OrdersDAO oDao = null;
+		OrdersDTO oDto = null;
+		DetailOrderDTO doDto = null;
+		BufferedReader br = null;
+		String msg = null;
+		String url = null;
 		request.setCharacterEncoding("UTF-8");
 		RequestDispatcher rd = null;
 		HttpSession session = request.getSession();
 		String action = request.getParameter("action");
-		OrdersDAO oDao = null;
-		OrdersDTO oDto = null;
-		BufferedReader br = null;
-		String msg = null;
-		String url = null;
 
 		switch (action) {
 		case "down":
-			String saveDir = "C:\\Temp\\";
-			int maxSize = 1024*1024*100;
+			String saveDir = "C:\\Temp\\Invoices\\Backup\\";
+			int maxSize = 1024 * 1024 * 100;
 			String encType = "UTF-8";
 
-			MultipartRequest multipartRequest
-			= new MultipartRequest(request, saveDir, maxSize, encType, new DefaultFileRenamePolicy());
-			
-		    /*System.out.println("이름 : " + multipartRequest.getParameter("name") + "<br>");
-		    System.out.println("파일 : " + multipartRequest.getParameter("file") + "<br>"); //null 값을 갖는다.
-		    System.out.println("업로드파일명 : " + multipartRequest.getFilesystemName("file") + "<br>");
-		    System.out.println("원래파일명 : " + multipartRequest.getOriginalFileName("file") + "<br>");*/
-		    
-		    File file = multipartRequest.getFile("file");
-		    
-			//File file    =  new File("C:\\Temp\\shopping.csv");
-			 
-			br  =  new BufferedReader(new InputStreamReader(new FileInputStream(file),"euc-kr"));
+			MultipartRequest multipartRequest = new MultipartRequest(request, saveDir, maxSize, encType,
+					new DefaultFileRenamePolicy());
 
-			//br = new BufferedReader(new FileReader("C:\\Temp\\shopping.csv"));
+			/*
+			 * System.out.println("이름 : " + multipartRequest.getParameter("name") + "<br>");
+			 * System.out.println("파일 : " + multipartRequest.getParameter("file") + "<br>");
+			 * //null 값을 갖는다. System.out.println("업로드파일명 : " +
+			 * multipartRequest.getFilesystemName("file") + "<br>");
+			 * System.out.println("원래파일명 : " + multipartRequest.getOriginalFileName("file")
+			 * + "<br>");
+			 */
 
-			String line = null;			
+			File file = multipartRequest.getFile("file");
+
+			// File file = new File("C:\\Temp\\shopping.csv");
+
+			br = new BufferedReader(new InputStreamReader(new FileInputStream(file), "euc-kr"));
+
+			// br = new BufferedReader(new FileReader("C:\\Temp\\shopping.csv"));
+
+			String line = null;
 			br.readLine();
 			oDao = new OrdersDAO();
 			oDto = new OrdersDTO();
+			doDto = new DetailOrderDTO();
 			int count = 0;
 			
+			String o_name = null;
+			String o_tel = null;
+			String o_address = null;
+			int p_id = 0;
+			String p_name = null;
+			int o_quantity = 0;
+			int temp = 0;
+
 			while ((line = br.readLine()) != null) {
 				String[] lines = line.split(",");
 
-				String o_name = lines[0];
-				String o_tel = lines[1];
-				String o_address = lines[2];
-				int p_id = Integer.parseInt(lines[3]);
-				String p_name = lines[4];
-				int o_quantity = Integer.parseInt(lines[5]);
-				
-				oDto.setO_name(o_name);
-				oDto.setO_tel(o_tel);
-				oDto.setO_address(o_address);
-				oDto.setP_id(p_id);
-				oDto.setP_name(p_name);
-				oDto.setO_quantity(o_quantity);
-				
-				oDao.insertOrders(oDto);
-				
-				System.out.println(oDto.toString());
-				count++;
-				System.out.println(count);
-
-			}
+				o_name = lines[0];
+				o_tel = lines[1];
+				o_address = lines[2];
 			
-					   	
+				if (lines[0].equals("")) {
+					p_id = Integer.parseInt(lines[3]);
+					p_name = lines[4];
+					o_quantity = Integer.parseInt(lines[5]);
+
+					doDto.setO_id(temp);
+					doDto.setP_id(p_id);
+					doDto.setP_name(p_name);
+					doDto.setO_quantity(o_quantity);
+					oDao.insertDetailOrders(doDto);
+				} else {
+					oDto.setO_name(o_name);
+					oDto.setO_tel(o_tel);
+					oDto.setO_address(o_address);
+					oDao.insertOrders(oDto);
+					int orderid = oDao.selectOrderId(o_name);
+					System.out.println("주문번호 : "+orderid);
+					p_id = Integer.parseInt(lines[3]);
+					p_name = lines[4];
+					o_quantity = Integer.parseInt(lines[5]);
+					temp = orderid;
+					doDto.setO_id(orderid);
+					doDto.setP_id(p_id);
+					doDto.setP_name(p_name);
+					doDto.setO_quantity(o_quantity);
+					oDao.insertDetailOrders(doDto);
+					count++;
+				}
+				System.out.println(oDto.toString());
+				System.out.println(doDto.toString());
+				System.out.println(count);
+				
+			}
+
 			msg = "업로드 되었습니다.";
-			url = "OrdersProcServlet?action=orderlist&count="+count;
+			url = "OrdersProcServlet?action=orderlist&count=" + count;
+			System.out.println("count : " + count);
+			request.setAttribute("count", count);
 			request.setAttribute("message", msg);
 			request.setAttribute("url", url);
-			rd = request.getRequestDispatcher("../alertMsg.jsp");
+			
+			System.out.println(count);
+			rd = request.getRequestDispatcher("alertMsg.jsp");
 			rd.forward(request, response);
-	    	oDao.close();
-			
+			oDao.close();
+
 			break;
-			
+
 		case "orderlist":
+			oDao = new OrdersDAO();
+			oDto = new OrdersDTO();
 			int num = 0;
+			System.out.println(request.getParameter("count"));
 			if (!request.getParameter("count").equals("")) {
 				num = Integer.parseInt(request.getParameter("count"));
 			}
-			oDao = new OrdersDAO();
-			oDto = new OrdersDTO();
-			List<OrdersDTO> orderList = oDao.selectUpload(num);		
-			request.setAttribute("OrderList", orderList);	
+			List<OrdersDTO> orderList = oDao.selectUpload(num);	
+			System.out.println("완료");			
+			request.setAttribute("OrderList", orderList);
 			rd = request.getRequestDispatcher("order.jsp");
 			rd.forward(request, response);
-	    	oDao.close();
-	    	break;
+			break;
+			
+		case "detail":
+			int id = 0;
+			if (!request.getParameter("id").equals("")) {
+				id = Integer.parseInt(request.getParameter("id"));
+			}
+			String name = request.getParameter("name");
+			oDao = new OrdersDAO();
+			List<DetailOrderDTO> detailorderList = oDao.selectDetailOrder(id);
+			System.out.println(detailorderList);
+			request.setAttribute("id", id);
+			request.setAttribute("name", name);
+			request.setAttribute("detailorderList", detailorderList);
+			rd = request.getRequestDispatcher("detail.jsp");
+			rd.forward(request, response);
+			break;
 		}
-
 	}
 
 }

@@ -13,7 +13,7 @@
     <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
     <!-- Title  -->
-    <title>Yellow Container : order</title>
+    <title>Yellow Container : orderdetail</title>
 
     <!-- Favicon  -->
     <link rel="icon" href="img/core-img/favicon.ico">
@@ -161,17 +161,7 @@
 							class="product-topbar d-xl-flex align-items-end justify-content-between">
 						</div>
 					</div>
-				</div>
-
-
-				<form method="post" enctype="multipart/form-data"action="OrdersProcServlet?action=down">
-					<div style="margin: auto">
-						<input type="text" name = "name"/>
-						<input type="file" name="file" /> <input class="btn btn-warning"
-							type="submit" value="파일업로드" />
-					</div>
-				</form>
-
+				</div>				
 
 				<BR> <BR>
 				<!-- 	<form action="#" autocomplete="off">
@@ -184,7 +174,7 @@
 						<button></button>
 					</fieldset>				</form> -->
 
-				
+				<i class="fas fa-file-csv" aria-hidden="true"></i><b>&nbsp;&nbsp;<span style="color:orange; font-size:1.5em"> ${requestScope.name} </span>주문내역 (주문번호 : ${requestScope.id})</a></b>
 				<br> <br>
 
 				<div class="row">
@@ -197,24 +187,18 @@
 										<table class="table table-hover">
 											<thead>
 												<tr>
-													<th>주문번호</th>
-													<th>이름</th>
-													<th>전화번호</th>
-													<th>주소</th>
+													<th>상품코드</th>
+													<th>상품이름</th>
 													<th>주문개수</th>													
-													<th>주문시간</th>
 												</tr>
 											</thead>
 											<tbody>
-												<c:set var="orderlist" value="${requestScope.OrderList}" />
-												<c:forEach var="order" items="${orderlist}">
+												<c:set var="detaillist" value="${requestScope.detailorderList}" />
+												<c:forEach var="detail" items="${detaillist}">
 													<tr height=30>													
-														<td><a href="OrdersProcServlet?action=detail&name=${order.o_name}&id=${order.o_id}" >${order.o_id}</a></td>
-														<td>${order.o_name}</td>
-														<td>${order.o_tel}</td>
-														<td>${order.o_address}</td>													
-														<td>${order.count}</td>
-														<td>${order.o_time}</td>
+														<td>${detail.p_id}</a></td>
+														<td>${detail.p_name}</td>
+														<td>${detail.o_quantity}</td>
 													</tr>
 												</c:forEach>
 											</tbody>

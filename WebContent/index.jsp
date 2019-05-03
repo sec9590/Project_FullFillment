@@ -19,7 +19,9 @@
     <!-- Core Style CSS -->
     <link rel="stylesheet" href="css/core-style.css">
     <link rel="stylesheet" href="style.css">
-
+<%
+	
+%>
 </head>
 
 <body>
@@ -67,15 +69,23 @@
             <!-- Logo -->
             <div class="logo">
                 <a href="index.jsp"><img src="img/core-img/logo.png" alt=""></a>
+                <div style="text-align:center">
+	                ${memberName}
+	                <%
+	                	if(session.getAttribute("memberName") != null){
+	                %>
+					<a href="/project02/memberProcServlet?action=logout">로그아웃</a>
+					<%
+	                	}
+					%>
+				</div>
             </div>
             <!-- Amado Nav -->
             <nav class="amado-nav">
               <ul>
-                    <li class="active"><a href="index.jsp">Home</a></li>
-                    <li><a href="commodity.jsp">ADMIN</a></li>
-                    <li><a href="buying.jsp">BUYING</a></li>
-                    <li><a href="carrier.jsp">CARRIER</a></li>
-                    <li><a href="signup.jsp">Sign Up</a></li>
+                    <li class="active"><a href="index.jsp">HOME</a></li>
+                    <li><a href="signup.jsp">SIGN UP</a></li>
+                    <li><a href="login.jsp">LOGIN</a></li>
                 </ul>
             </nav>
 

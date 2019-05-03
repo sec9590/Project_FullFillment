@@ -9,13 +9,14 @@ public class OrdersDTO {
 	private String p_name;
 	private int o_quantity;
 	private String o_time;
+	private int count;
 	
 	public OrdersDTO() {
 	}
 	
 	
 	public OrdersDTO(int o_id, String o_name, String o_tel, String o_address, int p_id, String p_name, int o_quantity,
-			String o_time) {
+			String o_time, int count) {
 		this.o_id = o_id;
 		this.o_name = o_name;
 		this.o_tel = o_tel;
@@ -24,6 +25,17 @@ public class OrdersDTO {
 		this.p_name = p_name;
 		this.o_quantity = o_quantity;
 		this.o_time = o_time;
+		this.count = count;
+	}
+
+
+	public int getCount() {
+		return count;
+	}
+
+
+	public void setCount(int count) {
+		this.count = count;
 	}
 
 
@@ -110,7 +122,8 @@ public class OrdersDTO {
 	@Override
 	public String toString() {
 		return "OrdersDTO [o_id=" + o_id + ", o_name=" + o_name + ", o_tel=" + o_tel + ", o_address=" + o_address
-				+ ", p_id=" + p_id + ", p_name=" + p_name + ", o_quantity=" + o_quantity + ", o_time=" + o_time + "]";
+				+ ", p_id=" + p_id + ", p_name=" + p_name + ", o_quantity=" + o_quantity + ", o_time=" + o_time
+				+ ", count=" + count + "]";
 	}
 	
 	

@@ -12,13 +12,7 @@
     <!-- Core Style CSS -->
     <link rel="stylesheet" href="css/core-style.css">
     <link rel="stylesheet" href="style.css">
-<%
-	if(session.getAttribute("memberField") == null){
-		if(session.getAttribute("memberField") != "A")
-		response.sendRedirect("admin.jsp");
-	} else {
-%>
-    
+
 </head>
 <body>
  <!-- ##### Main Content Wrapper Start ##### -->
@@ -150,7 +144,4 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
         
         
 </body>
-<%
-}
-%>
 </html>
