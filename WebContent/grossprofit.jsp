@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="member.*, product.*, java.util.*" %>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+    pageEncoding="UTF-8" import="member.*, java.util.*" %>
    
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -12,7 +11,7 @@
     <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
     <!-- Title  -->
-    <title>Yellow Container : commodity</title>
+    <title>Yellow Container : grossprofit</title>
 
     <!-- Favicon  -->
     <link rel="icon" href="img/core-img/favicon.ico">
@@ -42,7 +41,7 @@
   <!--===============================================================================================-->
  	<style>
  		h4 { margin-left:15px; margin-bottom:20px; }
- 		th, td { text-align:center;}
+ 		th { text-align:center;}
  	</style>
 </head>
 
@@ -80,7 +79,7 @@
         <!-- Amado Nav -->
         <nav class="amado-nav">
         	<li><a href="index.jsp">HOME</a></li>
-            <li class="active"><a href="OrdersProcServlet?action=productlist">재고내역</a></li>
+            <li class="active"><a href="commodity.jsp">재고내역</a></li>
             <li><a href="order.jsp">주문내역</a></li>
             <li><a href="sales.jsp">판매내역</a></li>
             <li><a href="oderhistory.jsp">발주내역</a></li>
@@ -92,32 +91,35 @@
 
 	<div class="amado_product_area section-padding-100">
 	    <div class="row">
-	     <h4>재고내역</h4>
+	     <h4>매출 총 이익</h4>
 	        <!-- Single Product Area -->
 	        <div class="col-12 col-sm-6 col-md-12 col-xl-15">
 	            <div class="single-product-wrapper">
 	                  <table class="table table-hover">
-	                     <thead>
-	                         <tr>
-	                             <th>제품코드</th>
-	                             <th>제품명</th>
-	                             <th>가격</th>
-	                             <th>수량</th>
-	                         </tr>
-	                     </thead>
-	                     <tbody>
-	                        <tbody>
-									<c:set var="plist" value="${requestScope.ProductList}" />
-									<c:forEach var="product" items="${plist}">
-										<tr>
-											<td>${product.p_id}</td>
-											<td style="text-align:left">${product.p_name}</td>
-											<td>${product.p_price}</td>
-											<td>${product.p_quantity}</td>											
-										</tr>
-									</c:forEach>
-								</tbody>
-	                     </tbody>
+	                      <thead>
+	                          <tr>
+	                              <th>항목</th>
+	                              <th>금액</th>
+	                          </tr>
+	                      </thead>
+	                      <tbody>
+	                          <tr>
+	                              <td>쇼핑몰 (+)</td>
+	                              <td></td>
+	                          </tr>
+	                          <tr>
+	                              <td>구매처 (-)</td>
+	                              <td></td>
+	                          </tr>
+	                          <tr>
+	                              <td>운송 (-)</td>
+	                              <td></td>
+	                          </tr>
+	                          <tr class="success">
+	                              <td>총 이익</td>
+	                              <td></td>
+	                          </tr>
+	                      </tbody>
 	             	 </table>
 	            </div>
 	    	</div>
@@ -127,7 +129,7 @@
 <!-- ##### Main Content Wrapper End ##### -->
 
 <!-- ##### Footer Area Start ##### -->
-	<footer class="footer_area clearfix" style="padding:10px; position:fixed; margin-bottom:0px; width:100%">
+	<footer class="footer_area clearfix" style="padding:10px; position:absolute; bottom:0; width:100%">
 	<div class="container" style="text-align:center">		
 				<span style="color:white">					
 						Copyright &copy;<script>
@@ -139,7 +141,7 @@
 			</div>			
 	</footer>
 	<!-- ##### Footer Area End ##### -->
-
+	
     <!--===============================================================================================-->
     	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
     <!--===============================================================================================-->

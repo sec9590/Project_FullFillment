@@ -213,7 +213,7 @@ iframe {
 /*------------------------------------------------------------------
 [ Form ]*/
 .login100-form {
-  width: 100%;
+  width: px;
 }
 
 .login100-form-title {
@@ -435,8 +435,7 @@ iframe {
   }
 }
 
-/*//////////////////////////////////////////////////////////////////
-[ Login more ]*/
+
 .login-more li {
   position: relative;
   padding-left: 16px;
@@ -457,4 +456,27 @@ iframe {
   -o-transform: translateY(-50%);
   transform: translateY(-50%);
   left: 0;
+}
+
+
+/*/[발주버튼]*/
+.myButton {
+	background-color:#fbb810;
+	-moz-border-radius:42px;
+	-webkit-border-radius:42px;
+	border-radius:42px;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:20px;
+	padding:16px 31px;
+	text-decoration:none;
+}
+.myButton:hover {
+	background-color:#fbb810;
+}
+.myButton:active {
+	position:relative;
+	top:1px;
 }
