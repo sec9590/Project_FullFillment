@@ -58,6 +58,9 @@ h4 {
 th {
 	text-align: center;
 }
+.right-box {
+  float: right;
+}
 
 </style>
 
@@ -125,7 +128,7 @@ th {
             <li class="active"><a href="OrdersProcServlet?action=orderAll&page=1">주문내역</a></li>
             <li><a href="orderhistory.jsp">발주내역</a></li>
             <li><a href="WaybillProcServlet?action=waybilllist&page=1">운송내역</a></li>
-            <li><a href="WaybillProcServlet?action=nowaybilllist&page=1">미운송내역</a></li>
+            <li><a href="WaybillProcServlet?action=nowaybilllist">미운송내역</a></li>
             <li><a href="grossprofit.jsp">매출 총 이익</a></li>
         </nav>
         </header>
@@ -133,7 +136,18 @@ th {
 
 		<div class="amado_product_area section-padding-100">
 			<div class="row">
+			<div style="width:100%; position:relative;">
 				<h4>총 주문내역</h4>
+				<div style="float:right; margin-bottom:20px;" >
+					<select name="date" >
+						<option value="#">모든날짜</option>
+						<option value="#">오늘하루</option>
+						<option value="#">지난1일</option>
+						<option value="#">지난1개월</option>
+						<option value="#">지난1년</option>
+					</select>
+					</div>
+				</div>
 				<!-- Single Product Area -->
 				<div class="col-12 col-sm-6 col-md-12 col-xl-15">
 					<div class="single-product-wrapper">

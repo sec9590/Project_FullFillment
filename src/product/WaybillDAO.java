@@ -253,45 +253,6 @@ public class WaybillDAO {
 		return list;
 	}
 	
-	public List<NoWaybillDTO> selectNoWaybillAll(int page) {
-		int offset = 0;
-		String sql = null;
-		if (page == 0) {
-			sql = "select * from no_waybill order by o_id desc;";
-		} else {
-			sql = "select * from no_waybill order by o_id desc limit ?, 10;";
-			offset = (page - 1) * 10;
-		}
-		PreparedStatement pStmt = null;
-		List<NoWaybillDTO> list = new ArrayList<NoWaybillDTO>();
-		
-		try {
-			pStmt = conn.prepareStatement(sql);
-			if (page != 0)
-				pStmt.setInt(1, offset);
-			ResultSet rs = pStmt.executeQuery();
-
-			while (rs.next()) {
-				NoWaybillDTO nwDto = new NoWaybillDTO();
-				nwDto.setO_id(rs.getInt(1));
-				nwDto.setO_name(rs.getString(2));
-				nwDto.setO_tel(rs.getString(3));
-				nwDto.setO_address(rs.getString(4));
-				nwDto.setO_time(rs.getString(5).substring(2,16));
-				list.add(nwDto);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				if (pStmt != null && !pStmt.isClosed())
-					pStmt.close();
-			} catch (SQLException se) {
-				se.printStackTrace();
-			}
-		}
-		return list;
-	}
 	
 	public List<NoWaybillDTO> selectNoWaybillAll() {
 		

@@ -119,7 +119,7 @@
             <li><a href="OrdersProcServlet?action=orderAll&page=1">주문내역</a></li>
             <li><a href="orderhistory.jsp">발주내역</a></li>
             <li><a href="WaybillProcServlet?action=waybilllist&page=1">운송내역</a></li>
-            <li class="active"><a href="WaybillProcServlet?action=nowaybilllist&page=1">미운송내역</a></li>
+            <li class="active"><a href="WaybillProcServlet?action=nowaybilllist">미운송내역</a></li>
             <li><a href="grossprofit.jsp">매출 총 이익</a></li>
         </nav>
     </header>
@@ -158,18 +158,17 @@
 								</tr>
 							</c:forEach>
                     	</tbody>
-                	</table>
-                	<div align=center style="margin-bottom:10px;"> 	
-                    			<a href="OrdersProcServlet?action=ship&count=${requestScope.count}" class="myButton">운송신청</a>
-                    </div> 
-                	<div align=center>
-						<c:set var="pageList" value="${requestScope.pageList}" />
-						<c:forEach var="pageNo" items="${pageList}">
-							${pageNo}
-						</c:forEach>
-						<br>
-						<br>
-					</div>
+                	</table>  		         
+					
+							<%
+							if(request.getAttribute("nwayList") != null){
+							%>
+                			<div align=center style="margin-bottom:10px;"> 	
+                    			<a href="OrdersProcServlet?action=nowaybill" class="myButton">운송신청</a>
+                  			</div> 
+                    		<%
+							}
+                    		%>
 	            </div>
 	    	</div>
 		</div>
@@ -178,7 +177,7 @@
 <!-- ##### Main Content Wrapper End ##### -->
 
 <!-- ##### Footer Area Start ##### -->
-	<footer class="footer_area clearfix" style="padding:10px; position:absolute; margin-bottom:0; width:100%">
+	<footer class="footer_area clearfix" style="padding:10px; position:absolute; bottom:0; width:100%">
 	<div class="container" style="text-align:center">		
 				<span style="color:white">					
 						Copyright &copy;<script>

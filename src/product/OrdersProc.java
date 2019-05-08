@@ -222,12 +222,11 @@ public class OrdersProc extends HttpServlet {
 
 			break;
 
-		/*case "nowaybill":
+		case "nowaybill":
 			wDao = new WaybillDAO();
 			oDao = new OrdersDAO();
 			update = false;
 			
-			List<ProductDTO> noproduct = null;
 			List<NoWaybillDTO> noWaybillAll = wDao.selectNoWaybillAll();
 
 			for (NoWaybillDTO nDto : noWaybillAll) {
@@ -238,7 +237,6 @@ public class OrdersProc extends HttpServlet {
 						update = true;
 					} else {
 						update = false;
-						noproduct.add(dDto.getP_name())
 						break;
 					}
 				}
@@ -250,10 +248,13 @@ public class OrdersProc extends HttpServlet {
 					oDao.insertWaybill(nDto.getO_id());
 					oDao.updateWaybillTime(nDto);
 					wDao.deleteNoWaybill(nDto);
-				} 
+					msg = "운송처리되었습니다.";
+				} else {
+					msg = "재고가 부족한 항목이 있습니다.";
+				}
 			}
 
-			msg = "운송처리되었습니다.";
+			
 			url = "WaybillProcServlet?action=nowaybilllist&page=1";
 			request.setAttribute("message", msg);
 			request.setAttribute("url", url);
@@ -261,7 +262,7 @@ public class OrdersProc extends HttpServlet {
 			rd = request.getRequestDispatcher("alertMsg.jsp");
 			rd.forward(request, response);
 			oDao.close();
-			break;*/
+			break;
 
 		// csv 속 주문내역
 		case "orderlist":
