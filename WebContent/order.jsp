@@ -172,7 +172,16 @@
 										</tr>
 									</c:forEach>
 								</tbody>
-							</table>						
+							</table>
+							<%
+							if(request.getAttribute("OrderList") != null){
+							%>						
+							<div align=center> 	
+                    			<a href="OrdersProcServlet?action=ship&count=${requestScope.count}" class="myButton">운송신청</a>
+                    		</div> 
+                    		<%
+                    			}
+							%>
 						</div>
 					</div>
 				</div>

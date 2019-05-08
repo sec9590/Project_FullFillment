@@ -83,8 +83,8 @@
             <li class="active"><a href="OrdersProcServlet?action=productlist">재고내역</a></li>
             <li><a href="order.jsp">주문내역</a></li>
             <li><a href="sales.jsp">판매내역</a></li>
-            <li><a href="oderhistory.jsp">발주내역</a></li>
-            <li><a href="shippinghistory.jsp">운송내역</a></li>
+            <li><a href="orderhistory.jsp">발주내역</a></li>
+            <li><a href="WaybillProcServlet?action=waybilllist&page=1">운송내역</a></li>
             <li><a href="grossprofit.jsp">매출 총 이익</a></li>
         </nav>
     </header>

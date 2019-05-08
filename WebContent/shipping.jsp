@@ -93,7 +93,7 @@
             <li><a href="OrdersProcServlet?action=productlist">재고내역</a></li>
             <li><a href="order.jsp">주문내역</a></li>
             <li><a href="sales.jsp">판매내역</a></li>
-            <li><a href="oderhistory.jsp">발주내역</a></li>
+            <li><a href="orderhistory.jsp">발주내역</a></li>
             <li class="active"><a href="shippinghistory.jsp">운송내역</a></li>
             <li><a href="grossprofit.jsp">매출 총 이익</a></li>
         </nav>
@@ -105,11 +105,11 @@
 	     <div>
 	    	<h4>운송내역</h4>
 	    		<div style="margin-left:200px;">
-	    		<button type="submit" onclick="href=location">경기권</button>
-	    		<button type="submit" onclick="">충청권</button>
-	    		<button type="submit" onclick="">전라권</button>
-	    		<button type="submit" onclick="">경상권</button>
-	    		<button type="submit" onclick="">강원도</button>
+	    		<button type="button" onclick="location.href='WaybillProcServlet?action=shipping&add=A'">경기권</button>
+		    		<button type="button" onclick="location.href='WaybillProcServlet?action=shipping&add=B'">충청권</button>
+		    		<button type="button" onclick="location.href='WaybillProcServlet?action=shipping&add=C'">전라권</button>
+		    		<button type="button" onclick="location.href='WaybillProcServlet?action=shipping&add=D'">경상권</button>
+		    		<button type="button" onclick="location.href='WaybillProcServlet?action=shipping&add=E'">강원도</button>
 	    		</div>
 	    </div>
 	    

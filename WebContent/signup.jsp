@@ -14,7 +14,7 @@
 <style>
 	input[type=submit]{
 	  display: inline-block;
-	  width: 710px;
+	  width: 650px;
 	  height: 55px;
 	  color: #ffffff;
 	  background-color: #fbb710;
@@ -22,7 +22,9 @@
 	  padding: 0 7px;
 	  font-size: 18px;
 	  font-weight: 400;
-	}input[type='radio'] {
+	  cursor:pointer;
+	}
+	input[type='radio'] {
 	  -webkit-appearance:none;
 	  width:16px;
 	  height:16px;
@@ -44,8 +46,9 @@
 	input[type='radio']:checked:before {
 	  background:#008675;
 	}
-	label {font-size: 14px;
-  color: #6b6b6b;}
+	label {
+	 font-size: 14px;
+ 	 color: #6b6b6b;}
 </style>
 <body>
 
@@ -78,9 +81,6 @@
             <nav class="amado-nav">
                 <ul>
                   	<li><a href="index.jsp">Home</a></li>
-                    <li><a href="commodity.jsp">ADMIN</a></li>
-                    <li><a href="buying.jsp">BUYING</a></li>
-                    <li><a href="carrier.jsp">CARRIER</a></li>
                     <li class="active"><a href="signup.jsp">SIGN UP</a></li>
                     <li><a href="login.jsp">LOGIN</a></li>
 
@@ -169,7 +169,7 @@
    	</div>
    	</div>
 <!-- ##### Footer Area Start ##### -->
-	<footer class="footer_area clearfix" style="padding:10px; position:absolute; bottom:0; width:100%">
+	<footer class="footer_area clearfix" style="padding:10px; position:absolute; margin-bottom:0; width:100%">
 	<div class="container" style="text-align:center">		
 				<span style="color:white">					
 						Copyright &copy;<script>

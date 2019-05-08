@@ -2,6 +2,7 @@ package product;
 
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -42,43 +43,86 @@ public class WaybillProc extends HttpServlet {
 		WaybillDAO wDao = null;
 		WaybillDTO wDto = null;
 		List<WaybillDTO> wayList = null;
-		String msg = null;
-		String url = null;
 		request.setCharacterEncoding("UTF-8");
 		RequestDispatcher rd = null;
 		HttpSession session = request.getSession();
 		String action = request.getParameter("action");
+		int curPage = 0;
+		List<String> pageList = new ArrayList<String>();
 
 		switch (action) {
 		case "waybilllist":
+			if (!request.getParameter("page").equals("")) {
+				curPage = Integer.parseInt(request.getParameter("page"));
+			}
 			wDao = new WaybillDAO();
 			wDto = new WaybillDTO();
-			wayList = wDao.selectAll();
+			int pagecount = wDao.getCount();
+			if (pagecount == 0) // 데이터가 없을 때 대비
+				pagecount = 1;
+			int pageNo = (int) Math.ceil(pagecount / 10.0);
+			if (curPage > pageNo) // 경계선에 걸렸을 때 대비
+				curPage--;
+			session.setAttribute("currentMemberPage", curPage);
+			// 리스트 페이지의 하단 페이지 데이터 만들어 주기
+			String page = null;
+			page = "<a href=#>&laquo;</a>&nbsp;";
+			pageList.add(page);
+			for (int i = 1; i <= pageNo; i++) {
+				page = "&nbsp;<a href=WaybillProcServlet?action=waybilllist&page=" + i + ">" + i + "</a>&nbsp;";
+				pageList.add(page);
+			}
+			page = "&nbsp;<a href=#>&raquo;</a>";
+			pageList.add(page);
+			
+			wayList = wDao.selectWaybillAll(curPage);	
 			request.setAttribute("wayList", wayList);
+			request.setAttribute("pageList", pageList);
 			rd = request.getRequestDispatcher("shippinghistory.jsp");			
 			rd.forward(request, response);
 			break;
 			
 		case "shipping"	:
-			
 			String add = request.getParameter("add");
 			String add1 = null;
 			String add2 = null;
 			String add3 = null;
+			String add4 = null;
 			wDao = new WaybillDAO();
 			wDto = new WaybillDTO();
-			if(add.length() <= 2) {
-				add1 = add.substring(0,2);
-				wayList = wDao.selectAdd1(add1);
-			} else if(add.length() >= 6) {
-				add1 = add.substring(0, 2);
-				add2 = add.substring(2, 4);
-				add3 = add.substring(4, 6);
-				wayList = wDao.selectAdd3(add1, add2, add3);
-			} else {
-				add1 = add.substring(0, 2);
-				add2 = add.substring(2, 3);
-				wayList = wDao.selectAdd2(add1, add2);
+			switch(add) {
+			case "A" :
+				add1 = "서울경기";
+				add2 = add1.substring(0,2);
+				add3 = add1.substring(2,4);
+				wayList = wDao.selectAdd2(add2, add3);
+				break;
+			case "B" :
+				add1 = "대전세종충남";
+				add2 = add1.substring(0,2);
+				add3 = add1.substring(2,4);
+				add4 = add1.substring(4,6);
+				wayList = wDao.selectAdd3(add2, add3, add4);
+				break;
+			case "C" :
+				add1 = "광주전라";
+				add2 = add1.substring(0,2);
+				add3 = add1.substring(2,4);
+				wayList = wDao.selectAdd2(add2, add3);
+				break;
+			case "D" :
+				add1 = "대구울산부산경상";
+				add2 = add1.substring(0,2);
+				add3 = add1.substring(2,4);
+				add4 = add1.substring(4,6);
+				String add5 = add1.substring(6,8);
+				wayList = wDao.selectAdd4(add2, add3, add4, add5);
+				break;
+			case "E" :
+				add1 = "강원";
+				add2 = add1.substring(0,2);
+				wayList = wDao.selectAdd1(add2);
+				break;
 			}
 			
 			System.out.println("add= " + add);
@@ -86,6 +130,7 @@ public class WaybillProc extends HttpServlet {
 			rd = request.getRequestDispatcher("shipping.jsp");			
 			rd.forward(request, response);
 			break;
+			
 		}
 	}
 

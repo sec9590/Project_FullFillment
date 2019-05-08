@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="member.*, java.util.*" %>
+    pageEncoding="UTF-8" import="member.*, java.util.*, product.*" %>
      <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
    
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -93,7 +93,7 @@
             <li><a href="OrdersProcServlet?action=productlist">재고내역</a></li>
             <li><a href="order.jsp">주문내역</a></li>
             <li><a href="sales.jsp">판매내역</a></li>
-            <li><a href="oderhistory.jsp">발주내역</a></li>
+            <li><a href="orderhistory.jsp">발주내역</a></li>
             <li class="active"><a href="shippinghistory.jsp">운송내역</a></li>
             <li><a href="grossprofit.jsp">매출 총 이익</a></li>
         </nav>
@@ -105,11 +105,12 @@
 	     <div>
 	    	<h4>운송내역</h4>
 	    		<div style="margin-left:200px;">
-		    		<button type="submit" onclick="location.href='WaybillProcServlet?action=shipping&add=서울경기'">경기권</button>
-		    		<button type="submit" onclick="location.href='WaybillProcServlet?action=shipping&add=대전세종충청'">충청권</button>
-		    		<button type="submit" onclick="location.href='WaybillProcServlet?action=shipping&add=광주전라'">전라권</button>
-		    		<button type="submit" onclick="location.href='WaybillProcServlet?action=shipping&add=대구울산경산'">경상권</button>
-		    		<button type="submit" onclick="location.href='WaybillProcServlet?action=shipping&add=강원'">강원도</button>
+	    			
+		    		<button type="button" onclick="location.href='WaybillProcServlet?action=shipping&add=A'">경기권</button>
+		    		<button type="button" onclick="location.href='WaybillProcServlet?action=shipping&add=B'">충청권</button>
+		    		<button type="button" onclick="location.href='WaybillProcServlet?action=shipping&add=C'">전라권</button>
+		    		<button type="button" onclick="location.href='WaybillProcServlet?action=shipping&add=D'">경상권</button>
+		    		<button type="button" onclick="location.href='WaybillProcServlet?action=shipping&add=E'">강원도</button>
 	    		</div>
 	    </div>
 	    
@@ -124,6 +125,8 @@
 	                              <th>수취인</th>
 	                              <th>전화번호</th>
 	                              <th>주소</th>
+	                              <th>주문시간</th>
+	                              <th>배송시간</th>
 	                          </tr>
 	                      </thead>
                           <tbody>
@@ -137,10 +140,20 @@
 									<td>${way.o_name}</td>
 									<td>${way.o_tel}</td>
 									<td>${way.o_address}</td>
+									<td>${way.o_time}</td>
+									<td>${way.w_time}</td>
 								</tr>
 							</c:forEach>
                     	</tbody>
                 	</table>
+                	<div align=center>
+						<c:set var="pageList" value="${requestScope.pageList}" />
+						<c:forEach var="pageNo" items="${pageList}">
+							${pageNo}
+						</c:forEach>
+						<br>
+						<br>
+					</div>
 	            </div>
 	    	</div>
 		</div>

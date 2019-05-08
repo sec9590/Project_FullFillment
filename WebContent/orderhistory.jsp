@@ -107,7 +107,7 @@ button{
             <li><a href="commodity.jsp">재고내역</a></li>
             <li><a href="order.jsp">주문내역</a></li>
             <li><a href="sales.jsp">판매내역</a></li>
-            <li class="active"><a href="oderhistory.jsp">발주내역</a></li>
+            <li class="active"><a href="orderhistory.jsp">발주내역</a></li>
             <li><a href="shippinghistory.jsp">운송내역</a></li>
             <li><a href="grossprofit.jsp">매출 총 이익</a></li>
         </nav>
@@ -119,11 +119,11 @@ button{
 	    <div>
 	     <h4>발주내역</h4>
 	     		<div style="margin-left:300px;">
-		    		<button type="submit" onclick="location.href='OrdersProcServlet?action=orderhistory&code=A'">의자</button>
-		    		<button type="submit" onclick="location.href='OrdersProcServlet?action=orderhistory&code=B'">침대</button>
-		    		<button type="submit" onclick="location.href='OrdersProcServlet?action=orderhistory&code=C'">테이블</button>
-		    		<button type="submit" onclick="location.href='OrdersProcServlet?action=orderhistory&code=D'">수납장</button>
-		    		<button type="submit" onclick="location.href='OrdersProcServlet?action=orderhistory&code=E'">조명/리빙</button>
+		    		<button type="button" onclick="location.href='OrdersProcServlet?action=orderhistory&code=A'">의자</button>
+		    		<button type="button" onclick="location.href='OrdersProcServlet?action=orderhistory&code=B'">침대</button>
+		    		<button type="button" onclick="location.href='OrdersProcServlet?action=orderhistory&code=C'">테이블</button>
+		    		<button type="button" onclick="location.href='OrdersProcServlet?action=orderhistory&code=D'">수납장</button>
+		    		<button type="button" onclick="location.href='OrdersProcServlet?action=orderhistory&code=E'">조명/리빙</button>
 	    		</div>
 	    	</div>
 	    	

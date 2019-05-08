@@ -71,7 +71,7 @@
                    	 		String job = (String) session.getAttribute("memberJob");
                    	 		if(job.equals("0")){
                     %>
-                   		 <li><a href="commodity.jsp">ADMIN</a></li>
+                   		 <li><a href="OrdersProcServlet?action=productlist">ADMIN</a></li>
                    	<%
                    	 		} else if(job.equals("1")){
                    	%>
@@ -116,10 +116,11 @@
                             <div class="line"></div>
                             <p>From 180,000won</p>
                             <h4>LILLBERG 1인소파</h4>
-
                         </div>
                     </a>
                 </div>  
+                
+                
                 
                 <!-- Single Catagory -3 -->
                 <div class="single-products-catagory clearfix">
@@ -133,7 +134,8 @@
                         </div>
                     </a>
                 </div>
-
+                
+                
                 <!-- Single Catagory -4 -->
                 <div class="single-products-catagory clearfix">
                     <a href="#">
