@@ -42,12 +42,18 @@ public class WaybillProc extends HttpServlet {
 			throws ServletException, IOException {
 		WaybillDAO wDao = null;
 		WaybillDTO wDto = null;
+		NoWaybillDTO nwDto = null;
 		List<WaybillDTO> wayList = null;
+		List<NoWaybillDTO> nwayList = null;
 		request.setCharacterEncoding("UTF-8");
 		RequestDispatcher rd = null;
 		HttpSession session = request.getSession();
 		String action = request.getParameter("action");
 		int curPage = 0;
+		int pagecount = 0;
+		int pageNo = 0;
+		String page = null;
+		
 		List<String> pageList = new ArrayList<String>();
 
 		switch (action) {
@@ -57,15 +63,14 @@ public class WaybillProc extends HttpServlet {
 			}
 			wDao = new WaybillDAO();
 			wDto = new WaybillDTO();
-			int pagecount = wDao.getCount();
+			pagecount = wDao.getCount();
 			if (pagecount == 0) // 데이터가 없을 때 대비
 				pagecount = 1;
-			int pageNo = (int) Math.ceil(pagecount / 10.0);
+			pageNo = (int) Math.ceil(pagecount / 10.0);
 			if (curPage > pageNo) // 경계선에 걸렸을 때 대비
 				curPage--;
 			session.setAttribute("currentMemberPage", curPage);
 			// 리스트 페이지의 하단 페이지 데이터 만들어 주기
-			String page = null;
 			page = "<a href=#>&laquo;</a>&nbsp;";
 			pageList.add(page);
 			for (int i = 1; i <= pageNo; i++) {
@@ -131,6 +136,35 @@ public class WaybillProc extends HttpServlet {
 			rd.forward(request, response);
 			break;
 			
+		case "nowaybilllist":
+			if (!request.getParameter("page").equals("")) {
+				curPage = Integer.parseInt(request.getParameter("page"));
+			}
+			wDao = new WaybillDAO();
+			nwDto = new NoWaybillDTO();
+			pagecount = wDao.getCount();
+			if (pagecount == 0) // 데이터가 없을 때 대비
+				pagecount = 1;
+			pageNo = (int) Math.ceil(pagecount / 10.0);
+			if (curPage > pageNo) // 경계선에 걸렸을 때 대비
+				curPage--;
+			session.setAttribute("currentMemberPage", curPage);
+			// 리스트 페이지의 하단 페이지 데이터 만들어 주기
+			page = "<a href=#>&laquo;</a>&nbsp;";
+			pageList.add(page);
+			for (int i = 1; i <= pageNo; i++) {
+				page = "&nbsp;<a href=WaybillProcServlet?action=nowaybilllist&page=" + i + ">" + i + "</a>&nbsp;";
+				pageList.add(page);
+			}
+			page = "&nbsp;<a href=#>&raquo;</a>";
+			pageList.add(page);
+			
+			nwayList = wDao.selectNoWaybillAll(curPage);	
+			request.setAttribute("nwayList", nwayList);
+			request.setAttribute("pageList", pageList);
+			rd = request.getRequestDispatcher("noshippinghistory.jsp");			
+			rd.forward(request, response);
+			break;		
 		}
 	}
 

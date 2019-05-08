@@ -5,7 +5,10 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class OrdersDAO {
@@ -122,17 +125,13 @@ public class OrdersDAO {
 		}
 	}
 
-	public void insertWaybill(WaybillDTO wDto) {
-		String query = "insert into waybill(o_id, o_name, o_tel, o_address) values (?, ?, ?, ?);";
+	public void insertWaybill(int o_id) {
+		String query = "INSERT INTO waybill(o_id, o_name, o_tel, o_address, o_time) SELECT o_id, o_name, o_tel, o_address, o_time FROM orders WHERE o_id = ?;";
 		PreparedStatement pStmt = null;
-
+		
 		try {
 			pStmt = conn.prepareStatement(query);
-
-			pStmt.setInt(1, wDto.getO_id());
-			pStmt.setString(2, wDto.getO_name());
-			pStmt.setString(3, wDto.getO_tel());
-			pStmt.setString(4, wDto.getO_address());
+			pStmt.setInt(1, o_id);
 
 			pStmt.executeUpdate();
 
@@ -148,8 +147,121 @@ public class OrdersDAO {
 		}
 	}
 
+	public void updateWaybillTime(OrdersDTO oDto) {
+		String query = "update waybill set w_time=? where o_id=?;";
+		PreparedStatement pStmt = null;
+		String w_time = null;
+		String o_time = oDto.getO_time();
+		System.out.println(o_time);
+		
+		if(compareTime(o_time).after(currentTime("day")))
+			w_time = timechangeString(currentTime("night"));
+		else
+			w_time = timechangeString(currentTime("day"));
+		
+		System.out.println(w_time);
+		
+		try {
+			pStmt = conn.prepareStatement(query);
+
+			pStmt.setString(1, w_time);
+			pStmt.setInt(2, oDto.getO_id());
+
+			pStmt.executeUpdate();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (pStmt != null && !pStmt.isClosed())
+					pStmt.close();
+			} catch (SQLException se) {
+				se.printStackTrace();
+			}
+		}
+	}
+	
+	public void updateWaybillTime(NoWaybillDTO nwDto) {
+		String query = "update waybill set w_time=? where o_id=?;";
+		PreparedStatement pStmt = null;
+		String w_time = null;
+		String o_time = nwDto.getO_time();
+		System.out.println(o_time);
+		
+		if(compareTime(o_time).after(currentTime("day")))
+			w_time = timechangeString(currentTime("night"));
+		else
+			w_time = timechangeString(currentTime("day"));
+		
+		System.out.println(w_time);
+		
+		try {
+			pStmt = conn.prepareStatement(query);
+
+			pStmt.setString(1, w_time);
+			pStmt.setInt(2, nwDto.getO_id());
+
+			pStmt.executeUpdate();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (pStmt != null && !pStmt.isClosed())
+					pStmt.close();
+			} catch (SQLException se) {
+				se.printStackTrace();
+			}
+		}
+	}
+	
+	//운송처리위한 현재시간 변환
+	public static Date currentTime(String day) {
+		SimpleDateFormat format1 = new SimpleDateFormat ( "yyyy-MM-dd");
+		SimpleDateFormat format2 = new SimpleDateFormat ( "yyyy-MM-dd HH:mm");
+		Date time = new Date();
+		String time1 = format1.format(time);
+		
+		if(day.equals("day"))
+			time1 += " 09:00";
+		else
+			time1 += " 18:00";
+		
+		System.out.println(time1);
+		
+		try {
+			time = format2.parse(time1);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return time;
+	}
+	
+	//시간형식 문자열로 변환
+	public static String timechangeString(Date time) {
+		SimpleDateFormat format1 = new SimpleDateFormat ( "yyyy-MM-dd HH:mm");
+		String str = format1.format(time);
+		return str;		
+	}
+	
+	//주문시간변환
+	public static Date compareTime(String o_time) {
+		SimpleDateFormat format1 = new SimpleDateFormat ( "yyyy-MM-dd HH:mm");	
+		Date time = null;
+		try {
+			time = format1.parse(o_time);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return time;
+	}
+	
 	public List<OrdersDTO> selectUpload(int count) {
-		String query = "select o.o_id, o.o_name, o.o_tel, o.o_address, date_format(o.o_time, '%Y-%m-%d %h:%i'), count(*) '주문수'\r\n"
+		String query = "select o.o_id, o.o_name, o.o_tel, o.o_address, date_format(o.o_time, '%Y-%m-%d %H:%i'), count(*) '주문수'\r\n"
 				+ "				from orders as o inner join orders_detail as d on o.o_id = d.o_id group by o.o_id order by o.o_id desc limit ?;";
 		PreparedStatement pStmt = null;
 		List<OrdersDTO> list = new ArrayList<OrdersDTO>();
@@ -183,7 +295,7 @@ public class OrdersDAO {
 	}
 
 	public List<OrdersDTO> selectOrderAll() {
-		String query = "select o.o_id, o.o_name, o.o_tel, o.o_address, date_format(o.o_time, '%Y-%m-%d %h:%i'), count(*) '주문수'\r\n"
+		String query = "select o.o_id, o.o_name, o.o_tel, o.o_address, date_format(o.o_time, '%Y-%m-%d %H:%i'), count(*) '주문수'\r\n"
 				+ "from orders as o inner join orders_detail as d on o.o_id = d.o_id group by o.o_id order by o.o_id;";
 		PreparedStatement pStmt = null;
 		List<OrdersDTO> list = new ArrayList<OrdersDTO>();
@@ -220,10 +332,10 @@ public class OrdersDAO {
 		int offset = 0;
 		String sql = null;
 		if (page == 0) {
-			sql = "select o.o_id, o.o_name, o.o_tel, o.o_address, date_format(o.o_time, '%Y-%m-%d %h:%i'), count(*) '주문수'\r\n"
+			sql = "select o.o_id, o.o_name, o.o_tel, o.o_address, date_format(o.o_time, '%Y-%m-%d %H:%i'), count(*) '주문수'\r\n"
 					+ "				from orders as o inner join orders_detail as d on o.o_id = d.o_id group by o.o_id order by o.o_id desc;";
 		} else {
-			sql = "select o.o_id, o.o_name, o.o_tel, o.o_address, date_format(o.o_time, '%Y-%m-%d %h:%i'), count(*) '주문수'\r\n"
+			sql = "select o.o_id, o.o_name, o.o_tel, o.o_address, date_format(o.o_time, '%Y-%m-%d %H:%i'), count(*) '주문수'\r\n"
 					+ "from orders as o inner join orders_detail as d on o.o_id = d.o_id group by o.o_id order by o.o_id desc limit ?, 10;";
 			offset = (page - 1) * 10;
 		}

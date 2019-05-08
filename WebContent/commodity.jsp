@@ -19,7 +19,6 @@
 
     <!-- Core Style CSS -->
     <link rel="stylesheet" href="css/core-style.css">
-    <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" type="text/css" href="css/util.css">
     <link rel="stylesheet" type="text/css" href="css/main.css">
 
@@ -81,10 +80,11 @@
         <nav class="amado-nav">
         	<li><a href="index.jsp">HOME</a></li>
             <li class="active"><a href="OrdersProcServlet?action=productlist">재고내역</a></li>
-            <li><a href="order.jsp">주문내역</a></li>
-            <li><a href="sales.jsp">판매내역</a></li>
+            <li><a href="order.jsp">주문하기</a></li>
+            <li><a href="OrdersProcServlet?action=orderAll&page=1">주문내역</a></li>
             <li><a href="orderhistory.jsp">발주내역</a></li>
             <li><a href="WaybillProcServlet?action=waybilllist&page=1">운송내역</a></li>
+            <li><a href="WaybillProcServlet?action=nowaybilllist&page=1">미운송내역</a></li>
             <li><a href="grossprofit.jsp">매출 총 이익</a></li>
         </nav>
     </header>
@@ -127,7 +127,7 @@
 <!-- ##### Main Content Wrapper End ##### -->
 
 <!-- ##### Footer Area Start ##### -->
-	<footer class="footer_area clearfix" style="padding:10px; position:fixed; margin-bottom:0px; width:100%">
+	<footer class="footer_area clearfix" style="padding:10px; position:absolute; margin-bottom:0; width:100%">
 	<div class="container" style="text-align:center">		
 				<span style="color:white">					
 						Copyright &copy;<script>

@@ -12,7 +12,7 @@
     <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
     <!-- Title  -->
-    <title>Yellow Container : shippinghistory</title>
+    <title>Yellow Container : noshippinghistory</title>
 
     <!-- Favicon  -->
     <link rel="icon" href="img/core-img/favicon.ico">
@@ -53,6 +53,30 @@
  		button:hover{
  			background-color:#333333;
  		}
+ 		.myButton {
+			background-color:#fbb810;
+			-moz-border-radius:42px;
+			-webkit-border-radius:42px;
+			border-radius:42px;
+			display:inline-block;
+			cursor:pointer;
+			color:#ffffff;
+			font-size:15px;
+			padding:10px 15px;
+			text-decoration:none;
+		}
+ 		.myButton:hover {
+			background-color:#333333;
+			-moz-border-radius:42px;
+			-webkit-border-radius:42px;
+			border-radius:42px;
+			display:inline-block;
+			cursor:pointer;
+			color:#ffffff;
+			font-size:15px;
+			padding:10px 15px;
+			text-decoration:none;
+		}
  	</style>
 </head>
 
@@ -94,8 +118,8 @@
             <li><a href="order.jsp">주문하기</a></li>
             <li><a href="OrdersProcServlet?action=orderAll&page=1">주문내역</a></li>
             <li><a href="orderhistory.jsp">발주내역</a></li>
-            <li class="active"><a href="WaybillProcServlet?action=waybilllist&page=1">운송내역</a></li>
-            <li><a href="WaybillProcServlet?action=nowaybilllist&page=1">미운송내역</a></li>
+            <li><a href="WaybillProcServlet?action=waybilllist&page=1">운송내역</a></li>
+            <li class="active"><a href="WaybillProcServlet?action=nowaybilllist&page=1">미운송내역</a></li>
             <li><a href="grossprofit.jsp">매출 총 이익</a></li>
         </nav>
     </header>
@@ -105,14 +129,6 @@
 	    <div class="row">
 	     <div>
 	    	<h4>운송내역</h4>
-	    		<div style="margin-left:200px;">
-	    			
-		    		<button type="button" onclick="location.href='WaybillProcServlet?action=shipping&add=A'">경기권</button>
-		    		<button type="button" onclick="location.href='WaybillProcServlet?action=shipping&add=B'">충청권</button>
-		    		<button type="button" onclick="location.href='WaybillProcServlet?action=shipping&add=C'">전라권</button>
-		    		<button type="button" onclick="location.href='WaybillProcServlet?action=shipping&add=D'">경상권</button>
-		    		<button type="button" onclick="location.href='WaybillProcServlet?action=shipping&add=E'">강원도</button>
-	    		</div>
 	    </div>
 	    
 	        <!-- Single Product Area -->
@@ -121,32 +137,31 @@
 	                  <table class="table table-hover">
 	                      <thead>
 	                          <tr>
-	                              <th>송장번호</th>
 	                              <th>주문번호</th>
 	                              <th>수취인</th>
 	                              <th>전화번호</th>
 	                              <th>주소</th>
 	                              <th>주문시간</th>
-	                              <th>배송시간</th>
 	                          </tr>
 	                      </thead>
                           <tbody>
-                          	<c:set var="wlist" value="${requestScope.wayList}" />
-							<c:forEach var="way" items="${wlist}">
+                          	<c:set var="nwlist" value="${requestScope.nwayList}" />
+							<c:forEach var="nway" items="${nwlist}">
 								<tr height="30">
-									<td>${way.w_id}</td>
 									<td><a
-										href="OrdersProcServlet?action=detail&name=${way.o_name}&id=${way.o_id}">${way.o_id}</a>
+										href="OrdersProcServlet?action=detail&name=${nway.o_name}&id=${nway.o_id}">${nway.o_id}</a>
 									</td>
-									<td>${way.o_name}</td>
-									<td>${way.o_tel}</td>
-									<td>${way.o_address}</td>
-									<td>${way.o_time}</td>
-									<td>${way.w_time}</td>
+									<td>${nway.o_name}</td>
+									<td>${nway.o_tel}</td>
+									<td>${nway.o_address}</td>
+									<td>${nway.o_time}</td>
 								</tr>
 							</c:forEach>
                     	</tbody>
                 	</table>
+                	<div align=center style="margin-bottom:10px;"> 	
+                    			<a href="OrdersProcServlet?action=ship&count=${requestScope.count}" class="myButton">운송신청</a>
+                    </div> 
                 	<div align=center>
 						<c:set var="pageList" value="${requestScope.pageList}" />
 						<c:forEach var="pageNo" items="${pageList}">

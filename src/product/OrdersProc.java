@@ -55,8 +55,9 @@ public class OrdersProc extends HttpServlet {
 		ProductDAO pDao = null;
 		ProductDTO pDto = null;
 		WaybillDTO wDto = null;
+		WaybillDAO wDao = null;
 		NoWaybillDTO nwDto = null;
-		
+
 		BufferedReader br = null;
 		String msg = null;
 		String url = null;
@@ -64,12 +65,15 @@ public class OrdersProc extends HttpServlet {
 		RequestDispatcher rd = null;
 		HttpSession session = request.getSession();
 		String action = request.getParameter("action");
+
 		List<String> pageList = new ArrayList<String>();
 		List<OrdersDTO> orderAll = null;
 		int curPage = 0;
 		int num = 0;
+		boolean update = false;
 
 		switch (action) {
+		// 파일 다운하고 주문하기
 		case "down":
 			String saveDir = "C:\\Temp\\Invoices\\Backup\\";
 			int maxSize = 1024 * 1024 * 100;
@@ -102,7 +106,7 @@ public class OrdersProc extends HttpServlet {
 			doDto = new DetailOrderDTO();
 			wDto = new WaybillDTO();
 			int count = 0;
-			
+
 			String o_name = null;
 			String o_tel = null;
 			String o_address = null;
@@ -110,7 +114,6 @@ public class OrdersProc extends HttpServlet {
 			String p_name = null;
 			int o_quantity = 0;
 			int temp = 0;
-			
 
 			while ((line = br.readLine()) != null) {
 				String[] lines = line.split(",");
@@ -118,7 +121,7 @@ public class OrdersProc extends HttpServlet {
 				o_name = lines[0];
 				o_tel = lines[1];
 				o_address = lines[2];
-			
+
 				if (lines[0].equals("")) {
 					p_id = Integer.parseInt(lines[3]);
 					p_name = lines[4];
@@ -128,16 +131,16 @@ public class OrdersProc extends HttpServlet {
 					doDto.setP_id(p_id);
 					doDto.setP_name(p_name);
 					doDto.setO_quantity(o_quantity);
-					
-					oDao.insertDetailOrders(doDto);					
+
+					oDao.insertDetailOrders(doDto);
 				} else {
 					oDto.setO_name(o_name);
 					oDto.setO_tel(o_tel);
 					oDto.setO_address(o_address);
 					oDao.insertOrders(oDto);
-					int orderid = oDao.selectOrderId(o_name);					
-					System.out.println("주문번호 : "+orderid);
-												
+					int orderid = oDao.selectOrderId(o_name);
+					System.out.println("주문번호 : " + orderid);
+
 					p_id = Integer.parseInt(lines[3]);
 					p_name = lines[4];
 					o_quantity = Integer.parseInt(lines[5]);
@@ -146,14 +149,14 @@ public class OrdersProc extends HttpServlet {
 					doDto.setP_id(p_id);
 					doDto.setP_name(p_name);
 					doDto.setO_quantity(o_quantity);
-					
-					oDao.insertDetailOrders(doDto);					
+
+					oDao.insertDetailOrders(doDto);
 					count++;
 				}
 				System.out.println(oDto.toString());
 				System.out.println(doDto.toString());
 				System.out.println(count);
-				
+
 			}
 
 			msg = "주문 성공";
@@ -162,77 +165,123 @@ public class OrdersProc extends HttpServlet {
 			request.setAttribute("count", count);
 			request.setAttribute("message", msg);
 			request.setAttribute("url", url);
-			
+
 			System.out.println(count);
 			rd = request.getRequestDispatcher("alertMsg.jsp");
 			rd.forward(request, response);
 			oDao.close();
 
-			break;		
-			
+			break;
+
+		// 운송신청
 		case "ship":
 			oDao = new OrdersDAO();
 			oDto = new OrdersDTO();
 			nwDto = new NoWaybillDTO();
-			boolean update = false;
-	
+			update = false;
+
 			System.out.println(request.getParameter("count"));
 			if (!request.getParameter("count").equals("")) {
 				num = Integer.parseInt(request.getParameter("count"));
 			}
-			
-			orderAll = oDao.selectUpload(num);	
-			
-			for(OrdersDTO order : orderAll) {
+
+			orderAll = oDao.selectUpload(num);
+
+			for (OrdersDTO order : orderAll) {
 				List<DetailOrderDTO> doDtoList = oDao.selectDetailOrder(order.getO_id());
-		
-				for(DetailOrderDTO dDto : doDtoList) {
-					if(oDao.checkQuantity(dDto)) {
+
+				for (DetailOrderDTO dDto : doDtoList) {
+					if (oDao.checkQuantity(dDto)) {
 						update = true;
 					} else {
-						update = false;					
+						update = false;
 						break;
-					}					
+					}
 				}
-				
-				if(update) {
-					for(DetailOrderDTO dDto : doDtoList) {
+
+				if (update) {
+					for (DetailOrderDTO dDto : doDtoList) {
 						oDao.updateQuantity(dDto);
 					}
+					oDao.insertWaybill(order.getO_id());
+					oDao.updateWaybillTime(order);
 				} else {
 					oDao.insertNoWaybill(order.getO_id());
-				}		
-				
-			}		
-			
+				}
+
+			}
+
 			msg = "운송처리되었습니다.";
 			url = "order.jsp";
 			request.setAttribute("message", msg);
 			request.setAttribute("url", url);
-		
+
 			rd = request.getRequestDispatcher("alertMsg.jsp");
 			rd.forward(request, response);
 			oDao.close();
-			
+
 			break;
 
+		/*case "nowaybill":
+			wDao = new WaybillDAO();
+			oDao = new OrdersDAO();
+			update = false;
+			
+			List<ProductDTO> noproduct = null;
+			List<NoWaybillDTO> noWaybillAll = wDao.selectNoWaybillAll();
+
+			for (NoWaybillDTO nDto : noWaybillAll) {
+				List<DetailOrderDTO> doDtoList = oDao.selectDetailOrder(nDto.getO_id());
+
+				for (DetailOrderDTO dDto : doDtoList) {
+					if (oDao.checkQuantity(dDto)) {
+						update = true;
+					} else {
+						update = false;
+						noproduct.add(dDto.getP_name())
+						break;
+					}
+				}
+
+				if (update) {
+					for (DetailOrderDTO dDto : doDtoList) {
+						oDao.updateQuantity(dDto);
+					}
+					oDao.insertWaybill(nDto.getO_id());
+					oDao.updateWaybillTime(nDto);
+					wDao.deleteNoWaybill(nDto);
+				} 
+			}
+
+			msg = "운송처리되었습니다.";
+			url = "WaybillProcServlet?action=nowaybilllist&page=1";
+			request.setAttribute("message", msg);
+			request.setAttribute("url", url);
+
+			rd = request.getRequestDispatcher("alertMsg.jsp");
+			rd.forward(request, response);
+			oDao.close();
+			break;*/
+
+		// csv 속 주문내역
 		case "orderlist":
 			oDao = new OrdersDAO();
 			oDto = new OrdersDTO();
-		
+
 			System.out.println(request.getParameter("count"));
 			if (!request.getParameter("count").equals("")) {
 				num = Integer.parseInt(request.getParameter("count"));
 			}
-			List<OrdersDTO> orderList = oDao.selectUpload(num);	
-			System.out.println("완료");			
+			List<OrdersDTO> orderList = oDao.selectUpload(num);
+			System.out.println("완료");
 			request.setAttribute("OrderList", orderList);
 			request.setAttribute("count", num);
 			System.out.println(num);
 			rd = request.getRequestDispatcher("order.jsp");
 			rd.forward(request, response);
 			break;
-			
+
+		// 주문 상세내역
 		case "detail":
 			int id = 0;
 			if (!request.getParameter("id").equals("")) {
@@ -248,16 +297,18 @@ public class OrdersProc extends HttpServlet {
 			rd = request.getRequestDispatcher("detail.jsp");
 			rd.forward(request, response);
 			break;
-		
+
+		// 재고목록
 		case "productlist":
 			pDao = new ProductDAO();
 			pDto = new ProductDTO();
 			List<ProductDTO> productList = pDao.selectAll();
 			request.setAttribute("ProductList", productList);
-			rd = request.getRequestDispatcher("commodity.jsp");			
+			rd = request.getRequestDispatcher("commodity.jsp");
 			rd.forward(request, response);
 			break;
-		
+
+		// 총 주문내역
 		case "orderAll":
 			if (!request.getParameter("page").equals("")) {
 				curPage = Integer.parseInt(request.getParameter("page"));
@@ -280,26 +331,25 @@ public class OrdersProc extends HttpServlet {
 			}
 			page = "&nbsp;<a href=#>&raquo;</a>";
 			pageList.add(page);
-			
-			orderAll = oDao.selectOrderAll(curPage);	
+
+			orderAll = oDao.selectOrderAll(curPage);
 			request.setAttribute("orderAllList", orderAll);
 			request.setAttribute("pageList", pageList);
 			rd = request.getRequestDispatcher("sales.jsp");
 			rd.forward(request, response);
 			break;
-		
+
+		// 발주내역
 		case "orderhistory":
 			String code = request.getParameter("code");
 			pDao = new ProductDAO();
 			pDto = new ProductDTO();
 			List<ProductDTO> orderhistoryList = pDao.selectOrderHistory(code);
 			request.setAttribute("orderhistoryList", orderhistoryList);
-			rd = request.getRequestDispatcher("orderhistory.jsp");			
+			rd = request.getRequestDispatcher("orderhistory.jsp");
 			rd.forward(request, response);
 			break;
-			
-		
-			
+
 		}
 	}
 

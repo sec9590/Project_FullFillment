@@ -19,6 +19,7 @@
     <!-- Core Style CSS -->
     <link rel="stylesheet" href="css/core-style.css">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
 </head>
 
 <body>   
