@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="member.*, product.*, java.util.*" %>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
    
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -12,7 +12,7 @@
     <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
     <!-- Title  -->
-    <title>Yellow Container : commodity</title>
+    <title>Yellow Container : shipping</title>
 
     <!-- Favicon  -->
     <link rel="icon" href="img/core-img/favicon.ico">
@@ -43,6 +43,16 @@
  	<style>
  		h4 { margin-left:15px; margin-bottom:20px; }
  		th, td { text-align:center;}
+ 		button{
+ 		 	margin-left:15px; margin-bottom:20px;
+ 			background-color:#fbb710;
+ 			color:#fff;
+ 			width:80px;
+ 			height:30px;
+ 		}
+ 		button:hover{
+ 			background-color:#333333;
+ 		}
  	</style>
 </head>
 
@@ -80,11 +90,11 @@
         <!-- Amado Nav -->
         <nav class="amado-nav">
         	<li><a href="index.jsp">HOME</a></li>
-            <li class="active"><a href="OrdersProcServlet?action=productlist">재고내역</a></li>
+            <li><a href="OrdersProcServlet?action=productlist">재고내역</a></li>
             <li><a href="order.jsp">주문내역</a></li>
             <li><a href="sales.jsp">판매내역</a></li>
             <li><a href="oderhistory.jsp">발주내역</a></li>
-            <li><a href="shippinghistory.jsp">운송내역</a></li>
+            <li class="active"><a href="shippinghistory.jsp">운송내역</a></li>
             <li><a href="grossprofit.jsp">매출 총 이익</a></li>
         </nav>
     </header>
@@ -92,33 +102,45 @@
 
 	<div class="amado_product_area section-padding-100">
 	    <div class="row">
-	     <h4>재고내역</h4>
+	     <div>
+	    	<h4>운송내역</h4>
+	    		<div style="margin-left:200px;">
+	    		<button type="submit" onclick="href=location">경기권</button>
+	    		<button type="submit" onclick="">충청권</button>
+	    		<button type="submit" onclick="">전라권</button>
+	    		<button type="submit" onclick="">경상권</button>
+	    		<button type="submit" onclick="">강원도</button>
+	    		</div>
+	    </div>
+	    
 	        <!-- Single Product Area -->
 	        <div class="col-12 col-sm-6 col-md-12 col-xl-15">
 	            <div class="single-product-wrapper">
 	                  <table class="table table-hover">
-	                     <thead>
-	                         <tr>
-	                             <th>제품코드</th>
-	                             <th>제품명</th>
-	                             <th>가격</th>
-	                             <th>수량</th>
-	                         </tr>
-	                     </thead>
-	                     <tbody>
-	                        <tbody>
-									<c:set var="plist" value="${requestScope.ProductList}" />
-									<c:forEach var="product" items="${plist}">
-										<tr>
-											<td>${product.p_id}</td>
-											<td style="text-align:left">${product.p_name}</td>
-											<td>${product.p_price}</td>
-											<td>${product.p_quantity}</td>											
-										</tr>
-									</c:forEach>
-								</tbody>
-	                     </tbody>
-	             	 </table>
+	                      <thead>
+	                          <tr>
+	                              <th>송장번호</th>
+	                              <th>주문번호</th>
+	                              <th>수취인</th>
+	                              <th>전화번호</th>
+	                              <th>주소</th>
+	                          </tr>
+	                      </thead>
+                          <tbody>
+                          	<c:set var="wlist" value="${requestScope.wayList}" />
+							<c:forEach var="way" items="${wlist}">
+								<tr height="30">
+									<td>${way.w_id}</td>
+									<td><a
+										href="OrdersProcServlet?action=detail&name=${way.o_name}&id=${way.o_id}">${way.o_id}</a>
+									</td>
+									<td>${way.o_name}</td>
+									<td>${way.o_tel}</td>
+									<td>${way.o_address}</td>
+								</tr>
+							</c:forEach>
+                    	</tbody>
+                	</table>
 	            </div>
 	    	</div>
 		</div>
@@ -127,7 +149,7 @@
 <!-- ##### Main Content Wrapper End ##### -->
 
 <!-- ##### Footer Area Start ##### -->
-	<footer class="footer_area clearfix" style="padding:10px; position:fixed; margin-bottom:0px; width:100%">
+	<footer class="footer_area clearfix" style="padding:10px; position:absolute; margin-bottom:0; width:100%">
 	<div class="container" style="text-align:center">		
 				<span style="color:white">					
 						Copyright &copy;<script>

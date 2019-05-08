@@ -91,7 +91,7 @@
             <!-- Amado Nav -->
             <nav class="amado-nav">
                 <ul>
-                    <li><a href="index.jsp">Home</a></li>
+                    <li><a href="index.jsp">HOME</a></li>
                     <li><a href="signup.jsp">SIGN UP</a></li>
                     <li class="active"><a href="login.jsp">LOGIN</a></li>
                 </ul>
@@ -153,7 +153,7 @@
                             <div>
                               <div>
                                 <div>
-                                  <form class="login100-form validate-form" name="Loginform" action="/project02/memberProcServlet?action=login" method=post>
+                                  <form class="login100-form validate-form" name="Loginform" action="memberProcServlet?action=login" method=post>
                                     <span class="login100-form-title p-b-70">
                                       Welcome
                                     </span>
@@ -189,61 +189,20 @@
           </div>
           </div>
     <!-- ##### Main Content Wrapper End ##### -->
-
-
-
-    <!-- ##### Footer Area Start ##### -->
-    <footer class="footer_area clearfix">
-        <div class="container">
-            <div class="row align-items-center">
-                <!-- Single Widget Area -->
-                <div class="col-12 col-lg-4">
-                    <div class="single_widget_area">
-                        <!-- Logo -->
-                        <div class="footer-logo mr-50">
-                            <a href="index.jsp"><img src="img/core-img/logo2.png" alt=""></a>
-                        </div>
-                        <!-- Copywrite Text -->
-                        <p class="copywrite"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a> & Re-distributed by <a href="https://themewagon.com/" target="_blank">Themewagon</a>
-<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                    </div>
-                </div>
-                <!-- Single Widget Area -->
-                <div class="col-12 col-lg-8">
-                    <div class="single_widget_area">
-                        <!-- Footer Menu -->
-                        <div class="footer_menu">
-                            <nav class="navbar navbar-expand-lg justify-content-end">
-                                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#footerNavContent" aria-controls="footerNavContent" aria-expanded="false" aria-label="Toggle navigation"><i class="fa fa-bars"></i></button>
-                                <div class="collapse navbar-collapse" id="footerNavContent">
-                                    <ul class="navbar-nav ml-auto">
-                                       <li class="nav-item active">
-                                            <a class="nav-link" href="index.jsp">HOME</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="commodity.jsp">ADMIN</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="buying.jsp">BUYING</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="carrier.jsp">CARRIER</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="signup.jsp">SIGN UP</a>
-                                        </li>                               
-                                    </ul>
-                                </div>
-                            </nav>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer>
-    <!-- ##### Footer Area End ##### -->
-
+    
+<!-- ##### Footer Area Start ##### -->
+	<footer class="footer_area clearfix" style="padding:10px; position:absolute; bottom:0; width:100%">
+	<div class="container" style="text-align:center">		
+				<span style="color:white">					
+						Copyright &copy;<script>
+							document.write(new Date().getFullYear());
+						</script>
+						All rights reserved | YeonA & SeEun & MinJi
+						</span>
+					
+			</div>			
+	</footer>
+	<!-- ##### Footer Area End ##### -->
     <!--===============================================================================================-->
     	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
     <!--===============================================================================================-->

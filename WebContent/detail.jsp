@@ -48,7 +48,10 @@
 <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.6.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css">
 
-
+<style>
+	th, td{text-align : center;}
+	
+</style>
 
 </head>
 
@@ -93,99 +96,44 @@
 		</div>
 
 		<!-- Header Area Start -->
-		<header class="header-area clearfix"> <!-- Close Icon -->
-		<div class="nav-close">
-			<i class="fa fa-close" aria-hidden="true"></i>
-		</div>
-		<!-- Logo -->
-		<div class="logo">
-			<a href="index.html"><img src="img/core-img/logo.png" alt=""></a>
-		</div>
-		<!-- Amado Nav --> <nav class="amado-nav">
-		<ul>
-			<li><a href="index.jsp">HOME</a></li>
-			<li class="active"><a href="admin.jsp">ADMIN</a></li>
-			<li><a href="buying.jsp">BUYING</a></li>
-			<li><a href="carrier.jsp">CARRIER</a></li>
-			<li><a href="signup.jsp">SIGN UP</a></li>
-		</ul>
-		</nav> </header>
-		<!-- Header Area End -->
-
-
-		<div class="shop_sidebar_area">
-
-			<!-- ##### Single Widget ##### -->
-			<div class="widget catagory mb-50">
-				<!-- Widget Title -->
-				<h6 class="widget-title mb-30">관리자</h6>
-
-        <!-- Mobile Nav (max width 767px)-->
-        <div class="mobile-nav">
-            <!-- Navbar Brand -->
-            <div class="amado-navbar-brand">
-                <a href="index.html"><img src="img/core-img/logo.png" alt=""></a>
-                <div style="text-align:center">
-	                ${memberName}
-					<a href="/project02/memberProcServlet?action=logout">로그아웃</a>
-				</div>
-            </div>
-            <!-- Navbar Toggler -->
-            <div class="amado-navbar-toggler">
-                <span></span><span></span><span></span>
-            </div>
-        </div>        
-
-
-				<!--  Catagories  -->
-				<div class="catagories-menu">
-					<ul>
-						<li><a href="commodity.jsp">재고내역</a></li>
-						<li class="active"><a href="order.jsp">주문내역</a></li>
-						<li><a href="sales.jsp">판매내역</a></li>
-						<li><a href="#">발주내역</a></li>
-						<li><a href="#">운송내역</a></li>
-						<li><a href="#">매출총이익</a></li>
-					</ul>
-				</div>
+    <header class="header-area clearfix">
+        <!-- Close Icon -->
+        <div class="nav-close">
+            <i class="fa fa-close" aria-hidden="true"></i>
+        </div>
+        <!-- Logo -->
+        <div class="logo">
+            <a href="index.jsp"><img src="img/core-img/logo.png" alt=""></a>
+            <div style="text-align:center">
+             ${memberName}
+			<a href="/project02/memberProcServlet?action=logout">로그아웃</a>
 			</div>
+        </div>
+        <!-- Amado Nav -->
+        <nav class="amado-nav">
+        	<li><a href="index.jsp">HOME</a></li>
+            <li class="active"><a href="commodity.jsp">재고내역</a></li>
+            <li><a href="order.jsp">주문내역</a></li>
+            <li><a href="sales.jsp">판매내역</a></li>
+            <li><a href="oderhistory.jsp">발주내역</a></li>
+            <li><a href="shippinghistory.jsp">운송내역</a></li>
+            <li><a href="grossprofit.jsp">매출 총 이익</a></li>
+        </nav>
+    </header>
 
-			<div class="widget price mb-50"></div>
-		</div>
-
-		<div class="amado_product_area section-padding-100">
+		<div class="amado_product_area section-padding-100" style = "margin : auto ">
 			<div class="container-fluid">
-				<div class="row">
-					<div class="col-12">
-						<div
-							class="product-topbar d-xl-flex align-items-end justify-content-between">
-						</div>
-					</div>
-				</div>				
 
 				<BR> <BR>
-				<!-- 	<form action="#" autocomplete="off">
-					<fieldset class="url">
-						<input id="url" type="text" name="url" required> <label
-							for="url"><i class="fas fa-file-csv" aria-hidden="true"></i>주문내역</label>
-						<div class="after"></div>
-					</fieldset>
-					<fieldset class="enter">
-						<button></button>
-					</fieldset>				</form> -->
-
-				<i class="fas fa-file-csv" aria-hidden="true"></i><b>&nbsp;&nbsp;<span style="color:orange; font-size:1.5em"> ${requestScope.name} </span>주문내역 (주문번호 : ${requestScope.id})</a></b>
+				<i class="glyphicon fa fa-file-csv" aria-hidden="true"></i><b>&nbsp;&nbsp;<span style="color:orange; font-size:1.5em"> ${requestScope.name} </span>주문내역 (주문번호 : ${requestScope.id})</a></b>
 				<br> <br>
 
-				<div class="row">
-					<!-- Single Product Area -->					
-					<div class="single-product-wrapper">
-							<!-- Product Image -->
-							<div>
-								<div>
-									<div style="margin : auto;">
-										<table class="table table-hover">
-											<thead>
+			<div class="row">
+					<!-- Single Product Area -->
+					<div class="col-12 col-sm-6 col-md-12 col-xl-15">
+						<div class="single-product-wrapper">
+							<table class="table table-hover">
+								<thead>
 												<tr>
 													<th>상품코드</th>
 													<th>상품이름</th>
@@ -206,74 +154,23 @@
 									</div>
 								</div>
 							</div>						
-					</div>
-				</div>
 			</div>
 		</div>
 	</div>
 
 	<!-- ##### Main Content Wrapper End ##### -->
 
-
-
-	<!-- ##### Footer Area Start ##### -->
-	<footer class="footer_area clearfix">
-	<div class="container">
-		<div class="row align-items-center">
-			<!-- Single Widget Area -->
-			<div class="col-12 col-lg-4">
-				<div class="single_widget_area">
-					<!-- Logo -->
-					<div class="footer-logo mr-50">
-						<a href="index.html"><img src="img/core-img/logo2.png" alt=""></a>
-					</div>
-					<!-- Copywrite Text -->
-					<p class="copywrite">
-						<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-						Copyright &copy;
-						<script>
+<!-- ##### Footer Area Start ##### -->
+	<footer class="footer_area clearfix" style="padding:10px; position:absolute; bottom:0; width:100%">
+	<div class="container" style="text-align:center">		
+				<span style="color:white">					
+						Copyright &copy;<script>
 							document.write(new Date().getFullYear());
 						</script>
-						All rights reserved | This template is made with <i
-							class="fa fa-heart-o" aria-hidden="true"></i> by <a
-							href="https://colorlib.com" target="_blank">Colorlib</a> &
-						Re-distributed by <a href="https://themewagon.com/"
-							target="_blank">Themewagon</a>
-						<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-				</div>
-			</div>
-			<!-- Single Widget Area -->
-			<div class="col-12 col-lg-8">
-				<div class="single_widget_area">
-					<!-- Footer Menu -->
-					<div class="footer_menu">
-						<nav class="navbar navbar-expand-lg justify-content-end">
-						<button class="navbar-toggler" type="button"
-							data-toggle="collapse" data-target="#footerNavContent"
-							aria-controls="footerNavContent" aria-expanded="false"
-							aria-label="Toggle navigation">
-							<i class="fa fa-bars"></i>
-						</button>
-						<div class="collapse navbar-collapse" id="footerNavContent">
-							<ul class="navbar-nav ml-auto">
-								<li class="nav-item active"><a class="nav-link"
-									href="index.html">HOME</a></li>
-								<li class="nav-item"><a class="nav-link" href="admin.jsp">ADMIN</a>
-								</li>
-								<li class="nav-item"><a class="nav-link" href="buying.jsp">BUYING</a>
-								</li>
-								<li class="nav-item"><a class="nav-link" href="carrier.jsp">CARRIER</a>
-								</li>
-								<li class="nav-item"><a class="nav-link" href="signup.jsp">SIGN
-										UP</a></li>
-							</ul>
-						</div>
-						</nav>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+						All rights reserved | YeonA & SeEun & MinJi
+						</span>
+					
+			</div>			
 	</footer>
 	<!-- ##### Footer Area End ##### -->
 

@@ -17,7 +17,7 @@ public class MemberDAO {
 	
 	private Connection conn;
     private static final String USERNAME = "javauser";
-    private static final String PASSWORD = "javauser";
+    private static final String PASSWORD = "javapass";
     private static final String URL = "jdbc:mysql://localhost:3306/yellow?verifyServerCertificate=false&useSSL=false";
     
     public MemberDAO() {

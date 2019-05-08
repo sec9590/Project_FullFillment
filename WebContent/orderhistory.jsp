@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="member.*, product.*, java.util.*" %>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+    pageEncoding="UTF-8" import="member.*, java.util.*" %>
    
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -12,14 +11,14 @@
     <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
     <!-- Title  -->
-    <title>Yellow Container : commodity</title>
+    <title>Yellow Container : orderhistory</title>
 
     <!-- Favicon  -->
     <link rel="icon" href="img/core-img/favicon.ico">
 
     <!-- Core Style CSS -->
-    <link rel="stylesheet" href="css/core-style.css">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/core-style.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
     <link rel="stylesheet" type="text/css" href="css/util.css">
     <link rel="stylesheet" type="text/css" href="css/main.css">
 
@@ -42,7 +41,32 @@
   <!--===============================================================================================-->
  	<style>
  		h4 { margin-left:15px; margin-bottom:20px; }
- 		th, td { text-align:center;}
+ 		th { text-align:center;}
+ 		/*/[발주버튼]*/
+		.myButton {
+			background-color:#fbb810;
+	-moz-border-radius:42px;
+	-webkit-border-radius:42px;
+	border-radius:42px;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:15px;
+	font-weight : bold;
+	padding:10px 20px;
+	text-decoration:none;	
+		}
+button{
+ 		 	margin-left:15px; margin-bottom:20px;
+ 			background-color:#fbb710;
+ 			color:#fff;
+ 			width:80px;
+ 			height:30px;
+ 		}
+ 		button:hover{
+ 			background-color:#333333;
+ 		}
  	</style>
 </head>
 
@@ -80,10 +104,10 @@
         <!-- Amado Nav -->
         <nav class="amado-nav">
         	<li><a href="index.jsp">HOME</a></li>
-            <li class="active"><a href="OrdersProcServlet?action=productlist">재고내역</a></li>
+            <li><a href="commodity.jsp">재고내역</a></li>
             <li><a href="order.jsp">주문내역</a></li>
             <li><a href="sales.jsp">판매내역</a></li>
-            <li><a href="oderhistory.jsp">발주내역</a></li>
+            <li class="active"><a href="oderhistory.jsp">발주내역</a></li>
             <li><a href="shippinghistory.jsp">운송내역</a></li>
             <li><a href="grossprofit.jsp">매출 총 이익</a></li>
         </nav>
@@ -92,12 +116,22 @@
 
 	<div class="amado_product_area section-padding-100">
 	    <div class="row">
-	     <h4>재고내역</h4>
+	    <div>
+	     <h4>발주내역</h4>
+	     		<div style="margin-left:300px;">
+		    		<button type="submit" onclick="location.href='OrdersProcServlet?action=orderhistory&code=A'">의자</button>
+		    		<button type="submit" onclick="location.href='OrdersProcServlet?action=orderhistory&code=B'">침대</button>
+		    		<button type="submit" onclick="location.href='OrdersProcServlet?action=orderhistory&code=C'">테이블</button>
+		    		<button type="submit" onclick="location.href='OrdersProcServlet?action=orderhistory&code=D'">수납장</button>
+		    		<button type="submit" onclick="location.href='OrdersProcServlet?action=orderhistory&code=E'">조명/리빙</button>
+	    		</div>
+	    	</div>
+	    	
 	        <!-- Single Product Area -->
 	        <div class="col-12 col-sm-6 col-md-12 col-xl-15">
 	            <div class="single-product-wrapper">
-	                  <table class="table table-hover">
-	                     <thead>
+	                  <table class="table table-hover" >
+	                      <thead>
 	                         <tr>
 	                             <th>제품코드</th>
 	                             <th>제품명</th>
@@ -107,7 +141,7 @@
 	                     </thead>
 	                     <tbody>
 	                        <tbody>
-									<c:set var="plist" value="${requestScope.ProductList}" />
+									<c:set var="plist" value="${requestScope.orderhistoryList}" />
 									<c:forEach var="product" items="${plist}">
 										<tr>
 											<td>${product.p_id}</td>
@@ -118,16 +152,20 @@
 									</c:forEach>
 								</tbody>
 	                     </tbody>
-	             	 </table>
-	            </div>
-	    	</div>
-		</div>
-	</div>
+	             	</table>	            
+	             	<div align=center> 	
+                    <a href="#" class="myButton">발주신청</a>
+                    </div>                   
+	        	</div>
+	       	</div>
+	    </div>
+   	</div>
 </div>
+
 <!-- ##### Main Content Wrapper End ##### -->
 
 <!-- ##### Footer Area Start ##### -->
-	<footer class="footer_area clearfix" style="padding:10px; position:fixed; margin-bottom:0px; width:100%">
+	<footer class="footer_area clearfix" style="padding:10px; position:absolute; bottom:0; width:100%">
 	<div class="container" style="text-align:center">		
 				<span style="color:white">					
 						Copyright &copy;<script>

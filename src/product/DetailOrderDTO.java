@@ -6,14 +6,7 @@ public class DetailOrderDTO {
 	private int p_id;
 	private String p_name;
 	private int o_quantity;
-	public DetailOrderDTO(int d_id, String o_name, int p_id, String p_name, int o_quantity) {
-		super();
-		this.d_id = d_id;
-		this.o_id = o_id;
-		this.p_id = p_id;
-		this.p_name = p_name;
-		this.o_quantity = o_quantity;
-	}
+
 	public DetailOrderDTO() {
 		super();
 	}

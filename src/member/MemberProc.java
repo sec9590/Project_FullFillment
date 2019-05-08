@@ -72,7 +72,7 @@ public class MemberProc extends HttpServlet {
 				String pg = member.getM_job();
 				switch(pg) {
 				case "0" :
-					response.sendRedirect("commodity.jsp");
+					response.sendRedirect("OrdersProcServlet?action=productlist");
 					break;
 				case "1" :
 					response.sendRedirect("buying.jsp");

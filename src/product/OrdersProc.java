@@ -6,6 +6,7 @@ import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -17,6 +18,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
+import member.MemberDAO;
+import member.MemberDTO;
 
 import com.oreilly.servlet.MultipartRequest;
 
@@ -49,6 +52,9 @@ public class OrdersProc extends HttpServlet {
 		OrdersDAO oDao = null;
 		OrdersDTO oDto = null;
 		DetailOrderDTO doDto = null;
+		ProductDAO pDao = null;
+		ProductDTO pDto = null;
+		WaybillDTO wDto = null;
 		BufferedReader br = null;
 		String msg = null;
 		String url = null;
@@ -56,6 +62,8 @@ public class OrdersProc extends HttpServlet {
 		RequestDispatcher rd = null;
 		HttpSession session = request.getSession();
 		String action = request.getParameter("action");
+		List<String> pageList = new ArrayList<String>();
+		int curPage = 0;
 
 		switch (action) {
 		case "down":
@@ -88,6 +96,7 @@ public class OrdersProc extends HttpServlet {
 			oDao = new OrdersDAO();
 			oDto = new OrdersDTO();
 			doDto = new DetailOrderDTO();
+			wDto = new WaybillDTO();
 			int count = 0;
 			
 			String o_name = null;
@@ -97,6 +106,7 @@ public class OrdersProc extends HttpServlet {
 			String p_name = null;
 			int o_quantity = 0;
 			int temp = 0;
+			
 
 			while ((line = br.readLine()) != null) {
 				String[] lines = line.split(",");
@@ -114,14 +124,25 @@ public class OrdersProc extends HttpServlet {
 					doDto.setP_id(p_id);
 					doDto.setP_name(p_name);
 					doDto.setO_quantity(o_quantity);
+					
 					oDao.insertDetailOrders(doDto);
+					
+					oDao.updateQuantity(doDto);
 				} else {
 					oDto.setO_name(o_name);
 					oDto.setO_tel(o_tel);
 					oDto.setO_address(o_address);
 					oDao.insertOrders(oDto);
-					int orderid = oDao.selectOrderId(o_name);
+					int orderid = oDao.selectOrderId(o_name);					
 					System.out.println("주문번호 : "+orderid);
+					
+					wDto.setO_id(orderid);
+					wDto.setO_name(o_name);
+					wDto.setO_tel(o_tel);
+					wDto.setO_address(o_address);
+					//운송
+					oDao.insertWaybill(wDto);
+					
 					p_id = Integer.parseInt(lines[3]);
 					p_name = lines[4];
 					o_quantity = Integer.parseInt(lines[5]);
@@ -130,7 +151,10 @@ public class OrdersProc extends HttpServlet {
 					doDto.setP_id(p_id);
 					doDto.setP_name(p_name);
 					doDto.setO_quantity(o_quantity);
+					
 					oDao.insertDetailOrders(doDto);
+					
+					oDao.updateQuantity(doDto);
 					count++;
 				}
 				System.out.println(oDto.toString());
@@ -139,7 +163,7 @@ public class OrdersProc extends HttpServlet {
 				
 			}
 
-			msg = "업로드 되었습니다.";
+			msg = "주문 성공";
 			url = "OrdersProcServlet?action=orderlist&count=" + count;
 			System.out.println("count : " + count);
 			request.setAttribute("count", count);
@@ -183,6 +207,58 @@ public class OrdersProc extends HttpServlet {
 			rd = request.getRequestDispatcher("detail.jsp");
 			rd.forward(request, response);
 			break;
+		
+		case "productlist":
+			pDao = new ProductDAO();
+			pDto = new ProductDTO();
+			List<ProductDTO> productList = pDao.selectAll();
+			request.setAttribute("ProductList", productList);
+			rd = request.getRequestDispatcher("commodity.jsp");			
+			rd.forward(request, response);
+			break;
+		
+		case "orderAll":
+			if (!request.getParameter("page").equals("")) {
+				curPage = Integer.parseInt(request.getParameter("page"));
+			}
+			oDao = new OrdersDAO();
+			int pagecount = oDao.getCount();
+			if (pagecount == 0) // 데이터가 없을 때 대비
+				pagecount = 1;
+			int pageNo = (int) Math.ceil(pagecount / 10.0);
+			if (curPage > pageNo) // 경계선에 걸렸을 때 대비
+				curPage--;
+			session.setAttribute("currentMemberPage", curPage);
+			// 리스트 페이지의 하단 페이지 데이터 만들어 주기
+			String page = null;
+			page = "<a href=#>&laquo;</a>&nbsp;";
+			pageList.add(page);
+			for (int i = 1; i <= pageNo; i++) {
+				page = "&nbsp;<a href=OrdersProcServlet?action=orderAll&page=" + i + ">" + i + "</a>&nbsp;";
+				pageList.add(page);
+			}
+			page = "&nbsp;<a href=#>&raquo;</a>";
+			pageList.add(page);
+			
+			List<OrdersDTO> orderAll = oDao.selectOrderAll(curPage);	
+			request.setAttribute("orderAllList", orderAll);
+			request.setAttribute("pageList", pageList);
+			rd = request.getRequestDispatcher("sales.jsp");
+			rd.forward(request, response);
+			break;
+		
+		case "orderhistory":
+			String code = request.getParameter("code");
+			pDao = new ProductDAO();
+			pDto = new ProductDTO();
+			List<ProductDTO> orderhistoryList = pDao.selectOrderHistory(code);
+			request.setAttribute("orderhistoryList", orderhistoryList);
+			rd = request.getRequestDispatcher("orderhistory.jsp");			
+			rd.forward(request, response);
+			break;
+			
+		
+			
 		}
 	}
 
