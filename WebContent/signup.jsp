@@ -87,19 +87,6 @@
                 </ul>
             </nav>
 
-            <!-- Cart Menu
-            <div class="cart-fav-search mb-100">
-                <a href="cart.html" class="cart-nav"><img src="img/core-img/cart.png" alt=""> Cart <span>(0)</span></a>
-                <a href="#" class="fav-nav"><img src="img/core-img/favorites.png" alt=""> Favourite</a>
-                <a href="#" class="search-nav"><img src="img/core-img/search.png" alt=""> Search</a>
-            </div> -->
-            <!-- Social Button
-            <div class="social-info d-flex justify-content-between">
-                <a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a>
-                <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
-                <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-                <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-            </div> -->
         </header>
         <!-- Header Area End -->
 
@@ -148,11 +135,11 @@
                                 			<th><label>운송회사 선택 - 운송 지역</label></th>
                                 		</tr>
                                 		<tr>
-                                			<td><label><input type="radio" name="m_field" value="서울경기" >&nbsp;경기권</label></td>
-                                			<td><label><input type="radio" name="m_field" value="대전세종충청" >&nbsp;충청권</label></td>
-                                			<td><label><input type="radio" name="m_field" value="광주전라" >&nbsp;전라권</label></td>
-                                			<td><label><input type="radio" name="m_field" value="부산대구울산경상" >&nbsp;경상권</label></td>
-                                			<td><label><input type="radio" name="m_field" value="강원" >&nbsp;강원도</label></td>
+                                			<td><label><input type="radio" name="m_field" value="a" >&nbsp;경기권</label></td>
+                                			<td><label><input type="radio" name="m_field" value="b" >&nbsp;충청권</label></td>
+                                			<td><label><input type="radio" name="m_field" value="c" >&nbsp;전라권</label></td>
+                                			<td><label><input type="radio" name="m_field" value="d" >&nbsp;경상권</label></td>
+                                			<td><label><input type="radio" name="m_field" value="e" >&nbsp;강원도</label></td>
                                 		</tr>
                                 	</table>
                                 

@@ -126,7 +126,7 @@ th {
 				<!-- Single Product Area -->
 				<div class="col-12 col-sm-6 col-md-12 col-xl-15">
 					<div class="single-product-wrapper">
-						<table class="table table-hover">
+						<table class="table table-hover" >
 							<thead>
 								<tr>
 									<th>주문번호</th>

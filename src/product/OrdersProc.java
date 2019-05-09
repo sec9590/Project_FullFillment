@@ -17,7 +17,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
-import waybill.*;
+import waybill.NoWaybillDTO;
+import waybill.WaybillDAO;
+import waybill.WaybillDTO;
+
 import com.oreilly.servlet.MultipartRequest;
 
 /**
@@ -72,6 +75,7 @@ public class OrdersProc extends HttpServlet {
 		int pageNo = 0;
 		int num = 0;
 		boolean update = false;
+		
 
 		switch (action) {
 		// 파일 다운하고 주문하기
@@ -440,6 +444,7 @@ public class OrdersProc extends HttpServlet {
 			rd = request.getRequestDispatcher("buying.jsp");
 			rd.forward(request, response);
 			break;
+			
 		}
 	}
 

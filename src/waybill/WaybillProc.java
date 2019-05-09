@@ -144,7 +144,19 @@ public class WaybillProc extends HttpServlet {
 			request.setAttribute("nwayList", nwayList);
 			rd = request.getRequestDispatcher("noshippinghistory.jsp");			
 			rd.forward(request, response);
-			break;		
+			break;	
+			
+		// 운송회사에 따른 운송내역
+		case "buyinglist":
+			String field = request.getParameter("field");
+			wDao = new WaybillDAO();
+			wDto = new WaybillDTO();
+			
+			List<WaybillDTO> carrierList = wDao.selectCarrierAll(field);			
+			request.setAttribute("carrierList", carrierList);
+			rd = request.getRequestDispatcher("carrier.jsp");
+			rd.forward(request, response);
+			break;
 		}
 	}
 
