@@ -152,9 +152,23 @@ public class ProductDAO {
 
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(new Date());
-		cal.add(Calendar.DATE, 1);
-
+		
 		String strDate = format1.format(cal.getTime()) + " 10:00";
+
+		System.out.println(strDate);
+
+		return strDate;
+	}
+
+	// 어제 날짜
+	public String yesterday() {
+		SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
+
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(new Date());
+		cal.add(Calendar.DATE, -1);
+
+		String strDate = format1.format(cal.getTime());
 
 		System.out.println(strDate);
 
@@ -192,6 +206,38 @@ public class ProductDAO {
 		try {
 			pStmt = conn.prepareStatement(query);
 			pStmt.setString(1, field);
+			ResultSet rs = pStmt.executeQuery();
+
+			while (rs.next()) {
+				BuyingDTO bDto = new BuyingDTO();
+				bDto.setB_id(rs.getInt(1));
+				bDto.setP_id(rs.getInt(2));
+				bDto.setP_name(rs.getString(3));
+				bDto.setP_price(rs.getString(4));
+				bDto.setP_quantity(rs.getInt(5));
+				bDto.setB_time(rs.getString(6));
+				list.add(bDto);
+				System.out.println(bDto.toString());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (pStmt != null && !pStmt.isClosed())
+					pStmt.close();
+			} catch (SQLException se) {
+				se.printStackTrace();
+			}
+		}
+		return list;
+	}
+
+	public List<BuyingDTO> selectOrderhistoryAll() {
+		String query = "select b_id, p_id, p_name, p_price, p_quantity, date_format(b_time, '%Y-%m-%d %H:%i') from buying;";
+		PreparedStatement pStmt = null;
+		List<BuyingDTO> list = new ArrayList<BuyingDTO>();
+		try {
+			pStmt = conn.prepareStatement(query);
 			ResultSet rs = pStmt.executeQuery();
 
 			while (rs.next()) {

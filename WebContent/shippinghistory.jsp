@@ -93,7 +93,7 @@
             <li><a href="OrdersProcServlet?action=productlist">재고내역</a></li>
             <li><a href="order.jsp">주문하기</a></li>
             <li><a href="OrdersProcServlet?action=orderAll&page=1">주문내역</a></li>
-            <li><a href="orderhistory.jsp">발주내역</a></li>
+            <li><a href="OrdersProcServlet?action=orderhistoryall">발주내역</a></li>
             <li class="active"><a href="WaybillProcServlet?action=waybilllist&page=1">운송내역</a></li>
             <li><a href="WaybillProcServlet?action=nowaybilllist">미운송내역</a></li>
             <li><a href="grossprofit.jsp">매출 총 이익</a></li>
@@ -105,6 +105,7 @@
 	    <div class="row">
 	     <div>
 	    	<h4>운송내역</h4>
+	    	<br>
 	    		<div style="margin-left:350px;">	    			
 		    		<button type="button" onclick="location.href='WaybillProcServlet?action=shipping&add=A'">경기권</button>
 		    		<button type="button" onclick="location.href='WaybillProcServlet?action=shipping&add=B'">충청권</button>

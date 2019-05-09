@@ -75,11 +75,8 @@ public class OrdersProc extends HttpServlet {
 		int pageNo = 0;
 		int num = 0;
 		boolean update = false;
-<<<<<<< HEAD
-		
-=======
 		String field = null;
->>>>>>> 44c791799b04fb373cb9ef27b9c79aa2017bb2bb
+		String day = null;
 
 		switch (action) {
 		// 파일 다운하고 주문하기
@@ -435,39 +432,67 @@ public class OrdersProc extends HttpServlet {
 			rd.forward(request, response);
 			break;
 
-		// 구매처에따른 발주 내역
+		// 발주내역(전체)
+		case "orderhistoryall":
+			pDao = new ProductDAO();
+			pDto = new ProductDTO();
+			List<BuyingDTO> orderhistoryall = pDao.selectOrderhistoryAll();
+			request.setAttribute("orderhistoryList", orderhistoryall);
+			rd = request.getRequestDispatcher("orderhistoryall.jsp");
+			rd.forward(request, response);
+			break;
+
+		// 구매처에따른 발주 신청내역
 		case "buyinglist":
 			field = request.getParameter("field");
 			pDao = new ProductDAO();
 			bDto = new BuyingDTO();
 			buyingList = pDao.selectBuying(field);
 			for (ProductDTO product : buyingList) {
-				int quantity = 15-product.getP_quantity();
+				int quantity = 15 - product.getP_quantity();
 				product.setP_quantity(quantity);
 			}
-			request.setAttribute("buyingList", buyingList);
+			System.out.println(buyingList);
+			day = pDao.yesterday();
+			request.setAttribute("yesterday", day);
+			
+			if (buyingList.size() == 0) {
+				buyingList = null;
+				request.setAttribute("buyingList", buyingList);
+				System.out.println(buyingList);
+			} else
+				request.setAttribute("buyingList", buyingList);
+
 			rd = request.getRequestDispatcher("buying.jsp");
 			rd.forward(request, response);
 			break;
-<<<<<<< HEAD
-			
-=======
+
+		// 구매처에따른 발주 신청 전체 내역
+		case "buyingall":
+			field = request.getParameter("field");
+			pDao = new ProductDAO();
+			pDto = new ProductDTO();
+			List<BuyingDTO> buyingall = pDao.selectBuyingAll(field);
+			request.setAttribute("buyingall", buyingall);
+			rd = request.getRequestDispatcher("buyingall.jsp");
+			rd.forward(request, response);
+			break;
 
 		// 발주처리
 		case "buying":
 			field = request.getParameter("field");
-			
+
 			pDao = new ProductDAO();
 			bDto = new BuyingDTO();
 			buyingList = pDao.selectBuying(field);
 
-			for (ProductDTO product : buyingList) {				
+			for (ProductDTO product : buyingList) {
 				pDao.insertBuying(product.getP_id());
 				pDao.updatep_Quantity(product);
 			}
 
 			buyingList = pDao.selectBuying(field);
-			
+
 			msg = "발주처리되었습니다.";
 			url = "OrdersProcServlet?action=buyinglist&field=" + field;
 			request.setAttribute("message", msg);
@@ -475,10 +500,9 @@ public class OrdersProc extends HttpServlet {
 
 			rd = request.getRequestDispatcher("alertMsg.jsp");
 			rd.forward(request, response);
-			
+
 			pDao.close();
 			break;
->>>>>>> 44c791799b04fb373cb9ef27b9c79aa2017bb2bb
 		}
 	}
 }

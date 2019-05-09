@@ -40,6 +40,7 @@ public class MemberProc extends HttpServlet {
 		String m_tel = null;
 		String m_job = null;
 		String m_field = null;
+		String field = null;
 		
 		switch(action) {
 		case "login" :
@@ -75,11 +76,12 @@ public class MemberProc extends HttpServlet {
 					response.sendRedirect("OrdersProcServlet?action=productlist");
 					break;
 				case "1" :
-					String field = "OrdersProcServlet?action=buyinglist&field=" + member.getM_field();
+					field = "OrdersProcServlet?action=buyinglist&field=" + member.getM_field();
 					response.sendRedirect(field);
 					break;
 				case "2" :
-					response.sendRedirect("carrier.jsp");
+					field = "WaybillProcServlet?action=carrierlist&field=" + member.getM_field();
+					response.sendRedirect(field);
 					break;
 				}
 			

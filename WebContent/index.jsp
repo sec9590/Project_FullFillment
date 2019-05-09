@@ -82,7 +82,7 @@
            			<%
            	 				} else {
            			%>
-                   			<li><a href="carrier.jsp">CARRIER</a></li>
+                   			<li><a href="WaybillProcServlet?action=carrierlist&field=${memberField}">CARRIER</a></li>
                     <%
            	 				}
                    	 		}

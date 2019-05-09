@@ -1,6 +1,5 @@
 package waybill;
 
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,7 +11,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
 
 /**
  * Servlet implementation class OrdersProc
@@ -53,7 +51,7 @@ public class WaybillProc extends HttpServlet {
 		int pagecount = 0;
 		int pageNo = 0;
 		String page = null;
-		
+
 		List<String> pageList = new ArrayList<String>();
 
 		switch (action) {
@@ -79,15 +77,15 @@ public class WaybillProc extends HttpServlet {
 			}
 			page = "&nbsp;<a href=#>&raquo;</a>";
 			pageList.add(page);
-			
-			wayList = wDao.selectWaybillAll(curPage);	
+
+			wayList = wDao.selectWaybillAll(curPage);
 			request.setAttribute("wayList", wayList);
 			request.setAttribute("pageList", pageList);
-			rd = request.getRequestDispatcher("shippinghistory.jsp");			
+			rd = request.getRequestDispatcher("shippinghistory.jsp");
 			rd.forward(request, response);
 			break;
-			
-		case "shipping"	:
+
+		case "shipping":
 			String add = request.getParameter("add");
 			String add1 = null;
 			String add2 = null;
@@ -95,68 +93,76 @@ public class WaybillProc extends HttpServlet {
 			String add4 = null;
 			wDao = new WaybillDAO();
 			wDto = new WaybillDTO();
-			switch(add) {
-			case "A" :
+			switch (add) {
+			case "A":
 				add1 = "서울경기";
-				add2 = add1.substring(0,2);
-				add3 = add1.substring(2,4);
+				add2 = add1.substring(0, 2);
+				add3 = add1.substring(2, 4);
 				wayList = wDao.selectAdd2(add2, add3);
 				break;
-			case "B" :
+			case "B":
 				add1 = "대전세종충남";
-				add2 = add1.substring(0,2);
-				add3 = add1.substring(2,4);
-				add4 = add1.substring(4,6);
+				add2 = add1.substring(0, 2);
+				add3 = add1.substring(2, 4);
+				add4 = add1.substring(4, 6);
 				wayList = wDao.selectAdd3(add2, add3, add4);
 				break;
-			case "C" :
+			case "C":
 				add1 = "광주전라";
-				add2 = add1.substring(0,2);
-				add3 = add1.substring(2,4);
+				add2 = add1.substring(0, 2);
+				add3 = add1.substring(2, 4);
 				wayList = wDao.selectAdd2(add2, add3);
 				break;
-			case "D" :
+			case "D":
 				add1 = "대구울산부산경상";
-				add2 = add1.substring(0,2);
-				add3 = add1.substring(2,4);
-				add4 = add1.substring(4,6);
-				String add5 = add1.substring(6,8);
+				add2 = add1.substring(0, 2);
+				add3 = add1.substring(2, 4);
+				add4 = add1.substring(4, 6);
+				String add5 = add1.substring(6, 8);
 				wayList = wDao.selectAdd4(add2, add3, add4, add5);
 				break;
-			case "E" :
+			case "E":
 				add1 = "강원";
-				add2 = add1.substring(0,2);
+				add2 = add1.substring(0, 2);
 				wayList = wDao.selectAdd1(add2);
 				break;
 			}
-			
+
 			System.out.println("add= " + add);
 			request.setAttribute("wayList", wayList);
-			rd = request.getRequestDispatcher("shipping.jsp");			
+			rd = request.getRequestDispatcher("shipping.jsp");
 			rd.forward(request, response);
 			break;
-			
+
 		case "nowaybilllist":
 			wDao = new WaybillDAO();
 			nwDto = new NoWaybillDTO();
-			
-			nwayList = wDao.selectNoWaybillAll();	
-			request.setAttribute("nwayList", nwayList);
-			rd = request.getRequestDispatcher("noshippinghistory.jsp");			
+
+			nwayList = wDao.selectNoWaybillAll();
+			if (nwayList.size() == 0) {
+				nwayList = null;
+				request.setAttribute("nwayList", nwayList);
+				System.out.println(nwayList);
+			} else
+				request.setAttribute("nwayList", nwayList);
+
+			rd = request.getRequestDispatcher("noshippinghistory.jsp");
 			rd.forward(request, response);
-			break;	
+			break;
 			
 		// 운송회사에 따른 운송내역
-		case "buyinglist":
+		case "carrierlist":
 			String field = request.getParameter("field");
 			wDao = new WaybillDAO();
 			wDto = new WaybillDTO();
-			
-			List<WaybillDTO> carrierList = wDao.selectCarrierAll(field);			
+
+			List<WaybillDTO> carrierList = wDao.selectCarrierAll(field);
 			request.setAttribute("carrierList", carrierList);
+			System.out.println("운송회사");
 			rd = request.getRequestDispatcher("carrier.jsp");
 			rd.forward(request, response);
 			break;
+
 		}
 	}
 

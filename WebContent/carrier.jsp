@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="java.util.*, member.*, product.*, waybill.*"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" import="java.util.*, member.*, product.*, waybill.*"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -60,9 +60,10 @@
             </nav>        
             </header>        
         
-       <div class="amado_product_area section-padding-100" style="margin:auto">
+       <div class="amado_product_area section-padding-100 clearfix" style="margin:auto">
 	    <div class="row">
-	     <h4>운송내역</h4>
+	     <h4><span style="color:#fbb810; font-weight:bold">${memberName}</span>님 운송내역</h4>
+			<br>
 	        <!-- Single Product Area -->
 	        <div class="col-12 col-sm-6 col-md-12 col-xl-15">
 	            <div class="single-product-wrapper">
@@ -70,26 +71,27 @@
 	                      <thead>
 	                          <tr>
 	                              <th>송장번호</th>
-                                                  <th>수취인</th>
-                                                  <th>전화번호</th>
-                                                  <th>주소</th>
-                                                  <th>제품코드</th>
-                                                  <th>제품명</th>
-                                                  <th>수량</th>
+	                              <th>주문번호</th>
+	                              <th>수취인</th>
+	                              <th>전화번호</th>
+	                              <th>주소</th>
+	                              <th>배송시간</th>
 	                          </tr>
 	                      </thead>
                           <tbody>
-                              <tr>
-                               
-                                  <td></td>
-                                  <td></td>
-                                  <td></td>
-                                  <td></td>
-                                  <td></td>
-                                  <td></td>
-                                  <td></td>
-                              </tr>
-                            
+                            <c:set var="clist" value="${requestScope.carrierList}" />
+							<c:forEach var="carr" items="${clist}">
+								<tr height="30">
+									<td>${carr.w_id}</td>
+									<td><a
+										href="OrdersProcServlet?action=detail&name=${carr.o_name}&id=${carr.o_id}">${carr.o_id}</a>
+									</td>
+									<td>${carr.o_name}</td>
+									<td>${carr.o_tel}</td>
+									<td>${carr.o_address}</td>
+									<td>${carr.w_time}</td>
+								</tr>
+							</c:forEach>
                           </tbody>
 	             	</table>            
             
