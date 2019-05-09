@@ -122,14 +122,14 @@ th, td {
 											<td>${buying.p_id}</td>
 											<td style="text-align: left">${buying.p_name}</td>
 											<td>${buying.p_price}</td>
-											<td>${buying.p_quantity}</td>
+										<td>${buying.p_quantity}</td>
 										</tr>
 									</c:forEach>
 								</tbody>
 							</table>
 						</nav>
-						<div align:center>
-							<a href="#" class="myButton">발주완료</a>
+						<div align=center>
+							<a href="OrdersProcServlet?action=buying&field=${memberField}" class="myButton">발주완료</a>
 						</div>
 					</div>
 				</div>

@@ -6,6 +6,7 @@ public class WaybillDTO {
 	private String o_name;
 	private String o_tel;
 	private String o_address;
+	private String w_waycode;
 	private String o_time;
 	private String w_time;
 	
@@ -13,16 +14,21 @@ public class WaybillDTO {
 	}
 	
 	
-
-	public WaybillDTO(int w_id, int o_id, String o_name, String o_tel, String o_address, String o_time, String w_time) {
+	public WaybillDTO(int w_id, int o_id, String o_name, String o_tel, String o_address, String w_waycode,
+			String o_time, String w_time) {
 		this.w_id = w_id;
 		this.o_id = o_id;
 		this.o_name = o_name;
 		this.o_tel = o_tel;
 		this.o_address = o_address;
+		this.w_waycode = w_waycode;
 		this.o_time = o_time;
 		this.w_time = w_time;
 	}
+
+
+
+
 
 
 
@@ -81,11 +87,24 @@ public class WaybillDTO {
 	public void setW_time(String w_time) {
 		this.w_time = w_time;
 	}
+	
+	
+
+	public String getW_waycode() {
+		return w_waycode;
+	}
+
+
+	public void setW_waycode(String w_waycode) {
+		this.w_waycode = w_waycode;
+	}
+
 
 	@Override
 	public String toString() {
 		return "WaybillDTO [w_id=" + w_id + ", o_id=" + o_id + ", o_name=" + o_name + ", o_tel=" + o_tel
-				+ ", o_address=" + o_address + ", o_time=" + o_time + ", w_time=" + w_time + "]";
-	}
+				+ ", o_address=" + o_address + ", w_waycode=" + w_waycode + ", o_time=" + o_time + ", w_time=" + w_time
+				+ "]";
+	}	
 
 }

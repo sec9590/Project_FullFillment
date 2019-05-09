@@ -75,45 +75,11 @@
                     <li><a href="signup.jsp">SIGN UP</a></li>
                     <li class="active"><a href="login.jsp">LOGIN</a></li>
                 </ul>
-            </nav>
-
-            <!-- Cart Menu
-            <div class="cart-fav-search mb-100">
-                <a href="cart.html" class="cart-nav"><img src="img/core-img/cart.png" alt=""> Cart <span>(0)</span></a>
-                <a href="#" class="fav-nav"><img src="img/core-img/favorites.png" alt=""> Favourite</a>
-                <a href="#" class="search-nav"><img src="img/core-img/search.png" alt=""> Search</a>
-            </div> -->
-            <!-- Social Button
-            <div class="social-info d-flex justify-content-between">
-                <a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a>
-                <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
-                <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-                <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-            </div> -->
+            </nav>            
         </header>
         <!-- Header Area End -->
 
-        <div class="shop_sidebar_area" style="background-color:#ffffff;">
-
-            <!-- ##### Single Widget ##### -->
-            <!-- <div class="widget catagory mb-50">
-                Widget Title
-                <h6 class="widget-title mb-30">관리자</h6>
-
-                 Catagories 
-                <div class="catagories-menu">
-                    <ul>
-                        <li class="active"><a href="commodity.jsp">재고내역</a></li>
-                        <li><a href="order.jsp">주문내역</a></li>
-                        <li><a href="sales.jsp">판매내역</a></li>
-                        <li><a href="#">발주내역</a></li>
-                        <li><a href="#">운송내역</a></li>
-                        <li><a href="#">매출총이익</a></li>
-                    </ul>
-                </div>
-            </div> -->
-
-            <!-- <div class="widget price mb-50"></div> -->
+        <div class="shop_sidebar_area" style="background-color:#ffffff;">            
             </div>
 
           <div class="amado_product_area section-padding-100">
@@ -171,7 +137,7 @@
     <!-- ##### Main Content Wrapper End ##### -->
     
 <!-- ##### Footer Area Start ##### -->
-	<footer class="footer_area clearfix" style="padding:10px; position:absolute; margin-bottom:0; width:100%">
+	<footer class="footer_area clearfix" style="padding:10px; position:absolute; bottom:0; width:100%">
 	<div class="container" style="text-align:center">		
 				<span style="color:white">					
 						Copyright &copy;<script>

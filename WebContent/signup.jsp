@@ -148,11 +148,11 @@
                                 			<th><label>운송회사 선택 - 운송 지역</label></th>
                                 		</tr>
                                 		<tr>
-                                			<td><label><input type="radio" name="m_field" value="서울경기" >&nbsp;경기권</label></td>
-                                			<td><label><input type="radio" name="m_field" value="대전세종충청" >&nbsp;충청권</label></td>
-                                			<td><label><input type="radio" name="m_field" value="광주전라" >&nbsp;전라권</label></td>
-                                			<td><label><input type="radio" name="m_field" value="부산대구울산경상" >&nbsp;경상권</label></td>
-                                			<td><label><input type="radio" name="m_field" value="강원" >&nbsp;강원도</label></td>
+                                			<td><label><input type="radio" name="m_field" value="a" >&nbsp;경기권</label></td>
+                                			<td><label><input type="radio" name="m_field" value="b" >&nbsp;충청권</label></td>
+                                			<td><label><input type="radio" name="m_field" value="c" >&nbsp;전라권</label></td>
+                                			<td><label><input type="radio" name="m_field" value="d" >&nbsp;경상권</label></td>
+                                			<td><label><input type="radio" name="m_field" value="e" >&nbsp;강원도</label></td>
                                 		</tr>
                                 	</table>
                                 

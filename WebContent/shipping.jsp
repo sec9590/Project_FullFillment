@@ -125,6 +125,8 @@
 	                              <th>수취인</th>
 	                              <th>전화번호</th>
 	                              <th>주소</th>
+	                              <th>주문시간</th>
+	                              <th>배송시간</th>
 	                          </tr>
 	                      </thead>
                           <tbody>
@@ -138,6 +140,8 @@
 									<td>${way.o_name}</td>
 									<td>${way.o_tel}</td>
 									<td>${way.o_address}</td>
+									<td>${way.o_time}</td>
+									<td>${way.w_time}</td>
 								</tr>
 							</c:forEach>
                     	</tbody>

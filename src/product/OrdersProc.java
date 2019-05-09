@@ -63,7 +63,7 @@ public class OrdersProc extends HttpServlet {
 		RequestDispatcher rd = null;
 		HttpSession session = request.getSession();
 		String action = request.getParameter("action");
-
+		List<ProductDTO> buyingList = null;
 		List<String> pageList = new ArrayList<String>();
 		List<OrdersDTO> orderAll = null;
 		String page = null;
@@ -72,6 +72,7 @@ public class OrdersProc extends HttpServlet {
 		int pageNo = 0;
 		int num = 0;
 		boolean update = false;
+		String field = null;
 
 		switch (action) {
 		// 파일 다운하고 주문하기
@@ -227,7 +228,7 @@ public class OrdersProc extends HttpServlet {
 			wDao = new WaybillDAO();
 			oDao = new OrdersDAO();
 			update = false;
-			
+
 			List<NoWaybillDTO> noWaybillAll = wDao.selectNoWaybillAll();
 
 			for (NoWaybillDTO nDto : noWaybillAll) {
@@ -255,7 +256,6 @@ public class OrdersProc extends HttpServlet {
 				}
 			}
 
-			
 			url = "WaybillProcServlet?action=nowaybilllist&page=1";
 			request.setAttribute("message", msg);
 			request.setAttribute("url", url);
@@ -275,21 +275,19 @@ public class OrdersProc extends HttpServlet {
 			if (!request.getParameter("count").equals("")) {
 				num = Integer.parseInt(request.getParameter("count"));
 			}
-			
-			List<OrdersDTO> orderList = oDao.selectUpload(num);
-			
-			for (OrdersDTO order : orderList) {
-				List<DetailOrderDTO> doDtoList = oDao.selectDetailOrder(order.getO_id());
 
-				for (DetailOrderDTO dDto : doDtoList) {
-					if (oDao.checkBuying((dDto))) { //10개미만으로 떨어지면
-						if(!pDao.isBuying(dDto.getP_id()))
-							pDao.insertBuying(dDto.getP_id());
-					}
-				}
-			}
-			
-			System.out.println("주문내역검색 및 발주db저장완료");
+			List<OrdersDTO> orderList = oDao.selectUpload(num);
+
+			/*
+			 * for (OrdersDTO order : orderList) { List<DetailOrderDTO> doDtoList =
+			 * oDao.selectDetailOrder(order.getO_id());
+			 * 
+			 * for (DetailOrderDTO dDto : doDtoList) { if (oDao.checkBuying((dDto))) {
+			 * //10개미만으로 떨어지면 if(!pDao.isBuying(dDto.getP_id()))
+			 * pDao.insertBuying(dDto.getP_id()); } } }
+			 */
+
+			System.out.println("주문내역검색 완료");
 			request.setAttribute("OrderList", orderList);
 			request.setAttribute("count", num);
 			System.out.println(num);
@@ -355,7 +353,7 @@ public class OrdersProc extends HttpServlet {
 			rd.forward(request, response);
 			break;
 
-		case "timehistory" :
+		case "timehistory":
 			String time = request.getParameter("time");
 			if (!request.getParameter("page").equals("")) {
 				curPage = Integer.parseInt(request.getParameter("page"));
@@ -373,42 +371,43 @@ public class OrdersProc extends HttpServlet {
 			page = "<a href=#>&laquo;</a>&nbsp;";
 			pageList.add(page);
 			for (int i = 1; i <= pageNo; i++) {
-				page = "&nbsp;<a href=OrdersProcServlet?action=timehistory&time=" + time + "&page=" + i + ">" + i + "</a>&nbsp;";
+				page = "&nbsp;<a href=OrdersProcServlet?action=timehistory&time=" + time + "&page=" + i + ">" + i
+						+ "</a>&nbsp;";
 				pageList.add(page);
 			}
 			page = "&nbsp;<a href=#>&raquo;</a>";
 			pageList.add(page);
-			
-			switch(time) {
-			case "today" :
+
+			switch (time) {
+			case "today":
 				orderAll = oDao.selectToDay(curPage);
 				request.setAttribute("orderAllList", orderAll);
 				request.setAttribute("pageList", pageList);
 				rd = request.getRequestDispatcher("salestoday.jsp");
 				rd.forward(request, response);
 				break;
-			case "day" :
+			case "day":
 				orderAll = oDao.selectDay(curPage);
 				request.setAttribute("orderAllList", orderAll);
 				request.setAttribute("pageList", pageList);
 				rd = request.getRequestDispatcher("salesday.jsp");
 				rd.forward(request, response);
 				break;
-			case "week" :
+			case "week":
 				orderAll = oDao.selectWeek(curPage);
 				request.setAttribute("orderAllList", orderAll);
 				request.setAttribute("pageList", pageList);
 				rd = request.getRequestDispatcher("salesweek.jsp");
 				rd.forward(request, response);
 				break;
-			case "month" :
+			case "month":
 				orderAll = oDao.selectMonth(curPage);
 				request.setAttribute("orderAllList", orderAll);
 				request.setAttribute("pageList", pageList);
 				rd = request.getRequestDispatcher("salesmonth.jsp");
 				rd.forward(request, response);
 				break;
-			case "year" :
+			case "year":
 				orderAll = oDao.selectYear(curPage);
 				request.setAttribute("orderAllList", orderAll);
 				request.setAttribute("pageList", pageList);
@@ -417,30 +416,58 @@ public class OrdersProc extends HttpServlet {
 				break;
 			}
 			break;
-			
+
 		// 발주내역
 		case "orderhistory":
 			String code = request.getParameter("code");
 			pDao = new ProductDAO();
 			pDto = new ProductDTO();
-			List<ProductDTO> orderhistoryList = pDao.selectOrderHistory(code);
+			List<BuyingDTO> orderhistoryList = pDao.selectBuyingAll(code);
 			request.setAttribute("orderhistoryList", orderhistoryList);
 			rd = request.getRequestDispatcher("orderhistory.jsp");
 			rd.forward(request, response);
 			break;
-		
+
 		// 구매처에따른 발주 내역
 		case "buyinglist":
-			String field = request.getParameter("field");
+			field = request.getParameter("field");
 			pDao = new ProductDAO();
 			bDto = new BuyingDTO();
-			
-			List<BuyingDTO> buyingList = pDao.selectBuyingAll(field);			
+			buyingList = pDao.selectBuying(field);
+			for (ProductDTO product : buyingList) {
+				int quantity = 15-product.getP_quantity();
+				product.setP_quantity(quantity);
+			}
 			request.setAttribute("buyingList", buyingList);
 			rd = request.getRequestDispatcher("buying.jsp");
 			rd.forward(request, response);
 			break;
+
+		// 발주처리
+		case "buying":
+			field = request.getParameter("field");
+			
+			pDao = new ProductDAO();
+			bDto = new BuyingDTO();
+			buyingList = pDao.selectBuying(field);
+
+			for (ProductDTO product : buyingList) {				
+				pDao.insertBuying(product.getP_id());
+				pDao.updatep_Quantity(product);
+			}
+
+			buyingList = pDao.selectBuying(field);
+			
+			msg = "발주처리되었습니다.";
+			url = "OrdersProcServlet?action=buyinglist&field=" + field;
+			request.setAttribute("message", msg);
+			request.setAttribute("url", url);
+
+			rd = request.getRequestDispatcher("alertMsg.jsp");
+			rd.forward(request, response);
+			
+			pDao.close();
+			break;
 		}
 	}
-
 }

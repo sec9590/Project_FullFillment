@@ -54,6 +54,7 @@ public class OrdersDAO {
 		return count;
 	}
 
+	//주문내역 추가
 	public void insertOrders(OrdersDTO oDto) {
 		String query = "insert into orders(o_name, o_tel, o_address, o_time) values (?, ?, ?, now());";
 		PreparedStatement pStmt = null;
@@ -79,6 +80,7 @@ public class OrdersDAO {
 		}
 	}
 
+	// 미운송내역 추가
 	public void insertNoWaybill(int o_id) {
 		String query = "INSERT INTO no_waybill SELECT * FROM orders WHERE o_id = ?;";
 		PreparedStatement pStmt = null;
@@ -101,6 +103,7 @@ public class OrdersDAO {
 		}
 	}
 
+	// 상세주문내역 추가
 	public void insertDetailOrders(DetailOrderDTO dODto) {
 		String query = "insert into orders_detail(o_id, p_id, p_name, o_quantity) values (?, ?, ?, ?);";
 		PreparedStatement pStmt = null;
@@ -127,13 +130,32 @@ public class OrdersDAO {
 		}
 	}
 
+	
+	// 운송db에 추가
 	public void insertWaybill(int o_id) {
-		String query = "INSERT INTO waybill(o_id, o_name, o_tel, o_address, o_time) SELECT o_id, o_name, o_tel, o_address, o_time FROM orders WHERE o_id = ?;";
+		String query = "INSERT INTO waybill(o_id, o_name, o_tel, o_address, w_waycode, o_time) SELECT o_id, o_name, o_tel, o_address, ?, o_time FROM orders WHERE o_id = ?;";
 		PreparedStatement pStmt = null;
-
+		String address = selectAddress(o_id);
+		System.out.println(address);
+		String add = address.substring(0, 2);
+		System.out.println(add);
+		String w_waycode = null;
+		
+		if(add.equals("서울") || add.equals("경기")) {
+			w_waycode = "a";
+		} else if(add.equals("대전") || add.equals("세종") || add.equals("충청")) {
+			w_waycode = "b";
+		} else if(add.equals("광주") || add.equals("전라")) {
+			w_waycode = "c";
+		} else if(add.equals("대구") || add.equals("울산") || add.equals("부산") || add.equals("경상")) {
+			w_waycode = "d";
+		} else {
+			w_waycode = "e";
+		}
 		try {
 			pStmt = conn.prepareStatement(query);
-			pStmt.setInt(1, o_id);
+			pStmt.setString(1, w_waycode);
+			pStmt.setInt(2, o_id);
 
 			pStmt.executeUpdate();
 
@@ -148,7 +170,8 @@ public class OrdersDAO {
 			}
 		}
 	}
-
+	
+	// 운송시간
 	public void updateWaybillTime(OrdersDTO oDto) {
 		String query = "update waybill set w_time=? where o_id=?;";
 		PreparedStatement pStmt = null;
@@ -182,7 +205,8 @@ public class OrdersDAO {
 			}
 		}
 	}
-
+	
+	//nowaybill의 운송시간
 	public void updateWaybillTime(NoWaybillDTO nwDto) {
 		String query = "update waybill set w_time=? where o_id=?;";
 		PreparedStatement pStmt = null;
@@ -216,7 +240,8 @@ public class OrdersDAO {
 			}
 		}
 	}
-
+	
+	
 	// 운송처리위한 현재시간 변환
 	public static Date currentTime(String day) {
 		SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
@@ -226,8 +251,10 @@ public class OrdersDAO {
 
 		if (day.equals("day"))
 			time1 += " 09:00";
-		else
+		else if(day.equals("night"))
 			time1 += " 18:00";
+		else
+			time1 += " 10:00";
 
 		System.out.println(time1);
 
@@ -262,6 +289,7 @@ public class OrdersDAO {
 		return time;
 	}
 
+	// 첨부추가한 주문내역
 	public List<OrdersDTO> selectUpload(int count) {
 		String query = "select o.o_id, o.o_name, o.o_tel, o.o_address, date_format(o.o_time, '%Y-%m-%d %H:%i'), count(*) '주문수'\r\n"
 				+ "				from orders as o inner join orders_detail as d on o.o_id = d.o_id group by o.o_id order by o.o_id desc limit ?;";
@@ -296,6 +324,7 @@ public class OrdersDAO {
 		return list;
 	}
 
+	// 총주문내역
 	public List<OrdersDTO> selectOrderAll() {
 		String query = "select o.o_id, o.o_name, o.o_tel, o.o_address, date_format(o.o_time, '%Y-%m-%d %H:%i'), count(*) '주문수'\r\n"
 				+ "from orders as o inner join orders_detail as d on o.o_id = d.o_id group by o.o_id order by o.o_id;";
@@ -330,6 +359,7 @@ public class OrdersDAO {
 		return list;
 	}
 
+	// 페이지별로 총 주문내역
 	public List<OrdersDTO> selectOrderAll(int page) {
 		int offset = 0;
 		String sql = null;
@@ -401,7 +431,8 @@ public class OrdersDAO {
 		}
 		return oDto.getO_id();
 	}
-
+	
+	
 	// 상품개수
 	public int selectQuentity(int p_id) {
 		String query = "select p_quantity from product where p_id = ?";
@@ -430,6 +461,7 @@ public class OrdersDAO {
 		return pDto.getP_quantity();
 	}
 
+	// 상세주문내역
 	public List<DetailOrderDTO> selectDetailOrder(int id) {
 		String query = "select p_id, p_name, o_quantity from orders_detail where o_id=?;";
 		PreparedStatement pStmt = null;
@@ -739,6 +771,33 @@ public class OrdersDAO {
 			return list;
 		}
 		
+		// 배송코드 찾기
+				public String selectAddress(int o_id) {
+					String query = "select o_address from orders where o_id=?;";
+					PreparedStatement pStmt = null;
+					OrdersDTO oDto = new OrdersDTO();
+
+					try {
+						pStmt = conn.prepareStatement(query);
+						pStmt.setInt(1, o_id);
+						ResultSet rs = pStmt.executeQuery();
+
+						while (rs.next()) {
+							oDto.setO_address(rs.getString(1));
+						}
+
+					} catch (Exception e) {
+						e.printStackTrace();
+					} finally {
+						try {
+							if (pStmt != null && !pStmt.isClosed())
+								pStmt.close();
+						} catch (SQLException se) {
+							se.printStackTrace();
+						}
+					}
+					return oDto.getO_address();
+				}
 
 	public void close() {
 		try {
