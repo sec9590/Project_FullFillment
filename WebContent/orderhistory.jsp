@@ -1,5 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="java.util.*, member.*, product.*, waybill.*"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" import="java.util.*, member.*, product.*, waybill.*"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
    
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -41,7 +42,7 @@
   <!--===============================================================================================-->
  	<style>
  		h4 { margin-left:15px; margin-bottom:20px; }
- 		th { text-align:center;}
+ 		th, td { text-align:center;}
  		/*/[발주버튼]*/
 		.myButton {
 			background-color:#fbb810;
@@ -134,10 +135,11 @@ button{
 	                  <table class="table table-hover" >
 	                      <thead>
 	                         <tr>
+	                         	 <th>발주번호</th>
 	                             <th>제품코드</th>
 	                             <th>제품명</th>
 	                             <th>가격</th>
-	                             <th>수량</th>
+	                             <th>발주수량</th>
 	                             <th>발주시간</th>
 	                         </tr>
 	                     </thead>
@@ -146,8 +148,9 @@ button{
 									<c:set var="plist" value="${requestScope.orderhistoryList}" />
 									<c:forEach var="product" items="${plist}">
 										<tr>
+											<td>${product.b_id}</td>
 											<td>${product.p_id}</td>
-											<td style="text-align:left">${product.p_name}</td>
+											<td>${product.p_name}</td>
 											<td>${product.p_price}</td>
 											<td>${product.p_quantity}</td>
 											<td>${product.b_time}</td>													

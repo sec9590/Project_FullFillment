@@ -5,10 +5,11 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
-
-import waybill.NoWaybillDTO;
 
 public class ProductDAO {
 	private Connection conn;
@@ -25,15 +26,15 @@ public class ProductDAO {
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
-	}	
-	
+	}
+
 	// 재고목록
 	public List<ProductDTO> selectAll() {
 		String query = "select p_id, p_name, p_price, p_quantity from product;";
 		PreparedStatement pStmt = null;
 		List<ProductDTO> list = new ArrayList<ProductDTO>();
 		try {
-			pStmt = conn.prepareStatement(query);			
+			pStmt = conn.prepareStatement(query);
 			ResultSet rs = pStmt.executeQuery();
 
 			while (rs.next()) {
@@ -57,14 +58,14 @@ public class ProductDAO {
 		}
 		return list;
 	}
-	
-	//10개미만 떨어진 상품목록
-	public List<ProductDTO> selectOrderHistory(String code) {
-		String query = "select p_id, p_name, p_price, p_quantity from product where buycode = ? and p_quantity <= 10;";
+
+	// 10개미만 떨어진 상품목록(상품db)
+	public List<ProductDTO> selectBuying(String code) {
+		String query = "select p_id, p_name, p_price, p_quantity from product where buycode = ? and p_quantity < 10;";
 		PreparedStatement pStmt = null;
 		List<ProductDTO> list = new ArrayList<ProductDTO>();
 		try {
-			pStmt = conn.prepareStatement(query);	
+			pStmt = conn.prepareStatement(query);
 			pStmt.setString(1, code);
 			ResultSet rs = pStmt.executeQuery();
 
@@ -89,15 +90,47 @@ public class ProductDAO {
 		}
 		return list;
 	}
-	
-	//주문시 10개미만 떨어진 상품 발주db저장
-	public void insertBuying(int p_id) {
-		String query = "INSERT INTO buying(p_id, p_name, p_img, p_price, p_quantity, buycode) SELECT p_id, p_name, p_img, p_price, p_quantity, buycode FROM product WHERE p_id = ?;";
+
+	// 상품개수
+	public int selectQuentity(int p_id) {
+		String query = "select p_quantity from product where p_id = ?";
 		PreparedStatement pStmt = null;
+		ProductDTO pDto = new ProductDTO();
 
 		try {
 			pStmt = conn.prepareStatement(query);
 			pStmt.setInt(1, p_id);
+			ResultSet rs = pStmt.executeQuery();
+
+			while (rs.next()) {
+				pDto.setP_quantity(rs.getInt(1));
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (pStmt != null && !pStmt.isClosed())
+					pStmt.close();
+			} catch (SQLException se) {
+				se.printStackTrace();
+			}
+		}
+		return pDto.getP_quantity();
+	}
+
+	// 주문시 10개미만 떨어진 상품 발주db저장(발주시간 및 주문수량)
+	public void insertBuying(int p_id) {
+		String query = "INSERT INTO buying(p_id, p_name, p_img, p_price, p_quantity, b_time, buycode) SELECT p_id, p_name, p_img, p_price, ?, ?, buycode FROM product WHERE p_id = ?;";
+		PreparedStatement pStmt = null;
+		int quantity = 15 - selectQuentity(p_id);
+		String b_time = currentTime();
+
+		try {
+			pStmt = conn.prepareStatement(query);
+			pStmt.setInt(1, quantity);
+			pStmt.setString(2, b_time);
+			pStmt.setInt(3, p_id);
 
 			pStmt.executeUpdate();
 
@@ -112,17 +145,31 @@ public class ProductDAO {
 			}
 		}
 	}
-	
-	// 발주내역 삭제
-	public void deleteNoWaybill(BuyingDTO bDto) {
-		String query = "delete from buying where buycode = ?";
+
+	// 운송처리위한 현재시간 변환
+	public static String currentTime() {
+		SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
+
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(new Date());
+		cal.add(Calendar.DATE, 1);
+
+		String strDate = format1.format(cal.getTime()) + " 10:00";
+
+		System.out.println(strDate);
+
+		return strDate;
+	}
+
+	// 상품채우기
+	public void updatep_Quantity(ProductDTO pDto) {
+		String query = "update product set p_quantity=15 where p_id=?;";
 		PreparedStatement pStmt = null;
 
 		try {
 			pStmt = conn.prepareStatement(query);
-			
-			pStmt.setString(1, bDto.getBuycode());
-			
+
+			pStmt.setInt(1, pDto.getP_id());
 			pStmt.executeUpdate();
 
 		} catch (Exception e) {
@@ -136,47 +183,48 @@ public class ProductDAO {
 			}
 		}
 	}
-	
-	// 구매처에 따른 발주내역
-		public List<BuyingDTO> selectBuyingAll(String field) {
-			String query = "select p_id, p_name, p_price, p_quantity from buying where buycode=?;";
-			PreparedStatement pStmt = null;
-			List<BuyingDTO> list = new ArrayList<BuyingDTO>();
-			try {
-				pStmt = conn.prepareStatement(query);	
-				pStmt.setString(1, field);
-				ResultSet rs = pStmt.executeQuery();
 
-				while (rs.next()) {
-					BuyingDTO bDto = new BuyingDTO();
-					bDto.setP_id(rs.getInt(1));
-					bDto.setP_name(rs.getString(2));
-					bDto.setP_price(rs.getString(3));
-					bDto.setP_quantity(rs.getInt(4));
-					list.add(bDto);
-					System.out.println(bDto.toString());
-				}
-			} catch (Exception e) {
-				e.printStackTrace();
-			} finally {
-				try {
-					if (pStmt != null && !pStmt.isClosed())
-						pStmt.close();
-				} catch (SQLException se) {
-					se.printStackTrace();
-				}
+	// 구매처에 따른 발주내역(발주db)
+	public List<BuyingDTO> selectBuyingAll(String field) {
+		String query = "select b_id, p_id, p_name, p_price, p_quantity, date_format(b_time, '%Y-%m-%d %H:%i') from buying where buycode=?;";
+		PreparedStatement pStmt = null;
+		List<BuyingDTO> list = new ArrayList<BuyingDTO>();
+		try {
+			pStmt = conn.prepareStatement(query);
+			pStmt.setString(1, field);
+			ResultSet rs = pStmt.executeQuery();
+
+			while (rs.next()) {
+				BuyingDTO bDto = new BuyingDTO();
+				bDto.setB_id(rs.getInt(1));
+				bDto.setP_id(rs.getInt(2));
+				bDto.setP_name(rs.getString(3));
+				bDto.setP_price(rs.getString(4));
+				bDto.setP_quantity(rs.getInt(5));
+				bDto.setB_time(rs.getString(6));
+				list.add(bDto);
+				System.out.println(bDto.toString());
 			}
-			return list;
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (pStmt != null && !pStmt.isClosed())
+					pStmt.close();
+			} catch (SQLException se) {
+				se.printStackTrace();
+			}
 		}
-		
-	
+		return list;
+	}
+
 	// 발주db에 상품번호 확인
 	public List<BuyingDTO> selectBuyingAll() {
 		String query = "select p_id from buying;";
 		PreparedStatement pStmt = null;
 		List<BuyingDTO> list = new ArrayList<BuyingDTO>();
 		try {
-			pStmt = conn.prepareStatement(query);			
+			pStmt = conn.prepareStatement(query);
 			ResultSet rs = pStmt.executeQuery();
 
 			while (rs.next()) {
@@ -196,18 +244,27 @@ public class ProductDAO {
 		}
 		return list;
 	}
-	
+
 	// 상품존재유무
 	public boolean isBuying(int p_id) {
 		boolean check = false;
-		
+
 		List<BuyingDTO> buyingList = selectBuyingAll();
-		for(BuyingDTO buying : buyingList) {
-			if(buying.getP_id() == p_id)
+		for (BuyingDTO buying : buyingList) {
+			if (buying.getP_id() == p_id)
 				check = true;
 			else
-				check = false;			
-		}		
+				check = false;
+		}
 		return check;
+	}
+
+	public void close() {
+		try {
+			if (conn != null && !conn.isClosed())
+				conn.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 }

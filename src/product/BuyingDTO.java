@@ -1,6 +1,7 @@
 package product;
 
 public class BuyingDTO {
+	private int b_id;
 	private int p_id;
 	private String p_name;
 	private String p_img;
@@ -23,6 +24,15 @@ public class BuyingDTO {
 		this.p_quantity = p_quantity;
 		this.b_time = b_time;
 		this.buycode = buycode;
+	}
+
+	
+	public int getB_id() {
+		return b_id;
+	}
+
+	public void setB_id(int b_id) {
+		this.b_id = b_id;
 	}
 
 	public int getP_id() {
