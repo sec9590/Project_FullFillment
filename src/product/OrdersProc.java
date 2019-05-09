@@ -78,6 +78,7 @@ public class OrdersProc extends HttpServlet {
 		String field = null;
 		String day = null;
 
+
 		switch (action) {
 		// 파일 다운하고 주문하기
 		case "down":
@@ -356,7 +357,8 @@ public class OrdersProc extends HttpServlet {
 			rd = request.getRequestDispatcher("sales.jsp");
 			rd.forward(request, response);
 			break;
-
+		
+		// 주문내역 기간별
 		case "timehistory":
 			String time = request.getParameter("time");
 			if (!request.getParameter("page").equals("")) {

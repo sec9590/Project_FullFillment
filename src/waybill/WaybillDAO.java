@@ -317,40 +317,40 @@ public class WaybillDAO {
 	}
 	
 	// 운송회사에 따른 운송내역
-			public List<WaybillDTO> selectCarrierAll(String field) {
-				String query = "select * from waybill where w_waycode=?;";
-				PreparedStatement pStmt = null;
-				List<WaybillDTO> list = new ArrayList<WaybillDTO>();
-				try {
-					pStmt = conn.prepareStatement(query);	
-					pStmt.setString(1, field);
-					ResultSet rs = pStmt.executeQuery();
+		public List<WaybillDTO> selectCarrierAll(String field) {
+			String query = "select * from waybill where w_waycode=?;";
+			PreparedStatement pStmt = null;
+			List<WaybillDTO> list = new ArrayList<WaybillDTO>();
+			try {
+				pStmt = conn.prepareStatement(query);	
+				pStmt.setString(1, field);
+				ResultSet rs = pStmt.executeQuery();
 
-					while (rs.next()) {
-						WaybillDTO wDto = new WaybillDTO();
-						wDto.setW_id(rs.getInt(1));
-						wDto.setO_id(rs.getInt(2));
-						wDto.setO_name(rs.getString(3));
-						wDto.setO_tel(rs.getString(4));
-						wDto.setO_address(rs.getString(5));
-						wDto.setW_waycode(rs.getString(6));
-						wDto.setO_time(rs.getString(7).substring(2,16));
-						wDto.setW_time(rs.getString(8).substring(2,16));
-						list.add(wDto);
-						System.out.println(wDto.toString());
-					}
-				} catch (Exception e) {
-					e.printStackTrace();
-				} finally {
-					try {
-						if (pStmt != null && !pStmt.isClosed())
-							pStmt.close();
-					} catch (SQLException se) {
-						se.printStackTrace();
-					}
+				while (rs.next()) {
+					WaybillDTO wDto = new WaybillDTO();
+					wDto.setW_id(rs.getInt(1));
+					wDto.setO_id(rs.getInt(2));
+					wDto.setO_name(rs.getString(3));
+					wDto.setO_tel(rs.getString(4));
+					wDto.setO_address(rs.getString(5));
+					wDto.setW_waycode(rs.getString(6));
+					wDto.setO_time(rs.getString(7).substring(2,16));
+					wDto.setW_time(rs.getString(8).substring(2,16));
+					list.add(wDto);
+					System.out.println(wDto.toString());
 				}
-				return list;
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				try {
+					if (pStmt != null && !pStmt.isClosed())
+						pStmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace();
+				}
 			}
+			return list;
+		}
 			
 		
 	public void close() {

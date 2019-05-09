@@ -162,7 +162,6 @@ public class WaybillProc extends HttpServlet {
 			rd = request.getRequestDispatcher("carrier.jsp");
 			rd.forward(request, response);
 			break;
-
 		}
 	}
 
