@@ -35,10 +35,24 @@ body, html {
 
 /*---------------------------------------------*/
 a {
-	font-size : 14px;
+  font-family: Poppins-Regular;
+  font-size: 14px;
+  line-height: 1.7;
+  color: #666666;
+  margin: 0px;
+  transition: all 0.4s;
+  -webkit-transition: all 0.4s;
+  -o-transition: all 0.4s;
+  -moz-transition: all 0.4s;
 }
-a:hover{
-	font-size : 14px;
+
+a:focus {
+  outline: none !important;
+}
+
+a:hover {
+  text-decoration: none;
+  color: #333333;
 }
 
 /*---------------------------------------------*/
@@ -444,3 +458,25 @@ iframe {
   left: 0;
 }
 
+
+/*/[발주버튼]*/
+.myButton {
+	background-color:#fbb810;
+	-moz-border-radius:42px;
+	-webkit-border-radius:42px;
+	border-radius:42px;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:20px;
+	padding:16px 31px;
+	text-decoration:none;
+}
+.myButton:hover {
+	background-color:#fbb810;
+}
+.myButton:active {
+	position:relative;
+	top:1px;
+}

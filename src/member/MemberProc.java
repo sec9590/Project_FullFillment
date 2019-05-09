@@ -75,7 +75,8 @@ public class MemberProc extends HttpServlet {
 					response.sendRedirect("OrdersProcServlet?action=productlist");
 					break;
 				case "1" :
-					response.sendRedirect("buying.jsp");
+					String field = "OrdersProcServlet?action=buyinglist&field=" + member.getM_field();
+					response.sendRedirect(field);
 					break;
 				case "2" :
 					response.sendRedirect("carrier.jsp");

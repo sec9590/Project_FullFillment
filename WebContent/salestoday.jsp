@@ -115,7 +115,7 @@ th {
 				<div style="float:right; margin-bottom:20px;" >
 					<select name="time"  onchange="location.href=this.value">
 						<option value="OrdersProcServlet?action=orderAll&page=1">모든날짜</option>
-						<option value="OrdersProcServlet?action=timehistory&time=today&page=1">오늘하루</option>
+						<option value="OrdersProcServlet?action=timehistory&time=today&page=1" selected="selected">오늘하루</option>
 						<option value="OrdersProcServlet?action=timehistory&time=day&page=1">24시간전</option>
 						<option value="OrdersProcServlet?action=timehistory&time=week&page=1">지난1주일</option>
 						<option value="OrdersProcServlet?action=timehistory&time=month&page=1">지난1개월</option>

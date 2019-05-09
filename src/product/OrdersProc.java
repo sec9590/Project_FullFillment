@@ -3,7 +3,6 @@ package product;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
@@ -18,9 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
-import member.MemberDAO;
-import member.MemberDTO;
-
+import waybill.*;
 import com.oreilly.servlet.MultipartRequest;
 
 /**
@@ -54,6 +51,7 @@ public class OrdersProc extends HttpServlet {
 		DetailOrderDTO doDto = null;
 		ProductDAO pDao = null;
 		ProductDTO pDto = null;
+		BuyingDTO bDto = null;
 		WaybillDTO wDto = null;
 		WaybillDAO wDao = null;
 		NoWaybillDTO nwDto = null;
@@ -68,7 +66,10 @@ public class OrdersProc extends HttpServlet {
 
 		List<String> pageList = new ArrayList<String>();
 		List<OrdersDTO> orderAll = null;
+		String page = null;
+		int pagecount = 0;
 		int curPage = 0;
+		int pageNo = 0;
 		int num = 0;
 		boolean update = false;
 
@@ -159,7 +160,7 @@ public class OrdersProc extends HttpServlet {
 
 			}
 
-			msg = "주문 성공";
+			msg = "주문 성공 및 발주신청";
 			url = "OrdersProcServlet?action=orderlist&count=" + count;
 			System.out.println("count : " + count);
 			request.setAttribute("count", count);
@@ -264,17 +265,31 @@ public class OrdersProc extends HttpServlet {
 			oDao.close();
 			break;
 
-		// csv 속 주문내역
+		// csv 속 주문내역 및 발주DB저장
 		case "orderlist":
 			oDao = new OrdersDAO();
 			oDto = new OrdersDTO();
+			pDao = new ProductDAO();
 
 			System.out.println(request.getParameter("count"));
 			if (!request.getParameter("count").equals("")) {
 				num = Integer.parseInt(request.getParameter("count"));
 			}
+			
 			List<OrdersDTO> orderList = oDao.selectUpload(num);
-			System.out.println("완료");
+			
+			for (OrdersDTO order : orderList) {
+				List<DetailOrderDTO> doDtoList = oDao.selectDetailOrder(order.getO_id());
+
+				for (DetailOrderDTO dDto : doDtoList) {
+					if (oDao.checkBuying((dDto))) { //10개미만으로 떨어지면
+						if(!pDao.isBuying(dDto.getP_id()))
+							pDao.insertBuying(dDto.getP_id());
+					}
+				}
+			}
+			
+			System.out.println("주문내역검색 및 발주db저장완료");
 			request.setAttribute("OrderList", orderList);
 			request.setAttribute("count", num);
 			System.out.println(num);
@@ -315,15 +330,15 @@ public class OrdersProc extends HttpServlet {
 				curPage = Integer.parseInt(request.getParameter("page"));
 			}
 			oDao = new OrdersDAO();
-			int pagecount = oDao.getCount();
+			pagecount = oDao.getCount();
 			if (pagecount == 0) // 데이터가 없을 때 대비
 				pagecount = 1;
-			int pageNo = (int) Math.ceil(pagecount / 10.0);
+			pageNo = (int) Math.ceil(pagecount / 10.0);
 			if (curPage > pageNo) // 경계선에 걸렸을 때 대비
 				curPage--;
 			session.setAttribute("currentMemberPage", curPage);
 			// 리스트 페이지의 하단 페이지 데이터 만들어 주기
-			String page = null;
+			page = null;
 			page = "<a href=#>&laquo;</a>&nbsp;";
 			pageList.add(page);
 			for (int i = 1; i <= pageNo; i++) {
@@ -340,6 +355,69 @@ public class OrdersProc extends HttpServlet {
 			rd.forward(request, response);
 			break;
 
+		case "timehistory" :
+			String time = request.getParameter("time");
+			if (!request.getParameter("page").equals("")) {
+				curPage = Integer.parseInt(request.getParameter("page"));
+			}
+			oDao = new OrdersDAO();
+			pagecount = oDao.getCount();
+			if (pagecount == 0) // 데이터가 없을 때 대비
+				pagecount = 1;
+			pageNo = (int) Math.ceil(pagecount / 10.0);
+			if (curPage > pageNo) // 경계선에 걸렸을 때 대비
+				curPage--;
+			session.setAttribute("currentMemberPage", curPage);
+			// 리스트 페이지의 하단 페이지 데이터 만들어 주기
+			page = null;
+			page = "<a href=#>&laquo;</a>&nbsp;";
+			pageList.add(page);
+			for (int i = 1; i <= pageNo; i++) {
+				page = "&nbsp;<a href=OrdersProcServlet?action=timehistory&time=" + time + "&page=" + i + ">" + i + "</a>&nbsp;";
+				pageList.add(page);
+			}
+			page = "&nbsp;<a href=#>&raquo;</a>";
+			pageList.add(page);
+			
+			switch(time) {
+			case "today" :
+				orderAll = oDao.selectToDay(curPage);
+				request.setAttribute("orderAllList", orderAll);
+				request.setAttribute("pageList", pageList);
+				rd = request.getRequestDispatcher("salestoday.jsp");
+				rd.forward(request, response);
+				break;
+			case "day" :
+				orderAll = oDao.selectDay(curPage);
+				request.setAttribute("orderAllList", orderAll);
+				request.setAttribute("pageList", pageList);
+				rd = request.getRequestDispatcher("salesday.jsp");
+				rd.forward(request, response);
+				break;
+			case "week" :
+				orderAll = oDao.selectWeek(curPage);
+				request.setAttribute("orderAllList", orderAll);
+				request.setAttribute("pageList", pageList);
+				rd = request.getRequestDispatcher("salesweek.jsp");
+				rd.forward(request, response);
+				break;
+			case "month" :
+				orderAll = oDao.selectMonth(curPage);
+				request.setAttribute("orderAllList", orderAll);
+				request.setAttribute("pageList", pageList);
+				rd = request.getRequestDispatcher("salesmonth.jsp");
+				rd.forward(request, response);
+				break;
+			case "year" :
+				orderAll = oDao.selectYear(curPage);
+				request.setAttribute("orderAllList", orderAll);
+				request.setAttribute("pageList", pageList);
+				rd = request.getRequestDispatcher("salesyear.jsp");
+				rd.forward(request, response);
+				break;
+			}
+			break;
+			
 		// 발주내역
 		case "orderhistory":
 			String code = request.getParameter("code");
@@ -350,7 +428,18 @@ public class OrdersProc extends HttpServlet {
 			rd = request.getRequestDispatcher("orderhistory.jsp");
 			rd.forward(request, response);
 			break;
-
+		
+		// 구매처에따른 발주 내역
+		case "buyinglist":
+			String field = request.getParameter("field");
+			pDao = new ProductDAO();
+			bDto = new BuyingDTO();
+			
+			List<BuyingDTO> buyingList = pDao.selectBuyingAll(field);			
+			request.setAttribute("buyingList", buyingList);
+			rd = request.getRequestDispatcher("buying.jsp");
+			rd.forward(request, response);
+			break;
 		}
 	}
 

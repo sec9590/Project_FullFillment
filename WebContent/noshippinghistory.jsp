@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="member.*, java.util.*, product.*" %>
+    pageEncoding="UTF-8" import="java.util.*, member.*, product.*, waybill.*"%>
      <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
    
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -54,29 +54,26 @@
  			background-color:#333333;
  		}
  		.myButton {
-			background-color:#fbb810;
-			-moz-border-radius:42px;
-			-webkit-border-radius:42px;
-			border-radius:42px;
-			display:inline-block;
-			cursor:pointer;
-			color:#ffffff;
-			font-size:15px;
-			padding:10px 15px;
-			text-decoration:none;
-		}
- 		.myButton:hover {
-			background-color:#333333;
-			-moz-border-radius:42px;
-			-webkit-border-radius:42px;
-			border-radius:42px;
-			display:inline-block;
-			cursor:pointer;
-			color:#ffffff;
-			font-size:15px;
-			padding:10px 15px;
-			text-decoration:none;
-		}
+	background-color:#fbb810;
+	-moz-border-radius:42px;
+	-webkit-border-radius:42px;
+	border-radius:42px;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:15px;
+	font-weight : bold;
+	padding:10px 20px;
+	text-decoration:none;
+}
+.myButton:hover {
+	background-color:#fbb810;
+}
+.myButton:active {
+	position:relative;
+	top:1px;
+}
  	</style>
 </head>
 
@@ -128,7 +125,7 @@
 	<div class="amado_product_area section-padding-100">
 	    <div class="row">
 	     <div>
-	    	<h4>운송내역</h4>
+	    	<h4>미운송내역</h4>
 	    </div>
 	    
 	        <!-- Single Product Area -->
@@ -158,17 +155,16 @@
 								</tr>
 							</c:forEach>
                     	</tbody>
-                	</table>  		         
-					
-							<%
+                	</table>    
+                	<%
 							if(request.getAttribute("nwayList") != null){
-							%>
-                			<div align=center style="margin-bottom:10px;"> 	
+							%>						
+							<div align=center> 	
                     			<a href="OrdersProcServlet?action=nowaybill" class="myButton">운송신청</a>
-                  			</div> 
+                    		</div> 
                     		<%
-							}
-                    		%>
+                    			}
+							%>					
 	            </div>
 	    	</div>
 		</div>

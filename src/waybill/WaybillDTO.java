@@ -1,4 +1,4 @@
-package product;
+package waybill;
 
 public class WaybillDTO {
 	private int w_id;

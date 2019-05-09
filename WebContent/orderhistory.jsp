@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="member.*, java.util.*" %>
+    pageEncoding="UTF-8" import="java.util.*, member.*, product.*, waybill.*"%>
    
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -119,7 +119,7 @@ button{
 	    <div class="row">
 	    <div>
 	     <h4>발주내역</h4>
-	     		<div style="margin-left:300px;">
+	     		<div style="margin-left:350px;">
 		    		<button type="button" onclick="location.href='OrdersProcServlet?action=orderhistory&code=A'">의자</button>
 		    		<button type="button" onclick="location.href='OrdersProcServlet?action=orderhistory&code=B'">침대</button>
 		    		<button type="button" onclick="location.href='OrdersProcServlet?action=orderhistory&code=C'">테이블</button>
@@ -138,6 +138,7 @@ button{
 	                             <th>제품명</th>
 	                             <th>가격</th>
 	                             <th>수량</th>
+	                             <th>발주시간</th>
 	                         </tr>
 	                     </thead>
 	                     <tbody>
@@ -148,15 +149,13 @@ button{
 											<td>${product.p_id}</td>
 											<td style="text-align:left">${product.p_name}</td>
 											<td>${product.p_price}</td>
-											<td>${product.p_quantity}</td>											
+											<td>${product.p_quantity}</td>
+											<td>${product.b_time}</td>													
 										</tr>
 									</c:forEach>
 								</tbody>
 	                     </tbody>
-	             	</table>	            
-	             	<div align=center> 	
-                    <a href="#" class="myButton">발주신청</a>
-                    </div>                   
+	             	</table>             	                   
 	        	</div>
 	       	</div>
 	    </div>

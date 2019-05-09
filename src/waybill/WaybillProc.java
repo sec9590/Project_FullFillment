@@ -1,4 +1,4 @@
-package product;
+package waybill;
 
 
 import java.io.IOException;
@@ -137,7 +137,6 @@ public class WaybillProc extends HttpServlet {
 			break;
 			
 		case "nowaybilllist":
-			
 			wDao = new WaybillDAO();
 			nwDto = new NoWaybillDTO();
 			

@@ -118,7 +118,7 @@ th {
 						<option value="OrdersProcServlet?action=timehistory&time=today&page=1">오늘하루</option>
 						<option value="OrdersProcServlet?action=timehistory&time=day&page=1">24시간전</option>
 						<option value="OrdersProcServlet?action=timehistory&time=week&page=1">지난1주일</option>
-						<option value="OrdersProcServlet?action=timehistory&time=month&page=1">지난1개월</option>
+						<option value="OrdersProcServlet?action=timehistory&time=month&page=1" selected="selected">지난1개월</option>
 						<option value="OrdersProcServlet?action=timehistory&time=year&page=1">지난1년</option>
 					</select>
 					</div>

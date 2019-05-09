@@ -1,4 +1,4 @@
-package product;
+package waybill;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
