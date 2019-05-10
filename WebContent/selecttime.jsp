@@ -48,7 +48,46 @@
 <link rel="stylesheet" type="text/css"
 	href="vendor/daterangepicker/daterangepicker.css">
 <!--===============================================================================================-->
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
+
+<script>
+// 즉시실행함수
+  $( function() {
+	//달력 옵션 설정
+	$.datepicker.regional['ko'] = {
+		  closeText: '닫기',
+		  prevText: '이전달',
+		  nextText: '다음달',
+		  currentText: '오늘',
+		  monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+		  monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+		  dayNames: ['일','월','화','수','목','금','토'],
+		  dayNamesShort: ['일','월','화','수','목','금','토'],
+		  dayNamesMin: ['일','월','화','수','목','금','토'],
+		  weekHeader: 'Wk',
+		  dateFormat: 'yy-mm-dd',
+		  firstDay: 0,
+		  isRTL: false,
+		  duration:200,
+		  showAnim:'show',
+		  showMonthAfterYear: true,
+		  yearSuffix:'년'
+		 };
+		 
+		 $.datepicker.setDefaults($.datepicker.regional['ko']);
+	
+	// 실질적인 달력생성 부분
+	 $('#schDate').datepicker({
+        changeMonth: false,
+        changeYear: false,
+        defaultDate:$('#schDate').val()
+    });
+	
+  } );
+ </script>
 <style>
 h4 {
 	margin-left: 15px;
@@ -57,6 +96,19 @@ h4 {
 
 th {
 	text-align: center;
+}
+input[type=submit]{
+	background-color: #fbb810;
+	-moz-border-radius: 15px;
+	-webkit-border-radius: 15px;
+	border-radius: 15px;
+	cursor: pointer;
+	color: #ffffff;
+	font-family: Arial;
+	font-weight: bold;
+	font-size:13px;
+	padding: 5px 10px;
+	text-decoration: none;
 }
 
 </style>
@@ -112,16 +164,11 @@ th {
 			<div class="row">
 			<div style="width:100%; position:relative;">
 				<h4>총 주문내역</h4>
-				<div style="float:right; margin-bottom:20px;" >
-					<select name="time"  onchange="location.href=this.value">
-						<option value="OrdersProcServlet?action=orderAll&page=1">모든날짜</option>
-						<option value="OrdersProcServlet?action=timehistory&time=today&page=1">오늘하루</option>
-						<option value="OrdersProcServlet?action=timehistory&time=day&page=1">24시간전</option>
-						<option value="OrdersProcServlet?action=timehistory&time=week&page=1">지난1주일</option>
-						<option value="OrdersProcServlet?action=timehistory&time=month&page=1">지난1개월</option>
-						<option value="OrdersProcServlet?action=timehistory&time=year&page=1">지난1년</option>
-						<option value="OrdersProcServlet?action=selecttime">기간설정</option>
-					</select>
+					<div style="float:right; padding-bottom:10px;">
+					<form action="OrdersProcServlet?action=selecttime&page=1" method="post">
+					<input type="text" id="schDate" name="dateInventory" value="#" style="border-bottom:1px solid #cccccc;">
+					<input type="submit" style="background-color: #fbb810; border: none" value="검색"> 
+					</form>
 					</div>
 				</div>
 				<!-- Single Product Area -->
@@ -185,24 +232,15 @@ th {
 	<!-- ##### Footer Area End ##### -->
 
 	<!--===============================================================================================-->
-	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
 	<!--===============================================================================================-->
-	<script src="vendor/animsition/js/animsition.min.js"></script>
 	<!--===============================================================================================-->
-	<script src="vendor/bootstrap/js/popper.js"></script>
-	<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
 	<!--===============================================================================================-->
-	<script src="vendor/select2/select2.min.js"></script>
 	<!--===============================================================================================-->
-	<script src="vendor/daterangepicker/moment.min.js"></script>
-	<script src="vendor/daterangepicker/daterangepicker.js"></script>
 	<!--===============================================================================================-->
-	<script src="vendor/countdowntime/countdowntime.js"></script>
 	<!--===============================================================================================-->
 	<script src="js/main.js"></script>
 
 	<!-- ##### jQuery (Necessary for All JavaScript Plugins) ##### -->
-	<script src="js/jquery/jquery-2.2.4.min.js"></script>
 	<!-- Popper js -->
 	<script src="js/popper.min.js"></script>
 	<!-- Bootstrap js -->

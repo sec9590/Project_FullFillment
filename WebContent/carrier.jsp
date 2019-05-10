@@ -12,9 +12,49 @@
     <!-- Core Style CSS -->
     <link rel="stylesheet" href="css/core-style.css">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="<c:url value="/webjars/jquery-ui/1.11.4/jquery-ui.min.css"/>" type="text/css"/>
+
+	<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	<script src="<c:url value="/webjars/jquery/2.2.1/jquery.min.js"/>"></script>
+	<script src="<c:url value="/webjars/jquery-ui/1.11.4/jquery-ui.min.js"/>"></script>
+	<script src="<c:url value="/resources/js/jquery.mtz.monthpicker.js"/>"></script>
+    
+    <script>
+    var currentYear = (new Date()).getFullYear();
+    var startYear = currentYear-10;
+    var options = {
+
+            startYear: startYear,
+
+            finalYear: currentYear,
+
+            pattern: 'yyyy-mm',
+
+            monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월']
+
+    };
+
+    $('#schMonth').monthpicker(options);
+    
+
+
+    </script>
     <style>
 	th{text-align : center;}
 	h4 { margin-left:15px; margin-bottom:20px; } 
+	input[type=submit]{
+		background-color: #fbb810;
+		-moz-border-radius: 15px;
+		-webkit-border-radius: 15px;
+		border-radius: 15px;
+		cursor: pointer;
+		color: #ffffff;
+		font-family: Arial;
+		font-weight: bold;
+		font-size:13px;
+		padding: 5px 10px;
+		text-decoration: none;
+}
 </style>
 </head>
 <body>
@@ -64,6 +104,10 @@
 	    <div class="row">
 	     <h4><span style="color:#fbb810; font-weight:bold">${memberName}</span>님 운송내역</h4>
 			<br>
+			<form action="WaybillProcServlet?action=carrierlist&field=${memberField}" method="post">
+					<input type="text" id="schMonth" name="dateInventory" value="#" style="border-bottom:1px solid #cccccc;">
+					<input type="submit" style="background-color: #fbb810; border: none" value="검색"> 
+					</form>
 	        <!-- Single Product Area -->
 	        <div class="col-12 col-sm-6 col-md-12 col-xl-15">
 	            <div class="single-product-wrapper">
@@ -118,7 +162,6 @@
 	<!-- ##### Footer Area End ##### -->
 
     <!-- ##### jQuery (Necessary for All JavaScript Plugins) ##### -->
-    <script src="js/jquery/jquery-2.2.4.min.js"></script>
     <!-- Popper js -->
     <script src="js/popper.min.js"></script>
     <!-- Bootstrap js -->

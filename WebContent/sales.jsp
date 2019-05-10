@@ -98,8 +98,18 @@ h4 {
 th {
 	text-align: center;
 }
-input[type=text]{
-	border:1px soild #333333;
+input[type=submit]{
+	background-color: #fbb810;
+	-moz-border-radius: 15px;
+	-webkit-border-radius: 15px;
+	border-radius: 15px;
+	cursor: pointer;
+	color: #ffffff;
+	font-family: Arial;
+	font-weight: bold;
+	font-size:13px;
+	padding: 5px 10px;
+	text-decoration: none;
 }
 
 </style>
@@ -154,24 +164,13 @@ input[type=text]{
 			<div class="row">
 			<div style="width:100%; position:relative;">
 				<h4>총 주문내역</h4>
-				<div style="float:left; margin-bottom:20px;">
-				<form action="OrdersProcServlet?action=selecttime" method="post">
-					DATE : <input type="text" id="schDate" name="dateInventory" value="2019-05-10">
-					<input class="btn btn-warning" type="submit" style="background-color: #fbb810; border: none" value="검색"> 
-				</form>
-				</div>
-				<div style="float:right; margin-bottom:20px;" >
-					<select name="time"  onchange="location.href=this.value">
-						<option value="OrdersProcServlet?action=orderAll&page=1">모든날짜</option>
-						<option value="OrdersProcServlet?action=timehistory&time=today&page=1">오늘하루</option>
-						<option value="OrdersProcServlet?action=timehistory&time=day&page=1">24시간전</option>
-						<option value="OrdersProcServlet?action=timehistory&time=week&page=1">지난1주일</option>
-						<option value="OrdersProcServlet?action=timehistory&time=month&page=1">지난1개월</option>
-						<option value="OrdersProcServlet?action=timehistory&time=year&page=1">지난1년</option>
-					</select>
-						
+				
+					<div style="float:right; padding-bottom:10px;">
+					<form action="OrdersProcServlet?action=selecttime&page=1" method="post">
+					<input type="text" id="schDate" name="dateInventory" value="#" style="border-bottom:1px solid #cccccc;">
+					<input type="submit" style="background-color: #fbb810; border: none" value="검색"> 
+					</form>
 					</div>
-					
 				</div>
 				<!-- Single Product Area -->
 				<div class="col-12 col-sm-6 col-md-12 col-xl-15">
