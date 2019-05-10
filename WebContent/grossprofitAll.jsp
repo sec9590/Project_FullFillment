@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8" import="java.util.*, member.*, product.*, waybill.*"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -125,7 +125,6 @@ button:hover {
 		<li><a href="WaybillProcServlet?action=waybilllist&page=1">운송내역</a></li>
 		<li><a href="WaybillProcServlet?action=nowaybilllist">미운송내역</a></li>
 		<li class="active"><a href="grossprofit.jsp">매출 총 이익</a></li>
-		
 		</nav> </header>
 		<!-- Header Area End -->
 
@@ -134,7 +133,7 @@ button:hover {
 			<div>
 				<h4>매출 총 이익</h4>
 				<br>
-				<div style="margin-left: 350px;" align=center>
+				<div style="margin-left: 350px;">
 					<button type="button"
 						onclick="location.href='OrdersProcServlet?action=orderhistory&code=A'">쇼핑몰</button>
 					<button type="button"
@@ -142,7 +141,7 @@ button:hover {
 					<button type="button"
 						onclick="location.href='OrdersProcServlet?action=orderhistory&code=C'">운송회사</button>
 				</div>
-				</div>
+					</div>
 				<!-- Single Product Area -->
 				<div class="col-12 col-sm-6 col-md-12 col-xl-15">
 					<div class="single-product-wrapper">
