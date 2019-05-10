@@ -269,14 +269,14 @@ public class OrdersDAO {
 	}
 
 	// 시간형식 문자열로 변환
-	public static String timechangeString(Date time) {
+	public String timechangeString(Date time) {
 		SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 		String str = format1.format(time);
 		return str;
 	}
 
 	// 주문시간변환
-	public static Date compareTime(String o_time) {
+	public Date compareTime(String o_time) {
 		SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 		Date time = null;
 		try {
@@ -288,6 +288,28 @@ public class OrdersDAO {
 
 		return time;
 	}
+	
+	// 일단위 검색(문자열시간 분빼고 변환)
+		public Date selectTime(String o_time) {
+			SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
+			Date time = null;
+			try {
+				time = format1.parse(o_time);
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+			return time;
+		}
+		
+		// 일단위 검색(시간형식 문자열로 변환)
+		public String selecttimechangeString(Date time) {
+			SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
+			String str = format1.format(time);
+			return str;
+		}
+
 
 	// 첨부추가한 주문내역
 	public List<OrdersDTO> selectUpload(int count) {
@@ -799,6 +821,44 @@ public class OrdersDAO {
 					return oDto.getO_address();
 				}
 
+		// 기간설정
+		public List<OrdersDTO> selectTime(String date1, String date2) {
+			String sql = "select o.o_id, o.o_name, o.o_tel, o.o_address, date_format(o.o_time, '%Y-%m-%d %H:%i'), count(*) '주문수' \r\n" + 
+					"from orders as o inner join orders_detail as d on o.o_id = d.o_id where o.o_time between ?  and ?  group by o.o_id  order by o.o_id desc;";
+			PreparedStatement pStmt = null;
+			List<OrdersDTO> list = new ArrayList<OrdersDTO>();
+			System.out.println(date1 + " " + date2);
+
+			try {
+				pStmt = conn.prepareStatement(sql);
+				pStmt.setString(1, date1);
+				pStmt.setString(2, date2);
+				ResultSet rs = pStmt.executeQuery();
+
+				while (rs.next()) {
+					OrdersDTO oDto = new OrdersDTO();
+					oDto.setO_id(rs.getInt(1));
+					oDto.setO_name(rs.getString(2));
+					oDto.setO_tel(rs.getString(3));
+					oDto.setO_address(rs.getString(4));
+					oDto.setO_time(rs.getString(5));
+					oDto.setCount(rs.getInt(6));
+					System.out.println("기간설정" + oDto.toString());
+					list.add(oDto);
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				try {
+					if (pStmt != null && !pStmt.isClosed())
+						pStmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace();
+				}
+			}
+			return list;
+		}				
+				
 	public void close() {
 		try {
 			if (conn != null && !conn.isClosed())

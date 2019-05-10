@@ -49,46 +49,6 @@
 	href="vendor/daterangepicker/daterangepicker.css">
 <!--===============================================================================================-->
 
-<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-
-
-<script>
-// 즉시실행함수
-  $( function() {
-	//달력 옵션 설정
-	$.datepicker.regional['ko'] = {
-		  closeText: '닫기',
-		  prevText: '이전달',
-		  nextText: '다음달',
-		  currentText: '오늘',
-		  monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
-		  monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
-		  dayNames: ['일','월','화','수','목','금','토'],
-		  dayNamesShort: ['일','월','화','수','목','금','토'],
-		  dayNamesMin: ['일','월','화','수','목','금','토'],
-		  weekHeader: 'Wk',
-		  dateFormat: 'yy-mm-dd',
-		  firstDay: 0,
-		  isRTL: false,
-		  duration:200,
-		  showAnim:'show',
-		  showMonthAfterYear: true,
-		  yearSuffix:'년'
-		 };
-		 
-		 $.datepicker.setDefaults($.datepicker.regional['ko']);
-	
-	// 실질적인 달력생성 부분
-	 $('#schDate').datepicker({
-        changeMonth: false,
-        changeYear: false,
-        defaultDate:$('#schDate').val()
-    });
-	
-  } );
- </script>
 <style>
 h4 {
 	margin-left: 15px;
@@ -98,11 +58,9 @@ h4 {
 th {
 	text-align: center;
 }
-input[type=text]{
-	border:1px soild #333333;
-}
 
 </style>
+
 </head>
 
 <body>
@@ -154,12 +112,6 @@ input[type=text]{
 			<div class="row">
 			<div style="width:100%; position:relative;">
 				<h4>총 주문내역</h4>
-				<div style="float:left; margin-bottom:20px;">
-				<form action="OrdersProcServlet?action=selecttime" method="post">
-					DATE : <input type="text" id="schDate" name="dateInventory" value="2019-05-10">
-					<input class="btn btn-warning" type="submit" style="background-color: #fbb810; border: none" value="검색"> 
-				</form>
-				</div>
 				<div style="float:right; margin-bottom:20px;" >
 					<select name="time"  onchange="location.href=this.value">
 						<option value="OrdersProcServlet?action=orderAll&page=1">모든날짜</option>
@@ -168,10 +120,9 @@ input[type=text]{
 						<option value="OrdersProcServlet?action=timehistory&time=week&page=1">지난1주일</option>
 						<option value="OrdersProcServlet?action=timehistory&time=month&page=1">지난1개월</option>
 						<option value="OrdersProcServlet?action=timehistory&time=year&page=1">지난1년</option>
+						<option value="OrdersProcServlet?action=selecttime">기간설정</option>
 					</select>
-						
 					</div>
-					
 				</div>
 				<!-- Single Product Area -->
 				<div class="col-12 col-sm-6 col-md-12 col-xl-15">
@@ -234,15 +185,24 @@ input[type=text]{
 	<!-- ##### Footer Area End ##### -->
 
 	<!--===============================================================================================-->
+	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
 	<!--===============================================================================================-->
+	<script src="vendor/animsition/js/animsition.min.js"></script>
 	<!--===============================================================================================-->
+	<script src="vendor/bootstrap/js/popper.js"></script>
+	<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
 	<!--===============================================================================================-->
+	<script src="vendor/select2/select2.min.js"></script>
 	<!--===============================================================================================-->
+	<script src="vendor/daterangepicker/moment.min.js"></script>
+	<script src="vendor/daterangepicker/daterangepicker.js"></script>
 	<!--===============================================================================================-->
+	<script src="vendor/countdowntime/countdowntime.js"></script>
 	<!--===============================================================================================-->
 	<script src="js/main.js"></script>
 
 	<!-- ##### jQuery (Necessary for All JavaScript Plugins) ##### -->
+	<script src="js/jquery/jquery-2.2.4.min.js"></script>
 	<!-- Popper js -->
 	<script src="js/popper.min.js"></script>
 	<!-- Bootstrap js -->
@@ -251,6 +211,5 @@ input[type=text]{
 	<script src="js/plugins.js"></script>
 	<!-- Active js -->
 	<script src="js/active.js"></script>
-	
 </body>
 </html>

@@ -5,7 +5,9 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -77,6 +79,8 @@ public class OrdersProc extends HttpServlet {
 		boolean update = false;
 		String field = null;
 		String day = null;
+		SimpleDateFormat mySdf;
+		Date today;
 
 
 		switch (action) {
@@ -505,6 +509,29 @@ public class OrdersProc extends HttpServlet {
 
 			pDao.close();
 			break;
+			
+		// 기간설정 달력
+		case "selecttime":		// 일단위 상품별 주문 내역
+			oDao = new OrdersDAO();
+			String date = request.getParameter("dateInventory");
+			date = oDao.selecttimechangeString(oDao.selectTime(date));			
+			System.out.println(date);
+			String date1 = date + " 00:00";
+			System.out.println(date1);
+			String date2 = date + " 23:59";
+			
+			date1 = oDao.timechangeString(oDao.compareTime(date1));
+		
+			date2 = oDao.timechangeString(oDao.compareTime(date2));
+		
+			
+			orderAll = oDao.selectTime(date1, date2);
+			System.out.println("기간설정 달력");
+			request.setAttribute("dateInventory", date);
+			request.setAttribute("orderAllList", orderAll);
+			rd = request.getRequestDispatcher("selecttime.jsp");
+			rd.forward(request, response);
+			break;	
 		}
 	}
 }
