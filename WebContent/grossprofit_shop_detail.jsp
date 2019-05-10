@@ -1,6 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8" import="java.util.*, member.*, product.*, waybill.*"%>
-
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"
+	import="java.util.*, member.*, product.*, waybill.*"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -13,14 +15,14 @@
 <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
 <!-- Title  -->
-<title>Yellow Container : grossprofit</title>
+<title>Yellow Container : grossprofit_shop</title>
 
 <!-- Favicon  -->
 <link rel="icon" href="img/core-img/favicon.ico">
 
 <!-- Core Style CSS -->
-<link rel="stylesheet" href="css/core-style.css">
-<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" type="text/css" href="css/core-style.css">
+<link rel="stylesheet" type="text/css" href="css/style.css">
 <link rel="stylesheet" type="text/css" href="css/util.css">
 <link rel="stylesheet" type="text/css" href="css/main.css">
 
@@ -121,54 +123,49 @@ button:hover {
 		<li><a href="OrdersProcServlet?action=productlist">재고내역</a></li>
 		<li><a href="order.jsp">주문하기</a></li>
 		<li><a href="OrdersProcServlet?action=orderAll&page=1">주문내역</a></li>
-		<li><a href="OrdersProcServlet?action=orderhistoryall">발주내역</a></li>
+		<li class="active"><a
+			href="OrdersProcServlet?action=orderhistoryall">발주내역</a></li>
 		<li><a href="WaybillProcServlet?action=waybilllist&page=1">운송내역</a></li>
 		<li><a href="WaybillProcServlet?action=nowaybilllist">미운송내역</a></li>
-		<li class="active"><a href="grossprofitAll.jsp">매출 총 이익</a></li>
+		<li><a href="grossprofit.jsp">매출 총 이익</a></li>
 		</nav> </header>
 		<!-- Header Area End -->
 
 		<div class="amado_product_area section-padding-100">
 			<div class="row">
-			<div>
-				<h4>매출 총 이익</h4>
+				<h4>
+					<span style="color:#fbb810; font-weight:bold; "> "${requestScope.shopcode}" </span> 상세대금내역
+				</h4>
 				<br>
-				<div style="margin-left: 350px;">
-					<button type="button"
-						onclick="location.href='OrdersProcServlet?action=shopprofit'">쇼핑몰</button>
-					<button type="button"
-						onclick="location.href='OrdersProcServlet?action=orderhistory&code=B'">구매처</button>
-					<button type="button"
-						onclick="location.href='OrdersProcServlet?action=orderhistory&code=C'">운송회사</button>
-				</div>
-					</div>
+
 				<!-- Single Product Area -->
 				<div class="col-12 col-sm-6 col-md-12 col-xl-15">
 					<div class="single-product-wrapper">
 						<table class="table table-hover">
 							<thead>
 								<tr>
-									<th>항목</th>
-									<th>금액</th>
+									<th>상품코드</th>
+									<th>상품이름</th>
+									<th>상품가격</th>
+									<th>상품개수</th>
+									<th>총 가격</th>
+									<th>대금청구액</th>
 								</tr>
 							</thead>
 							<tbody>
-								<tr>
-									<td>쇼핑몰 (+)</td>
-									<td></td>
-								</tr>
-								<tr>
-									<td>구매처 (-)</td>
-									<td></td>
-								</tr>
-								<tr>
-									<td>운송 (-)</td>
-									<td></td>
-								</tr>
-								<tr class="success">
-									<td>총 이익</td>
-									<td></td>
-								</tr>
+							<tbody>
+								<c:set var="slist" value="${requestScope.shopList_detail}" />
+								<c:forEach var="shop" items="${slist}">
+									<tr>
+										<td>${shop.p_id}</td>
+										<td>${shop.p_name}</td>
+										<td>${shop.p_price}</td>
+										<td>${shop.p_count}</td>
+										<td style="color:blue">${shop.p_total}</td>
+										<td style="color:red">${shop.total}</td>
+									</tr>
+								</c:forEach>
+							</tbody>
 							</tbody>
 						</table>
 					</div>
@@ -176,11 +173,12 @@ button:hover {
 			</div>
 		</div>
 	</div>
+
 	<!-- ##### Main Content Wrapper End ##### -->
 
 	<!-- ##### Footer Area Start ##### -->
 	<footer class="footer_area clearfix"
-		style="padding:10px; position:absolute; bottom:0; width:100%">
+		style="padding:10px; position:absolute; margin-bottom:0; width:100%">
 	<div class="container" style="text-align: center">
 		<span style="color: white"> Copyright &copy;<script>
 			document.write(new Date().getFullYear());

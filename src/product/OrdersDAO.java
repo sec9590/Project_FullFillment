@@ -30,6 +30,7 @@ public class OrdersDAO {
 		}
 	}
 
+	// 페이지위한 개수
 	public int getCount() {
 		String query = "select count(*) from orders;";
 		PreparedStatement pStmt = null;
@@ -54,9 +55,9 @@ public class OrdersDAO {
 		return count;
 	}
 
-	//주문내역 추가
+	// 주문내역 추가
 	public void insertOrders(OrdersDTO oDto) {
-		String query = "insert into orders(o_name, o_tel, o_address, o_time) values (?, ?, ?, now());";
+		String query = "insert into orders(o_name, o_tel, o_address, o_time, shopcode) values (?, ?, ?, now(), ?);";
 		PreparedStatement pStmt = null;
 
 		try {
@@ -65,6 +66,7 @@ public class OrdersDAO {
 			pStmt.setString(1, oDto.getO_name());
 			pStmt.setString(2, oDto.getO_tel());
 			pStmt.setString(3, oDto.getO_address());
+			pStmt.setString(4, oDto.getShopcode());
 
 			pStmt.executeUpdate();
 
@@ -130,7 +132,6 @@ public class OrdersDAO {
 		}
 	}
 
-	
 	// 운송db에 추가
 	public void insertWaybill(int o_id) {
 		String query = "INSERT INTO waybill(o_id, o_name, o_tel, o_address, w_waycode, o_time) SELECT o_id, o_name, o_tel, o_address, ?, o_time FROM orders WHERE o_id = ?;";
@@ -140,14 +141,14 @@ public class OrdersDAO {
 		String add = address.substring(0, 2);
 		System.out.println(add);
 		String w_waycode = null;
-		
-		if(add.equals("서울") || add.equals("경기")) {
+
+		if (add.equals("서울") || add.equals("경기")) {
 			w_waycode = "a";
-		} else if(add.equals("대전") || add.equals("세종") || add.equals("충청")) {
+		} else if (add.equals("대전") || add.equals("세종") || add.equals("충청")) {
 			w_waycode = "b";
-		} else if(add.equals("광주") || add.equals("전라")) {
+		} else if (add.equals("광주") || add.equals("전라")) {
 			w_waycode = "c";
-		} else if(add.equals("대구") || add.equals("울산") || add.equals("부산") || add.equals("경상")) {
+		} else if (add.equals("대구") || add.equals("울산") || add.equals("부산") || add.equals("경상")) {
 			w_waycode = "d";
 		} else {
 			w_waycode = "e";
@@ -170,7 +171,7 @@ public class OrdersDAO {
 			}
 		}
 	}
-	
+
 	// 운송시간
 	public void updateWaybillTime(OrdersDTO oDto) {
 		String query = "update waybill set w_time=? where o_id=?;";
@@ -205,8 +206,8 @@ public class OrdersDAO {
 			}
 		}
 	}
-	
-	//nowaybill의 운송시간
+
+	// nowaybill의 운송시간
 	public void updateWaybillTime(NoWaybillDTO nwDto) {
 		String query = "update waybill set w_time=? where o_id=?;";
 		PreparedStatement pStmt = null;
@@ -240,8 +241,7 @@ public class OrdersDAO {
 			}
 		}
 	}
-	
-	
+
 	// 운송처리위한 현재시간 변환
 	public static Date currentTime(String day) {
 		SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
@@ -251,7 +251,7 @@ public class OrdersDAO {
 
 		if (day.equals("day"))
 			time1 += " 09:00";
-		else if(day.equals("night"))
+		else if (day.equals("night"))
 			time1 += " 18:00";
 		else
 			time1 += " 10:00";
@@ -288,28 +288,27 @@ public class OrdersDAO {
 
 		return time;
 	}
-	
+
 	// 일단위 검색(문자열시간 분빼고 변환)
-		public Date selectTime(String o_time) {
-			SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
-			Date time = null;
-			try {
-				time = format1.parse(o_time);
-			} catch (ParseException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-
-			return time;
-		}
-		
-		// 일단위 검색(시간형식 문자열로 변환)
-		public String selecttimechangeString(Date time) {
-			SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
-			String str = format1.format(time);
-			return str;
+	public Date selectTime(String o_time) {
+		SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
+		Date time = null;
+		try {
+			time = format1.parse(o_time);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 
+		return time;
+	}
+
+	// 일단위 검색(시간형식 문자열로 변환)
+	public String selecttimechangeString(Date time) {
+		SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
+		String str = format1.format(time);
+		return str;
+	}
 
 	// 첨부추가한 주문내역
 	public List<OrdersDTO> selectUpload(int count) {
@@ -453,8 +452,7 @@ public class OrdersDAO {
 		}
 		return oDto.getO_id();
 	}
-	
-	
+
 	// 상품개수
 	public int selectQuentity(int p_id) {
 		String query = "select p_quantity from product where p_id = ?";
@@ -565,60 +563,417 @@ public class OrdersDAO {
 			return false;
 		}
 	}
+<<<<<<< Updated upstream
 	
-		
-		// 배송코드 찾기
-				public String selectAddress(int o_id) {
-					String query = "select o_address from orders where o_id=?;";
-					PreparedStatement pStmt = null;
-					OrdersDTO oDto = new OrdersDTO();
+=======
 
-					try {
-						pStmt = conn.prepareStatement(query);
-						pStmt.setInt(1, o_id);
-						ResultSet rs = pStmt.executeQuery();
+	// 오늘 하루
+	public List<OrdersDTO> selectToDay(int page) {
+		int offset = 0;
+		String sql = null;
+		if (page == 0) {
+			sql = "select o.o_id, o.o_name, o.o_tel, o.o_address, date_format(o.o_time, '%Y-%m-%d %H:%i'), count(*) '주문수' \r\n"
+					+ "from orders as o inner join orders_detail as d on o.o_id = d.o_id where date_format(o.o_time,'%Y-%m-%d') = current_date group by o.o_id  order by o.o_id desc;";
+		} else {
+			sql = "select o.o_id, o.o_name, o.o_tel, o.o_address, date_format(o.o_time, '%Y-%m-%d %H:%i'), count(*) '주문수' \r\n"
+					+ "from orders as o inner join orders_detail as d on o.o_id = d.o_id where date_format(o.o_time,'%Y-%m-%d') = current_date group by o.o_id  order by o.o_id desc limit ?, 10;";
+			offset = (page - 1) * 10;
+		}
+		PreparedStatement pStmt = null;
+		List<OrdersDTO> list = new ArrayList<OrdersDTO>();
 
-						while (rs.next()) {
-							oDto.setO_address(rs.getString(1));
-						}
+		try {
+			pStmt = conn.prepareStatement(sql);
+			if (page != 0)
+				pStmt.setInt(1, offset);
+			ResultSet rs = pStmt.executeQuery();
 
-					} catch (Exception e) {
-						e.printStackTrace();
-					} finally {
-						try {
-							if (pStmt != null && !pStmt.isClosed())
-								pStmt.close();
-						} catch (SQLException se) {
-							se.printStackTrace();
-						}
-					}
-					return oDto.getO_address();
-				}
-
-		// 기간설정
-		public List<OrdersDTO> selectTime(String date1, String date2) {
-			String sql = "select o.o_id, o.o_name, o.o_tel, o.o_address, date_format(o.o_time, '%Y-%m-%d %H:%i'), count(*) '주문수' \r\n" + 
-					"from orders as o inner join orders_detail as d on o.o_id = d.o_id where o.o_time between ?  and ?  group by o.o_id  order by o.o_id desc;";
-			PreparedStatement pStmt = null;
-			List<OrdersDTO> list = new ArrayList<OrdersDTO>();
-			System.out.println(date1 + " " + date2);
-
+			while (rs.next()) {
+				OrdersDTO oDto = new OrdersDTO();
+				oDto.setO_id(rs.getInt(1));
+				oDto.setO_name(rs.getString(2));
+				oDto.setO_tel(rs.getString(3));
+				oDto.setO_address(rs.getString(4));
+				oDto.setO_time(rs.getString(5));
+				oDto.setCount(rs.getInt(6));
+				System.out.println(oDto.toString());
+				list.add(oDto);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
 			try {
-				pStmt = conn.prepareStatement(sql);
-				pStmt.setString(1, date1);
-				pStmt.setString(2, date2);
+				if (pStmt != null && !pStmt.isClosed())
+					pStmt.close();
+			} catch (SQLException se) {
+				se.printStackTrace();
+			}
+		}
+		return list;
+	}
+
+	// 24시간전
+	public List<OrdersDTO> selectDay(int page) {
+		int offset = 0;
+		String sql = null;
+		if (page == 0) {
+			sql = "select o.o_id, o.o_name, o.o_tel, o.o_address, date_format(o.o_time, '%Y-%m-%d %H:%i'), count(*) '주문수' \r\n"
+					+ "from orders as o inner join orders_detail as d on o.o_id = d.o_id where o.o_time >= date_sub(now(), interval 1 day) group by o.o_id  order by o.o_id desc;";
+		} else {
+			sql = "select o.o_id, o.o_name, o.o_tel, o.o_address, date_format(o.o_time, '%Y-%m-%d %H:%i'), count(*) '주문수' \r\n"
+					+ "from orders as o inner join orders_detail as d on o.o_id = d.o_id where o.o_time >= date_sub(now(), interval 1 day) group by o.o_id  order by o.o_id desc limit ?, 10;";
+			offset = (page - 1) * 10;
+		}
+		PreparedStatement pStmt = null;
+		List<OrdersDTO> list = new ArrayList<OrdersDTO>();
+
+		try {
+			pStmt = conn.prepareStatement(sql);
+			if (page != 0)
+				pStmt.setInt(1, offset);
+			ResultSet rs = pStmt.executeQuery();
+
+			while (rs.next()) {
+				OrdersDTO oDto = new OrdersDTO();
+				oDto.setO_id(rs.getInt(1));
+				oDto.setO_name(rs.getString(2));
+				oDto.setO_tel(rs.getString(3));
+				oDto.setO_address(rs.getString(4));
+				oDto.setO_time(rs.getString(5));
+				oDto.setCount(rs.getInt(6));
+				System.out.println(oDto.toString());
+				list.add(oDto);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (pStmt != null && !pStmt.isClosed())
+					pStmt.close();
+			} catch (SQLException se) {
+				se.printStackTrace();
+			}
+		}
+		return list;
+	}
+
+	// 지난 1주일
+	public List<OrdersDTO> selectWeek(int page) {
+		int offset = 0;
+		String sql = null;
+		if (page == 0) {
+			sql = "select o.o_id, o.o_name, o.o_tel, o.o_address, date_format(o.o_time, '%Y-%m-%d %H:%i'), count(*) '주문수' \r\n"
+					+ "from orders as o inner join orders_detail as d on o.o_id = d.o_id where o.o_time >= date_sub(now(), interval -1 week) group by o.o_id  order by o.o_id desc;";
+		} else {
+			sql = "select o.o_id, o.o_name, o.o_tel, o.o_address, date_format(o.o_time, '%Y-%m-%d %H:%i'), count(*) '주문수' \r\n"
+					+ "from orders as o inner join orders_detail as d on o.o_id = d.o_id where o.o_time >= date_sub(now(), interval -1 week) group by o.o_id  order by o.o_id desc limit ?, 10;";
+			offset = (page - 1) * 10;
+		}
+		PreparedStatement pStmt = null;
+		List<OrdersDTO> list = new ArrayList<OrdersDTO>();
+
+		try {
+			pStmt = conn.prepareStatement(sql);
+			if (page != 0)
+				pStmt.setInt(1, offset);
+			ResultSet rs = pStmt.executeQuery();
+
+			while (rs.next()) {
+				OrdersDTO oDto = new OrdersDTO();
+				oDto.setO_id(rs.getInt(1));
+				oDto.setO_name(rs.getString(2));
+				oDto.setO_tel(rs.getString(3));
+				oDto.setO_address(rs.getString(4));
+				oDto.setO_time(rs.getString(5));
+				oDto.setCount(rs.getInt(6));
+				System.out.println(oDto.toString());
+				list.add(oDto);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (pStmt != null && !pStmt.isClosed())
+					pStmt.close();
+			} catch (SQLException se) {
+				se.printStackTrace();
+			}
+		}
+		return list;
+	}
+
+	// 지난 1달
+	public List<OrdersDTO> selectMonth(int page) {
+		int offset = 0;
+		String sql = null;
+		if (page == 0) {
+			sql = "select o.o_id, o.o_name, o.o_tel, o.o_address, date_format(o.o_time, '%Y-%m-%d %H:%i'), count(*) '주문수' \r\n"
+					+ "from orders as o inner join orders_detail as d on o.o_id = d.o_id where o.o_time >= date_sub(now(), interval -1 month) group by o.o_id  order by o.o_id desc;";
+		} else {
+			sql = "select o.o_id, o.o_name, o.o_tel, o.o_address, date_format(o.o_time, '%Y-%m-%d %H:%i'), count(*) '주문수' \r\n"
+					+ "from orders as o inner join orders_detail as d on o.o_id = d.o_id where o.o_time >= date_sub(now(), interval -1 month) group by o.o_id  order by o.o_id desc limit ?, 10;";
+			offset = (page - 1) * 10;
+		}
+		PreparedStatement pStmt = null;
+		List<OrdersDTO> list = new ArrayList<OrdersDTO>();
+
+		try {
+			pStmt = conn.prepareStatement(sql);
+			if (page != 0)
+				pStmt.setInt(1, offset);
+			ResultSet rs = pStmt.executeQuery();
+
+			while (rs.next()) {
+				OrdersDTO oDto = new OrdersDTO();
+				oDto.setO_id(rs.getInt(1));
+				oDto.setO_name(rs.getString(2));
+				oDto.setO_tel(rs.getString(3));
+				oDto.setO_address(rs.getString(4));
+				oDto.setO_time(rs.getString(5));
+				oDto.setCount(rs.getInt(6));
+				System.out.println(oDto.toString());
+				list.add(oDto);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (pStmt != null && !pStmt.isClosed())
+					pStmt.close();
+			} catch (SQLException se) {
+				se.printStackTrace();
+			}
+		}
+		return list;
+	}
+
+	// 지난 1년
+	public List<OrdersDTO> selectYear(int page) {
+		int offset = 0;
+		String sql = null;
+		if (page == 0) {
+			sql = "select o.o_id, o.o_name, o.o_tel, o.o_address, date_format(o.o_time, '%Y-%m-%d %H:%i'), count(*) '주문수' \r\n"
+					+ "from orders as o inner join orders_detail as d on o.o_id = d.o_id where o.o_time >= date_sub(now(), interval -1 year) group by o.o_id  order by o.o_id desc;";
+		} else {
+			sql = "select o.o_id, o.o_name, o.o_tel, o.o_address, date_format(o.o_time, '%Y-%m-%d %H:%i'), count(*) '주문수' \r\n"
+					+ "from orders as o inner join orders_detail as d on o.o_id = d.o_id where o.o_time >= date_sub(now(), interval -1 year) group by o.o_id  order by o.o_id desc limit ?, 10;";
+			offset = (page - 1) * 10;
+		}
+		PreparedStatement pStmt = null;
+		List<OrdersDTO> list = new ArrayList<OrdersDTO>();
+
+		try {
+			pStmt = conn.prepareStatement(sql);
+			if (page != 0)
+				pStmt.setInt(1, offset);
+			ResultSet rs = pStmt.executeQuery();
+
+			while (rs.next()) {
+				OrdersDTO oDto = new OrdersDTO();
+				oDto.setO_id(rs.getInt(1));
+				oDto.setO_name(rs.getString(2));
+				oDto.setO_tel(rs.getString(3));
+				oDto.setO_address(rs.getString(4));
+				oDto.setO_time(rs.getString(5));
+				oDto.setCount(rs.getInt(6));
+				System.out.println(oDto.toString());
+				list.add(oDto);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (pStmt != null && !pStmt.isClosed())
+					pStmt.close();
+			} catch (SQLException se) {
+				se.printStackTrace();
+			}
+		}
+		return list;
+	}
+
+	// 배송코드 찾기
+	public String selectAddress(int o_id) {
+		String query = "select o_address from orders where o_id=?;";
+		PreparedStatement pStmt = null;
+		OrdersDTO oDto = new OrdersDTO();
+
+		try {
+			pStmt = conn.prepareStatement(query);
+			pStmt.setInt(1, o_id);
+			ResultSet rs = pStmt.executeQuery();
+
+			while (rs.next()) {
+				oDto.setO_address(rs.getString(1));
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (pStmt != null && !pStmt.isClosed())
+					pStmt.close();
+			} catch (SQLException se) {
+				se.printStackTrace();
+			}
+		}
+		return oDto.getO_address();
+	}
+
+	// 기간설정
+	public List<OrdersDTO> selectTime(String date1, String date2) {
+		String sql = "select o.o_id, o.o_name, o.o_tel, o.o_address, date_format(o.o_time, '%Y-%m-%d %H:%i'), count(*) '주문수' \r\n"
+				+ "from orders as o inner join orders_detail as d on o.o_id = d.o_id where o.o_time between ?  and ?  group by o.o_id  order by o.o_id desc;";
+		PreparedStatement pStmt = null;
+		List<OrdersDTO> list = new ArrayList<OrdersDTO>();
+		System.out.println(date1 + " " + date2);
+
+		try {
+			pStmt = conn.prepareStatement(sql);
+			pStmt.setString(1, date1);
+			pStmt.setString(2, date2);
+			ResultSet rs = pStmt.executeQuery();
+
+			while (rs.next()) {
+				OrdersDTO oDto = new OrdersDTO();
+				oDto.setO_id(rs.getInt(1));
+				oDto.setO_name(rs.getString(2));
+				oDto.setO_tel(rs.getString(3));
+				oDto.setO_address(rs.getString(4));
+				oDto.setO_time(rs.getString(5));
+				oDto.setCount(rs.getInt(6));
+				System.out.println("기간설정" + oDto.toString());
+				list.add(oDto);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (pStmt != null && !pStmt.isClosed())
+					pStmt.close();
+			} catch (SQLException se) {
+				se.printStackTrace();
+			}
+		}
+		return list;
+	}
+
+	public int getorderCount(String o_time) {
+		String query = "select count(*) from orders where o_time like ?;";
+		PreparedStatement pStmt = null;
+		int count = 0;
+		try {
+			pStmt = conn.prepareStatement(query);
+			o_time = o_time + "%";
+			pStmt.setString(1, o_time);
+			ResultSet rs = pStmt.executeQuery();
+			while (rs.next()) {
+				count = rs.getInt(1);
+			}
+			rs.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (pStmt != null && !pStmt.isClosed())
+					pStmt.close();
+			} catch (SQLException se) {
+				se.printStackTrace();
+			}
+		}
+		return count;
+	}
+	// 쇼핑몰 대금청구 목록
+	public List<OrdersDTO> selectShop() {
+		String query = "select shopcode, date_format(o_time, '%Y-%m-%d %H:%i'), total, shippay from orders group by o_time;";
+		PreparedStatement pStmt = null;
+		List<OrdersDTO> list = new ArrayList<OrdersDTO>();
+		
+		try {
+			pStmt = conn.prepareStatement(query);
+
+			ResultSet rs = pStmt.executeQuery();
+
+			while (rs.next()) {
+				OrdersDTO oDto = new OrdersDTO();
+				oDto.setShopcode(rs.getString(1));
+				oDto.setO_time(rs.getString(2));
+				oDto.setTotal(rs.getInt(3));
+				oDto.setShippay(rs.getInt(4));
+				System.out.println(oDto.toString());
+				list.add(oDto);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (pStmt != null && !pStmt.isClosed())
+					pStmt.close();
+			} catch (SQLException se) {
+				se.printStackTrace();
+			}
+		}
+		return list;
+	}
+
+	// 쇼핑몰 대금청구 상세대금목록
+	public List<DetailOrderDTO> selectShopDetail(String o_time) {
+		String query = "select d.p_id, d.p_name, p.p_price, sum(d.o_quantity), p.p_price*sum(d.o_quantity) as '총가격', total from orders_detail as d, product as p, orders as o where d.o_id=o.o_id and d.p_id = p.p_id and o.o_time like ? group by d.p_id;\r\n" + 
+				";";
+		PreparedStatement pStmt = null;
+		List<DetailOrderDTO> list = new ArrayList<DetailOrderDTO>();
+>>>>>>> Stashed changes
+		
+		try {
+			pStmt = conn.prepareStatement(query);		
+			o_time = o_time + "%";
+			pStmt.setString(1, o_time);
+			ResultSet rs = pStmt.executeQuery();
+
+			while (rs.next()) {
+				DetailOrderDTO doDto = new DetailOrderDTO();
+				doDto.setP_id(rs.getInt(1));
+				doDto.setP_name(rs.getString(2));
+				doDto.setP_price(rs.getString(3));
+				doDto.setP_count(rs.getInt(4));
+				doDto.setP_total(rs.getInt(5));
+				doDto.setTotal(rs.getInt(6));
+				System.out.println(doDto.toString());
+				list.add(doDto);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (pStmt != null && !pStmt.isClosed())
+					pStmt.close();
+			} catch (SQLException se) {
+				se.printStackTrace();
+			}
+		}
+		return list;
+	}
+	
+	// 쇼핑몰 별 총액
+		public List<DetailOrderDTO> selectshopTotal() {
+			String query = "select p.p_price*sum(d.o_quantity) as '총가격' from orders_detail as d, product as p, orders as o where d.o_id=o.o_id and d.p_id = p.p_id group by d.p_id;\r\n" + 
+					";";
+			PreparedStatement pStmt = null;
+			List<DetailOrderDTO> list = new ArrayList<DetailOrderDTO>();
+			
+			try {
+				pStmt = conn.prepareStatement(query);
+
 				ResultSet rs = pStmt.executeQuery();
 
 				while (rs.next()) {
-					OrdersDTO oDto = new OrdersDTO();
-					oDto.setO_id(rs.getInt(1));
-					oDto.setO_name(rs.getString(2));
-					oDto.setO_tel(rs.getString(3));
-					oDto.setO_address(rs.getString(4));
-					oDto.setO_time(rs.getString(5));
-					oDto.setCount(rs.getInt(6));
-					System.out.println("기간설정" + oDto.toString());
-					list.add(oDto);
+					DetailOrderDTO doDto = new DetailOrderDTO();
+					doDto.setP_id(rs.getInt(1));
+					doDto.setP_name(rs.getString(2));
+					doDto.setP_price(rs.getString(3));
+					doDto.setP_count(rs.getInt(4));
+					doDto.setTotal(rs.getInt(5));
+					list.add(doDto);
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -631,8 +986,7 @@ public class OrdersDAO {
 				}
 			}
 			return list;
-		}				
-				
+		}
 	public void close() {
 		try {
 			if (conn != null && !conn.isClosed())

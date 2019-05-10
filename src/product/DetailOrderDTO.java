@@ -5,11 +5,50 @@ public class DetailOrderDTO {
 	private int o_id;
 	private int p_id;
 	private String p_name;
+	private String p_price;
+	private int p_count;
+	private int total;
 	private int o_quantity;
+	private int p_total;
+	
+	
+
+	public int getP_total() {
+		return p_total;
+	}
+
+	public void setP_total(int p_total) {
+		this.p_total = p_total;
+	}
 
 	public DetailOrderDTO() {
 		super();
 	}
+	
+	public int getP_count() {
+		return p_count;
+	}
+
+	public void setP_count(int p_count) {
+		this.p_count = p_count;
+	}
+
+	public int getTotal() {
+		return total;
+	}
+
+	public void setTotal(int total) {
+		this.total = total;
+	}
+
+	public String getP_price() {
+		return p_price;
+	}
+
+	public void setP_price(String p_price) {
+		this.p_price = p_price;
+	}
+
 	public int getD_id() {
 		return d_id;
 	}

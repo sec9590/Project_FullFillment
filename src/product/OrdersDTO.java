@@ -10,7 +10,42 @@ public class OrdersDTO {
 	private int o_quantity;
 	private String o_time;
 	private int count;
+	private String shopcode;
+	private int total;
+	private int shippay;
 	
+	
+	
+	public int getShippay() {
+		return shippay;
+	}
+
+
+	public void setShippay(int shippay) {
+		this.shippay = shippay;
+	}
+
+
+	public int getTotal() {
+		return total;
+	}
+
+
+	public void setTotal(int total) {
+		this.total = total;
+	}
+
+
+	public String getShopcode() {
+		return shopcode;
+	}
+
+
+	public void setShopcode(String shopcode) {
+		this.shopcode = shopcode;
+	}
+
+
 	public OrdersDTO() {
 	}
 	

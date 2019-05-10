@@ -127,25 +127,24 @@ button{
 	                  <table class="table table-hover" >
 	                      <thead>
 	                         <tr>
-	                         	 <th>발주번호</th>
-	                             <th>제품코드</th>
-	                             <th>제품명</th>
-	                             <th>가격</th>
-	                             <th>발주수량</th>
-	                             <th>발주시간</th>
+	                         	 <th>쇼핑몰</th>
+	                             <th>주문시간</th>
+	                             <th>대금청구</th>
+	                             <th>송장청구</th>
+	                             <th>총 대금</th>
 	                         </tr>
 	                     </thead>
 	                     <tbody>
 	                        <tbody>
-									<c:set var="plist" value="${requestScope.orderhistoryList}" />
-									<c:forEach var="product" items="${plist}">
+									<c:set var="slist" value="${requestScope.shopList}" />
+									<c:forEach var="shop" items="${slist}">
 										<tr>
-											<td>${product.b_id}</td>
-											<td>${product.p_id}</td>
-											<td>${product.p_name}</td>
-											<td>${product.p_price}</td>
-											<td>${product.p_quantity}</td>
-											<td>${product.b_time}</td>													
+											<td><a
+												href="OrdersProcServlet?action=shopprofit_detail&shopcode=${shop.shopcode}&o_time=${shop.o_time}">${shop.shopcode}</a></td>
+											<td>${shop.o_time}</td>
+											<td>${shop.total}</td>	
+											<td>${shop.shippay}</td>
+											<td style="color:red; font-weight:bold">${shop.total + shop.shippay}</td>										
 										</tr>
 									</c:forEach>
 								</tbody>
