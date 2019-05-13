@@ -12,12 +12,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-<<<<<<< Updated upstream
-import product.OrdersDAO;
-=======
-import product.BuyingDTO;
-import product.ProductDAO;
->>>>>>> Stashed changes
 
 /**
  * Servlet implementation class OrdersProc
@@ -169,25 +163,7 @@ public class WaybillProc extends HttpServlet {
 			rd = request.getRequestDispatcher("carrier.jsp");
 			rd.forward(request, response);
 			break;
-<<<<<<< Updated upstream
 			
-		// 월단위 운송회사별 운송내역
-		/*case "selectmonth": 
-			wDao = new WaybillDAO();
-			String date = request.getParameter("dateInventory");
-			date = wDao.selecttimechangeString(wDao.selectTime(date));
-			System.out.println(date);
-		
-			wayList = wDao.selectTime();
-			System.out.println("기간설정 달력");
-			request.setAttribute("dateInventory", date);
-			request.setAttribute("orderAllList", wayList);
-			request.setAttribute("pageList", pageList);
-			rd = request.getRequestDispatcher("carrier.jsp");
-			rd.forward(request, response);
-			break;*/
-=======
-
 		// 발주 가격 내역
 		case "shipprofitAll":
 			wDao = new WaybillDAO();
@@ -213,7 +189,6 @@ public class WaybillProc extends HttpServlet {
 			request.setAttribute("shipList_detail", shipProfit_detail);
 			rd = request.getRequestDispatcher("grossprofit_ship_detail.jsp");
 			rd.forward(request, response);
->>>>>>> Stashed changes
 		}
 	}
 

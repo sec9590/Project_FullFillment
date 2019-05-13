@@ -563,10 +563,7 @@ public class OrdersDAO {
 			return false;
 		}
 	}
-<<<<<<< Updated upstream
 
-=======
->>>>>>> Stashed changes
 
 	// 오늘 하루
 	public List<OrdersDTO> selectToDay(int page) {
