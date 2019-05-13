@@ -172,6 +172,7 @@ input[type=submit]{
 					</form>
 					</div>
 				</div>				
+				</div>
 				<!-- Single Product Area -->
 				<div class="col-12 col-sm-6 col-md-12 col-xl-15">
 					<div class="single-product-wrapper">
