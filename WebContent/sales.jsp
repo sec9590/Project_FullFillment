@@ -171,8 +171,7 @@ input[type=submit]{
 					<input type="submit" style="background-color: #fbb810; border: none" value="검색"> 
 					</form>
 					</div>
-				</div>
-				<input type="hidden" value="2019-05" id="monthpicker">
+				</div>				
 				<!-- Single Product Area -->
 				<div class="col-12 col-sm-6 col-md-12 col-xl-15">
 					<div class="single-product-wrapper">

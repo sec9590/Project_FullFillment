@@ -196,15 +196,11 @@ public class WaybillProc extends HttpServlet {
 		case "selectWaybill": 
 			wDao = new WaybillDAO();
 			String date = request.getParameter("dateInventory");
-			date = wDao.selecttimechangeString(wDao.selectTime(date));
 			System.out.println(date);
 			String date1 = date + "-01 00:00";
 			System.out.println(date1);
 			String date2 = date + "-30 23:59";
 			System.out.println(date2);
-
-			date1 = wDao.timechangeString(wDao.compareTime(date1));
-			date2 = wDao.timechangeString(wDao.compareTime(date2));
 			
 			wayList = wDao.selectWaybill(date1, date2);
 			System.out.println("기간설정 달력");
