@@ -363,9 +363,6 @@ public class OrdersProc extends HttpServlet {
 			rd = request.getRequestDispatcher("sales.jsp");
 			rd.forward(request, response);
 			break;
-<<<<<<< Updated upstream
-		
-=======
 
 		// 주문내역 기간별
 		case "timehistory":
@@ -431,7 +428,6 @@ public class OrdersProc extends HttpServlet {
 				break;
 			}
 			break;
->>>>>>> Stashed changes
 
 		// 발주내역
 		case "orderhistory":
@@ -516,34 +512,7 @@ public class OrdersProc extends HttpServlet {
 			pDao.close();
 			break;
 
-		// 기간설정 달력
-<<<<<<< Updated upstream
-		case "selecttime":		// 일단위 상품별 주문 내역
-			if (!request.getParameter("page").equals("")) {
-				curPage = Integer.parseInt(request.getParameter("page"));
-			}
-			oDao = new OrdersDAO();
-			pagecount = oDao.getCount();
-			if (pagecount == 0) // 데이터가 없을 때 대비
-				pagecount = 1;
-			pageNo = (int) Math.ceil(pagecount / 10.0);
-			if (curPage > pageNo) // 경계선에 걸렸을 때 대비
-				curPage--;
-			session.setAttribute("currentMemberPage", curPage);
-			// 리스트 페이지의 하단 페이지 데이터 만들어 주기
-			page = null;
-			page = "<a href=#>&laquo;</a>&nbsp;";
-			pageList.add(page);
-			for (int i = 1; i <= pageNo; i++) {
-				page = "&nbsp;<a href=OrdersProcServlet?action=selecttime&page=" + i + ">" + i
-						+ "</a>&nbsp;";
-				pageList.add(page);
-			}
-			page = "&nbsp;<a href=#>&raquo;</a>";
-			pageList.add(page);
-=======
 		case "selecttime": // 일단위 상품별 주문 내역
->>>>>>> Stashed changes
 			oDao = new OrdersDAO();
 			String date = request.getParameter("dateInventory");
 			date = oDao.selecttimechangeString(oDao.selectTime(date));
@@ -553,13 +522,8 @@ public class OrdersProc extends HttpServlet {
 			String date2 = date + " 23:59";
 
 			date1 = oDao.timechangeString(oDao.compareTime(date1));
-
 			date2 = oDao.timechangeString(oDao.compareTime(date2));
-<<<<<<< Updated upstream
 		
-=======
-
->>>>>>> Stashed changes
 			orderAll = oDao.selectTime(date1, date2);
 			System.out.println("기간설정 달력");
 			request.setAttribute("dateInventory", date);

@@ -10,33 +10,57 @@
     <link rel="icon" href="img/core-img/favicon.ico">
 
     <!-- Core Style CSS -->
-    <link rel="stylesheet" href="css/core-style.css">
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="<c:url value="/webjars/jquery-ui/1.11.4/jquery-ui.min.css"/>" type="text/css"/>
-
-	<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-	<script src="<c:url value="/webjars/jquery/2.2.1/jquery.min.js"/>"></script>
-	<script src="<c:url value="/webjars/jquery-ui/1.11.4/jquery-ui.min.js"/>"></script>
-	<script src="<c:url value="/resources/js/jquery.mtz.monthpicker.js"/>"></script>
+    <link rel="stylesheet" type="text/css" href="css/core-style.css">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<link rel="stylesheet" type="text/css" href="css/util.css">
+	<link rel="stylesheet" type="text/css" href="css/main.css">
+	
+	
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     
     <script>
-    var currentYear = (new Date()).getFullYear();
-    var startYear = currentYear-10;
-    var options = {
-
-            startYear: startYear,
-
-            finalYear: currentYear,
-
-            pattern: 'yyyy-mm',
-
-            monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월']
-
-    };
-
-    $('#schMonth').monthpicker(options);
-    
-
+    $(function () {
+        //input을 datepicker로 선언
+    	 var datepicker_default = {
+                 closeText: '닫기',
+                 prevText: '이전달',
+                 nextText: '다음달',
+                 currentText: '오늘',
+                 dateFormat: 'yy-mm' //Input Display Format 변경
+                 , showOtherMonths: true //빈 공간에 현재월의 앞뒤월의 날짜를 표시
+                 , showMonthAfterYear: true //년도 먼저 나오고, 뒤에 월 표시
+                 , changeYear: true //콤보박스에서 년 선택 가능
+                 , changeMonth: true //콤보박스에서 월 선택 가능
+                 , buttonImageOnly: true //기본 버튼의 회색 부분을 없애고, 이미지만 보이게 함
+                 , buttonText: "선택" //버튼에 마우스 갖다 댔을 때 표시되는 텍스트
+                 , yearSuffix: "년" //달력의 년도 부분 뒤에 붙는 텍스트
+                 , monthNamesShort: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'] //달력의 월 부분 텍스트
+                 , monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'] //달력의 월 부분 Tooltip 텍스트
+                 , dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'] //달력의 요일 부분 텍스트
+                 , dayNames: ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일'] //달력의 요일 부분 Tooltip 텍스트
+                 , minDate: "-10Y" //최소 선택일자(-1D:하루전, -1M:한달전, -1Y:일년전)
+                 , maxDate: "+1D" //최대 선택일자(+1D:하루후, -1M:한달후, -1Y:일년후)
+                 , showButtonPanel: true
+             };
+  
+             datepicker_default.closeText = "선택";
+             datepicker_default.onClose = function (dateText, inst) {
+                 var month = $("#ui-datepicker-div .ui-datepicker-month :selected").val();
+                 var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
+                 $(this).datepicker("option", "defaultDate", new Date(year, month, 1));
+                 $(this).datepicker('setDate', new Date(year, month, 1));
+             }
+  
+             datepicker_default.beforeShow = function () {
+                 var selectDate = $("#sdate").val().split("-");
+                 var year = Number(selectDate[0]);
+                 var month = Number(selectDate[1]) - 1;
+                 $(this).datepicker("option", "defaultDate", new Date(year, month, 1));
+             }
+             $("#sdate").datepicker(datepicker_default);
+    });
 
     </script>
     <style>
@@ -56,6 +80,10 @@
 		text-decoration: none;
 }
 </style>
+<style> 
+table.ui-datepicker-calendar { display:none; }
+</style>
+
 </head>
 <body>
  <!-- ##### Main Content Wrapper Start ##### -->
@@ -102,12 +130,15 @@
         
        <div class="amado_product_area section-padding-100 clearfix" style="margin:auto">
 	    <div class="row">
+	    <div style="width:100%; position:relative;">
 	     <h4><span style="color:#fbb810; font-weight:bold">${memberName}</span>님 운송내역</h4>
-			<br>
-			<form action="WaybillProcServlet?action=carrierlist&field=${memberField}" method="post">
-					<input type="text" id="schMonth" name="dateInventory" value="#" style="border-bottom:1px solid #cccccc;">
+				<div style="float:right; padding-bottom:10px;">
+					<form action="OrdersProcServlet?action=selecttime&page=1" method="post" autocomplete=off>
+					<input type="text" id="sdate" name="dateInventory" value="#" style="border-bottom:1px solid #cccccc;">
 					<input type="submit" style="background-color: #fbb810; border: none" value="검색"> 
 					</form>
+				</div>
+		</div>	
 	        <!-- Single Product Area -->
 	        <div class="col-12 col-sm-6 col-md-12 col-xl-15">
 	            <div class="single-product-wrapper">
@@ -163,14 +194,7 @@
 
     <!-- ##### jQuery (Necessary for All JavaScript Plugins) ##### -->
     <!-- Popper js -->
-    <script src="js/popper.min.js"></script>
-    <!-- Bootstrap js -->
-    <script src="js/bootstrap.min.js"></script>
-    <!-- Plugins js -->
-    <script src="js/plugins.js"></script>
-    <!-- Active js -->
-    <script src="js/active.js"></script>
-        
+
         
 </body>
 </html>

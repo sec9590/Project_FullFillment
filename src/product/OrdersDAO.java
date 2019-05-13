@@ -563,9 +563,7 @@ public class OrdersDAO {
 			return false;
 		}
 	}
-<<<<<<< Updated upstream
-	
-=======
+
 
 	// 오늘 하루
 	public List<OrdersDTO> selectToDay(int page) {
@@ -922,7 +920,6 @@ public class OrdersDAO {
 				";";
 		PreparedStatement pStmt = null;
 		List<DetailOrderDTO> list = new ArrayList<DetailOrderDTO>();
->>>>>>> Stashed changes
 		
 		try {
 			pStmt = conn.prepareStatement(query);		

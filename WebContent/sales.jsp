@@ -172,6 +172,10 @@ input[type=submit]{
 					</form>
 					</div>
 				</div>
+				<div for="" id="choice=work-month" class="form-control">
+					<span id="txt-work-month">2019년5월</span>
+				</div>
+				<input type="hidden" value="2019-05" id="monthpicker">
 				<!-- Single Product Area -->
 				<div class="col-12 col-sm-6 col-md-12 col-xl-15">
 					<div class="single-product-wrapper">
