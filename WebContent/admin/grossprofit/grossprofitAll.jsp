@@ -1,6 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8" import="java.util.*, member.*, product.*, waybill.*"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"
+	import="java.util.*, member.*, product.*, waybill.*"%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -13,14 +15,14 @@
 <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
 <!-- Title  -->
-<title>Yellow Container : grossprofit_buying</title>
+<title>Yellow Container : grossprofitAll</title>
 
 <!-- Favicon  -->
 <link rel="icon" href="img/core-img/favicon.ico">
 
 <!-- Core Style CSS -->
-<link rel="stylesheet" type="text/css" href="css/core-style.css">
-<link rel="stylesheet" type="text/css" href="css/style.css">
+<link rel="stylesheet" href="css/core-style.css">
+<link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" type="text/css" href="css/util.css">
 <link rel="stylesheet" type="text/css" href="css/main.css">
 
@@ -85,7 +87,20 @@ button {
 button:hover {
 	background-color: #333333;
 }
+input[type=submit]{
+			background-color: #fbb810;
+			-moz-border-radius: 15px;
+			-webkit-border-radius: 15px;
+			border-radius: 15px;
+			cursor: pointer;
+			color: #ffffff;
+			font-family: Arial;
+			font-weight: bold;
+			font-size:13px;
+			padding: 5px 10px;
+			text-decoration: none;
 </style>
+
 </head>
 
 <body>
@@ -118,56 +133,65 @@ button:hover {
 		</div>
 		<!-- Amado Nav --> <nav class="amado-nav">
 		<li><a href="index.jsp">HOME</a></li>
-            <li><a href="OrdersProcServlet?action=productlist">재고내역</a></li>
-            <li><a href="order.jsp">주문하기</a></li>
-            <li><a href="OrdersProcServlet?action=orderAll&page=1">주문내역</a></li>
-            <li><a href="OrdersProcServlet?action=orderhistoryall">발주내역</a></li>
-            <li><a href="WaybillProcServlet?action=waybilllist&page=1">운송내역</a></li>
-            <li><a href="WaybillProcServlet?action=nowaybilllist">미운송내역</a></li>
-            <li class="active"><a href="grossprofitAll.jsp">매출 총 이익</a></li>
+		<li><a href="OrdersProcServlet?action=productlist">재고내역</a></li>
+		<li><a href="admin/order/order.jsp">주문하기</a></li>
+		<li><a href="OrdersProcServlet?action=orderAll&page=1">주문내역</a></li>
+		<li><a href="OrdersProcServlet?action=orderhistoryall">발주내역</a></li>
+		<li><a href="WaybillProcServlet?action=waybilllist&page=1">운송내역</a></li>
+		<li><a href="WaybillProcServlet?action=nowaybilllist">미운송내역</a></li>
+		<li class="active"><a href="OrdersProcServlet?action=grossprofit">매출 총 이익</a></li>
 		</nav> </header>
 		<!-- Header Area End -->
 
 		<div class="amado_product_area section-padding-100">
 			<div class="row">
-				<h4>구매처 대금청구</h4>
-				<br>
-
+				<div style="width:100%; position:relative;">
+					<h4>매출 총 이익</h4>
+					<br>
+					<div align="left" style="position:relative;">
+						<button type="button"
+							onclick="location.href='OrdersProcServlet?action=shopprofit'">쇼핑몰</button>
+						<button type="button"
+							onclick="location.href='OrdersProcServlet?action=buyingprofitAll'">구매처</button>
+						<button type="button"
+							onclick="location.href='WaybillProcServlet?action=shipprofitAll'">운송회사</button>
+					
+				</div>
 				<!-- Single Product Area -->
 				<div class="col-12 col-sm-6 col-md-12 col-xl-15">
 					<div class="single-product-wrapper">
 						<table class="table table-hover">
 							<thead>
 								<tr>
-									<th>구매처</th>
-									<th>발주시간</th>
-									<th>총 가격</th>							
+									<th>항목</th>
+									<th>금액</th>
 								</tr>
 							</thead>
-							<tbody>							
-								<c:set var="blist" value="${requestScope.buyingProfit}" />
-								<c:set var = "total" value = "0" />
-								<c:forEach var="buying" items="${blist}">
-									<tr>
-										<td><a
-											href="OrdersProcServlet?action=buyingprofit_detail&buycode=${buying.buycode}&b_name=${buying.b_name}&b_time=${buying.b_time}">${buying.b_name}</a></td>
-										<td>${buying.b_time}</td>
-										<td style="color: red; font-weight: bold">${buying.total}</td>										
-									<c:set var= "total" value="${total + buying.total}"/>
-									</tr>
-								</c:forEach>					
+							<tbody>
+								<tr>
+									<td>쇼핑몰 (+)</td>
+									<td style="color:blue">${requestScope.shoptotal}</td>
+								</tr>
+								<tr>
+									<td>구매처 (-)</td>
+									<td style="color:red">${requestScope.buyingtotal}</td>
+								</tr>
+								<tr>
+									<td>운송 (-)</td>
+									<td style="color:red">${requestScope.shiptotal}</td>
+								</tr>
+								<tr class="success">
+									<td>총 이익</td>
+									<c:set var= "total" value="${requestScope.shoptotal - requestScope.buyingtotal - requestScope.shiptotal}"/>					
+									<td style="font-weight:bold">${total}</td>
+								</tr>
 							</tbody>
 						</table>
-						<br><br>
-						<div align=center>
-							<h5 style="font-weight:bold;">총 합계 : <span style="color:red; font-weight:bold"><c:out value="${total}"/></span></h5>
-						</div>	
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-
 	<!-- ##### Main Content Wrapper End ##### -->
 
 	<!-- ##### Footer Area Start ##### -->

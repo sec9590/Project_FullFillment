@@ -106,12 +106,12 @@ button{
         <nav class="amado-nav">
         	<li><a href="index.jsp">HOME</a></li>
             <li><a href="OrdersProcServlet?action=productlist">재고내역</a></li>
-            <li><a href="order.jsp">주문하기</a></li>
+            <li><a href="admin/order/order.jsp">주문하기</a></li>
             <li><a href="OrdersProcServlet?action=orderAll&page=1">주문내역</a></li>
             <li class="active"><a href="OrdersProcServlet?action=orderhistoryall">발주내역</a></li>
             <li><a href="WaybillProcServlet?action=waybilllist&page=1">운송내역</a></li>
             <li><a href="WaybillProcServlet?action=nowaybilllist">미운송내역</a></li>
-            <li><a href="grossprofitAll.jsp">매출 총 이익</a></li>
+            <li><a href="OrdersProcServlet?action=grossprofit">매출 총 이익</a></li>
         </nav>
     </header>
     <!-- Header Area End -->

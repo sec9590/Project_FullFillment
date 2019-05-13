@@ -227,7 +227,7 @@ public class OrdersProc extends HttpServlet {
 			}
 
 			msg = "운송처리되었습니다.";
-			url = "order.jsp";
+			url = "admin/order/order.jsp";
 			request.setAttribute("message", msg);
 			request.setAttribute("url", url);
 
@@ -304,7 +304,7 @@ public class OrdersProc extends HttpServlet {
 			request.setAttribute("OrderList", orderList);
 			request.setAttribute("count", num);
 			System.out.println(num);
-			rd = request.getRequestDispatcher("order.jsp");
+			rd = request.getRequestDispatcher("admin/order/order.jsp");
 			rd.forward(request, response);
 			break;
 
@@ -321,7 +321,7 @@ public class OrdersProc extends HttpServlet {
 			request.setAttribute("id", id);
 			request.setAttribute("name", name);
 			request.setAttribute("detailorderList", detailorderList);
-			rd = request.getRequestDispatcher("detail.jsp");
+			rd = request.getRequestDispatcher("admin/order/detail.jsp");
 			rd.forward(request, response);
 			break;
 
@@ -331,7 +331,7 @@ public class OrdersProc extends HttpServlet {
 			pDto = new ProductDTO();
 			List<ProductDTO> productList = pDao.selectAll();
 			request.setAttribute("ProductList", productList);
-			rd = request.getRequestDispatcher("commodity.jsp");
+			rd = request.getRequestDispatcher("admin/commodity.jsp");
 			rd.forward(request, response);
 			break;
 
@@ -362,7 +362,7 @@ public class OrdersProc extends HttpServlet {
 			orderAll = oDao.selectOrderAll(curPage);
 			request.setAttribute("orderAllList", orderAll);
 			request.setAttribute("pageList", pageList);
-			rd = request.getRequestDispatcher("sales.jsp");
+			rd = request.getRequestDispatcher("admin/order/sales.jsp");
 			rd.forward(request, response);
 			break;
 
@@ -438,7 +438,7 @@ public class OrdersProc extends HttpServlet {
 			pDto = new ProductDTO();
 			List<BuyingDTO> orderhistoryList = pDao.selectBuyingAll(code);
 			request.setAttribute("orderhistoryList", orderhistoryList);
-			rd = request.getRequestDispatcher("orderhistory.jsp");
+			rd = request.getRequestDispatcher("admin/buying/orderhistory.jsp");
 			rd.forward(request, response);
 			break;
 
@@ -448,7 +448,7 @@ public class OrdersProc extends HttpServlet {
 			pDto = new ProductDTO();
 			List<BuyingDTO> orderhistoryall = pDao.selectOrderhistoryAll();
 			request.setAttribute("orderhistoryList", orderhistoryall);
-			rd = request.getRequestDispatcher("orderhistoryall.jsp");
+			rd = request.getRequestDispatcher("admin/buying/orderhistoryall.jsp");
 			rd.forward(request, response);
 			break;
 
@@ -473,7 +473,7 @@ public class OrdersProc extends HttpServlet {
 			} else
 				request.setAttribute("buyingList", buyingList);
 
-			rd = request.getRequestDispatcher("buying.jsp");
+			rd = request.getRequestDispatcher("buying/buying.jsp");
 			rd.forward(request, response);
 			break;
 
@@ -484,7 +484,7 @@ public class OrdersProc extends HttpServlet {
 			pDto = new ProductDTO();
 			List<BuyingDTO> buyingall = pDao.selectBuyingAll(field);
 			request.setAttribute("buyingall", buyingall);
-			rd = request.getRequestDispatcher("buyingall.jsp");
+			rd = request.getRequestDispatcher("buying/buyingall.jsp");
 			rd.forward(request, response);
 			break;
 
@@ -531,7 +531,7 @@ public class OrdersProc extends HttpServlet {
 			request.setAttribute("dateInventory", date);
 			request.setAttribute("orderAllList", orderAll);
 			request.setAttribute("pageList", pageList);
-			rd = request.getRequestDispatcher("selecttime.jsp");
+			rd = request.getRequestDispatcher("admin/order/selecttime.jsp");
 			rd.forward(request, response);
 			break;
 
@@ -559,7 +559,7 @@ public class OrdersProc extends HttpServlet {
 			}
 
 			request.setAttribute("shopList", shopList);
-			rd = request.getRequestDispatcher("grossprofit_shop.jsp");
+			rd = request.getRequestDispatcher("admin/grossprofit/grossprofit_shop.jsp");
 			rd.forward(request, response);
 			break;
 
@@ -578,7 +578,7 @@ public class OrdersProc extends HttpServlet {
 			request.setAttribute("shopcode", shopcode);
 			request.setAttribute("shippay", pay);
 			request.setAttribute("shopList_detail", shopList_detail);
-			rd = request.getRequestDispatcher("grossprofit_shop_detail.jsp");
+			rd = request.getRequestDispatcher("admin/grossprofit/grossprofit_shop_detail.jsp");
 			rd.forward(request, response);
 			break;
 
@@ -588,7 +588,7 @@ public class OrdersProc extends HttpServlet {
 			bDto = new BuyingDTO();
 			List<BuyingDTO> buyingProfit = pDao.buyingprofitAll();
 			request.setAttribute("buyingProfit", buyingProfit);
-			rd = request.getRequestDispatcher("grossprofit_buying.jsp");
+			rd = request.getRequestDispatcher("admin/grossprofit/grossprofit_buying.jsp");
 			rd.forward(request, response);
 			break;
 
@@ -604,7 +604,7 @@ public class OrdersProc extends HttpServlet {
 			request.setAttribute("b_name", b_name);
 			request.setAttribute("buycode", buycode);
 			request.setAttribute("buyingList_detail", buyingList_detail);
-			rd = request.getRequestDispatcher("grossprofit_buying_detail.jsp");
+			rd = request.getRequestDispatcher("admin/grossprofit/grossprofit_buying_detail.jsp");
 			rd.forward(request, response);
 			break;
 		
@@ -648,7 +648,7 @@ public class OrdersProc extends HttpServlet {
 			request.setAttribute("shoptotal", shoptotal);
 			request.setAttribute("buyingtotal", buyingtotal);
 			request.setAttribute("shiptotal", shiptotal);
-			rd = request.getRequestDispatcher("grossprofitAll.jsp");
+			rd = request.getRequestDispatcher("admin/grossprofit/grossprofitAll.jsp");
 			rd.forward(request, response);
 			
 		}

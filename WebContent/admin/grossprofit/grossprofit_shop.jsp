@@ -1,6 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="java.util.*, member.*, product.*, waybill.*"%>
-     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" import="java.util.*, member.*, product.*, waybill.*"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
    
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -12,14 +13,14 @@
     <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
     <!-- Title  -->
-    <title>Yellow Container : shippinghistory</title>
+    <title>Yellow Container : grossprofit_shop</title>
 
     <!-- Favicon  -->
     <link rel="icon" href="img/core-img/favicon.ico">
 
     <!-- Core Style CSS -->
-    <link rel="stylesheet" href="css/core-style.css">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/core-style.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
     <link rel="stylesheet" type="text/css" href="css/util.css">
     <link rel="stylesheet" type="text/css" href="css/main.css">
 
@@ -40,8 +41,7 @@
   <!--===============================================================================================-->
     <link rel="stylesheet" type="text/css" href="vendor/daterangepicker/daterangepicker.css">
   <!--===============================================================================================-->
-  
-  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     
@@ -92,7 +92,22 @@
  	<style>
  		h4 { margin-left:15px; margin-bottom:20px; }
  		th, td { text-align:center;}
- 		button{
+ 		/*/[발주버튼]*/
+		.myButton {
+			background-color:#fbb810;
+	-moz-border-radius:42px;
+	-webkit-border-radius:42px;
+	border-radius:42px;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:15px;
+	font-weight : bold;
+	padding:10px 20px;
+	text-decoration:none;	
+		}
+button{
  		 	margin-left:15px; margin-bottom:20px;
  			background-color:#fbb710;
  			color:#fff;
@@ -102,7 +117,7 @@
  		button:hover{
  			background-color:#333333;
  		}
- 		input[type=submit]{
+ 	input[type=submit]{
 			background-color: #fbb810;
 			-moz-border-radius: 15px;
 			-webkit-border-radius: 15px;
@@ -155,86 +170,69 @@
         <nav class="amado-nav">
         	<li><a href="index.jsp">HOME</a></li>
             <li><a href="OrdersProcServlet?action=productlist">재고내역</a></li>
-            <li><a href="order.jsp">주문하기</a></li>
+            <li><a href="admin/order/order.jsp">주문하기</a></li>
             <li><a href="OrdersProcServlet?action=orderAll&page=1">주문내역</a></li>
             <li><a href="OrdersProcServlet?action=orderhistoryall">발주내역</a></li>
-            <li class="active"><a href="WaybillProcServlet?action=waybilllist&page=1">운송내역</a></li>
+            <li><a href="WaybillProcServlet?action=waybilllist&page=1">운송내역</a></li>
             <li><a href="WaybillProcServlet?action=nowaybilllist">미운송내역</a></li>
-            <li><a href="grossprofitAll.jsp">매출 총 이익</a></li>
+            <li class="active"><a href="OrdersProcServlet?action=grossprofit">매출 총 이익</a></li>
         </nav>
     </header>
     <!-- Header Area End -->
 
 	<div class="amado_product_area section-padding-100">
-	    <div class="row">
-	     <div style="width:100%; position:relative;">
-	    	<h4>운송내역</h4>
-	    	<br>
-	    		<div align="left" style="position:relative;">	    			
-		    		<button type="button" onclick="location.href='WaybillProcServlet?action=shipping&add=A'">경기권</button>
-		    		<button type="button" onclick="location.href='WaybillProcServlet?action=shipping&add=B'">충청권</button>
-		    		<button type="button" onclick="location.href='WaybillProcServlet?action=shipping&add=C'">전라권</button>
-		    		<button type="button" onclick="location.href='WaybillProcServlet?action=shipping&add=D'">경상권</button>
-		    		<button type="button" onclick="location.href='WaybillProcServlet?action=shipping&add=E'">강원도</button>
-	    		
-	    		<div style="float:right; padding-bottom:10px; position:relative;">
-					<form action="WaybillProcServlet?action=selectWaybill" method="post" autocomplete=off>
+	    <div class="row">	  
+	    <div style="width:100%; position:relative;"> 
+	     <h4>쇼핑몰 대금청구</h4>
+	     <br>     		
+			<div style="float:right; padding-bottom:10px; position:relative;">
+					<form action="WaybillProcServlet?action=selectShipping" method="post" autocomplete=off>
 					<input type="text" id="sdate" name="dateInventory" value="#" style="border-bottom:1px solid #cccccc;">
 					<input type="submit" style="background-color: #fbb810; border: none" value="검색"> 
 					</form>
-				</div>
-				</div>
-	    </div>
-	    
+			</div>
+			</div>
 	        <!-- Single Product Area -->
 	        <div class="col-12 col-sm-6 col-md-12 col-xl-15">
-	            <div class="single-product-wrapper">
-	                  <table class="table table-hover">
+	                  <table class="table table-hover" >
 	                      <thead>
-	                          <tr>
-	                              <th>송장번호</th>
-	                              <th>주문번호</th>
-	                              <th>수취인</th>
-	                              <th>전화번호</th>
-	                              <th>주소</th>
-	                              <th>주문시간</th>
-	                              <th>배송시간</th>
-	                          </tr>
-	                      </thead>
-                          <tbody>
-                          	<c:set var="wlist" value="${requestScope.wayList}" />
-							<c:forEach var="way" items="${wlist}">
-								<tr height="30">
-									<td>${way.w_id}</td>
-									<td><a
-										href="OrdersProcServlet?action=detail&name=${way.o_name}&id=${way.o_id}">${way.o_id}</a>
-									</td>
-									<td>${way.o_name}</td>
-									<td>${way.o_tel}</td>
-									<td>${way.o_address}</td>
-									<td>${way.o_time}</td>
-									<td>${way.w_time}</td>
-								</tr>
-							</c:forEach>
-                    	</tbody>
-                	</table>
-                	<div align=center>
-						<c:set var="pageList" value="${requestScope.pageList}" />
-						<c:forEach var="pageNo" items="${pageList}">
-							${pageNo}
-						</c:forEach>
-						<br>
-						<br>
-					</div>
-	            </div>
-	    	</div>
-		</div>
-	</div>
-</div>
+	                         <tr>
+	                         	 <th>쇼핑몰</th>
+	                             <th>주문시간</th>
+	                             <th>대금청구</th>
+	                             <th>송장청구</th>
+	                             <th>총 대금</th>
+	                         </tr>
+	                     </thead>
+	                     <tbody>	                       
+									<c:set var="slist" value="${requestScope.shopList}" />
+									<c:set var = "total" value = "0" />
+									<c:forEach var="shop" items="${slist}">
+										<tr>
+											<td><a
+												href="OrdersProcServlet?action=shopprofit_detail&shopcode=${shop.shopcode}&o_time=${shop.o_time}">${shop.shopcode}</a></td>
+											<td>${shop.o_time}</td>
+											<td><fmt:formatNumber value="${shop.total}" pattern="#,###" /></td>	
+											<td><fmt:formatNumber value="${shop.shippay}" pattern="#,###" /></td>
+											<td style="color:red; font-weight:bold"><fmt:formatNumber value="${shop.total + shop.shippay}" pattern="#,###" /></td>										
+										<c:set var= "total" value="${total + shop.total + shop.shippay}"/>
+										</tr>
+									</c:forEach>							
+	                     </tbody>
+	             	</table>       
+	             	<br><br>
+						<div align=center>
+							<h5 style="font-weight:bold;">총 합계 : <span style="color:red; font-weight:bold"><fmt:formatNumber value="${total}" pattern="#,###" /></span></h5>
+						</div>      	                   
+	        	</div>
+	       	</div>
+	    </div>
+   	</div>
+
 <!-- ##### Main Content Wrapper End ##### -->
 
 <!-- ##### Footer Area Start ##### -->
-	<footer class="footer_area clearfix" style="padding:10px; position:absolute; margin-bottom:0; width:100%">
+	<footer class="footer_area clearfix" style="padding:10px; position:absolute; bottom:0; width:100%">
 	<div class="container" style="text-align:center">		
 				<span style="color:white">					
 						Copyright &copy;<script>
@@ -247,13 +245,6 @@
 	</footer>
 	<!-- ##### Footer Area End ##### -->
 
-    <!--===============================================================================================-->
-    <!--===============================================================================================-->
-    <!--===============================================================================================-->
-    <!--===============================================================================================-->
-    <!--===============================================================================================-->
-    <!--===============================================================================================-->
-    <!--===============================================================================================-->
 
     <!-- ##### jQuery (Necessary for All JavaScript Plugins) ##### -->
     <!-- Popper js -->

@@ -1,6 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"
-	import="java.util.*, member.*, product.*, waybill.*"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8" import="java.util.*, member.*, product.*, waybill.*"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 
@@ -15,7 +13,7 @@
 <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
 <!-- Title  -->
-<title>Yellow Container : grossprofit_shop</title>
+<title>Yellow Container : grossprofit_buying</title>
 
 <!-- Favicon  -->
 <link rel="icon" href="img/core-img/favicon.ico">
@@ -121,20 +119,18 @@ button:hover {
 		<!-- Amado Nav --> <nav class="amado-nav">
 		<li><a href="index.jsp">HOME</a></li>
             <li><a href="OrdersProcServlet?action=productlist">재고내역</a></li>
-            <li><a href="order.jsp">주문하기</a></li>
+            <li><a href="admin/order/order.jsp">주문하기</a></li>
             <li><a href="OrdersProcServlet?action=orderAll&page=1">주문내역</a></li>
             <li><a href="OrdersProcServlet?action=orderhistoryall">발주내역</a></li>
             <li><a href="WaybillProcServlet?action=waybilllist&page=1">운송내역</a></li>
             <li><a href="WaybillProcServlet?action=nowaybilllist">미운송내역</a></li>
-            <li class="active"><a href="grossprofitAll.jsp">매출 총 이익</a></li>
+            <li class="active"><a href="OrdersProcServlet?action=grossprofit">매출 총 이익</a></li>
 		</nav> </header>
 		<!-- Header Area End -->
 
 		<div class="amado_product_area section-padding-100">
 			<div class="row">
-				<h4>
-					 <span style="color:#fbb810; font-weight:bold; "> "${requestScope.w_name}" </span> 상세운송내역 
-				</h4>
+				<h4>구매처 대금청구</h4>
 				<br>
 
 				<!-- Single Product Area -->
@@ -143,29 +139,30 @@ button:hover {
 						<table class="table table-hover">
 							<thead>
 								<tr>
-								  <th>송장번호</th>	
-								  <th>주문번호</th>	                              
-	                              <th>수취인</th>
-	                              <th>전화번호</th>
-	                              <th>주소</th>
-	                              <th>주문개수</th>	                          
+									<th>구매처</th>
+									<th>발주시간</th>
+									<th>총 가격</th>							
 								</tr>
 							</thead>
-							<tbody>						
-								<c:set var="slist" value="${requestScope.shipList_detail}" />								
-								<c:forEach var="ship" items="${slist}">
+							<tbody>							
+								<c:set var="blist" value="${requestScope.buyingProfit}" />
+								<c:set var = "total" value = "0" />
+								<c:forEach var="buying" items="${blist}">
 									<tr>
-									<td>${ship.w_id}</td>
-									<td><a href="OrdersProcServlet?action=detail&name=${ship.o_name}&id=${ship.o_id}">${ship.o_id}</a></td>									
-									<td>${ship.o_name}</td>
-									<td>${ship.o_tel}</td>
-									<td>${ship.o_address}</td>							
-									<td>${ship.count}</td>
+										<td><a
+											href="OrdersProcServlet?action=buyingprofit_detail&buycode=${buying.buycode}&b_name=${buying.b_name}&b_time=${buying.b_time}">${buying.b_name}</a></td>
+										<td>${buying.b_time}</td>
+										<td style="color: red; font-weight: bold">${buying.total}</td>										
+									<c:set var= "total" value="${total + buying.total}"/>
 									</tr>
-								</c:forEach>
-							</tbody>					
-						</table>						
-					</div>					
+								</c:forEach>					
+							</tbody>
+						</table>
+						<br><br>
+						<div align=center>
+							<h5 style="font-weight:bold;">총 합계 : <span style="color:red; font-weight:bold"><c:out value="${total}"/></span></h5>
+						</div>	
+					</div>
 				</div>
 			</div>
 		</div>

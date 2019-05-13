@@ -87,7 +87,7 @@ public class WaybillProc extends HttpServlet {
 			wayList = wDao.selectWaybillAll(curPage);
 			request.setAttribute("wayList", wayList);
 			request.setAttribute("pageList", pageList);
-			rd = request.getRequestDispatcher("shippinghistory.jsp");
+			rd = request.getRequestDispatcher("admin/shipping/shippinghistory.jsp");
 			rd.forward(request, response);
 			break;
 
@@ -136,7 +136,7 @@ public class WaybillProc extends HttpServlet {
 			}
 			
 			request.setAttribute("wayList", wayList);
-			rd = request.getRequestDispatcher("shipping.jsp");
+			rd = request.getRequestDispatcher("admin/shipping/shipping.jsp");
 			rd.forward(request, response);
 			break;
 
@@ -152,7 +152,7 @@ public class WaybillProc extends HttpServlet {
 			} else
 				request.setAttribute("nwayList", nwayList);
 
-			rd = request.getRequestDispatcher("noshippinghistory.jsp");
+			rd = request.getRequestDispatcher("admin/shipping/noshippinghistory.jsp");
 			rd.forward(request, response);
 			break;
 
@@ -165,7 +165,7 @@ public class WaybillProc extends HttpServlet {
 			List<WaybillDTO> carrierList = wDao.selectCarrierAll(field);
 			request.setAttribute("carrierList", carrierList);
 			System.out.println("운송회사");
-			rd = request.getRequestDispatcher("carrier.jsp");
+			rd = request.getRequestDispatcher("carrier/carrier.jsp");
 			rd.forward(request, response);
 			break;
 			
@@ -176,7 +176,7 @@ public class WaybillProc extends HttpServlet {
 
 			List<WaybillDTO> shipProfit = wDao.shipprofitAll();
 			request.setAttribute("shipProfit", shipProfit);
-			rd = request.getRequestDispatcher("grossprofit_ship.jsp");
+			rd = request.getRequestDispatcher("admin/grossprofit/grossprofit_ship.jsp");
 			rd.forward(request, response);
 			break;
 			
@@ -192,7 +192,7 @@ public class WaybillProc extends HttpServlet {
 			request.setAttribute("waycode", waycode);
 			request.setAttribute("w_name", w_name);
 			request.setAttribute("shipList_detail", shipProfit_detail);
-			rd = request.getRequestDispatcher("grossprofit_ship_detail.jsp");
+			rd = request.getRequestDispatcher("admin/grossprofit/grossprofit_ship_detail.jsp");
 			rd.forward(request, response);
 			
 		// 운송회사별 월단위 운송 내역	
@@ -209,7 +209,7 @@ public class WaybillProc extends HttpServlet {
 			System.out.println("기간설정 달력");
 			request.setAttribute("dateInventory", date);
 			request.setAttribute("wayList", wayList);
-			rd = request.getRequestDispatcher("carrier_selectTime.jsp");
+			rd = request.getRequestDispatcher("carrier/carrier_selectTime.jsp");
 			rd.forward(request, response);
 			break;
 			
@@ -227,7 +227,7 @@ public class WaybillProc extends HttpServlet {
 			System.out.println("기간설정 달력");
 			request.setAttribute("dateInventory", date);
 			request.setAttribute("wayList", wayList);
-			rd = request.getRequestDispatcher("shipping_selectTime.jsp");
+			rd = request.getRequestDispatcher("admin/shipping/shipping_selectTime.jsp");
 			rd.forward(request, response);
 			break;		
 			

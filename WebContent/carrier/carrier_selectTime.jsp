@@ -124,7 +124,7 @@ table.ui-datepicker-calendar { display:none; }
             <nav class="amado-nav">
                 <ul>
                   <li><a href="index.jsp">HOME</a></li>                 
-                  <li class="active"><a href="carrier.jsp">CARRIER</a></li>  
+                  <li class="active"><a href="carrier/carrier.jsp">CARRIER</a></li>  
                 </ul>
             </nav>        
             </header>        

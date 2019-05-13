@@ -1,9 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"
-	import="java.util.*, member.*, product.*, waybill.*"%>
+<%@ page language="java" contentType="text/html;" pageEncoding="UTF-8"
+	import="java.util.*"%>
+<%@ page import="product.*, member.*, waybill.*"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -15,7 +13,7 @@
 <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
 <!-- Title  -->
-<title>Yellow Container : grossprofit_shop</title>
+<title>Yellow Container : sales</title>
 
 <!-- Favicon  -->
 <link rel="icon" href="img/core-img/favicon.ico">
@@ -50,50 +48,77 @@
 <link rel="stylesheet" type="text/css"
 	href="vendor/daterangepicker/daterangepicker.css">
 <!--===============================================================================================-->
+
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+
+<script>
+// 즉시실행함수
+  $( function() {
+	//달력 옵션 설정
+	$.datepicker.regional['ko'] = {
+		  closeText: '닫기',
+		  prevText: '이전달',
+		  nextText: '다음달',
+		  currentText: '오늘',
+		  monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+		  monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+		  dayNames: ['일','월','화','수','목','금','토'],
+		  dayNamesShort: ['일','월','화','수','목','금','토'],
+		  dayNamesMin: ['일','월','화','수','목','금','토'],
+		  weekHeader: 'Wk',
+		  dateFormat: 'yy-mm-dd',
+		  firstDay: 0,
+		  isRTL: false,
+		  duration:200,
+		  showAnim:'show',
+		  showMonthAfterYear: true,
+		  yearSuffix:'년'
+		 };
+		 
+		 $.datepicker.setDefaults($.datepicker.regional['ko']);
+	
+	// 실질적인 달력생성 부분
+	 $('#schDate').datepicker({
+        changeMonth: false,
+        changeYear: false,
+        defaultDate:$('#schDate').val()
+    });
+	
+  } );
+ </script>
 <style>
 h4 {
 	margin-left: 15px;
 	margin-bottom: 20px;
 }
 
-th, td {
+th {
 	text-align: center;
 }
-/*/[발주버튼]*/
-.myButton {
+input[type=submit]{
 	background-color: #fbb810;
-	-moz-border-radius: 42px;
-	-webkit-border-radius: 42px;
-	border-radius: 42px;
-	display: inline-block;
+	-moz-border-radius: 15px;
+	-webkit-border-radius: 15px;
+	border-radius: 15px;
 	cursor: pointer;
 	color: #ffffff;
 	font-family: Arial;
-	font-size: 15px;
 	font-weight: bold;
-	padding: 10px 20px;
+	font-size:13px;
+	padding: 5px 10px;
 	text-decoration: none;
 }
 
-button {
-	margin-left: 15px;
-	margin-bottom: 20px;
-	background-color: #fbb710;
-	color: #fff;
-	width: 80px;
-	height: 30px;
-}
-
-button:hover {
-	background-color: #333333;
-}
 </style>
 </head>
 
 <body>
-
 	<!-- ##### Main Content Wrapper Start ##### -->
 	<div class="main-content-wrapper d-flex clearfix">
+
 		<!-- Mobile Nav (max width 767px)-->
 		<div class="mobile-nav">
 			<!-- Navbar Brand -->
@@ -104,13 +129,13 @@ button:hover {
 				</div>
 			</div>
 			<!-- Navbar Toggler -->
+			<div class="amado-navbar-toggler">
+				<span></span><span></span><span></span>
+			</div>
 		</div>
 
 		<!-- Header Area Start -->
 		<header class="header-area clearfix"> <!-- Close Icon -->
-		<div class="nav-close">
-			<i class="fa fa-close" aria-hidden="true"></i>
-		</div>
 		<!-- Logo -->
 		<div class="logo">
 			<a href="index.jsp"><img src="img/core-img/logo.png" alt=""></a>
@@ -118,66 +143,69 @@ button:hover {
 				${memberName} <a href="/project02/memberProcServlet?action=logout">로그아웃</a>
 			</div>
 		</div>
-		<!-- Amado Nav --> <nav class="amado-nav">
-		<li><a href="index.jsp">HOME</a></li>
+		<!-- Amado Nav --> 
+		<nav class="amado-nav">
+        	<li><a href="index.jsp">HOME</a></li>
             <li><a href="OrdersProcServlet?action=productlist">재고내역</a></li>
-            <li><a href="order.jsp">주문하기</a></li>
-            <li><a href="OrdersProcServlet?action=orderAll&page=1">주문내역</a></li>
+            <li><a href="admin/order/order.jsp">주문하기</a></li>
+            <li class="active"><a href="OrdersProcServlet?action=orderAll&page=1">주문내역</a></li>
             <li><a href="OrdersProcServlet?action=orderhistoryall">발주내역</a></li>
             <li><a href="WaybillProcServlet?action=waybilllist&page=1">운송내역</a></li>
             <li><a href="WaybillProcServlet?action=nowaybilllist">미운송내역</a></li>
-            <li class="active"><a href="grossprofitAll.jsp">매출 총 이익</a></li>
-		</nav> </header>
+            <li><a href="OrdersProcServlet?action=grossprofit">매출 총 이익</a></li>
+        </nav>
+        </header>
 		<!-- Header Area End -->
 
 		<div class="amado_product_area section-padding-100">
-			<div class="row">
-				<h4>
-					<span style="color:#fbb810; font-weight:bold; "> "${requestScope.shopcode}" </span> 상세대금내역 
-					<span style="font-size:0.8em; font-weight:normal;">(송장개수 : ${requestScope.shippay})</span>
-				</h4>
-				<br>
-
+			<div class="row" >
+			<div style="width:100%; position:relative;">
+				<h4>총 주문내역</h4>
+				
+					<div style="float:right; padding-bottom:10px;">
+					<form action="OrdersProcServlet?action=selecttime&page=1" method="post">
+					<input type="text" id="schDate" name="dateInventory" value="#" style="border-bottom:1px solid #cccccc;">
+					<input type="submit" style="background-color: #fbb810; border: none" value="검색"> 
+					</form>
+					</div>
+				</div>				
 				<!-- Single Product Area -->
-				<div class="col-12 col-sm-6 col-md-12 col-xl-15">
-					<div class="single-product-wrapper">
-						<table class="table table-hover">
+						<table class="table table-hover" >
 							<thead>
 								<tr>
-									<th>상품코드</th>
-									<th>상품이름</th>
-									<th>상품가격</th>
-									<th>상품개수</th>
-									<th>총 가격</th>
-									<th>대금청구액</th>
+									<th>주문번호</th>
+									<th>이름</th>
+									<th>전화번호</th>
+									<th>주소</th>
+									<th>주문개수</th>
+									<th>주문시간</th>
 								</tr>
 							</thead>
-							<tbody>						
-								<c:set var="slist" value="${requestScope.shopList_detail}" />
-								<c:set var = "total" value = "0" />
-								<c:forEach var="shop" items="${slist}">
-									<tr>
-										<td>${shop.p_id}</td>
-										<td>${shop.p_name}</td>
-										<td>${shop.p_price}</td>
-										<td>${shop.p_count}</td>
-										<td style="color:blue">${shop.p_total}</td>
-										<td style="color:red">${shop.total}</td>
-										<c:set var= "total" value="${total + shop.total}"/>
+							<tbody>
+								<c:set var="orderAll" value="${requestScope.orderAllList}" />
+								<c:forEach var="order" items="${orderAll}">
+									<tr height="30">
+										<td style="text-align: center"><a
+											href="OrdersProcServlet?action=detail&name=${order.o_name}&id=${order.o_id}">${order.o_id}</a>
+										</td>
+										<td style="text-align: center">${order.o_name}</td>
+										<td style="text-align: center">${order.o_tel}</td>
+										<td>${order.o_address}</td>
+										<td style="text-align: center">${order.count}</td>
+										<td style="text-align: center">${order.o_time}</td>
 									</tr>
 								</c:forEach>
-							</tbody>					
+							</tbody>
 						</table>
-						<br><br>
 						<div align=center>
-							<h5 style="font-weight:bold;">운송대금 : <span style="color:red;">${requestScope.shippay * 10000}</span>&nbsp;/&nbsp;상품대금 : <span style="color:red;"><c:out value="${total}"/></span></h5>
+							<c:set var="pageList" value="${requestScope.pageList}" />
+							<c:forEach var="pageNo" items="${pageList}">
+								${pageNo}
+							</c:forEach>
 						</div>
-					</div>					
+					</div>
 				</div>
 			</div>
-		</div>
-	</div>
-
 	<!-- ##### Main Content Wrapper End ##### -->
 
 	<!-- ##### Footer Area Start ##### -->
@@ -194,24 +222,15 @@ button:hover {
 	<!-- ##### Footer Area End ##### -->
 
 	<!--===============================================================================================-->
-	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
 	<!--===============================================================================================-->
-	<script src="vendor/animsition/js/animsition.min.js"></script>
 	<!--===============================================================================================-->
-	<script src="vendor/bootstrap/js/popper.js"></script>
-	<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
 	<!--===============================================================================================-->
-	<script src="vendor/select2/select2.min.js"></script>
 	<!--===============================================================================================-->
-	<script src="vendor/daterangepicker/moment.min.js"></script>
-	<script src="vendor/daterangepicker/daterangepicker.js"></script>
 	<!--===============================================================================================-->
-	<script src="vendor/countdowntime/countdowntime.js"></script>
 	<!--===============================================================================================-->
 	<script src="js/main.js"></script>
 
 	<!-- ##### jQuery (Necessary for All JavaScript Plugins) ##### -->
-	<script src="js/jquery/jquery-2.2.4.min.js"></script>
 	<!-- Popper js -->
 	<script src="js/popper.min.js"></script>
 	<!-- Bootstrap js -->
@@ -220,6 +239,6 @@ button:hover {
 	<script src="js/plugins.js"></script>
 	<!-- Active js -->
 	<script src="js/active.js"></script>
+	
 </body>
-
 </html>

@@ -12,7 +12,7 @@
     <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
     <!-- Title  -->
-    <title>Yellow Container : shippinghistory</title>
+    <title>Yellow Container : noshippinghistory</title>
 
     <!-- Favicon  -->
     <link rel="icon" href="img/core-img/favicon.ico">
@@ -40,55 +40,6 @@
   <!--===============================================================================================-->
     <link rel="stylesheet" type="text/css" href="vendor/daterangepicker/daterangepicker.css">
   <!--===============================================================================================-->
-  
-  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    
-    <script>
-    $(function () {
-        //input을 datepicker로 선언
-    	 var datepicker_default = {
-                 closeText: '닫기',
-                 prevText: '이전달',
-                 nextText: '다음달',
-                 currentText: '오늘',
-                 dateFormat: 'yy-MM' //Input Display Format 변경
-                 , showOtherMonths: true //빈 공간에 현재월의 앞뒤월의 날짜를 표시
-                 , showMonthAfterYear: true //년도 먼저 나오고, 뒤에 월 표시
-                 , changeYear: true //콤보박스에서 년 선택 가능
-                 , changeMonth: true //콤보박스에서 월 선택 가능
-                 , buttonImageOnly: true //기본 버튼의 회색 부분을 없애고, 이미지만 보이게 함
-                 , buttonText: "선택" //버튼에 마우스 갖다 댔을 때 표시되는 텍스트
-                 , yearSuffix: "년" //달력의 년도 부분 뒤에 붙는 텍스트
-                 , monthSuffix: "월" //달력의 월 부분 뒤에 붙는 텍스트
-                 , monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'] //달력의 월 부분 텍스트
-                 , monthNames: ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'] //달력의 월 부분 Tooltip 텍스트
-                 , dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'] //달력의 요일 부분 텍스트
-                 , dayNames: ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일'] //달력의 요일 부분 Tooltip 텍스트
-                 , minDate: "-10Y" //최소 선택일자(-1D:하루전, -1M:한달전, -1Y:일년전)
-                 , maxDate: "+1D" //최대 선택일자(+1D:하루후, -1M:한달후, -1Y:일년후)
-                 , showButtonPanel: true
-             };
-  
-             datepicker_default.closeText = "선택";
-             datepicker_default.onClose = function (dateText, inst) {
-                 var month = $("#ui-datepicker-div .ui-datepicker-month :selected").val();
-                 var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
-                 $(this).datepicker("option", "defaultDate", new Date(year, month, 1));
-                 $(this).datepicker('setDate', new Date(year, month, 1));
-             }
-  
-             datepicker_default.beforeShow = function () {
-                 var selectDate = $("#sdate").val().split("-");
-                 var year = Number(selectDate[0]);
-                 var month = Number(selectDate[1]) - 1;
-                 $(this).datepicker("option", "defaultDate", new Date(year, month, 1));
-             }
-             $("#sdate").datepicker(datepicker_default);
-    });
-
-    </script>
  	<style>
  		h4 { margin-left:15px; margin-bottom:20px; }
  		th, td { text-align:center;}
@@ -102,22 +53,28 @@
  		button:hover{
  			background-color:#333333;
  		}
- 		input[type=submit]{
-			background-color: #fbb810;
-			-moz-border-radius: 15px;
-			-webkit-border-radius: 15px;
-			border-radius: 15px;
-			cursor: pointer;
-			color: #ffffff;
-			font-family: Arial;
-			font-weight: bold;
-			font-size:13px;
-			padding: 5px 10px;
-			text-decoration: none;
+ 		.myButton {
+	background-color:#fbb810;
+	-moz-border-radius:42px;
+	-webkit-border-radius:42px;
+	border-radius:42px;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:15px;
+	font-weight : bold;
+	padding:10px 20px;
+	text-decoration:none;
+}
+.myButton:hover {
+	background-color:#fbb810;
+}
+.myButton:active {
+	position:relative;
+	top:1px;
+}
  	</style>
- 	<style> 
-	table.ui-datepicker-calendar { display:none; }
-	</style>
 </head>
 
 <body>
@@ -155,35 +112,20 @@
         <nav class="amado-nav">
         	<li><a href="index.jsp">HOME</a></li>
             <li><a href="OrdersProcServlet?action=productlist">재고내역</a></li>
-            <li><a href="order.jsp">주문하기</a></li>
+            <li><a href="admin/order/order.jsp">주문하기</a></li>
             <li><a href="OrdersProcServlet?action=orderAll&page=1">주문내역</a></li>
             <li><a href="OrdersProcServlet?action=orderhistoryall">발주내역</a></li>
-            <li class="active"><a href="WaybillProcServlet?action=waybilllist&page=1">운송내역</a></li>
-            <li><a href="WaybillProcServlet?action=nowaybilllist">미운송내역</a></li>
-            <li><a href="grossprofitAll.jsp">매출 총 이익</a></li>
+            <li><a href="WaybillProcServlet?action=waybilllist&page=1">운송내역</a></li>
+            <li class="active"><a href="WaybillProcServlet?action=nowaybilllist">미운송내역</a></li>
+            <li><a href="OrdersProcServlet?action=grossprofit">매출 총 이익</a></li>
         </nav>
     </header>
     <!-- Header Area End -->
 
 	<div class="amado_product_area section-padding-100">
 	    <div class="row">
-	     <div style="width:100%; position:relative;">
-	    	<h4>운송내역</h4>
-	    	<br>
-	    		<div align="left" style="position:relative;">	    			
-		    		<button type="button" onclick="location.href='WaybillProcServlet?action=shipping&add=A'">경기권</button>
-		    		<button type="button" onclick="location.href='WaybillProcServlet?action=shipping&add=B'">충청권</button>
-		    		<button type="button" onclick="location.href='WaybillProcServlet?action=shipping&add=C'">전라권</button>
-		    		<button type="button" onclick="location.href='WaybillProcServlet?action=shipping&add=D'">경상권</button>
-		    		<button type="button" onclick="location.href='WaybillProcServlet?action=shipping&add=E'">강원도</button>
-	    		
-	    		<div style="float:right; padding-bottom:10px; position:relative;">
-					<form action="WaybillProcServlet?action=selectShipping" method="post" autocomplete=off>
-					<input type="text" id="sdate" name="dateInventory" value="#" style="border-bottom:1px solid #cccccc;">
-					<input type="submit" style="background-color: #fbb810; border: none" value="검색"> 
-					</form>
-				</div>
-				</div>
+	     <div>
+	    	<h4>미운송내역</h4>
 	    </div>
 	    
 	        <!-- Single Product Area -->
@@ -192,40 +134,37 @@
 	                  <table class="table table-hover">
 	                      <thead>
 	                          <tr>
-	                              <th>송장번호</th>
 	                              <th>주문번호</th>
 	                              <th>수취인</th>
 	                              <th>전화번호</th>
 	                              <th>주소</th>
 	                              <th>주문시간</th>
-	                              <th>배송시간</th>
 	                          </tr>
 	                      </thead>
                           <tbody>
-                          	<c:set var="wlist" value="${requestScope.wayList}" />
-							<c:forEach var="way" items="${wlist}">
+                          	<c:set var="nwlist" value="${requestScope.nwayList}" />
+							<c:forEach var="nway" items="${nwlist}">
 								<tr height="30">
-									<td>${way.w_id}</td>
 									<td><a
-										href="OrdersProcServlet?action=detail&name=${way.o_name}&id=${way.o_id}">${way.o_id}</a>
+										href="OrdersProcServlet?action=detail&name=${nway.o_name}&id=${nway.o_id}">${nway.o_id}</a>
 									</td>
-									<td>${way.o_name}</td>
-									<td>${way.o_tel}</td>
-									<td>${way.o_address}</td>
-									<td>${way.o_time}</td>
-									<td>${way.w_time}</td>
+									<td>${nway.o_name}</td>
+									<td>${nway.o_tel}</td>
+									<td>${nway.o_address}</td>
+									<td>${nway.o_time}</td>
 								</tr>
 							</c:forEach>
                     	</tbody>
-                	</table>
-                	<div align=center>
-						<c:set var="pageList" value="${requestScope.pageList}" />
-						<c:forEach var="pageNo" items="${pageList}">
-							${pageNo}
-						</c:forEach>
-						<br>
-						<br>
-					</div>
+                	</table>    
+                	<%
+							if(request.getAttribute("nwayList") != null){
+							%>						
+							<div align=center> 	
+                    			<a href="OrdersProcServlet?action=nowaybill" class="myButton">운송신청</a>
+                    		</div> 
+                    		<%
+                    			}
+							%>					
 	            </div>
 	    	</div>
 		</div>
@@ -234,7 +173,7 @@
 <!-- ##### Main Content Wrapper End ##### -->
 
 <!-- ##### Footer Area Start ##### -->
-	<footer class="footer_area clearfix" style="padding:10px; position:absolute; margin-bottom:0; width:100%">
+	<footer class="footer_area clearfix" style="padding:10px; position:absolute; bottom:0; width:100%">
 	<div class="container" style="text-align:center">		
 				<span style="color:white">					
 						Copyright &copy;<script>
@@ -248,14 +187,24 @@
 	<!-- ##### Footer Area End ##### -->
 
     <!--===============================================================================================-->
+    	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
     <!--===============================================================================================-->
+    	<script src="vendor/animsition/js/animsition.min.js"></script>
     <!--===============================================================================================-->
+    	<script src="vendor/bootstrap/js/popper.js"></script>
+    	<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
     <!--===============================================================================================-->
+    	<script src="vendor/select2/select2.min.js"></script>
     <!--===============================================================================================-->
+    	<script src="vendor/daterangepicker/moment.min.js"></script>
+    	<script src="vendor/daterangepicker/daterangepicker.js"></script>
     <!--===============================================================================================-->
+    	<script src="vendor/countdowntime/countdowntime.js"></script>
     <!--===============================================================================================-->
+    	<script src="js/main.js"></script>
 
     <!-- ##### jQuery (Necessary for All JavaScript Plugins) ##### -->
+    <script src="js/jquery/jquery-2.2.4.min.js"></script>
     <!-- Popper js -->
     <script src="js/popper.min.js"></script>
     <!-- Bootstrap js -->
