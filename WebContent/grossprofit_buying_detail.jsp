@@ -133,8 +133,7 @@ button:hover {
 		<div class="amado_product_area section-padding-100">
 			<div class="row">
 				<h4>
-					<span style="color:#fbb810; font-weight:bold; "> "${requestScope.shopcode}" </span> 상세대금내역 
-					<span style="font-size:0.8em; font-weight:normal;">(송장개수 : ${requestScope.shippay})</span>
+					<span style="color:#fbb810; font-weight:bold; "> "${requestScope.b_name}" </span> 상세발주요금내역
 				</h4>
 				<br>
 
@@ -144,34 +143,32 @@ button:hover {
 						<table class="table table-hover">
 							<thead>
 								<tr>
-									<th>상품코드</th>
+									<th>발주번호</th>
 									<th>상품이름</th>
 									<th>상품가격</th>
 									<th>상품개수</th>
 									<th>총 가격</th>
-									<th>대금청구액</th>
 								</tr>
 							</thead>
-							<tbody>						
-								<c:set var="slist" value="${requestScope.shopList_detail}" />
+							<tbody>							
+								<c:set var="blist" value="${requestScope.buyingList_detail}" />
 								<c:set var = "total" value = "0" />
-								<c:forEach var="shop" items="${slist}">
+								<c:forEach var="buying" items="${blist}">
 									<tr>
-										<td>${shop.p_id}</td>
-										<td>${shop.p_name}</td>
-										<td>${shop.p_price}</td>
-										<td>${shop.p_count}</td>
-										<td style="color:blue">${shop.p_total}</td>
-										<td style="color:red">${shop.total}</td>
-										<c:set var= "total" value="${total + shop.total}"/>
+										<td>${buying.b_id}</td>
+										<td>${buying.p_name}</td>
+										<td>${buying.p_price}</td>
+										<td>${buying.p_quantity}</td>										
+										<td style="color:red">${buying.p_price * buying.p_quantity}</td>
+										<c:set var= "total" value="${total + buying.p_price * buying.p_quantity}"/>
 									</tr>
 								</c:forEach>
-							</tbody>					
-						</table>
+							</tbody>
+						</table>			
 						<br><br>
 						<div align=center>
-							<h5 style="font-weight:bold;">운송대금 : <span style="color:red;">${requestScope.shippay * 10000}</span>&nbsp;/&nbsp;상품대금 : <span style="color:red;"><c:out value="${total}"/></span></h5>
-						</div>
+							<h5 style="font-weight:bold;">&nbsp;총 합계 : <span style="color:red; font-weight:bold"><c:out value="${total}"/>&nbsp;</span></h5>
+						</div>			
 					</div>					
 				</div>
 			</div>
@@ -182,7 +179,7 @@ button:hover {
 
 	<!-- ##### Footer Area Start ##### -->
 	<footer class="footer_area clearfix"
-		style="padding:10px; position:absolute; margin-bottom:0; width:100%">
+		style="padding:10px; position:absolute; bottom:0; width:100%">
 	<div class="container" style="text-align: center">
 		<span style="color: white"> Copyright &copy;<script>
 			document.write(new Date().getFullYear());

@@ -12,7 +12,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+<<<<<<< Updated upstream
 import product.OrdersDAO;
+=======
+import product.BuyingDTO;
+import product.ProductDAO;
+>>>>>>> Stashed changes
 
 /**
  * Servlet implementation class OrdersProc
@@ -151,7 +156,7 @@ public class WaybillProc extends HttpServlet {
 			rd = request.getRequestDispatcher("noshippinghistory.jsp");
 			rd.forward(request, response);
 			break;
-			
+
 		// 운송회사에 따른 운송내역
 		case "carrierlist":
 			String field = request.getParameter("field");
@@ -164,6 +169,7 @@ public class WaybillProc extends HttpServlet {
 			rd = request.getRequestDispatcher("carrier.jsp");
 			rd.forward(request, response);
 			break;
+<<<<<<< Updated upstream
 			
 		// 월단위 운송회사별 운송내역
 		/*case "selectmonth": 
@@ -180,6 +186,34 @@ public class WaybillProc extends HttpServlet {
 			rd = request.getRequestDispatcher("carrier.jsp");
 			rd.forward(request, response);
 			break;*/
+=======
+
+		// 발주 가격 내역
+		case "shipprofitAll":
+			wDao = new WaybillDAO();
+			wDto = new WaybillDTO();
+
+			List<WaybillDTO> shipProfit = wDao.shipprofitAll();
+			request.setAttribute("shipProfit", shipProfit);
+			rd = request.getRequestDispatcher("grossprofit_ship.jsp");
+			rd.forward(request, response);
+			break;
+			
+		case "shipprofit_detail":
+			wDao = new WaybillDAO();
+			wDto = new WaybillDTO();
+			
+			String w_time = request.getParameter("w_time");
+			String waycode = request.getParameter("waycode");
+			String w_name = request.getParameter("w_name");
+			
+			List<WaybillDTO> shipProfit_detail = wDao.shipprofit(w_time, waycode);
+			request.setAttribute("waycode", waycode);
+			request.setAttribute("w_name", w_name);
+			request.setAttribute("shipList_detail", shipProfit_detail);
+			rd = request.getRequestDispatcher("grossprofit_ship_detail.jsp");
+			rd.forward(request, response);
+>>>>>>> Stashed changes
 		}
 	}
 

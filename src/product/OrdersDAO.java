@@ -563,7 +563,10 @@ public class OrdersDAO {
 			return false;
 		}
 	}
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
 
 	// 오늘 하루
 	public List<OrdersDTO> selectToDay(int page) {
@@ -856,6 +859,7 @@ public class OrdersDAO {
 		return list;
 	}
 
+	// 쇼핑몰 주문개수
 	public int getorderCount(String o_time) {
 		String query = "select count(*) from orders where o_time like ?;";
 		PreparedStatement pStmt = null;
@@ -881,7 +885,8 @@ public class OrdersDAO {
 		}
 		return count;
 	}
-	// 쇼핑몰 대금청구 목록
+
+	// 쇼핑몰 대금청구 목록	
 	public List<OrdersDTO> selectShop() {
 		String query = "select shopcode, date_format(o_time, '%Y-%m-%d %H:%i'), total, shippay from orders group by o_time;";
 		PreparedStatement pStmt = null;
@@ -952,7 +957,7 @@ public class OrdersDAO {
 	}
 	
 	// 쇼핑몰 별 총액
-		public List<DetailOrderDTO> selectshopTotal() {
+	public List<DetailOrderDTO> selectshopTotal() {
 			String query = "select p.p_price*sum(d.o_quantity) as '총가격' from orders_detail as d, product as p, orders as o where d.o_id=o.o_id and d.p_id = p.p_id group by d.p_id;\r\n" + 
 					";";
 			PreparedStatement pStmt = null;
@@ -984,6 +989,7 @@ public class OrdersDAO {
 			}
 			return list;
 		}
+		
 	public void close() {
 		try {
 			if (conn != null && !conn.isClosed())

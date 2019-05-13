@@ -512,6 +512,7 @@ public class OrdersProc extends HttpServlet {
 			pDao.close();
 			break;
 
+<<<<<<< Updated upstream
 		case "selecttime": // 일단위 상품별 주문 내역
 			oDao = new OrdersDAO();
 			String date = request.getParameter("dateInventory");
@@ -532,20 +533,46 @@ public class OrdersProc extends HttpServlet {
 			rd = request.getRequestDispatcher("selecttime.jsp");
 			rd.forward(request, response);
 			break;
+=======
+		// 기간설정 달력
+		case "selecttime": // 일단위 상품별 주문 내역
+			if (!request.getParameter("page").equals("")) {
+				curPage = Integer.parseInt(request.getParameter("page"));
+			}
+			oDao = new OrdersDAO();
+			pagecount = oDao.getCount();
+			if (pagecount == 0) // 데이터가 없을 때 대비
+				pagecount = 1;
+			pageNo = (int) Math.ceil(pagecount / 10.0);
+			if (curPage > pageNo) // 경계선에 걸렸을 때 대비
+				curPage--;
+			session.setAttribute("currentMemberPage", curPage);
+			// 리스트 페이지의 하단 페이지 데이터 만들어 주기
+			page = null;
+			page = "<a href=#>&laquo;</a>&nbsp;";
+			pageList.add(page);
+			for (int i = 1; i <= pageNo; i++) {
+				page = "&nbsp;<a href=OrdersProcServlet?action=selecttime&page=" + i + ">" + i + "</a>&nbsp;";
+				pageList.add(page);
+			}
+			page = "&nbsp;<a href=#>&raquo;</a>";
+			pageList.add(page);
+>>>>>>> Stashed changes
 
+			// 쇼핑몰 대금청구
 		case "shopprofit":
 			oDao = new OrdersDAO();
-			
+
 			List<OrdersDTO> shopList = oDao.selectShop();
-			
+
 			for (OrdersDTO shop : shopList) {
 				int sum = 0;
 				int shippay = 0;
 				System.out.println("이거" + shop.getO_time());
 				List<DetailOrderDTO> shopList_total = oDao.selectShopDetail(shop.getO_time());
-				
+
 				for (DetailOrderDTO dDto : shopList_total) {
-					sum += (int) (dDto.getP_total() + (dDto.getP_total() * 0.1));					
+					sum += (int) (dDto.getP_total() + (dDto.getP_total() * 0.1));
 				}
 				shop.setTotal(sum);
 				System.out.println(sum);
@@ -553,27 +580,54 @@ public class OrdersProc extends HttpServlet {
 				System.out.println("운송비" + shippay);
 				shop.setShippay(shippay);
 			}
-			
+
 			request.setAttribute("shopList", shopList);
 			rd = request.getRequestDispatcher("grossprofit_shop.jsp");
 			rd.forward(request, response);
 			break;
 
+		// 쇼핑몰 대금상세내역
 		case "shopprofit_detail":
 			oDao = new OrdersDAO();
+			int pay = 0;
 			String o_time = request.getParameter("o_time");
 			String shopcode = request.getParameter("shopcode");
 			List<DetailOrderDTO> shopList_detail = oDao.selectShopDetail(o_time);
-			for(DetailOrderDTO dDto : shopList_detail) {
+			for (DetailOrderDTO dDto : shopList_detail) {
 				int total = (int) (dDto.getP_total() + (dDto.getP_total() * 0.1));
-				dDto.setTotal(total);				
+				dDto.setTotal(total);
+				pay = oDao.getorderCount(o_time);
 			}
 			request.setAttribute("shopcode", shopcode);
+			request.setAttribute("shippay", pay);
 			request.setAttribute("shopList_detail", shopList_detail);
 			rd = request.getRequestDispatcher("grossprofit_shop_detail.jsp");
 			rd.forward(request, response);
 			break;
 
+		// 발주 가격 내역
+		case "buyingprofitAll":
+			pDao = new ProductDAO();
+			bDto = new BuyingDTO();
+			List<BuyingDTO> buyingProfit = pDao.buyingprofitAll();
+			request.setAttribute("buyingProfit", buyingProfit);
+			rd = request.getRequestDispatcher("grossprofit_buying.jsp");
+			rd.forward(request, response);
+			break;
+			
+		case "buyingprofit_detail":
+			pDao = new ProductDAO();
+			bDto = new BuyingDTO();
+			String b_time = request.getParameter("b_time");
+			String buycode = request.getParameter("buycode");
+			String b_name = request.getParameter("b_name");
+			List<BuyingDTO> buyingList_detail = pDao.buyingprofit(b_time, buycode);
+
+			request.setAttribute("b_name", b_name);
+			request.setAttribute("buycode", buycode);
+			request.setAttribute("buyingList_detail", buyingList_detail);
+			rd = request.getRequestDispatcher("grossprofit_buying_detail.jsp");
+			rd.forward(request, response);
 		}
 	}
 }

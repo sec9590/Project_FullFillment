@@ -108,10 +108,10 @@ button{
             <li><a href="OrdersProcServlet?action=productlist">재고내역</a></li>
             <li><a href="order.jsp">주문하기</a></li>
             <li><a href="OrdersProcServlet?action=orderAll&page=1">주문내역</a></li>
-            <li class="active"><a href="OrdersProcServlet?action=orderhistoryall">발주내역</a></li>
+            <li><a href="OrdersProcServlet?action=orderhistoryall">발주내역</a></li>
             <li><a href="WaybillProcServlet?action=waybilllist&page=1">운송내역</a></li>
             <li><a href="WaybillProcServlet?action=nowaybilllist">미운송내역</a></li>
-            <li><a href="grossprofit.jsp">매출 총 이익</a></li>
+            <li class="active"><a href="grossprofitAll.jsp">매출 총 이익</a></li>
         </nav>
     </header>
     <!-- Header Area End -->
@@ -134,9 +134,9 @@ button{
 	                             <th>총 대금</th>
 	                         </tr>
 	                     </thead>
-	                     <tbody>
-	                        <tbody>
+	                     <tbody>	                       
 									<c:set var="slist" value="${requestScope.shopList}" />
+									<c:set var = "total" value = "0" />
 									<c:forEach var="shop" items="${slist}">
 										<tr>
 											<td><a
@@ -145,11 +145,15 @@ button{
 											<td>${shop.total}</td>	
 											<td>${shop.shippay}</td>
 											<td style="color:red; font-weight:bold">${shop.total + shop.shippay}</td>										
+										<c:set var= "total" value="${total + shop.total + shop.shippay}"/>
 										</tr>
-									</c:forEach>
-								</tbody>
+									</c:forEach>							
 	                     </tbody>
-	             	</table>             	                   
+	             	</table>       
+	             	<br><br>
+						<div align=center>
+							<h5 style="font-weight:bold;">총 합계 : <span style="color:red; font-weight:bold"><c:out value="${total}"/></span></h5>
+						</div>      	                   
 	        	</div>
 	       	</div>
 	    </div>

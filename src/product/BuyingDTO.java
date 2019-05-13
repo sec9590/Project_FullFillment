@@ -9,6 +9,9 @@ public class BuyingDTO {
 	private int p_quantity;
 	private String b_time;
 	private String buycode;
+	private int total;
+	private String b_name;
+	
 
 	public BuyingDTO() {
 		super();
@@ -27,6 +30,23 @@ public class BuyingDTO {
 	}
 
 	
+	
+	public String getB_name() {
+		return b_name;
+	}
+
+	public void setB_name(String b_name) {
+		this.b_name = b_name;
+	}
+
+	public int getTotal() {
+		return total;
+	}
+
+	public void setTotal(int total) {
+		this.total = total;
+	}
+
 	public int getB_id() {
 		return b_id;
 	}

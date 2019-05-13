@@ -9,6 +9,8 @@ public class WaybillDTO {
 	private String w_waycode;
 	private String o_time;
 	private String w_time;
+	private int count;
+	private String w_name;
 	
 	public WaybillDTO() {
 	}
@@ -30,6 +32,26 @@ public class WaybillDTO {
 
 
 
+
+
+	public String getW_name() {
+		return w_name;
+	}
+
+
+	public void setW_name(String w_name) {
+		this.w_name = w_name;
+	}
+
+
+	public int getCount() {
+		return count;
+	}
+
+
+	public void setCount(int count) {
+		this.count = count;
+	}
 
 
 	public int getW_id() {

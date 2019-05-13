@@ -1,4 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8" import="java.util.*, member.*, product.*, waybill.*"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"
+	import="java.util.*, member.*, product.*, waybill.*"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 
@@ -13,14 +15,14 @@
 <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
 <!-- Title  -->
-<title>Yellow Container : grossprofit</title>
+<title>Yellow Container : grossprofit_shop</title>
 
 <!-- Favicon  -->
 <link rel="icon" href="img/core-img/favicon.ico">
 
 <!-- Core Style CSS -->
-<link rel="stylesheet" href="css/core-style.css">
-<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" type="text/css" href="css/core-style.css">
+<link rel="stylesheet" type="text/css" href="css/style.css">
 <link rel="stylesheet" type="text/css" href="css/util.css">
 <link rel="stylesheet" type="text/css" href="css/main.css">
 
@@ -118,65 +120,57 @@ button:hover {
 		</div>
 		<!-- Amado Nav --> <nav class="amado-nav">
 		<li><a href="index.jsp">HOME</a></li>
-		<li><a href="OrdersProcServlet?action=productlist">재고내역</a></li>
-		<li><a href="order.jsp">주문하기</a></li>
-		<li><a href="OrdersProcServlet?action=orderAll&page=1">주문내역</a></li>
-		<li><a href="OrdersProcServlet?action=orderhistoryall">발주내역</a></li>
-		<li><a href="WaybillProcServlet?action=waybilllist&page=1">운송내역</a></li>
-		<li><a href="WaybillProcServlet?action=nowaybilllist">미운송내역</a></li>
-		<li class="active"><a href="grossprofit.jsp">매출 총 이익</a></li>
-		
+            <li><a href="OrdersProcServlet?action=productlist">재고내역</a></li>
+            <li><a href="order.jsp">주문하기</a></li>
+            <li><a href="OrdersProcServlet?action=orderAll&page=1">주문내역</a></li>
+            <li><a href="OrdersProcServlet?action=orderhistoryall">발주내역</a></li>
+            <li><a href="WaybillProcServlet?action=waybilllist&page=1">운송내역</a></li>
+            <li><a href="WaybillProcServlet?action=nowaybilllist">미운송내역</a></li>
+            <li class="active"><a href="grossprofitAll.jsp">매출 총 이익</a></li>
 		</nav> </header>
 		<!-- Header Area End -->
 
 		<div class="amado_product_area section-padding-100">
 			<div class="row">
-			<div>
-				<h4>매출 총 이익</h4>
+				<h4>
+					 <span style="color:#fbb810; font-weight:bold; "> "${requestScope.w_name}" </span> 상세운송내역 
+				</h4>
 				<br>
-				<div style="margin-left: 350px;" align=center>
-					<button type="button"
-						onclick="location.href='OrdersProcServlet?action=orderhistory&code=A'">쇼핑몰</button>
-					<button type="button"
-						onclick="location.href='OrdersProcServlet?action=orderhistory&code=B'">구매처</button>
-					<button type="button"
-						onclick="location.href='OrdersProcServlet?action=orderhistory&code=C'">운송회사</button>
-				</div>
-				</div>
+
 				<!-- Single Product Area -->
 				<div class="col-12 col-sm-6 col-md-12 col-xl-15">
 					<div class="single-product-wrapper">
 						<table class="table table-hover">
 							<thead>
 								<tr>
-									<th>항목</th>
-									<th>금액</th>
+								  <th>송장번호</th>	
+								  <th>주문번호</th>	                              
+	                              <th>수취인</th>
+	                              <th>전화번호</th>
+	                              <th>주소</th>
+	                              <th>주문개수</th>	                          
 								</tr>
 							</thead>
-							<tbody>
-								<tr>
-									<td>쇼핑몰 (+)</td>
-									<td></td>
-								</tr>
-								<tr>
-									<td>구매처 (-)</td>
-									<td></td>
-								</tr>
-								<tr>
-									<td>운송 (-)</td>
-									<td></td>
-								</tr>
-								<tr class="success">
-									<td>총 이익</td>
-									<td></td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
+							<tbody>						
+								<c:set var="slist" value="${requestScope.shipList_detail}" />								
+								<c:forEach var="ship" items="${slist}">
+									<tr>
+									<td>${ship.w_id}</td>
+									<td><a href="OrdersProcServlet?action=detail&name=${ship.o_name}&id=${ship.o_id}">${ship.o_id}</a></td>									
+									<td>${ship.o_name}</td>
+									<td>${ship.o_tel}</td>
+									<td>${ship.o_address}</td>							
+									<td>${ship.count}</td>
+									</tr>
+								</c:forEach>
+							</tbody>					
+						</table>						
+					</div>					
 				</div>
 			</div>
 		</div>
 	</div>
+
 	<!-- ##### Main Content Wrapper End ##### -->
 
 	<!-- ##### Footer Area Start ##### -->

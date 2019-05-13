@@ -152,7 +152,7 @@ public class ProductDAO {
 
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(new Date());
-		
+
 		String strDate = format1.format(cal.getTime()) + " 10:00";
 
 		System.out.println(strDate);
@@ -303,6 +303,71 @@ public class ProductDAO {
 				check = false;
 		}
 		return check;
+	}
+
+	// 발주 대금 전체 계산
+	public List<BuyingDTO> buyingprofitAll() {
+		String query = "select m.m_name, b.b_time, sum(b.p_price * b.p_quantity), b.buycode from buying as b, member as m where binary(m.m_field) = binary(b.buycode) group by b.buycode, b.b_time;";
+		PreparedStatement pStmt = null;
+		List<BuyingDTO> list = new ArrayList<BuyingDTO>();
+		try {
+			pStmt = conn.prepareStatement(query);
+			ResultSet rs = pStmt.executeQuery();
+
+			while (rs.next()) {
+				BuyingDTO bDto = new BuyingDTO();
+				bDto.setB_name(rs.getString(1));
+				bDto.setB_time(rs.getString(2).substring(0, 16));
+				bDto.setTotal(rs.getInt(3));
+				bDto.setBuycode(rs.getString(4));
+				list.add(bDto);
+				System.out.println(bDto.toString());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (pStmt != null && !pStmt.isClosed())
+					pStmt.close();
+			} catch (SQLException se) {
+				se.printStackTrace();
+			}
+		}
+		return list;
+	}
+
+	// 발주 상세 대금 내역
+	public List<BuyingDTO> buyingprofit(String b_time, String buycode) {
+		String query = "select b_id, p_name, p_price, p_quantity from buying where buycode=? and b_time like ?;";
+		PreparedStatement pStmt = null;
+		List<BuyingDTO> list = new ArrayList<BuyingDTO>();
+		try {
+			pStmt = conn.prepareStatement(query);
+			pStmt.setString(1, buycode);
+			b_time = b_time + "%";
+			pStmt.setString(2, b_time);
+			ResultSet rs = pStmt.executeQuery();
+
+			while (rs.next()) {
+				BuyingDTO bDto = new BuyingDTO();
+				bDto.setB_id(rs.getInt(1));				
+				bDto.setP_name(rs.getString(2));
+				bDto.setP_price(rs.getString(3));
+				bDto.setP_quantity(rs.getInt(4));
+				list.add(bDto);
+				System.out.println(bDto.toString());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (pStmt != null && !pStmt.isClosed())
+					pStmt.close();
+			} catch (SQLException se) {
+				se.printStackTrace();
+			}
+		}
+		return list;
 	}
 
 	public void close() {

@@ -317,7 +317,7 @@ public class WaybillDAO {
 	}
 	
 	// 운송회사에 따른 운송내역
-		public List<WaybillDTO> selectCarrierAll(String field) {
+	public List<WaybillDTO> selectCarrierAll(String field) {
 			String query = "select * from waybill where w_waycode=?;";
 			PreparedStatement pStmt = null;
 			List<WaybillDTO> list = new ArrayList<WaybillDTO>();
@@ -351,8 +351,75 @@ public class WaybillDAO {
 			}
 			return list;
 		}
-			
 		
+	// 운송회사 전체 대금청구
+	public List<WaybillDTO> shipprofitAll() {
+		String query = "select m.m_name, w.w_time, count(*), w.w_waycode from waybill as w inner join member as m on binary(m.m_field) = binary(w.w_waycode) group by w.w_time, w.w_waycode;";
+		PreparedStatement pStmt = null;
+		List<WaybillDTO> list = new ArrayList<WaybillDTO>();
+		try {
+			pStmt = conn.prepareStatement(query);	
+			ResultSet rs = pStmt.executeQuery();
+
+			while (rs.next()) {
+				WaybillDTO wDto = new WaybillDTO();
+				wDto.setW_name(rs.getString(1));
+				wDto.setW_time(rs.getString(2).substring(0,16));
+				wDto.setCount(rs.getInt(3));
+				wDto.setW_waycode(rs.getString(4));
+				list.add(wDto);
+				System.out.println(wDto.toString());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (pStmt != null && !pStmt.isClosed())
+					pStmt.close();
+			} catch (SQLException se) {
+				se.printStackTrace();
+			}
+		}
+		return list;
+	}
+	
+	public List<WaybillDTO> shipprofit(String w_time, String w_waycode) {
+		String query = "select w.w_id, o.o_id, o.o_name, o.o_tel, o.o_address, count(*) '주문수'\r\n" + 
+				"				from orders as o, waybill as w, orders_detail as d where d.o_id=o.o_id and o.o_id = w.o_id and w.w_waycode=? and w.w_time like ? group by o.o_id;";
+		PreparedStatement pStmt = null;
+		List<WaybillDTO> list = new ArrayList<WaybillDTO>();
+		try {
+			pStmt = conn.prepareStatement(query);	
+			pStmt.setString(1, w_waycode);
+			w_time = w_time + "%";
+			pStmt.setString(2, w_time);
+			ResultSet rs = pStmt.executeQuery();
+
+			while (rs.next()) {
+				WaybillDTO wDto = new WaybillDTO();
+				wDto.setW_id(rs.getInt(1));
+				wDto.setO_id(rs.getInt(2));
+				wDto.setO_name(rs.getString(3));
+				wDto.setO_tel(rs.getString(4));
+				wDto.setO_address(rs.getString(5));
+				wDto.setCount(rs.getInt(6));
+				list.add(wDto);
+				System.out.println(wDto.toString());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (pStmt != null && !pStmt.isClosed())
+					pStmt.close();
+			} catch (SQLException se) {
+				se.printStackTrace();
+			}
+		}
+		return list;
+	}
+		
+	
 	public void close() {
 		try {
 			if (conn != null && !conn.isClosed())

@@ -13,7 +13,7 @@
 <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
 <!-- Title  -->
-<title>Yellow Container : grossprofit</title>
+<title>Yellow Container : grossprofitAll</title>
 
 <!-- Favicon  -->
 <link rel="icon" href="img/core-img/favicon.ico">
@@ -137,9 +137,9 @@ button:hover {
 					<button type="button"
 						onclick="location.href='OrdersProcServlet?action=shopprofit'">쇼핑몰</button>
 					<button type="button"
-						onclick="location.href='OrdersProcServlet?action=orderhistory&code=B'">구매처</button>
+						onclick="location.href='OrdersProcServlet?action=buyingprofitAll'">구매처</button>
 					<button type="button"
-						onclick="location.href='OrdersProcServlet?action=orderhistory&code=C'">운송회사</button>
+						onclick="location.href='WaybillProcServlet?action=shipprofitAll'">운송회사</button>
 				</div>
 					</div>
 				<!-- Single Product Area -->

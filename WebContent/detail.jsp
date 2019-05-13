@@ -118,7 +118,7 @@
             <li><a href="OrdersProcServlet?action=orderhistoryall">발주내역</a></li>
             <li><a href="WaybillProcServlet?action=waybilllist&page=1">운송내역</a></li>
             <li><a href="WaybillProcServlet?action=nowaybilllist">미운송내역</a></li>
-            <li><a href="grossprofit.jsp">매출 총 이익</a></li>
+            <li><a href="grossprofitAll.jsp">매출 총 이익</a></li>
         </nav>
     </header>
 
