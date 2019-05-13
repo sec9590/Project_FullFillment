@@ -132,6 +132,7 @@ table.ui-datepicker-calendar { display:none; }
 	    <div class="row">
 	    <div style="width:100%; position:relative;">
 	     <h4><span style="color:#fbb810; font-weight:bold">${memberName}</span>님 운송내역</h4>
+	     <span style="margin-left:20px;">${dateInventory} 운송내역</span>
 				<div style="float:right; padding-bottom:10px;">
 					<form action="WaybillProcServlet?action=selectWaybill" method="post" autocomplete=off>
 					<input type="text" id="sdate" name="dateInventory" value="#" style="border-bottom:1px solid #cccccc;">
@@ -154,17 +155,17 @@ table.ui-datepicker-calendar { display:none; }
 	                          </tr>
 	                      </thead>
                           <tbody>
-                            <c:set var="clist" value="${requestScope.carrierList}" />
-							<c:forEach var="carr" items="${clist}">
+                            <c:set var="wlist" value="${requestScope.wayList}" />
+							<c:forEach var="way" items="${wlist}">
 								<tr height="30">
-									<td>${carr.w_id}</td>
+									<td>${way.w_id}</td>
 									<td><a
-										href="OrdersProcServlet?action=detail&name=${carr.o_name}&id=${carr.o_id}">${carr.o_id}</a>
+										href="OrdersProcServlet?action=detail&name=${way.o_name}&id=${way.o_id}">${way.o_id}</a>
 									</td>
-									<td>${carr.o_name}</td>
-									<td>${carr.o_tel}</td>
-									<td>${carr.o_address}</td>
-									<td>${carr.w_time}</td>
+									<td>${way.o_name}</td>
+									<td>${way.o_tel}</td>
+									<td>${way.o_address}</td>
+									<td>${way.w_time}</td>
 								</tr>
 							</c:forEach>
                           </tbody>

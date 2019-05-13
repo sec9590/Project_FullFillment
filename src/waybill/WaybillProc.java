@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import product.OrdersDAO;
+
 
 /**
  * Servlet implementation class OrdersProc
@@ -189,6 +191,28 @@ public class WaybillProc extends HttpServlet {
 			request.setAttribute("shipList_detail", shipProfit_detail);
 			rd = request.getRequestDispatcher("grossprofit_ship_detail.jsp");
 			rd.forward(request, response);
+			
+		// 월단위 운송 내역	
+		case "selectWaybill": 
+			wDao = new WaybillDAO();
+			String date = request.getParameter("dateInventory");
+			date = wDao.selecttimechangeString(wDao.selectTime(date));
+			System.out.println(date);
+			String date1 = date + "-01 00:00";
+			System.out.println(date1);
+			String date2 = date + "-30 23:59";
+			System.out.println(date2);
+
+			date1 = wDao.timechangeString(wDao.compareTime(date1));
+			date2 = wDao.timechangeString(wDao.compareTime(date2));
+			
+			wayList = wDao.selectWaybill(date1, date2);
+			System.out.println("기간설정 달력");
+			request.setAttribute("dateInventory", date);
+			request.setAttribute("wayList", wayList);
+			rd = request.getRequestDispatcher("carrier_selectTime.jsp");
+			rd.forward(request, response);
+			break;
 		}
 	}
 

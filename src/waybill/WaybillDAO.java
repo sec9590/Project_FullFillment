@@ -5,7 +5,10 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 
@@ -420,6 +423,83 @@ public class WaybillDAO {
 	}
 		
 	
+	// 월단위 검색(문자열시간 빼고 변환)
+		public Date selectTime(String o_time) {
+			SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM");
+			Date time = null;
+			try {
+				time = format1.parse(o_time);
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+			return time;
+		}
+
+		// 월단위 검색(시간형식 문자열로 변환)
+		public String selecttimechangeString(Date time) {
+			SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM");
+			String str = format1.format(time);
+			return str;
+		}	
+		
+		// 운송회사에 따른 운송내역
+		public List<WaybillDTO> selectWaybill(String date1, String date2) {
+				String query = "select * from waybill where o_time between ? and ?;";
+				PreparedStatement pStmt = null;
+				List<WaybillDTO> list = new ArrayList<WaybillDTO>();
+				System.out.println(date1 + " " + date2);
+				try {
+					pStmt = conn.prepareStatement(query);	
+					pStmt.setString(1, date1);
+					pStmt.setString(2, date2);
+					ResultSet rs = pStmt.executeQuery();
+
+					while (rs.next()) {
+						WaybillDTO wDto = new WaybillDTO();
+						wDto.setW_id(rs.getInt(1));
+						wDto.setO_id(rs.getInt(2));
+						wDto.setO_name(rs.getString(3));
+						wDto.setO_tel(rs.getString(4));
+						wDto.setO_address(rs.getString(5));
+						wDto.setW_waycode(rs.getString(6));
+						wDto.setO_time(rs.getString(7).substring(2,16));
+						wDto.setW_time(rs.getString(8).substring(2,16));
+						list.add(wDto);
+						System.out.println("한달" + wDto.toString());
+					}
+				} catch (Exception e) {
+					e.printStackTrace();
+				} finally {
+					try {
+						if (pStmt != null && !pStmt.isClosed())
+							pStmt.close();
+					} catch (SQLException se) {
+						se.printStackTrace();
+					}
+				}
+				return list;
+			}
+	
+		public Date compareTime(String o_time) {
+			SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+			Date time = null;
+			try {
+				time = format1.parse(o_time);
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return time;
+		}
+		
+		public String timechangeString(Date time) {
+			SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+			String str = format1.format(time);
+			return str;
+		}
+		
 	public void close() {
 		try {
 			if (conn != null && !conn.isClosed())
