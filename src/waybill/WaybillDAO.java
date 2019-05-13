@@ -395,6 +395,7 @@ public class WaybillDAO {
 			pStmt = conn.prepareStatement(query);	
 			pStmt.setString(1, w_waycode);
 			w_time = w_time + "%";
+			System.out.println("운송시간 : " + w_time);
 			pStmt.setString(2, w_time);
 			ResultSet rs = pStmt.executeQuery();
 

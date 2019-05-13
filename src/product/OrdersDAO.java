@@ -84,7 +84,7 @@ public class OrdersDAO {
 
 	// 미운송내역 추가
 	public void insertNoWaybill(int o_id) {
-		String query = "INSERT INTO no_waybill SELECT * FROM orders WHERE o_id = ?;";
+		String query = "INSERT INTO no_waybill(o_id, o_name, o_tel, o_address, o_time) SELECT o_id, o_name, o_tel, o_address, o_time FROM orders WHERE o_id = ?;";
 		PreparedStatement pStmt = null;
 
 		try {

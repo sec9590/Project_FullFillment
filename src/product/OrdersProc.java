@@ -523,7 +523,7 @@ public class OrdersProc extends HttpServlet {
 
 			date1 = oDao.timechangeString(oDao.compareTime(date1));
 			date2 = oDao.timechangeString(oDao.compareTime(date2));
-		
+
 			orderAll = oDao.selectTime(date1, date2);
 			System.out.println("기간설정 달력");
 			request.setAttribute("dateInventory", date);
@@ -533,7 +533,7 @@ public class OrdersProc extends HttpServlet {
 			rd.forward(request, response);
 			break;
 
-			// 쇼핑몰 대금청구
+		// 쇼핑몰 대금청구
 		case "shopprofit":
 			oDao = new OrdersDAO();
 
@@ -588,7 +588,7 @@ public class OrdersProc extends HttpServlet {
 			rd = request.getRequestDispatcher("grossprofit_buying.jsp");
 			rd.forward(request, response);
 			break;
-			
+
 		case "buyingprofit_detail":
 			pDao = new ProductDAO();
 			bDto = new BuyingDTO();
