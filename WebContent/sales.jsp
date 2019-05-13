@@ -136,9 +136,6 @@ input[type=submit]{
 
 		<!-- Header Area Start -->
 		<header class="header-area clearfix"> <!-- Close Icon -->
-		<div class="nav-close">
-			<i class="fa fa-close" aria-hidden="true"></i>
-		</div>
 		<!-- Logo -->
 		<div class="logo">
 			<a href="index.jsp"><img src="img/core-img/logo.png" alt=""></a>
@@ -161,7 +158,7 @@ input[type=submit]{
 		<!-- Header Area End -->
 
 		<div class="amado_product_area section-padding-100">
-			<div class="row">
+			<div class="row" >
 			<div style="width:100%; position:relative;">
 				<h4>총 주문내역</h4>
 				
@@ -172,10 +169,7 @@ input[type=submit]{
 					</form>
 					</div>
 				</div>				
-				</div>
 				<!-- Single Product Area -->
-				<div class="col-12 col-sm-6 col-md-12 col-xl-15">
-					<div class="single-product-wrapper">
 						<table class="table table-hover" >
 							<thead>
 								<tr>
@@ -203,21 +197,15 @@ input[type=submit]{
 								</c:forEach>
 							</tbody>
 						</table>
-						<br>
 						<div align=center>
 							<c:set var="pageList" value="${requestScope.pageList}" />
 							<c:forEach var="pageNo" items="${pageList}">
 								${pageNo}
 							</c:forEach>
-							<br>
-							<br>
 						</div>
 					</div>
 				</div>
 			</div>
-		</div>
-	</div>
-
 	<!-- ##### Main Content Wrapper End ##### -->
 
 	<!-- ##### Footer Area Start ##### -->

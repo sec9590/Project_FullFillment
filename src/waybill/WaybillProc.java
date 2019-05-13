@@ -54,6 +54,9 @@ public class WaybillProc extends HttpServlet {
 		int pagecount = 0;
 		int pageNo = 0;
 		String page = null;
+		String date = null;
+		String date1 = null;
+		String date2 = null;
 
 		List<String> pageList = new ArrayList<String>();
 
@@ -96,6 +99,7 @@ public class WaybillProc extends HttpServlet {
 			String add4 = null;
 			wDao = new WaybillDAO();
 			wDto = new WaybillDTO();
+			System.out.println(add);
 			switch (add) {
 			case "A":
 				add1 = "서울경기";
@@ -130,8 +134,7 @@ public class WaybillProc extends HttpServlet {
 				wayList = wDao.selectAdd1(add2);
 				break;
 			}
-
-			System.out.println("add= " + add);
+			
 			request.setAttribute("wayList", wayList);
 			rd = request.getRequestDispatcher("shipping.jsp");
 			rd.forward(request, response);
@@ -192,14 +195,14 @@ public class WaybillProc extends HttpServlet {
 			rd = request.getRequestDispatcher("grossprofit_ship_detail.jsp");
 			rd.forward(request, response);
 			
-		// 월단위 운송 내역	
+		// 운송회사별 월단위 운송 내역	
 		case "selectWaybill": 
 			wDao = new WaybillDAO();
-			String date = request.getParameter("dateInventory");
+			date = request.getParameter("dateInventory");
 			System.out.println(date);
-			String date1 = date + "-01 00:00";
+			date1 = date + "-01 00:00";
 			System.out.println(date1);
-			String date2 = date + "-30 23:59";
+			date2 = date + "-30 23:59";
 			System.out.println(date2);
 			
 			wayList = wDao.selectWaybill(date1, date2);
@@ -209,6 +212,26 @@ public class WaybillProc extends HttpServlet {
 			rd = request.getRequestDispatcher("carrier_selectTime.jsp");
 			rd.forward(request, response);
 			break;
+			
+		// 관리자 페이지 월단위 운송 내역	
+		case "selectShipping": 
+			wDao = new WaybillDAO();
+			date = request.getParameter("dateInventory");
+			System.out.println(date);
+			date1 = date + "-01 00:00";
+			System.out.println(date1);
+			date2 = date + "-30 23:59";
+			System.out.println(date2);
+			
+			wayList = wDao.selectWaybill(date1, date2);
+			System.out.println("기간설정 달력");
+			request.setAttribute("dateInventory", date);
+			request.setAttribute("wayList", wayList);
+			rd = request.getRequestDispatcher("shipping_selectTime.jsp");
+			rd.forward(request, response);
+			break;		
+			
+		
 		}
 	}
 

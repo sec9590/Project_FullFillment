@@ -424,7 +424,7 @@ public class WaybillDAO {
 	}
 
 	
-	// 운송회사에 따른 운송내역
+	// 운송회사에 따른 운송내역, 관리자 월별 운송내역
 	public List<WaybillDTO> selectWaybill(String date1, String date2) {
 		String query = "select * from waybill where o_time between ? and ?;";
 		PreparedStatement pStmt = null;
