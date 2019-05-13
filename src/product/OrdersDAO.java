@@ -917,8 +917,8 @@ public class OrdersDAO {
 	}
 
 	// 쇼핑몰 대금청구 상세대금목록
-	public List<DetailOrderDTO> selectShopDetail(String o_time) {
-		String query = "select d.p_id, d.p_name, p.p_price, sum(d.o_quantity), p.p_price*sum(d.o_quantity) as '총가격', total from orders_detail as d, product as p, orders as o where d.o_id=o.o_id and d.p_id = p.p_id and o.o_time like ? group by d.p_id;\r\n" + 
+	public List<DetailOrderDTO> selectShopDetail(String o_time, String shopcode) {
+		String query = "select d.p_id, d.p_name, p.p_price, sum(d.o_quantity), p.p_price*sum(d.o_quantity) as '총가격', total from orders_detail as d, product as p, orders as o where d.o_id=o.o_id and d.p_id = p.p_id and o.o_time like ? and o.shopcode = ? group by d.p_id;\r\n" + 
 				";";
 		PreparedStatement pStmt = null;
 		List<DetailOrderDTO> list = new ArrayList<DetailOrderDTO>();
@@ -927,6 +927,7 @@ public class OrdersDAO {
 			pStmt = conn.prepareStatement(query);		
 			o_time = o_time + "%";
 			pStmt.setString(1, o_time);
+			pStmt.setString(2, shopcode);
 			ResultSet rs = pStmt.executeQuery();
 
 			while (rs.next()) {

@@ -81,6 +81,9 @@ public class OrdersProc extends HttpServlet {
 		String day = null;
 		SimpleDateFormat mySdf;
 		Date today;
+		int shoptotal = 0;
+		int buyingtotal = 0;
+		int shiptotal = 0;
 
 		switch (action) {
 		// 파일 다운하고 주문하기
@@ -106,9 +109,8 @@ public class OrdersProc extends HttpServlet {
 			// File file = new File("C:\\Temp\\shopping.csv");
 
 			br = new BufferedReader(new InputStreamReader(new FileInputStream(file), "euc-kr"));
-
-			String filename = multipartRequest.getFilesystemName("file");
-			System.out.println("업로드파일명 : " + filename);
+			System.out.println("원래파일명 : " + multipartRequest.getOriginalFileName("file"));
+			String filename = multipartRequest.getOriginalFileName("file");			
 			filename = filename.replaceAll(filename.substring(filename.length() - 4, filename.length()), "");
 
 			String line = null;
@@ -543,7 +545,7 @@ public class OrdersProc extends HttpServlet {
 				int sum = 0;
 				int shippay = 0;
 				System.out.println("이거" + shop.getO_time());
-				List<DetailOrderDTO> shopList_total = oDao.selectShopDetail(shop.getO_time());
+				List<DetailOrderDTO> shopList_total = oDao.selectShopDetail(shop.getO_time(), shop.getShopcode());
 
 				for (DetailOrderDTO dDto : shopList_total) {
 					sum += (int) (dDto.getP_total() + (dDto.getP_total() * 0.1));
@@ -553,6 +555,7 @@ public class OrdersProc extends HttpServlet {
 				shippay = oDao.getorderCount(shop.getO_time()) * 10000;
 				System.out.println("운송비" + shippay);
 				shop.setShippay(shippay);
+				shoptotal += (sum + shippay);
 			}
 
 			request.setAttribute("shopList", shopList);
@@ -566,7 +569,7 @@ public class OrdersProc extends HttpServlet {
 			int pay = 0;
 			String o_time = request.getParameter("o_time");
 			String shopcode = request.getParameter("shopcode");
-			List<DetailOrderDTO> shopList_detail = oDao.selectShopDetail(o_time);
+			List<DetailOrderDTO> shopList_detail = oDao.selectShopDetail(o_time, shopcode);
 			for (DetailOrderDTO dDto : shopList_detail) {
 				int total = (int) (dDto.getP_total() + (dDto.getP_total() * 0.1));
 				dDto.setTotal(total);
@@ -589,6 +592,7 @@ public class OrdersProc extends HttpServlet {
 			rd.forward(request, response);
 			break;
 
+		// 발주 가격 상세 내역
 		case "buyingprofit_detail":
 			pDao = new ProductDAO();
 			bDto = new BuyingDTO();
@@ -603,6 +607,50 @@ public class OrdersProc extends HttpServlet {
 			rd = request.getRequestDispatcher("grossprofit_buying_detail.jsp");
 			rd.forward(request, response);
 			break;
+		
+		case "grossprofit":
+			oDao = new OrdersDAO();
+
+			List<OrdersDTO> shopListall = oDao.selectShop();
+
+			for (OrdersDTO shop : shopListall) {
+				int sum = 0;
+				int shippay = 0;
+				
+				List<DetailOrderDTO> shopList_total = oDao.selectShopDetail(shop.getO_time(), shop.getShopcode());
+
+				for (DetailOrderDTO dDto : shopList_total) {
+					sum += (int) (dDto.getP_total() + (dDto.getP_total() * 0.1));
+				}
+				shop.setTotal(sum);
+				System.out.println(sum);
+				shippay = oDao.getorderCount(shop.getO_time()) * 10000;
+				System.out.println("운송비" + shippay);
+				shop.setShippay(shippay);
+				shoptotal += (sum + shippay);
+			}
+			
+			pDao = new ProductDAO();
+			bDto = new BuyingDTO();
+			List<BuyingDTO> buyingProfitall = pDao.buyingprofitAll();
+			for(BuyingDTO buydto : buyingProfitall) {
+				buyingtotal += buydto.getTotal();
+			}
+			
+			wDao = new WaybillDAO();
+			wDto = new WaybillDTO();
+
+			List<WaybillDTO> shipProfit = wDao.shipprofitAll();
+			for(WaybillDTO waydto : shipProfit) {
+				shiptotal += waydto.getCount() * 10000;
+			}
+			
+			request.setAttribute("shoptotal", shoptotal);
+			request.setAttribute("buyingtotal", buyingtotal);
+			request.setAttribute("shiptotal", shiptotal);
+			rd = request.getRequestDispatcher("grossprofitAll.jsp");
+			rd.forward(request, response);
+			
 		}
 	}
 }

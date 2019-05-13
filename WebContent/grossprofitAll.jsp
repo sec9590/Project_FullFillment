@@ -1,4 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8" import="java.util.*, member.*, product.*, waybill.*"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"
+	import="java.util.*, member.*, product.*, waybill.*"%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
@@ -124,24 +126,24 @@ button:hover {
 		<li><a href="OrdersProcServlet?action=orderhistoryall">발주내역</a></li>
 		<li><a href="WaybillProcServlet?action=waybilllist&page=1">운송내역</a></li>
 		<li><a href="WaybillProcServlet?action=nowaybilllist">미운송내역</a></li>
-		<li class="active"><a href="grossprofitAll.jsp">매출 총 이익</a></li>
+		<li class="active"><a href="OrdersProcServlet?action=grossprofit">매출 총 이익</a></li>
 		</nav> </header>
 		<!-- Header Area End -->
 
 		<div class="amado_product_area section-padding-100">
 			<div class="row">
-			<div>
-				<h4>매출 총 이익</h4>
-				<br>
-				<div style="margin-left: 350px;">
-					<button type="button"
-						onclick="location.href='OrdersProcServlet?action=shopprofit'">쇼핑몰</button>
-					<button type="button"
-						onclick="location.href='OrdersProcServlet?action=buyingprofitAll'">구매처</button>
-					<button type="button"
-						onclick="location.href='WaybillProcServlet?action=shipprofitAll'">운송회사</button>
-				</div>
+				<div>
+					<h4>매출 총 이익</h4>
+					<br>
+					<div style="margin-left: 450px;">
+						<button type="button"
+							onclick="location.href='OrdersProcServlet?action=shopprofit'">쇼핑몰</button>
+						<button type="button"
+							onclick="location.href='OrdersProcServlet?action=buyingprofitAll'">구매처</button>
+						<button type="button"
+							onclick="location.href='WaybillProcServlet?action=shipprofitAll'">운송회사</button>
 					</div>
+				</div>
 				<!-- Single Product Area -->
 				<div class="col-12 col-sm-6 col-md-12 col-xl-15">
 					<div class="single-product-wrapper">
@@ -155,19 +157,20 @@ button:hover {
 							<tbody>
 								<tr>
 									<td>쇼핑몰 (+)</td>
-									<td></td>
+									<td style="color:blue">${requestScope.shoptotal}</td>
 								</tr>
 								<tr>
 									<td>구매처 (-)</td>
-									<td></td>
+									<td style="color:red">${requestScope.buyingtotal}</td>
 								</tr>
 								<tr>
 									<td>운송 (-)</td>
-									<td></td>
+									<td style="color:red">${requestScope.shiptotal}</td>
 								</tr>
 								<tr class="success">
 									<td>총 이익</td>
-									<td></td>
+									<c:set var= "total" value="${requestScope.shoptotal - requestScope.buyingtotal - requestScope.shiptotal}"/>					
+									<td style="font-weight:bold">${total}</td>
 								</tr>
 							</tbody>
 						</table>
