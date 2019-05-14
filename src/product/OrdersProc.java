@@ -815,29 +815,7 @@ public class OrdersProc extends HttpServlet {
 			rd.forward(request, response);
 			break;	
 			
-			
-		case "shipselectTime": 
-			date = request.getParameter("dateInventory");
-			System.out.println(date);
-			date1 = date + "-01 00:00";
-			System.out.println(date1);
-			date2 = date + "-31 23:59";
-			System.out.println(date2);
-			
-			wDao = new WaybillDAO();
-			wDto = new WaybillDTO();
-
-			shipProfit = wDao.selectShipprofitAll(date1, date2);
-			for(WaybillDTO waydto : shipProfit) {
-				shiptotal += waydto.getCount() * 10000;
-			}
-			
-			System.out.println("운송회사 한달 내역");
-			request.setAttribute("dateInventory", date);
-			request.setAttribute("shipProfit", shipProfit);
-			rd = request.getRequestDispatcher("admin/grossprofit/grossprofit_ship_selectTime.jsp");
-			rd.forward(request, response);
-			break;	
+		
 			
 		}
 	}

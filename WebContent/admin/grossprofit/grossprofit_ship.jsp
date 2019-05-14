@@ -194,9 +194,9 @@ input[type=submit]{
 		<div class="amado_product_area section-padding-100">
 			<div class="row">
 			<div style="width:100%; position:relative;">
-				<h4>운송회사 대금청구</h4>
+				<h4>운송회사 대금지급 내역</h4>
 			<div style="float:right; padding-bottom:10px; position:relative;">
-					<form action="OrdersProcServlet?action=shipselectTime" method="post" autocomplete=off>
+					<form action="WaybillProcServlet?action=shipselectTime" method="post" autocomplete=off>
 					<input type="text" id="sdate" name="dateInventory" value="#" style="border-bottom:1px solid #cccccc;">
 					<input type="submit" style="background-color: #fbb810; border: none" value="검색"> 
 					</form>

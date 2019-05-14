@@ -65,7 +65,7 @@
 
     </script>
     <style>
-	th, td{text-align : center;}
+	th, td{text-align : center; }
 	h4 { margin-left:15px; margin-bottom:20px; } 
 	input[type=submit]{
 		background-color: #fbb810;

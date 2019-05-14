@@ -87,6 +87,7 @@
            	 				}
                    	 		}
                     %>
+                    <li><a href="product_list.jsp">PRODUCT</a></li>
                 </ul>
             </nav>            
         </header>
@@ -483,8 +484,8 @@
                         <!-- Hover Content -->
                         <div class="hover-content">
                             <div class="line"></div>
-                            <p>From 900,000won</p>
-                            <h4>ANTHOR 담요 150x170 다크그</h4>
+                            <p>From 90,000won</p>
+                            <h4>ANTHOR 담요 150x170 다크그레이</h4>
                         </div>
                     </a>
                 </div>

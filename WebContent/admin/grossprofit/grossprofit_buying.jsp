@@ -194,7 +194,7 @@ input[type=submit]{
 		<div class="amado_product_area section-padding-100">
 			<div class="row">
 			<div style="width:100%; position:relative;">
-				<h4>구매처 대금청구</h4>
+				<h4>구매처 대금지급 내역</h4>
 				<div style="float:right; padding-bottom:10px; position:relative;">
 					<form action="OrdersProcServlet?action=buyingselectTime" method="post" autocomplete=off>
 					<input type="text" id="sdate" name="dateInventory" value="#" style="border-bottom:1px solid #cccccc;">
