@@ -3,6 +3,7 @@
 	import="java.util.*, member.*, product.*, waybill.*"%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -170,7 +171,7 @@ input[type=submit]{
 							<tbody>
 								<tr>
 									<td>쇼핑몰 (+)</td>
-									<td style="color:blue">${requestScope.shoptotal}</td>
+									<td style="color:blue"><fmt:formatNumber value="${total}" pattern="#,###" />${requestScope.shoptotal}</td>
 								</tr>
 								<tr>
 									<td>구매처 (-)</td>
