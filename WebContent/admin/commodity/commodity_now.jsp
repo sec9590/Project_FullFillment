@@ -166,7 +166,7 @@ input[type=submit]{
 		<div class="amado_product_area section-padding-100">
 			<div class="row">	
 			<div style="width:100%; position:relative;">		
-				<h4><span style="color:#fbb810; font-weight:bold">${dateInventory }</span> 재고정산</h4>
+				<h4><span style="color:#fbb810; font-weight:bold">이번달</span> 재고정산</h4>
 				<div style="float:right; padding-bottom:10px; position:relative;">
 					<form action="CommodityProcServlet?action=selectCommodity" method="post" autocomplete=off>
 					<input type="text" id="sdate" name="dateInventory" value="#" style="border-bottom:1px solid #cccccc;">

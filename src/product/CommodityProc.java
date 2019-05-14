@@ -70,9 +70,12 @@ public class CommodityProc extends HttpServlet {
 		int in = 0;
 		int basic = 0;
 		int close = 0;
+		String date = null;
+		String date1 = null;
+		String date2 = null;
 
 		switch (action) {
-		// 파일 다운하고 주문하기
+		// 이번달 재고정산
 		case "commodity":
 			cDao = new CommodityDAO();
 	
@@ -86,9 +89,35 @@ public class CommodityProc extends HttpServlet {
 			}
 
 			request.setAttribute("commodityList", cDtoList);
-			rd = request.getRequestDispatcher("admin/commodity/commodity_detail.jsp");
+			rd = request.getRequestDispatcher("admin/commodity/commodity_now.jsp");
 			rd.forward(request, response);
 			break;
+		
+		// 월별 재고정산
+		case "selectCommodity":
+			date = request.getParameter("dateInventory");
+			System.out.println(date);
+			date1 = date + "-01 00:00";
+			System.out.println(date1);
+			date2 = date + "-31 23:59";
+			System.out.println(date2);
+			
+			cDao = new CommodityDAO();
+	
+			cDtoList = cDao.selectcommodityOutTime(date1, date2); // 출고, 기초재고, 상품id
+						
+			for (CommodityDTO coDto : cDtoList) {
+				p_id = coDto.getP_id();
+				coDto.setIn(cDao.selectcommodityIn(p_id));
+				close = coDto.getBasic() + coDto.getIn() - coDto.getOut();
+				coDto.setClose(close);
+			}
+			
+			request.setAttribute("dateInventory", date);
+			request.setAttribute("commodityList", cDtoList);
+			rd = request.getRequestDispatcher("admin/commodity/commodity_detail.jsp");
+			rd.forward(request, response);
+			break;	
 		}
 	}
 

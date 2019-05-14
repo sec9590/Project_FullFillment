@@ -25,9 +25,9 @@ public class CommodityDAO {
 		}
 	}
 
-	// 운송된 상품에서 출고된 상품갯수
+	// 이번달 운송된 상품에서 출고된 상품갯수
 	public List<CommodityDTO> selectcommodityOut() {
-		String query = "select 15, d.p_id, sum(d.o_quantity) from waybill as w , orders_detail as d, orders as o where o.o_id = w.o_id and o.o_id = d.o_id and w.w_time between '2019-05-13' and '2019-05-30' group by d.p_id;";
+		String query = "select 15, d.p_id, sum(d.o_quantity) from waybill as w , orders_detail as d, orders as o where o.o_id = w.o_id and o.o_id = d.o_id and (w.w_time > last_day(now() - interval 1 month) and w.w_time <= last_day(now())) group by d.p_id;";
 		PreparedStatement pStmt = null;
 		List<CommodityDTO> list = new ArrayList<CommodityDTO>();
 
@@ -57,10 +57,44 @@ public class CommodityDAO {
 		}
 		return list;
 	}
+	
+	// 월별 운송된 상품에서 출고된 상품갯수
+		public List<CommodityDTO> selectcommodityOutTime(String date1, String date2) {
+			String query = "select 15, d.p_id, sum(d.o_quantity) from waybill as w , orders_detail as d, orders as o where o.o_id = w.o_id and o.o_id = d.o_id and w.w_time between ? and ? group by d.p_id;";
+			PreparedStatement pStmt = null;
+			List<CommodityDTO> list = new ArrayList<CommodityDTO>();
+
+			try {
+				pStmt = conn.prepareStatement(query);
+				pStmt.setString(1, date1);
+				pStmt.setString(2, date2);
+				ResultSet rs = pStmt.executeQuery();
+
+				while (rs.next()) {
+					CommodityDTO cDto = new CommodityDTO();
+					cDto.setBasic(rs.getInt(1));
+					cDto.setP_id(rs.getInt(2));
+					cDto.setOut(rs.getInt(3));		
+					System.out.println(cDto.toString());
+					list.add(cDto);
+				}
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				try {
+					if (pStmt != null && !pStmt.isClosed())
+						pStmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace();
+				}
+			}
+			return list;
+		}
 
 	// 발주된 상품에서 입고된 상품갯수
 	public int selectcommodityIn(int p_id) {
-		String query = "select sum(p_quantity) from buying where b_time between '2019-05-13' and '2019-05-30' and p_id = ? group by p_id;";
+		String query = "select sum(p_quantity) from buying where w.w_time between ? and ? and p_id = ? group by p_id;";
 		PreparedStatement pStmt = null;
 		BuyingDTO bDto = new BuyingDTO();
 		
