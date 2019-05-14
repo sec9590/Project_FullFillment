@@ -439,7 +439,7 @@ public class OrdersProc extends HttpServlet {
 			}
 			break;
 
-		// 발주내역
+		// 항목별 발주내역
 		case "orderhistory":
 			String code = request.getParameter("code");
 			pDao = new ProductDAO();

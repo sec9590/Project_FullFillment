@@ -163,7 +163,7 @@ input[type=submit]{
 		<div class="amado_product_area section-padding-100">
 			<div class="row">
 			<div style="width:100%; position:relative;">
-				<h4>총 주문내역</h4>
+				<h4>일별 주문내역 (${dateInventory })</h4>
 					<div style="float:right; padding-bottom:10px;">
 					<form action="OrdersProcServlet?action=selecttime&page=1" method="post">
 					<input type="text" id="schDate" name="dateInventory" value="#" style="border-bottom:1px solid #cccccc;">

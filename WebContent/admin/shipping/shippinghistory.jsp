@@ -168,7 +168,7 @@
 	<div class="amado_product_area section-padding-100">
 	    <div class="row">
 	     <div style="width:100%; position:relative;">
-	    	<h4>운송내역</h4>
+	    	<h4>총 운송내역</h4>
 	    	<br>
 	    		<div align="left" style="position:relative;">	    			
 		    		<button type="button" onclick="location.href='WaybillProcServlet?action=shipping&add=A'">경기권</button>
@@ -187,8 +187,6 @@
 	    </div>
 	    
 	        <!-- Single Product Area -->
-	        <div class="col-12 col-sm-6 col-md-12 col-xl-15">
-	            <div class="single-product-wrapper">
 	                  <table class="table table-hover">
 	                      <thead>
 	                          <tr>
@@ -229,8 +227,6 @@
 	            </div>
 	    	</div>
 		</div>
-	</div>
-</div>
 <!-- ##### Main Content Wrapper End ##### -->
 
 <!-- ##### Footer Area Start ##### -->
