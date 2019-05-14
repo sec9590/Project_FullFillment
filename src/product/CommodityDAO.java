@@ -38,9 +38,9 @@ public class CommodityDAO {
 
 			while (rs.next()) {
 				CommodityDTO cDto = new CommodityDTO();
-				cDto.setBasic(rs.getInt(1));
+				cDto.setC_basic(rs.getInt(1));
 				cDto.setP_id(rs.getInt(2));
-				cDto.setOut(rs.getInt(3));		
+				cDto.setC_out(rs.getInt(3));		
 				System.out.println(cDto.toString());
 				list.add(cDto);
 			}
@@ -59,11 +59,11 @@ public class CommodityDAO {
 	}
 	
 	// 월별 운송된 상품에서 출고된 상품갯수
-		public List<CommodityDTO> selectcommodityOutTime(String date1, String date2) {
+	public List<CommodityDTO> selectcommodityOutTime(String date1, String date2) {
 			String query = "select 15, d.p_id, sum(d.o_quantity) from waybill as w , orders_detail as d, orders as o where o.o_id = w.o_id and o.o_id = d.o_id and w.w_time between ? and ? group by d.p_id;";
 			PreparedStatement pStmt = null;
 			List<CommodityDTO> list = new ArrayList<CommodityDTO>();
-
+		
 			try {
 				pStmt = conn.prepareStatement(query);
 				pStmt.setString(1, date1);
@@ -72,9 +72,9 @@ public class CommodityDAO {
 
 				while (rs.next()) {
 					CommodityDTO cDto = new CommodityDTO();
-					cDto.setBasic(rs.getInt(1));
+					cDto.setC_basic(rs.getInt(1));
 					cDto.setP_id(rs.getInt(2));
-					cDto.setOut(rs.getInt(3));		
+					cDto.setC_out(rs.getInt(3));		
 					System.out.println(cDto.toString());
 					list.add(cDto);
 				}
@@ -92,8 +92,8 @@ public class CommodityDAO {
 			return list;
 		}
 
-		// 이번달 발주된 상품에서 입고된 상품갯수
-		public int selectcommodityIn(int p_id) {
+	// 이번달 발주된 상품에서 입고된 상품갯수
+	public int selectcommodityIn(int p_id) {
 			String query = "select sum(p_quantity) from buying where (b_time > last_day(now() - interval 1 month) and b_time <= last_day(now())) and p_id = ? group by p_id;";
 			PreparedStatement pStmt = null;
 			BuyingDTO bDto = new BuyingDTO();
@@ -119,10 +119,68 @@ public class CommodityDAO {
 			}
 			return bDto.getP_quantity();
 		}	
+	
+	//재고내역에 재조정산이 되었는지 확인
+	public String checkmonth(String time) {
+		String query = "select time from commodity where time = ?";
+		PreparedStatement pStmt = null;
+		CommodityDTO cDto = new CommodityDTO();
+		
+		try {
+			pStmt = conn.prepareStatement(query);
+			pStmt.setString(1, time);
+			ResultSet rs = pStmt.executeQuery();
+
+			while (rs.next()) {
+				cDto.setC_time(rs.getString(1));
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (pStmt != null && !pStmt.isClosed())
+					pStmt.close();
+			} catch (SQLException se) {
+				se.printStackTrace();
+			}
+		}
+		return cDto.getC_time();
+	}	
+	
+	public int checkClose(int p_id, String date1, String date2) {
+		String query = "select c_close from commodity where c_time >= date_sub(?, interval 1 month) and c_time <= date_sub(?, interval 1 month) and p_id = ? ";
+		PreparedStatement pStmt = null;
+		CommodityDTO cDto = new CommodityDTO();
+		
+		
+		try {
+			pStmt = conn.prepareStatement(query);
+			pStmt.setString(1, date1);
+			pStmt.setString(2, date2);
+			pStmt.setInt(3, p_id);
+			ResultSet rs = pStmt.executeQuery();
+
+			while (rs.next()) {
+				cDto.setC_close(rs.getInt(1));
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (pStmt != null && !pStmt.isClosed())
+					pStmt.close();
+			} catch (SQLException se) {
+				se.printStackTrace();
+			}
+		}
+		return cDto.getC_close();
+	}	
 		
 	// 발주된 상품에서 입고된 상품갯수
 	public int selectcommodityInTime(String date1, String date2, int p_id) {
-		String query = "select sum(p_quantity) from buying where w.w_time between ? and ? and p_id = ? group by p_id;";
+		String query = "select sum(p_quantity) from buying where b_time between ? and ? and p_id = ? group by p_id;";
 		PreparedStatement pStmt = null;
 		BuyingDTO bDto = new BuyingDTO();
 		
@@ -150,4 +208,40 @@ public class CommodityDAO {
 		return bDto.getP_quantity();
 	}
 
+	// 재고 db삽입
+	public void insertCommodity(CommodityDTO cDto) {
+		String query = "INSERT INTO commodity(p_id, c_basic, c_in, c_out, c_close, c_time) values (?, ?, ?, ?, ?, ?);";
+		PreparedStatement pStmt = null;
+
+		try {
+			pStmt = conn.prepareStatement(query);
+
+			pStmt.setInt(1, cDto.getP_id());
+			pStmt.setInt(2, cDto.getC_basic());
+			pStmt.setInt(3, cDto.getC_in());
+			pStmt.setInt(4, cDto.getC_out());
+			pStmt.setInt(5, cDto.getC_close());
+			pStmt.setString(6, cDto.getC_time());
+
+			pStmt.executeUpdate();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (pStmt != null && !pStmt.isClosed())
+					pStmt.close();
+			} catch (SQLException se) {
+				se.printStackTrace();
+			}
+		}
+	}
+
+	public boolean checkInsert(String date) {
+		if(checkmonth(date)==null) {
+			System.out.println("없다.");
+			return true;
+		}else
+			return false;
+	}
 }

@@ -78,21 +78,21 @@ public class CommodityProc extends HttpServlet {
 		// 이번달 재고정산
 		case "commodity":
 			cDao = new CommodityDAO();
-	
+
 			cDtoList = cDao.selectcommodityOut(); // 출고, 기초재고, 상품id
-						
+
 			for (CommodityDTO coDto : cDtoList) {
 				p_id = coDto.getP_id();
-				coDto.setIn(cDao.selectcommodityIn(p_id));
-				close = coDto.getBasic() + coDto.getIn() - coDto.getOut();
-				coDto.setClose(close);
+				coDto.setC_in(cDao.selectcommodityIn(p_id));
+				close = coDto.getC_basic() + coDto.getC_in() - coDto.getC_out();
+				coDto.setC_close(close);
 			}
 
 			request.setAttribute("commodityList", cDtoList);
 			rd = request.getRequestDispatcher("admin/commodity/commodity_now.jsp");
 			rd.forward(request, response);
 			break;
-		
+
 		// 월별 재고정산
 		case "selectCommodity":
 			date = request.getParameter("dateInventory");
@@ -101,23 +101,73 @@ public class CommodityProc extends HttpServlet {
 			System.out.println(date1);
 			date2 = date + "-31 23:59";
 			System.out.println(date2);
-			
+
 			cDao = new CommodityDAO();
-	
+
 			cDtoList = cDao.selectcommodityOutTime(date1, date2); // 출고, 기초재고, 상품id
-						
 			for (CommodityDTO coDto : cDtoList) {
 				p_id = coDto.getP_id();
-				coDto.setIn(cDao.selectcommodityInTime(date1, date2, p_id));
-				close = coDto.getBasic() + coDto.getIn() - coDto.getOut();
-				coDto.setClose(close);
+				if(!date.equals("2019-04")) {
+					basic = cDao.checkClose(p_id, date1, date2);
+					System.out.println(basic);
+					coDto.setC_basic(basic);
+				}
+				coDto.setC_in(cDao.selectcommodityInTime(date1, date2, p_id));
+				close = coDto.getC_basic() + coDto.getC_in() - coDto.getC_out();
+				coDto.setC_close(close);
 			}
-			
 			request.setAttribute("dateInventory", date);
 			request.setAttribute("commodityList", cDtoList);
 			rd = request.getRequestDispatcher("admin/commodity/commodity_detail.jsp");
 			rd.forward(request, response);
-			break;	
+			break;
+
+		case "commodityDB":
+			date = request.getParameter("date");
+			System.out.println("재고정산 날짜 : " + date);
+			
+			cDao = new CommodityDAO();
+			
+			date1 = date + "-01 00:00";
+			System.out.println(date1);
+			date2 = date + "-31 23:59";
+			System.out.println(date2);
+			boolean finish = false;
+
+			cDtoList = cDao.selectcommodityOutTime(date1, date2); // 출고, 기초재고, 상품id
+
+			if (!cDao.checkInsert(date)) {
+				finish = false;
+			} else {
+				for (CommodityDTO coDto : cDtoList) {
+					finish = true;
+					p_id = coDto.getP_id();
+					coDto.setC_in(cDao.selectcommodityInTime(date1, date2, p_id));
+					close = coDto.getC_basic() + coDto.getC_in() - coDto.getC_out();
+					coDto.setC_close(close);
+					coDto.setC_time(date);
+					cDao.insertCommodity(coDto);
+					System.out.println("재고db" + coDto.toString());
+				}
+			}
+
+			if (finish) {
+				msg = date + " 재고정산을 처리하였습니다.";
+				url = "CommodityProcServlet?action=commodity";
+				request.setAttribute("message", msg);
+				request.setAttribute("url", url);
+				rd = request.getRequestDispatcher("alertMsg.jsp");
+				rd.forward(request, response);
+
+			} else {
+				msg = "재고정산을 이미 처리했습니다.";
+				url = "CommodityProcServlet?action=commodity";
+				request.setAttribute("message", msg);
+				request.setAttribute("url", url);
+				rd = request.getRequestDispatcher("alertMsg.jsp");
+				rd.forward(request, response);
+			}
+			break;
 		}
 	}
 

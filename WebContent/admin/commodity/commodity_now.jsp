@@ -192,10 +192,10 @@ input[type=submit]{
 								<c:forEach var="c" items="${clist}">
 									<tr>
 										<td>${c.p_id}</td>
-										<td>${c.basic}</td>
-										<td>${c.in}</td>
-										<td>${c.out}</td>
-										<td>${c.close}</td>
+										<td>${c.c_basic}</td>
+										<td>${c.c_in}</td>
+										<td>${c.c_out}</td>
+										<td>${c.c_close}</td>
 									</tr>								
 								</c:forEach>
 							</tbody>						

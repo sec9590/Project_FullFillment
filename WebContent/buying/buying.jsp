@@ -100,7 +100,7 @@ th, td {
 
 		<!-- 테이블 -->
 		<div class="single-product-area section-padding-100 clearfix" style="margin: auto">
-			<h4><span style="color:#fbb810; font-weight:bold">${memberName}</span>님 발주요청내역 (${requestScope.yesterday})</h4>
+			<h4><span style="color:#fbb810; font-weight:bold">${memberName}</span>님 발주요청내역 (${requestScope.currentTime})</h4>
 			<br>
 			<div class="container-fluid">
 				<div class="row">

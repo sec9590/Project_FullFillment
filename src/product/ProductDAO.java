@@ -124,7 +124,7 @@ public class ProductDAO {
 		String query = "INSERT INTO buying(p_id, p_name, p_img, p_price, p_quantity, b_time, buycode) SELECT p_id, p_name, p_img, p_price, ?, ?, buycode FROM product WHERE p_id = ?;";
 		PreparedStatement pStmt = null;
 		int quantity = 15 - selectQuentity(p_id);
-		String b_time = currentTime();
+		String b_time = nextday();
 
 		try {
 			pStmt = conn.prepareStatement(query);
@@ -153,22 +153,22 @@ public class ProductDAO {
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(new Date());
 
-		String strDate = format1.format(cal.getTime()) + " 10:00";
+		String strDate = format1.format(cal.getTime());
 
 		System.out.println(strDate);
 
 		return strDate;
 	}
 
-	// 어제 날짜
-	public String yesterday() {
+	// 발주내역시간은 다음날 오전 열시로 처리
+	public String nextday() {
 		SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
 
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(new Date());
-		cal.add(Calendar.DATE, -1);
+		cal.add(Calendar.DATE, +1);
 
-		String strDate = format1.format(cal.getTime());
+		String strDate = format1.format(cal.getTime())  + " 10:00";
 
 		System.out.println(strDate);
 

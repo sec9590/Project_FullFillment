@@ -489,8 +489,8 @@ public class OrdersProc extends HttpServlet {
 				product.setP_quantity(quantity);
 			}
 			System.out.println(buyingList);
-			day = pDao.yesterday();
-			request.setAttribute("yesterday", day);
+			day = pDao.currentTime();
+			request.setAttribute("currentTime", day);
 
 			if (buyingList.size() == 0) {
 				buyingList = null;
