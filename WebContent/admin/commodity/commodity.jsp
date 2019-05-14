@@ -58,6 +58,20 @@ h4 {
 th, td {
 	text-align: center;
 }
+
+button {
+	margin-left: 15px;
+	margin-bottom: 20px;
+	background-color: #fbb710;
+	color: #fff;
+	width: 80px;
+	height: 30px;
+	font-weight: bold;
+}
+
+button:hover {
+	background-color: #333333;
+}
 </style>
 </head>
 
@@ -104,7 +118,10 @@ th, td {
 		<div class="amado_product_area section-padding-100">
 			<div class="row">
 				<h4>재고내역</h4>
-				<!-- Single Product Area -->
+				<div style="float: right; margin-left: 950px">
+					<button type="button"
+						onclick="location.href='CommodityProcServlet?action=commodity'">재고정산</button>
+				</div>
 				<div class="col-12 col-sm-6 col-md-12 col-xl-15">
 					<div class="single-product-wrapper">
 						<table class="table table-hover">
@@ -123,9 +140,10 @@ th, td {
 									<tr>
 										<td>${product.p_id}</td>
 										<td style="text-align: left">${product.p_name}</td>
-										<td><fmt:formatNumber value="${product.p_price}" pattern="#,###" /></td>
+										<td><fmt:formatNumber value="${product.p_price}"
+												pattern="#,###" /></td>
 										<c:if test="${product.p_quantity < 10}">
-											<td style="color:red; font-weight:bold">${product.p_quantity}</td>
+											<td style="color: red; font-weight: bold">${product.p_quantity}</td>
 										</c:if>
 										<c:if test="${product.p_quantity >= 10}">
 											<td>${product.p_quantity}</td>

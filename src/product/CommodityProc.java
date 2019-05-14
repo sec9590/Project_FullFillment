@@ -75,32 +75,17 @@ public class CommodityProc extends HttpServlet {
 		// 파일 다운하고 주문하기
 		case "commodity":
 			cDao = new CommodityDAO();
-			List<CommodityDTO> list = new ArrayList<CommodityDTO>();
-			bDtoList = cDao.selectcommodityIn(); // 입고, 상품id
-			doDtoList = cDao.selectcommodityOut(); // 출고, 기초재고, 상품id
-
-			
-			for (DetailOrderDTO dDto : doDtoList) {
-				p_id = dDto.getP_id();
-				out = dDto.getO_quantity();
-				basic = dDto.getP_count(); // 기초재고
-
-				cDto.setP_id(p_id);
-				cDto.setOut(out);
-				cDto.setBasic(basic);
+	
+			cDtoList = cDao.selectcommodityOut(); // 출고, 기초재고, 상품id
+						
+			for (CommodityDTO coDto : cDtoList) {
+				p_id = coDto.getP_id();
+				coDto.setIn(cDao.selectcommodityIn(p_id));
+				close = coDto.getBasic() + coDto.getIn() - coDto.getOut();
+				coDto.setClose(close);
 			}
 
-			for (BuyingDTO buyDto : bDtoList) {
-				in = buyDto.getP_quantity();
-				cDto.setIn(in);
-			}
-			
-			close = basic + in - out;
-			cDto.setClose(close);
-			list.add(cDto);
-
-			request.setAttribute("commodityList", list);
-			System.out.println(list.toString());
+			request.setAttribute("commodityList", cDtoList);
 			rd = request.getRequestDispatcher("admin/commodity/commodity_detail.jsp");
 			rd.forward(request, response);
 			break;

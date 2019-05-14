@@ -117,7 +117,7 @@ th, td {
 								</tr>
 							</thead>
 							<tbody>						
-								<c:set var="clist" value="${requestScope.doDtoList}" />							
+								<c:set var="clist" value="${requestScope.commodityList}" />							
 								<c:forEach var="c" items="${clist}">
 									<tr>
 										<td>${c.p_id}</td>
