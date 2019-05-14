@@ -339,10 +339,10 @@ public class OrdersProc extends HttpServlet {
 			pDto = new ProductDTO();
 			List<ProductDTO> productList = pDao.selectAll();
 			request.setAttribute("ProductList", productList);
-			rd = request.getRequestDispatcher("admin/commodity.jsp");
+			rd = request.getRequestDispatcher("admin/commodity/commodity.jsp");
 			rd.forward(request, response);
-			break;
-
+			break;		
+		
 		// 총 주문내역
 		case "orderAll":
 			if (!request.getParameter("page").equals("")) {
@@ -606,6 +606,7 @@ public class OrdersProc extends HttpServlet {
 			}
 
 			request.setAttribute("shopList", shopList);
+			System.out.println(shopList);
 			rd = request.getRequestDispatcher("admin/grossprofit/grossprofit_shop.jsp");
 			rd.forward(request, response);
 			break;
@@ -655,6 +656,7 @@ public class OrdersProc extends HttpServlet {
 			rd.forward(request, response);
 			break;
 		
+			//매출총이익
 		case "grossprofit":
 			oDao = new OrdersDAO();
 
