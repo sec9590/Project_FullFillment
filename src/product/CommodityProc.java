@@ -108,7 +108,7 @@ public class CommodityProc extends HttpServlet {
 						
 			for (CommodityDTO coDto : cDtoList) {
 				p_id = coDto.getP_id();
-				coDto.setIn(cDao.selectcommodityIn(p_id));
+				coDto.setIn(cDao.selectcommodityInTime(date1, date2, p_id));
 				close = coDto.getBasic() + coDto.getIn() - coDto.getOut();
 				coDto.setClose(close);
 			}

@@ -92,15 +92,45 @@ public class CommodityDAO {
 			return list;
 		}
 
+		// 이번달 발주된 상품에서 입고된 상품갯수
+		public int selectcommodityIn(int p_id) {
+			String query = "select sum(p_quantity) from buying where (b_time > last_day(now() - interval 1 month) and b_time <= last_day(now())) and p_id = ? group by p_id;";
+			PreparedStatement pStmt = null;
+			BuyingDTO bDto = new BuyingDTO();
+			
+			try {
+				pStmt = conn.prepareStatement(query);
+				pStmt.setInt(1, p_id);
+				ResultSet rs = pStmt.executeQuery();
+
+				while (rs.next()) {
+					bDto.setP_quantity(rs.getInt(1));
+				}
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				try {
+					if (pStmt != null && !pStmt.isClosed())
+						pStmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace();
+				}
+			}
+			return bDto.getP_quantity();
+		}	
+		
 	// 발주된 상품에서 입고된 상품갯수
-	public int selectcommodityIn(int p_id) {
+	public int selectcommodityInTime(String date1, String date2, int p_id) {
 		String query = "select sum(p_quantity) from buying where w.w_time between ? and ? and p_id = ? group by p_id;";
 		PreparedStatement pStmt = null;
 		BuyingDTO bDto = new BuyingDTO();
 		
 		try {
 			pStmt = conn.prepareStatement(query);
-			pStmt.setInt(1, p_id);
+			pStmt.setString(1, date1);
+			pStmt.setString(2, date2);
+			pStmt.setInt(3, p_id);
 			ResultSet rs = pStmt.executeQuery();
 
 			while (rs.next()) {
