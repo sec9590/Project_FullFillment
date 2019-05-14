@@ -119,73 +119,7 @@ button:hover {
 				${memberName} <a href="/project02/memberProcServlet?action=logout">로그아웃</a>
 			</div>
 		</div>
-		<!-- Amado Nav --> <nav class="amado-nav">
-		<li><a href="index.jsp">HOME</a></li>
-		<li><a href="OrdersProcServlet?action=productlist">재고내역</a></li>
-		<li><a href="order.jsp">주문하기</a></li>
-		<li><a href="OrdersProcServlet?action=orderAll&page=1">주문내역</a></li>
-		<li class="active"><a
-			href="OrdersProcServlet?action=orderhistoryall">발주내역</a></li>
-		<li><a href="WaybillProcServlet?action=waybilllist&page=1">운송내역</a></li>
-		<li><a href="WaybillProcServlet?action=nowaybilllist">미운송내역</a></li>
-		<li><a href="OrdersProcServlet?action=grossprofit">매출 총 이익</a></li>
-		</nav> </header>
-		<!-- Header Area End -->
 
-		<div class="amado_product_area section-padding-100">
-			<div class="row">
-				<div>
-					<h4>발주내역</h4>
-					<br>
-					<div style="margin-left: 350px;">
-						<button type="button"
-							onclick="location.href='OrdersProcServlet?action=orderhistory&code=A'">의자</button>
-						<button type="button"
-							onclick="location.href='OrdersProcServlet?action=orderhistory&code=B'">침대</button>
-						<button type="button"
-							onclick="location.href='OrdersProcServlet?action=orderhistory&code=C'">테이블</button>
-						<button type="button"
-							onclick="location.href='OrdersProcServlet?action=orderhistory&code=D'">수납장</button>
-						<button type="button"
-							onclick="location.href='OrdersProcServlet?action=orderhistory&code=E'">조명/리빙</button>
-					</div>
-				</div>
-
-				<!-- Single Product Area -->
-				<div class="col-12 col-sm-6 col-md-12 col-xl-15">
-					<div class="single-product-wrapper">
-						<table class="table table-hover">
-							<thead>
-								<tr>
-									<th>발주번호</th>
-									<th>제품코드</th>
-									<th>제품명</th>
-									<th>가격</th>
-									<th>발주수량</th>
-									<th>발주시간</th>
-								</tr>
-							</thead>
-							<tbody>
-							<tbody>
-								<c:set var="plist" value="${requestScope.orderhistoryList}" />
-								<c:forEach var="product" items="${plist}">
-									<tr>
-										<td>${product.b_id}</td>
-										<td>${product.p_id}</td>
-										<td>${product.p_name}</td>
-										<td>${product.p_price}</td>
-										<td>${product.p_quantity}</td>
-										<td>${product.b_time}</td>
-									</tr>
-								</c:forEach>
-							</tbody>
-							</tbody>
-						</table>
-					</div>
-				</div>
-			</div>
-<<<<<<< Updated upstream
-        </div>
         <!-- Amado Nav -->
         <nav class="amado-nav">
         	<li><a href="index.jsp">HOME</a></li>
@@ -204,7 +138,6 @@ button:hover {
 	    <div class="row">
 	    <div style="width:100%; position:relative;">
 	     <h4>발주내역</h4>
-	     <br>
 	     		<div align=center>
 		    		<button type="button" onclick="location.href='OrdersProcServlet?action=orderhistory&code=A'">의자</button>
 		    		<button type="button" onclick="location.href='OrdersProcServlet?action=orderhistory&code=B'">침대</button>
@@ -263,23 +196,6 @@ button:hover {
 						</span>
 					
 			</div>			
-=======
-		</div>
-	</div>
-
-	<!-- ##### Main Content Wrapper End ##### -->
-
-	<!-- ##### Footer Area Start ##### -->
-	<footer class="footer_area clearfix"
-		style="padding:10px; position:absolute; bottom:0; width:100%">
-	<div class="container" style="text-align: center">
-		<span style="color: white"> Copyright &copy;<script>
-			document.write(new Date().getFullYear());
-		</script> All rights reserved | YeonA & SeEun & MinJi
-		</span>
-
-	</div>
->>>>>>> Stashed changes
 	</footer>
 	<!-- ##### Footer Area End ##### -->
 
