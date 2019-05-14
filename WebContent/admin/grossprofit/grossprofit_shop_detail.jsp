@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"
 	import="java.util.*, member.*, product.*, waybill.*"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -159,10 +160,10 @@ button:hover {
 									<tr>
 										<td>${shop.p_id}</td>
 										<td>${shop.p_name}</td>
-										<td>${shop.p_price}</td>
+										<td><fmt:formatNumber value="${shop.p_price}" pattern="#,###" /></td>
 										<td>${shop.p_count}</td>
-										<td style="color:blue">${shop.p_total}</td>
-										<td style="color:red">${shop.total}</td>
+										<td style="color:blue"><fmt:formatNumber value="${shop.p_total}" pattern="#,###" /></td>
+										<td style="color:red"><fmt:formatNumber value="${shop.total}" pattern="#,###" /></td>
 										<c:set var= "total" value="${total + shop.total}"/>
 									</tr>
 								</c:forEach>
@@ -170,7 +171,8 @@ button:hover {
 						</table>
 						<br><br>
 						<div align=center>
-							<h5 style="font-weight:bold;">운송대금 : <span style="color:red;">${requestScope.shippay * 10000}</span>&nbsp;/&nbsp;상품대금 : <span style="color:red;"><c:out value="${total}"/></span></h5>
+							<h5 style="font-weight:bold;">운송대금 : <span style="color:red;"><fmt:formatNumber value="${requestScope.shippay * 10000}" pattern="#,###" /></span>
+							&nbsp;/&nbsp;상품대금 : <span style="color:red;"><fmt:formatNumber value="${total + shop.total}" pattern="#,###" /></span></h5>
 						</div>
 					</div>					
 				</div>

@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"
 	import="java.util.*, member.*, product.*, waybill.*"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -46,7 +47,7 @@
                  , buttonText: "선택" //버튼에 마우스 갖다 댔을 때 표시되는 텍스트
                  , yearSuffix: "년" //달력의 년도 부분 뒤에 붙는 텍스트
                  , monthNamesShort: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'] //달력의 월 부분 텍스트
-                 , monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'] //달력의 월 부분 Tooltip 텍스트
+                 , monthNames: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'] //달력의 월 부분 Tooltip 텍스트
                  , dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'] //달력의 요일 부분 텍스트
                  , dayNames: ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일'] //달력의 요일 부분 Tooltip 텍스트
                  , minDate: "-10Y" //최소 선택일자(-1D:하루전, -1M:한달전, -1Y:일년전)
@@ -141,15 +142,12 @@ table.ui-datepicker-calendar { display:none; }
 
 
 		<!-- 테이블 -->
-		<div class="single-product-area section-padding-100 clearfix"
-			style="margin: auto">
+		<div class="single-product-area section-padding-100 clearfix" style="margin: auto">
 			<h4>
-				<span style="color: #fbb810; font-weight: bold">${memberName}</span>님
-				발주내역
+				<span style="color: #fbb810; font-weight: bold">${memberName}</span>님 발주내역
 			</h4>
-			<br>
 			<div style="float:right; padding-bottom:10px;">
-					<form action="WaybillProcServlet?action=selectWaybill" method="post" autocomplete=off>
+					<form action="OrdersProcServlet?action=buyingselectall" method="post" autocomplete=off>
 					<input type="text" id="sdate" name="dateInventory" value="#" style="border-bottom:1px solid #cccccc;">
 					<input type="submit" style="background-color: #fbb810; border: none" value="검색"> 
 					</form>
@@ -173,7 +171,7 @@ table.ui-datepicker-calendar { display:none; }
 											<td>${buying.b_id}</td>
 											<td>${buying.p_id}</td>
 											<td>${buying.p_name}</td>
-											<td>${buying.p_price}</td>
+											<td><fmt:formatNumber value="${buying.p_price}" pattern="#,###" /></td>
 											<td>${buying.p_quantity}</td>
 											<td>${buying.b_time}</td>
 										</tr>

@@ -202,7 +202,7 @@ public class WaybillProc extends HttpServlet {
 			System.out.println(date);
 			date1 = date + "-01 00:00";
 			System.out.println(date1);
-			date2 = date + "-30 23:59";
+			date2 = date + "-31 23:59";
 			System.out.println(date2);
 			
 			wayList = wDao.selectWaybill(date1, date2);
@@ -220,7 +220,7 @@ public class WaybillProc extends HttpServlet {
 			System.out.println(date);
 			date1 = date + "-01 00:00";
 			System.out.println(date1);
-			date2 = date + "-30 23:59";
+			date2 = date + "-31 23:59";
 			System.out.println(date2);
 			
 			wayList = wDao.selectWaybill(date1, date2);

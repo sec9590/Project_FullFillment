@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"
 	import="java.util.*, member.*, product.*, waybill.*"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -157,9 +158,9 @@ button:hover {
 									<tr>
 										<td>${buying.b_id}</td>
 										<td>${buying.p_name}</td>
-										<td>${buying.p_price}</td>
+										<td><fmt:formatNumber value="${buying.p_price}" pattern="#,###" /></td>
 										<td>${buying.p_quantity}</td>										
-										<td style="color:red">${buying.p_price * buying.p_quantity}</td>
+										<td style="color:red"><fmt:formatNumber value="${buying.p_price * buying.p_quantity}" pattern="#,###" /></td>
 										<c:set var= "total" value="${total + buying.p_price * buying.p_quantity}"/>
 									</tr>
 								</c:forEach>
@@ -167,7 +168,8 @@ button:hover {
 						</table>			
 						<br><br>
 						<div align=center>
-							<h5 style="font-weight:bold;">&nbsp;총 합계 : <span style="color:red; font-weight:bold"><c:out value="${total}"/>&nbsp;</span></h5>
+							<h5 style="font-weight:bold;">&nbsp;총 합계 : <span style="color:red; font-weight:bold">
+							<fmt:formatNumber value="${total + buying.p_price * buying.p_quantity}" pattern="#,###" />&nbsp;</span></h5>
 						</div>			
 					</div>					
 				</div>

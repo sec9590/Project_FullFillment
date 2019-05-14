@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"
 	import="java.util.*, member.*, product.*, waybill.*"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -122,7 +123,7 @@ th, td {
 									<tr>
 										<td>${product.p_id}</td>
 										<td style="text-align: left">${product.p_name}</td>
-										<td>${product.p_price}</td>
+										<td><fmt:formatNumber value="${product.p_price}" pattern="#,###" /></td>
 										<c:if test="${product.p_quantity < 10}">
 											<td style="color:red; font-weight:bold">${product.p_quantity}</td>
 										</c:if>

@@ -263,6 +263,42 @@ public class ProductDAO {
 		}
 		return list;
 	}
+	
+	// 월별 발주내역
+	public List<BuyingDTO> selectOrderhistoryAllTime(String date1, String date2) {
+		String query = "select b_id, p_id, p_name, p_price, p_quantity, date_format(b_time, '%Y-%m-%d %H:%i') from buying where b_time between ? and ?;";
+		PreparedStatement pStmt = null;
+		List<BuyingDTO> list = new ArrayList<BuyingDTO>();
+		System.out.println(date1 + " " + date2);
+		try {
+			pStmt = conn.prepareStatement(query);
+			pStmt.setString(1, date1);
+			pStmt.setString(2, date2);
+			ResultSet rs = pStmt.executeQuery();
+
+			while (rs.next()) {
+				BuyingDTO bDto = new BuyingDTO();
+				bDto.setB_id(rs.getInt(1));
+				bDto.setP_id(rs.getInt(2));
+				bDto.setP_name(rs.getString(3));
+				bDto.setP_price(rs.getString(4));
+				bDto.setP_quantity(rs.getInt(5));
+				bDto.setB_time(rs.getString(6));
+				list.add(bDto);
+				System.out.println(bDto.toString());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (pStmt != null && !pStmt.isClosed())
+					pStmt.close();
+			} catch (SQLException se) {
+				se.printStackTrace();
+			}
+		}
+		return list;
+	}
 
 	// 발주db에 상품번호 확인
 	public List<BuyingDTO> selectBuyingAll() {
@@ -369,6 +405,40 @@ public class ProductDAO {
 		}
 		return list;
 	}
+	
+	// 발주 대금 월별 계산
+		public List<BuyingDTO> selectBuyingprofitAll(String date1, String date2) {
+			String query = "select m.m_name, b.b_time, sum(b.p_price * b.p_quantity), b.buycode from buying as b, member as m where binary(m.m_field) = binary(b.buycode) and b.b_time between ? and ? group by b.buycode, b.b_time;";
+			PreparedStatement pStmt = null;
+			List<BuyingDTO> list = new ArrayList<BuyingDTO>();
+			System.out.println(date1 + " " + date2);
+			try {
+				pStmt = conn.prepareStatement(query);
+				pStmt.setString(1, date1);
+				pStmt.setString(2, date2);
+				ResultSet rs = pStmt.executeQuery();
+
+				while (rs.next()) {
+					BuyingDTO bDto = new BuyingDTO();
+					bDto.setB_name(rs.getString(1));
+					bDto.setB_time(rs.getString(2).substring(0, 16));
+					bDto.setTotal(rs.getInt(3));
+					bDto.setBuycode(rs.getString(4));
+					list.add(bDto);
+					System.out.println(bDto.toString());
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				try {
+					if (pStmt != null && !pStmt.isClosed())
+						pStmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace();
+				}
+			}
+			return list;
+		}	
 
 	public void close() {
 		try {

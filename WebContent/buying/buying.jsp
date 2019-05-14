@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" import="java.util.*, member.*, product.*, waybill.*"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -120,7 +121,7 @@ th, td {
 										<tr>
 											<td>${buying.p_id}</td>
 											<td style="text-align: left">${buying.p_name}</td>
-											<td>${buying.p_price}</td>
+											<td><fmt:formatNumber value="${buying.p_price}" pattern="#,###" /></td>
 										<td>${buying.p_quantity}</td>
 										</tr>
 									</c:forEach>

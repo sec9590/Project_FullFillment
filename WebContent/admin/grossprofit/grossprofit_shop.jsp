@@ -183,10 +183,9 @@ button{
 	<div class="amado_product_area section-padding-100">
 	    <div class="row">	  
 	    <div style="width:100%; position:relative;"> 
-	     <h4>쇼핑몰 대금청구</h4>
-	     <br>     		
+	     <h4>쇼핑몰 대금청구</h4>	
 			<div style="float:right; padding-bottom:10px; position:relative;">
-					<form action="WaybillProcServlet?action=selectShipping" method="post" autocomplete=off>
+					<form action="OrdersProcServlet?action=shopSelectTime" method="post" autocomplete=off>
 					<input type="text" id="sdate" name="dateInventory" value="#" style="border-bottom:1px solid #cccccc;">
 					<input type="submit" style="background-color: #fbb810; border: none" value="검색"> 
 					</form>

@@ -12,6 +12,7 @@ import java.util.Date;
 import java.util.List;
 
 import waybill.NoWaybillDTO;
+import waybill.WaybillDTO;
 
 public class OrdersDAO {
 	private Connection conn;
@@ -987,6 +988,44 @@ public class OrdersDAO {
 			}
 			return list;
 		}
+		
+	// 쇼핑몰 월별 대금청구 상세대금목록
+		public List<DetailOrderDTO> selectShopDetailTime(String date1, String date2) {
+			String query = "select d.p_id, d.p_name, p.p_price, sum(d.o_quantity), p.p_price*sum(d.o_quantity) as '총가격', total from orders_detail as d, product as p, orders as o where d.o_id=o.o_id and d.p_id = p.p_id and o.o_time between ? and ? group by d.p_id;\r\n" + 
+					";";
+			PreparedStatement pStmt = null;
+			List<DetailOrderDTO> list = new ArrayList<DetailOrderDTO>();
+			
+			try {
+				pStmt = conn.prepareStatement(query);		
+				pStmt.setString(1, date1);
+				pStmt.setString(2, date2);
+				ResultSet rs = pStmt.executeQuery();
+
+				while (rs.next()) {
+					DetailOrderDTO doDto = new DetailOrderDTO();
+					doDto.setP_id(rs.getInt(1));
+					doDto.setP_name(rs.getString(2));
+					doDto.setP_price(rs.getString(3));
+					doDto.setP_count(rs.getInt(4));
+					doDto.setP_total(rs.getInt(5));
+					doDto.setTotal(rs.getInt(6));
+					System.out.println(doDto.toString());
+					list.add(doDto);
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				try {
+					if (pStmt != null && !pStmt.isClosed())
+						pStmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace();
+				}
+			}
+			return list;
+		}
+		
 		
 	public void close() {
 		try {

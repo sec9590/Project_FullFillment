@@ -479,6 +479,41 @@ public class WaybillDAO {
 		String str = format1.format(time);
 		return str;
 	}
+	
+	
+	// 운송회사 전체 대금청구
+		public List<WaybillDTO> selectShipprofitAll(String date1, String date2) {
+			String query = "select m.m_name, w.w_time, count(*), w.w_waycode from waybill as w inner join member as m on binary(m.m_field) = binary(w.w_waycode) where w.w_time between ? and ? group by w.w_time, w.w_waycode;";
+			PreparedStatement pStmt = null;
+			List<WaybillDTO> list = new ArrayList<WaybillDTO>();
+			System.out.println(date1 + " " + date2);
+			try {
+				pStmt = conn.prepareStatement(query);
+				pStmt.setString(1, date1);
+				pStmt.setString(2, date2);
+				ResultSet rs = pStmt.executeQuery();
+
+				while (rs.next()) {
+					WaybillDTO wDto = new WaybillDTO();
+					wDto.setW_name(rs.getString(1));
+					wDto.setW_time(rs.getString(2).substring(0, 16));
+					wDto.setCount(rs.getInt(3));
+					wDto.setW_waycode(rs.getString(4));
+					list.add(wDto);
+					System.out.println(wDto.toString());
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				try {
+					if (pStmt != null && !pStmt.isClosed())
+						pStmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace();
+				}
+			}
+			return list;
+		}	
 
 	public void close() {
 		try {
