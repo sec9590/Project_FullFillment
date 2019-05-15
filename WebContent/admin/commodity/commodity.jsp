@@ -118,7 +118,9 @@ button:hover {
 		<div class="amado_product_area section-padding-100">
 			<div class="row">
 				<h4>재고내역</h4>
-				<div style="float: right; margin-left: 950px">
+				<div style="float: right; margin-left: 600px">
+				<button type="button"
+						onclick="location.href='CommodityProcServlet?action=commoditydbselect'">재고DB</button>
 					<button type="button"
 						onclick="location.href='CommodityProcServlet?action=commodity'">재고정산</button>
 				</div>

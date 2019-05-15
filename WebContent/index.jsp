@@ -20,7 +20,10 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/main.css">
 </head>
-
+<style>
+	span { font-size:15pt; font-weight:bold; color:#fbb710;}
+	ul { padding-top:10px;}
+</style>
 <body>   
     <!-- ##### Main Content Wrapper Start ##### -->
     <div class="main-content-wrapper d-flex clearfix">
@@ -89,6 +92,21 @@
                     <li><a href="product_list.jsp">PRODUCT</a></li>
                 </ul>
             </nav>
+                <div style="margin-top:50px; margin-left:-40px; width:250px; padding: 10px 10px 10px 10px;">
+                <span>재고부족</span>
+                <ul>
+                <%	
+                	ProductDAO pDao = new ProductDAO();
+                	List<ProductDTO> list = pDao.BuyingALL();
+                	for(ProductDTO pDto : list){
+                	
+                %>
+					<li style="font-size:10pt;">＊ <%=pDto.getP_name() %></li>
+					<%
+					}
+					%>
+                </ul>
+                </div>
                         
         </header>
         <!-- Header Area End -->

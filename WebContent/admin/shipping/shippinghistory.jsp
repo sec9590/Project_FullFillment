@@ -216,14 +216,14 @@
 							</c:forEach>
                     	</tbody>
                 	</table>
-                	<div align=center>
+                		<br>
+						<br>
+					</div>
+					<div align=center style="margin-left:220px">
 						<c:set var="pageList" value="${requestScope.pageList}" />
 						<c:forEach var="pageNo" items="${pageList}">
 							${pageNo}
 						</c:forEach>
-						<br>
-						<br>
-					</div>
 	            </div>
 	    	</div>
 		</div>

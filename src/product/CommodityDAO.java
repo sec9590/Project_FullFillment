@@ -1,5 +1,7 @@
 package product;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -10,6 +12,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+
 
 public class CommodityDAO {
 	private Connection conn;
@@ -151,11 +154,55 @@ public class CommodityDAO {
 				}
 			}
 			return bDto.getP_quantity();
-		}	
+		}
+	
+	//지난달 기말재고를 가져와 기초재고로 설정
+	public int selectFinal(String date1, String date2, int p_id) {
+		String query = "select ? from waybill as w , orders_detail as d, orders as o where o.o_id = w.o_id and o.o_id = d.o_id and w.w_time between ? and ? and d.p_id = ?";
+		PreparedStatement pStmt = null;
+		CommodityDTO cDto = new CommodityDTO();		
+		int basic = 0;
+		
+		List<CommodityDTO> cDtoList = selectcommodityOutTime(date1, date2); // 출고, 기초재고, 상품id
+		for (CommodityDTO coDto : cDtoList) {
+			int id = coDto.getP_id();
+			coDto.setC_in(selectcommodityInTime(date1, date2, p_id));
+			int close = coDto.getC_basic() + coDto.getC_in() - coDto.getC_out();
+			coDto.setC_close(close);
+			
+			if(p_id == id)
+				basic = close; //지난달 기말재고
+			System.out.println("지난달 상품 : " + p_id + " 기말재고: " +  basic);
+		}
+		
+		try {
+			pStmt = conn.prepareStatement(query);
+			pStmt.setInt(1, basic);
+			pStmt.setString(2, date1);
+			pStmt.setString(3, date2);
+			pStmt.setInt(4, p_id);
+			ResultSet rs = pStmt.executeQuery();
+
+			while (rs.next()) {
+				cDto.setC_basic(rs.getInt(1));
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (pStmt != null && !pStmt.isClosed())
+					pStmt.close();
+			} catch (SQLException se) {
+				se.printStackTrace();
+			}
+		}
+		return cDto.getC_basic();
+	}	
 	
 	//재고내역에 재조정산이 되었는지 확인
 	public String checkmonth(String time) {
-		String query = "select time from commodity where time = ?";
+		String query = "select c_time from commodity where c_time = ?";
 		PreparedStatement pStmt = null;
 		CommodityDTO cDto = new CommodityDTO();
 		
@@ -194,12 +241,26 @@ public class CommodityDAO {
 		return time;
 	}
 	
+	// 이번달 구하기
+	public String Month(String date) {		
+		DateFormat df = new SimpleDateFormat("yyyy-MM");
+		Calendar cal = Calendar.getInstance( );
+		cal.set(Calendar.YEAR,  Integer.parseInt(date.substring(0,4)));
+		cal.set(Calendar.MONTH,  Integer.parseInt(date.substring(5,7))-1);
+		cal.add ( cal.MONTH, +1 ); //이전달 플러스
+		String time = df.format(cal.getTime());
+		System.out.println("이전달+1 : " + time);   
+		
+		return time;
+	}
+	
 	// 전달 기말재고 구하기
 	public int checkClose(int p_id, String c_time) {
 		String query = "select c_close from commodity where c_time = ? and p_id = ? ";
 		PreparedStatement pStmt = null;
 		CommodityDTO cDto = new CommodityDTO();
 		c_time = lastMonth(c_time);
+		System.out.println("전달 기말재고 날짜 : " + c_time);
 		
 		try {
 			pStmt = conn.prepareStatement(query);
@@ -223,6 +284,34 @@ public class CommodityDAO {
 		}
 		return cDto.getC_close();
 	}	
+	
+	// 이번달 기말재고 구하기
+		public String checkNow(String c_time) {
+			String query = "select c_time from commodity where c_time = ? group by c_time";
+			PreparedStatement pStmt = null;
+			CommodityDTO cDto = new CommodityDTO();		
+			
+			try {
+				pStmt = conn.prepareStatement(query);
+				pStmt.setString(1, c_time);
+				ResultSet rs = pStmt.executeQuery();
+
+				while (rs.next()) {
+					cDto.setC_time(rs.getString(1));
+				}
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				try {
+					if (pStmt != null && !pStmt.isClosed())
+						pStmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace();
+				}
+			}
+			return cDto.getC_time();
+		}	
 		
 	// 발주된 상품에서 입고된 상품갯수
 	public int selectcommodityInTime(String date1, String date2, int p_id) {
@@ -322,4 +411,96 @@ public class CommodityDAO {
 		return list;
 	}
 	
+	//재고db총
+	public List<CommodityDTO> selectCommodityAll() {
+		String query = "select c_time, sum(c_basic), sum(c_in), sum(c_out), sum(c_close) from commodity group by c_time;";
+		PreparedStatement pStmt = null;
+		List<CommodityDTO> list = new ArrayList<CommodityDTO>();
+
+		try {
+			pStmt = conn.prepareStatement(query);
+			
+			ResultSet rs = pStmt.executeQuery();
+
+			while (rs.next()) {
+				CommodityDTO cDto = new CommodityDTO();
+				cDto.setC_time(rs.getString(1));
+				cDto.setC_basic(rs.getInt(2));
+				cDto.setC_in(rs.getInt(3));
+				cDto.setC_out(rs.getInt(4));
+				cDto.setC_close(rs.getInt(5));
+				System.out.println(cDto.toString());
+				list.add(cDto);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (pStmt != null && !pStmt.isClosed())
+					pStmt.close();
+			} catch (SQLException se) {
+				se.printStackTrace();
+			}
+		}
+		return list;
+	}
+	//상세 조회
+	public List<CommodityDTO> selectCommodityDetail(String c_time) {
+		String query = "select p_id, c_basic, c_in, c_out, c_close from commodity where c_time = ?;";
+		PreparedStatement pStmt = null;
+		List<CommodityDTO> list = new ArrayList<CommodityDTO>();
+
+		try {
+			pStmt = conn.prepareStatement(query);
+			pStmt.setString(1, c_time);
+			ResultSet rs = pStmt.executeQuery();
+
+			while (rs.next()) {
+				CommodityDTO cDto = new CommodityDTO();
+				cDto.setP_id(rs.getInt(1));
+				cDto.setC_basic(rs.getInt(2));
+				cDto.setC_in(rs.getInt(3));
+				cDto.setC_out(rs.getInt(4));
+				cDto.setC_close(rs.getInt(5));
+				System.out.println(cDto.toString());
+				list.add(cDto);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (pStmt != null && !pStmt.isClosed())
+					pStmt.close();
+			} catch (SQLException se) {
+				se.printStackTrace();
+			}
+		}
+		return list;
+	}
+	
+	public String prepareDownload(String c_time) {
+		List<CommodityDTO> cDtoList = selectCommodityDetail(c_time);
+		StringBuffer sb = new StringBuffer();
+		
+		try {
+			String name = "C:\\Temp\\commodity\\commodity.csv";
+			FileWriter fw = new FileWriter(name);
+			String head = "제품코드,기초재고,입고,출고,기말재고\r\n";
+			sb.append(head);
+			fw.write(head);			
+			for (CommodityDTO cDto : cDtoList) {
+				String line = cDto.getP_id() + "," + cDto.getC_basic() + "," + cDto.getC_in() + ","
+						+ cDto.getC_out() + "," + cDto.getC_close() + "\r\n";
+				sb.append(line);
+				fw.write(line);
+			}
+			fw.flush();
+			fw.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return sb.toString();
+	}
 }

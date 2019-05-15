@@ -91,6 +91,34 @@ public class ProductDAO {
 		return list;
 	}
 
+	// 10개미만 떨어진 상품목록(공지사항)
+		public List<ProductDTO> BuyingALL() {
+			String query = "select p_name from product where p_quantity < 10;";
+			PreparedStatement pStmt = null;
+			List<ProductDTO> list = new ArrayList<ProductDTO>();
+			try {
+				pStmt = conn.prepareStatement(query);
+				ResultSet rs = pStmt.executeQuery();
+
+				while (rs.next()) {
+					ProductDTO pDto = new ProductDTO();
+					pDto.setP_name(rs.getString(1));
+					System.out.println(pDto.toString());
+					list.add(pDto);
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				try {
+					if (pStmt != null && !pStmt.isClosed())
+						pStmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace();
+				}
+			}
+			return list;
+		}
+	
 	// 상품개수
 	public int selectQuentity(int p_id) {
 		String query = "select p_quantity from product where p_id = ?";

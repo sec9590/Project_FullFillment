@@ -197,13 +197,13 @@ input[type=submit]{
 								</c:forEach>
 							</tbody>
 						</table>
-						<div align=center>
+					</div>
+					<div align=center style = "margin-left : 200px">
 							<c:set var="pageList" value="${requestScope.pageList}" />
 							<c:forEach var="pageNo" items="${pageList}">
 								${pageNo}
 							</c:forEach>
 						</div>
-					</div>
 				</div>
 			</div>
 	<!-- ##### Main Content Wrapper End ##### -->
