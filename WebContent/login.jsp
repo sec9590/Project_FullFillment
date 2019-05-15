@@ -75,6 +75,7 @@
                     <li><a href="index.jsp">HOME</a></li>
                     <li><a href="signup.jsp">SIGN UP</a></li>
                     <li class="active"><a href="login.jsp">LOGIN</a></li>
+                    <li><a href="product_list.jsp">PRODUCT</a></li>
                 </ul>
             </nav>            
         </header>

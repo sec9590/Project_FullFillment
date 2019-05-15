@@ -100,11 +100,11 @@
                 <div class="catagories-menu">
                     <ul>
                     	<li class="active"><a href="product_list.jsp">ALL</a></li>
-                        <li><a href="commodity.html">CHAIR</a></li>
-                        <li><a href="order.html ">BED</a></li>
-                        <li><a href="sales.html">TABLES</a></li>
-                        <li><a href="orderhistory.html">STORAGE CLOSET</a></li>
-                        <li><a href="shippinghistory.html">LIGHT/LIVING</a></li>
+                        <li><a href="chair.jsp">CHAIR</a></li>
+                        <li><a href="bed.jsp ">BED</a></li>
+                        <li><a href="tables.jsp">TABLES</a></li>
+                        <li><a href="storage.jsp">STORAGE CLOSET</a></li>
+                        <li><a href="light.jsp">LIGHT/LIVING</a></li>
                     </ul>
                 </div>
             </div>

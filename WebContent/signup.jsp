@@ -83,7 +83,7 @@
                   	<li><a href="index.jsp">Home</a></li>
                     <li class="active"><a href="signup.jsp">SIGN UP</a></li>
                     <li><a href="login.jsp">LOGIN</a></li>
-
+					<li><a href="product_list.jsp">PRODUCT</a></li>
                 </ul>
             </nav>
 
