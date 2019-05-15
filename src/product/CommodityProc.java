@@ -2,7 +2,10 @@ package product;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -64,6 +67,7 @@ public class CommodityProc extends HttpServlet {
 		List<DetailOrderDTO> doDtoList = null;
 		List<BuyingDTO> bDtoList = null;
 		List<CommodityDTO> cDtoList = null;
+		List<ProductDTO> pDtoList = null;
 
 		int p_id = 0;
 		int out = 0;
@@ -83,6 +87,16 @@ public class CommodityProc extends HttpServlet {
 
 			for (CommodityDTO coDto : cDtoList) {
 				p_id = coDto.getP_id();
+
+				// 이번달
+				DateFormat df1 = new SimpleDateFormat("yyyy-MM");
+				Calendar cal1 = Calendar.getInstance();
+				date = df1.format(cal1.getTime());
+				System.out.println(df1.format(cal1.getTime()));
+
+				basic = cDao.checkClose(p_id, date);
+				System.out.println(basic);
+				coDto.setC_basic(basic);
 				coDto.setC_in(cDao.selectcommodityIn(p_id));
 				close = coDto.getC_basic() + coDto.getC_in() - coDto.getC_out();
 				coDto.setC_close(close);
@@ -107,11 +121,13 @@ public class CommodityProc extends HttpServlet {
 			cDtoList = cDao.selectcommodityOutTime(date1, date2); // 출고, 기초재고, 상품id
 			for (CommodityDTO coDto : cDtoList) {
 				p_id = coDto.getP_id();
-				if(!date.equals("2019-04")) {
-					basic = cDao.checkClose(p_id, date1, date2);
+
+				if (!date.equals("2019-04")) {
+					basic = cDao.checkClose(p_id, date);
 					System.out.println(basic);
 					coDto.setC_basic(basic);
 				}
+
 				coDto.setC_in(cDao.selectcommodityInTime(date1, date2, p_id));
 				close = coDto.getC_basic() + coDto.getC_in() - coDto.getC_out();
 				coDto.setC_close(close);
@@ -125,9 +141,9 @@ public class CommodityProc extends HttpServlet {
 		case "commodityDB":
 			date = request.getParameter("date");
 			System.out.println("재고정산 날짜 : " + date);
-			
+
 			cDao = new CommodityDAO();
-			
+
 			date1 = date + "-01 00:00";
 			System.out.println(date1);
 			date2 = date + "-31 23:59";
@@ -135,19 +151,41 @@ public class CommodityProc extends HttpServlet {
 			boolean finish = false;
 
 			cDtoList = cDao.selectcommodityOutTime(date1, date2); // 출고, 기초재고, 상품id
+			List<CommodityDTO> cProduct = cDao.selectcommodityProduct(date1, date2);
+			pDtoList = cDao.IsProduct();
 
 			if (!cDao.checkInsert(date)) {
 				finish = false;
 			} else {
-				for (CommodityDTO coDto : cDtoList) {
-					finish = true;
-					p_id = coDto.getP_id();
-					coDto.setC_in(cDao.selectcommodityInTime(date1, date2, p_id));
-					close = coDto.getC_basic() + coDto.getC_in() - coDto.getC_out();
-					coDto.setC_close(close);
-					coDto.setC_time(date);
-					cDao.insertCommodity(coDto);
-					System.out.println("재고db" + coDto.toString());
+				finish = true;
+				for (ProductDTO pd : pDtoList) {
+					if (cProduct.contains(pd)) {
+						for (CommodityDTO coDto : cDtoList) {
+							p_id = coDto.getP_id();
+
+							coDto.setC_in(cDao.selectcommodityInTime(date1, date2, p_id));
+							close = coDto.getC_basic() + coDto.getC_in() - coDto.getC_out();
+							coDto.setC_close(close);
+							coDto.setC_time(date);
+							cDao.insertCommodity(coDto);
+							System.out.println("재고db" + coDto.toString());
+						}
+					} else {
+						CommodityDTO ncDto = new CommodityDTO();
+						int pid = pd.getP_id();
+						ncDto.setC_basic(15);
+						ncDto.setP_id(pid);
+						if(cDao.selectcommodityInTime(date1, date2, pid) == 0) {
+							ncDto.setC_in(0);
+						} else {
+							ncDto.setC_in(cDao.selectcommodityInTime(date1, date2, pid));
+						}
+						ncDto.setC_time(date);
+						close = ncDto.getC_basic() + ncDto.getC_in();
+						ncDto.setC_close(close);
+						cDao.insertCommodity(ncDto);
+						System.out.println("없는 재고db" + ncDto.toString());
+					}
 				}
 			}
 
