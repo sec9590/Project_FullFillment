@@ -12,7 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import product.OrdersDAO;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 /**
@@ -20,6 +21,7 @@ import product.OrdersDAO;
  */
 @WebServlet("/WaybillProcServlet")
 public class WaybillProc extends HttpServlet {
+	private static final Logger LOG = LoggerFactory.getLogger(WaybillProc.class);
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -100,7 +102,7 @@ public class WaybillProc extends HttpServlet {
 			String add4 = null;
 			wDao = new WaybillDAO();
 			wDto = new WaybillDTO();
-			System.out.println(add);
+			LOG.info(add);
 			switch (add) {
 			case "A":
 				add1 = "서울경기";
@@ -149,7 +151,6 @@ public class WaybillProc extends HttpServlet {
 			if (nwayList.size() == 0) {
 				nwayList = null;
 				request.setAttribute("nwayList", nwayList);
-				System.out.println(nwayList);
 			} else
 				request.setAttribute("nwayList", nwayList);
 
@@ -165,7 +166,7 @@ public class WaybillProc extends HttpServlet {
 
 			List<WaybillDTO> carrierList = wDao.selectCarrierAll(field);
 			request.setAttribute("carrierList", carrierList);
-			System.out.println("운송회사");
+			LOG.info("운송회사");
 			rd = request.getRequestDispatcher("carrier/carrier.jsp");
 			rd.forward(request, response);
 			break;
@@ -200,14 +201,14 @@ public class WaybillProc extends HttpServlet {
 		case "selectWaybill": 
 			wDao = new WaybillDAO();
 			date = request.getParameter("dateInventory");
-			System.out.println(date);
+			LOG.info(date);
 			date1 = date + "-01 00:00";
-			System.out.println(date1);
+			LOG.info(date1);
 			date2 = date + "-31 23:59";
-			System.out.println(date2);
+			LOG.info(date2);
 			
 			wayList = wDao.selectWaybill(date1, date2);
-			System.out.println("기간설정 달력");
+			LOG.info("기간설정 달력");
 			request.setAttribute("dateInventory", date);
 			request.setAttribute("wayList", wayList);
 			rd = request.getRequestDispatcher("carrier/carrier_selectTime.jsp");
@@ -218,14 +219,14 @@ public class WaybillProc extends HttpServlet {
 		case "selectShipping": 
 			wDao = new WaybillDAO();
 			date = request.getParameter("dateInventory");
-			System.out.println(date);
+			LOG.info(date);
 			date1 = date + "-01 00:00";
-			System.out.println(date1);
+			LOG.info(date1);
 			date2 = date + "-31 23:59";
-			System.out.println(date2);
+			LOG.info(date2);
 			
 			wayList = wDao.selectWaybill(date1, date2);
-			System.out.println("기간설정 달력");
+			LOG.info("기간설정 달력");
 			request.setAttribute("dateInventory", date);
 			request.setAttribute("wayList", wayList);
 			rd = request.getRequestDispatcher("admin/shipping/shipping_selectTime.jsp");
@@ -234,11 +235,11 @@ public class WaybillProc extends HttpServlet {
 			
 		case "shipselectTime": 
 			date = request.getParameter("dateInventory");
-			System.out.println(date);
+			LOG.info(date);
 			date1 = date + "-01 00:00";
-			System.out.println(date1);
+			LOG.info(date1);
 			date2 = date + "-31 23:59";
-			System.out.println(date2);
+			LOG.info(date2);
 			
 			wDao = new WaybillDAO();
 			wDto = new WaybillDTO();
@@ -248,7 +249,7 @@ public class WaybillProc extends HttpServlet {
 				shiptotal += waydto.getCount() * 10000;
 			}
 			
-			System.out.println("운송회사 한달 내역");
+			LOG.info("운송회사 한달 내역");
 			request.setAttribute("dateInventory", date);
 			request.setAttribute("shipProfit", shipProfit);
 			rd = request.getRequestDispatcher("admin/grossprofit/grossprofit_ship_selectTime.jsp");

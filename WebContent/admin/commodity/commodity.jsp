@@ -168,8 +168,8 @@ button:hover {
 
 	<!-- ##### Footer Area Start ##### -->
 	<footer class="footer_area clearfix"
-		style="padding:10px;">
-	<div class="container" style="padding:10px; position:absolute; margin-bottom:0; width:100%">
+		style="padding:10px; position:absolute; margin-bottom:0px; width:100%">
+	<div class="container" style="text-align: center">
 		<span style="color: white"> Copyright &copy;<script>
 			document.write(new Date().getFullYear());
 		</script> All rights reserved | YeonA & SeEun & MinJi

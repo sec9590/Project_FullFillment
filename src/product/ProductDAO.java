@@ -11,7 +11,12 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+
 public class ProductDAO {
+	private static final Logger LOG = LoggerFactory.getLogger(ProductDAO.class);
 	private Connection conn;
 
 	private static final String USERNAME = "javauser";
@@ -43,7 +48,7 @@ public class ProductDAO {
 				pDto.setP_name(rs.getString(2));
 				pDto.setP_price(rs.getString(3));
 				pDto.setP_quantity(rs.getInt(4));
-				System.out.println(pDto.toString());
+				LOG.info(pDto.toString());
 				list.add(pDto);
 			}
 		} catch (Exception e) {
@@ -75,7 +80,7 @@ public class ProductDAO {
 				pDto.setP_name(rs.getString(2));
 				pDto.setP_price(rs.getString(3));
 				pDto.setP_quantity(rs.getInt(4));
-				System.out.println(pDto.toString());
+				LOG.info(pDto.toString());
 				list.add(pDto);
 			}
 		} catch (Exception e) {
@@ -103,7 +108,7 @@ public class ProductDAO {
 				while (rs.next()) {
 					ProductDTO pDto = new ProductDTO();
 					pDto.setP_name(rs.getString(1));
-					System.out.println(pDto.toString());
+					LOG.info(pDto.toString());
 					list.add(pDto);
 				}
 			} catch (Exception e) {
@@ -183,7 +188,7 @@ public class ProductDAO {
 
 		String strDate = format1.format(cal.getTime());
 
-		System.out.println(strDate);
+		LOG.info(strDate);
 
 		return strDate;
 	}
@@ -198,7 +203,7 @@ public class ProductDAO {
 
 		String strDate = format1.format(cal.getTime())  + " 10:00";
 
-		System.out.println(strDate);
+		LOG.info(strDate);
 
 		return strDate;
 	}
@@ -245,7 +250,7 @@ public class ProductDAO {
 				bDto.setP_quantity(rs.getInt(5));
 				bDto.setB_time(rs.getString(6));
 				list.add(bDto);
-				System.out.println(bDto.toString());
+				LOG.info(bDto.toString());
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -277,7 +282,7 @@ public class ProductDAO {
 				bDto.setP_quantity(rs.getInt(5));
 				bDto.setB_time(rs.getString(6));
 				list.add(bDto);
-				System.out.println(bDto.toString());
+				LOG.info(bDto.toString());
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -297,7 +302,7 @@ public class ProductDAO {
 		String query = "select b_id, p_id, p_name, p_price, p_quantity, date_format(b_time, '%Y-%m-%d %H:%i') from buying where b_time between ? and ?;";
 		PreparedStatement pStmt = null;
 		List<BuyingDTO> list = new ArrayList<BuyingDTO>();
-		System.out.println(date1 + " " + date2);
+		LOG.info(date1 + " " + date2);
 		try {
 			pStmt = conn.prepareStatement(query);
 			pStmt.setString(1, date1);
@@ -313,7 +318,7 @@ public class ProductDAO {
 				bDto.setP_quantity(rs.getInt(5));
 				bDto.setB_time(rs.getString(6));
 				list.add(bDto);
-				System.out.println(bDto.toString());
+				LOG.info(bDto.toString());
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -385,7 +390,7 @@ public class ProductDAO {
 				bDto.setTotal(rs.getInt(3));
 				bDto.setBuycode(rs.getString(4));
 				list.add(bDto);
-				System.out.println(bDto.toString());
+				LOG.info(bDto.toString());
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -419,7 +424,7 @@ public class ProductDAO {
 				bDto.setP_price(rs.getString(3));
 				bDto.setP_quantity(rs.getInt(4));
 				list.add(bDto);
-				System.out.println(bDto.toString());
+				LOG.info(bDto.toString());
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -439,7 +444,7 @@ public class ProductDAO {
 			String query = "select m.m_name, b.b_time, sum(b.p_price * b.p_quantity), b.buycode from buying as b, member as m where binary(m.m_field) = binary(b.buycode) and b.b_time between ? and ? group by b.buycode, b.b_time;";
 			PreparedStatement pStmt = null;
 			List<BuyingDTO> list = new ArrayList<BuyingDTO>();
-			System.out.println(date1 + " " + date2);
+			LOG.info(date1 + " " + date2);
 			try {
 				pStmt = conn.prepareStatement(query);
 				pStmt.setString(1, date1);
@@ -453,7 +458,7 @@ public class ProductDAO {
 					bDto.setTotal(rs.getInt(3));
 					bDto.setBuycode(rs.getString(4));
 					list.add(bDto);
-					System.out.println(bDto.toString());
+					LOG.info(bDto.toString());
 				}
 			} catch (Exception e) {
 				e.printStackTrace();

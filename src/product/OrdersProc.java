@@ -24,12 +24,15 @@ import waybill.WaybillDAO;
 import waybill.WaybillDTO;
 
 import com.oreilly.servlet.MultipartRequest;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Servlet implementation class OrdersProc
  */
 @WebServlet("/OrdersProcServlet")
 public class OrdersProc extends HttpServlet {
+	private static final Logger LOG = LoggerFactory.getLogger(OrdersProc.class);
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -104,11 +107,11 @@ public class OrdersProc extends HttpServlet {
 					new DefaultFileRenamePolicy());
 
 			/*
-			 * System.out.println("이름 : " + multipartRequest.getParameter("name") + "<br>");
-			 * System.out.println("파일 : " + multipartRequest.getParameter("file") + "<br>");
-			 * //null 값을 갖는다. System.out.println("업로드파일명 : " +
+			 * LOG.info("이름 : " + multipartRequest.getParameter("name") + "<br>");
+			 * LOG.info("파일 : " + multipartRequest.getParameter("file") + "<br>");
+			 * //null 값을 갖는다. LOG.info("업로드파일명 : " +
 			 * multipartRequest.getFilesystemName("file") + "<br>");
-			 * System.out.println("원래파일명 : " + multipartRequest.getOriginalFileName("file")
+			 * LOG.info("원래파일명 : " + multipartRequest.getOriginalFileName("file")
 			 * + "<br>");
 			 */
 
@@ -117,7 +120,7 @@ public class OrdersProc extends HttpServlet {
 			// File file = new File("C:\\Temp\\shopping.csv");
 
 			br = new BufferedReader(new InputStreamReader(new FileInputStream(file), "euc-kr"));
-			System.out.println("원래파일명 : " + multipartRequest.getOriginalFileName("file"));
+			LOG.info("원래파일명 : " + multipartRequest.getOriginalFileName("file"));
 			String filename = multipartRequest.getOriginalFileName("file");			
 			filename = filename.replaceAll(filename.substring(filename.length() - 4, filename.length()), "");
 
@@ -162,7 +165,7 @@ public class OrdersProc extends HttpServlet {
 					oDto.setShopcode(filename);
 					oDao.insertOrders(oDto);
 					int orderid = oDao.selectOrderId(o_name);
-					System.out.println("주문번호 : " + orderid);
+					LOG.info("주문번호 : " + orderid);
 
 					p_id = Integer.parseInt(lines[3]);
 					p_name = lines[4];
@@ -176,15 +179,15 @@ public class OrdersProc extends HttpServlet {
 					oDao.insertDetailOrders(doDto);
 					count++;
 				}
-				System.out.println(oDto.toString());
-				System.out.println(doDto.toString());
+				LOG.info(oDto.toString());
+				LOG.info(doDto.toString());
 				System.out.println(count);
 
 			}
 
 			msg = "주문 성공 및 발주신청";
 			url = "OrdersProcServlet?action=orderlist&count=" + count;
-			System.out.println("count : " + count);
+			LOG.info("count : " + count);
 			request.setAttribute("count", count);
 			request.setAttribute("message", msg);
 			request.setAttribute("url", url);
@@ -203,7 +206,7 @@ public class OrdersProc extends HttpServlet {
 			nwDto = new NoWaybillDTO();
 			update = false;
 
-			System.out.println(request.getParameter("count"));
+			LOG.info(request.getParameter("count"));
 			if (!request.getParameter("count").equals("")) {
 				num = Integer.parseInt(request.getParameter("count"));
 			}
@@ -292,7 +295,7 @@ public class OrdersProc extends HttpServlet {
 			oDto = new OrdersDTO();
 			pDao = new ProductDAO();
 
-			System.out.println(request.getParameter("count"));
+			LOG.info(request.getParameter("count"));
 			if (!request.getParameter("count").equals("")) {
 				num = Integer.parseInt(request.getParameter("count"));
 			}
@@ -308,7 +311,7 @@ public class OrdersProc extends HttpServlet {
 			 * pDao.insertBuying(dDto.getP_id()); } } }
 			 */
 
-			System.out.println("주문내역검색 완료");
+			LOG.info("주문내역검색 완료");
 			request.setAttribute("OrderList", orderList);
 			request.setAttribute("count", num);
 			System.out.println(num);
@@ -463,11 +466,11 @@ public class OrdersProc extends HttpServlet {
 		// 발주내역(월별)
 		case "selectOrders":
 			date = request.getParameter("dateInventory");
-			System.out.println(date);
+			LOG.info(date);
 			date1 = date + "-01 00:00";
-			System.out.println(date1);
+			LOG.info(date1);
 			date2 = date + "-31 23:59";
-			System.out.println(date2);
+			LOG.info(date2);
 			
 			pDao = new ProductDAO();
 			pDto = new ProductDTO();
@@ -517,11 +520,11 @@ public class OrdersProc extends HttpServlet {
 		// 구매처 월별 내역
 		case "buyingselectall":
 			date = request.getParameter("dateInventory");
-			System.out.println(date);
+			LOG.info(date);
 			date1 = date + "-01 00:00";
-			System.out.println(date1);
+			LOG.info(date1);
 			date2 = date + "-31 23:59";
-			System.out.println(date2);
+			LOG.info(date2);
 			
 			field = request.getParameter("field");
 			pDao = new ProductDAO();
@@ -565,16 +568,16 @@ public class OrdersProc extends HttpServlet {
 			oDao = new OrdersDAO();
 			date = request.getParameter("dateInventory");
 			date = oDao.selecttimechangeString(oDao.selectTime(date));
-			System.out.println(date);
+			LOG.info(date);
 			date1 = date + " 00:00";
-			System.out.println(date1);
+			LOG.info(date1);
 			date2 = date + " 23:59";
 
 			date1 = oDao.timechangeString(oDao.compareTime(date1));
 			date2 = oDao.timechangeString(oDao.compareTime(date2));
 
 			orderAll = oDao.selectTime(date1, date2);
-			System.out.println("기간설정 달력");
+			LOG.info("기간설정 달력");
 			request.setAttribute("dateInventory", date);
 			request.setAttribute("orderAllList", orderAll);
 			request.setAttribute("pageList", pageList);
@@ -591,7 +594,7 @@ public class OrdersProc extends HttpServlet {
 			for (OrdersDTO shop : shopList) {
 				int sum = 0;
 				int shippay = 0;
-				System.out.println("이거" + shop.getO_time());
+				LOG.info("이거" + shop.getO_time());
 				List<DetailOrderDTO> shopList_total = oDao.selectShopDetail(shop.getO_time(), shop.getShopcode());
 
 				for (DetailOrderDTO dDto : shopList_total) {
@@ -600,7 +603,7 @@ public class OrdersProc extends HttpServlet {
 				shop.setTotal(sum);
 				System.out.println(sum);
 				shippay = oDao.getorderCount(shop.getO_time()) * 10000;
-				System.out.println("운송비" + shippay);
+				LOG.info("운송비" + shippay);
 				shop.setShippay(shippay);
 				shoptotal += (sum + shippay);
 			}
@@ -674,7 +677,7 @@ public class OrdersProc extends HttpServlet {
 				shop.setTotal(sum);
 				System.out.println(sum);
 				shippay = oDao.getorderCount(shop.getO_time()) * 10000;
-				System.out.println("운송비" + shippay);
+				LOG.info("운송비" + shippay);
 				shop.setShippay(shippay);
 				shoptotal += (sum + shippay);
 			}
@@ -705,11 +708,11 @@ public class OrdersProc extends HttpServlet {
 		// 매출 총이익 페이지 월단위 내역	
 		case "selectGrossprofit": 
 			date = request.getParameter("dateInventory");
-			System.out.println(date);
+			LOG.info(date);
 			date1 = date + "-01 00:00";
-			System.out.println(date1);
+			LOG.info(date1);
 			date2 = date + "-31 23:59";
-			System.out.println(date2);
+			LOG.info(date2);
 			
 			oDao = new OrdersDAO();
 			shopListall = oDao.selectShopTime(date1, date2);
@@ -726,7 +729,7 @@ public class OrdersProc extends HttpServlet {
 				shop.setTotal(sum);
 				System.out.println(sum);
 				shippay = oDao.getorderCount(shop.getO_time()) * 10000;
-				System.out.println("운송비" + shippay);
+				LOG.info("운송비" + shippay);
 				shop.setShippay(shippay);
 				shoptotal += (sum + shippay);
 			}
@@ -747,7 +750,7 @@ public class OrdersProc extends HttpServlet {
 			}
 			
 			
-			System.out.println("기간설정 달력");
+			LOG.info("기간설정 달력");
 			request.setAttribute("dateInventory", date);
 			request.setAttribute("shoptotal", shoptotal);
 			request.setAttribute("buyingtotal", buyingtotal);
@@ -758,11 +761,11 @@ public class OrdersProc extends HttpServlet {
 			
 		case "shopSelectTime": 
 			date = request.getParameter("dateInventory");
-			System.out.println(date);
+			LOG.info(date);
 			date1 = date + "-01 00:00";
-			System.out.println(date1);
+			LOG.info(date1);
 			date2 = date + "-31 23:59";
-			System.out.println(date2);
+			LOG.info(date2);
 			
 			oDao = new OrdersDAO();
 			shopListall = oDao.selectShopTime(date1, date2);
@@ -779,13 +782,13 @@ public class OrdersProc extends HttpServlet {
 				shop.setTotal(sum);
 				System.out.println(sum);
 				shippay = oDao.getorderCount(shop.getO_time()) * 10000;
-				System.out.println("운송비" + shippay);
+				LOG.info("운송비" + shippay);
 				shop.setShippay(shippay);
 				shoptotal += (sum + shippay);
 			}
 			
 	
-			System.out.println("쇼핑몰 한달 내역");
+			LOG.info("쇼핑몰 한달 내역");
 			request.setAttribute("dateInventory", date);
 			request.setAttribute("shopList", shopListall);
 			request.setAttribute("shoptotal", shoptotal);
@@ -795,11 +798,11 @@ public class OrdersProc extends HttpServlet {
 			
 		case "buyingselectTime": 
 			date = request.getParameter("dateInventory");
-			System.out.println(date);
+			LOG.info(date);
 			date1 = date + "-01 00:00";
-			System.out.println(date1);
+			LOG.info(date1);
 			date2 = date + "-31 23:59";
-			System.out.println(date2);
+			LOG.info(date2);
 			
 			pDao = new ProductDAO();
 			bDto = new BuyingDTO();
@@ -808,7 +811,7 @@ public class OrdersProc extends HttpServlet {
 				buyingtotal += buydto.getTotal();
 			}
 			
-			System.out.println("구매처 한달 내역");
+			LOG.info("구매처 한달 내역");
 			request.setAttribute("dateInventory", date);
 			request.setAttribute("buyingProfit", buyingProfitall);
 			rd = request.getRequestDispatcher("admin/grossprofit/grossprofit_buying_selectTime.jsp");

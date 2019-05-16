@@ -4,7 +4,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -20,11 +19,15 @@ import waybill.NoWaybillDTO;
 import waybill.WaybillDAO;
 import waybill.WaybillDTO;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
  * Servlet implementation class CommodityProc
  */
 @WebServlet("/CommodityProcServlet")
 public class CommodityProc extends HttpServlet {
+	private static final Logger LOG = LoggerFactory.getLogger(CommodityProc.class);
 	private static final long serialVersionUID = 1L;
 
 	public CommodityProc() {
@@ -95,9 +98,9 @@ public class CommodityProc extends HttpServlet {
 				DateFormat df1 = new SimpleDateFormat("yyyy-MM");
 				Calendar cal1 = Calendar.getInstance();
 				date = df1.format(cal1.getTime());
-				System.out.println("이번달은? : "+ df1.format(cal1.getTime()));
+				LOG.info("이번달은? : "+ df1.format(cal1.getTime()));
 				
-				System.out.println("재고처리 유무 : " + cDao.checkNow(date));
+				LOG.info("재고처리 유무 : " + cDao.checkNow(date));
 				if(cDao.checkNow(date) == null)
 					request.setAttribute("dbinsert", null);
 				else
@@ -130,15 +133,15 @@ public class CommodityProc extends HttpServlet {
 		case "selectCommodity":
 			cDao = new CommodityDAO();
 			date = request.getParameter("dateInventory");
-			System.out.println("월별 : " + date);
+			LOG.info("월별 : " + date);
 			date1 = date + "-01 00:00";
-			System.out.println(date1);
+			LOG.info(date1);
 			date2 = date + "-31 23:59";
-			System.out.println(date2);
+			LOG.info(date2);
 
 			lastmonth = cDao.lastMonth(date);
 			lastdate1 = lastmonth + "-01 00:00";
-			System.out.println("지난달 : " + lastmonth);
+			LOG.info("지난달 : " + lastmonth);
 
 			cDtoList = cDao.selectcommodityOutTime(date1, date2); // 출고, 기초재고, 상품id
 			for (CommodityDTO coDto : cDtoList) {
@@ -159,14 +162,14 @@ public class CommodityProc extends HttpServlet {
 
 		case "commodityDB":
 			date = request.getParameter("date");
-			System.out.println("재고정산 날짜 : " + date);
+			LOG.info("재고정산 날짜 : " + date);
 
 			cDao = new CommodityDAO();
 
 			date1 = date + "-01 00:00";
-			System.out.println(date1);
+			LOG.info(date1);
 			date2 = date + "-31 23:59";
-			System.out.println(date2);
+			LOG.info(date2);
 			boolean finish = false;
 			boolean ok = false;
 
@@ -193,7 +196,7 @@ public class CommodityProc extends HttpServlet {
 							coDto.setC_close(close);
 							coDto.setC_time(date);
 							cDao.insertCommodity(coDto);
-							System.out.println("재고db : " + coDto.toString());
+							LOG.info("재고db : " + coDto.toString());
 							break;
 						} else
 							ok = false;
@@ -214,7 +217,7 @@ public class CommodityProc extends HttpServlet {
 						close = ncDto.getC_basic() + ncDto.getC_in();
 						ncDto.setC_close(close);
 						cDao.insertCommodity(ncDto);
-						System.out.println("없는재고db : " + ncDto.toString());
+						LOG.info("없는재고db : " + ncDto.toString());
 					}
 				}
 			}

@@ -12,9 +12,11 @@ import java.util.Date;
 import java.util.List;
 
 import waybill.NoWaybillDTO;
-import waybill.WaybillDTO;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class OrdersDAO {
+	private static final Logger LOG = LoggerFactory.getLogger(OrdersDAO.class);
 	private Connection conn;
 
 	private static final String USERNAME = "javauser";
@@ -138,9 +140,9 @@ public class OrdersDAO {
 		String query = "INSERT INTO waybill(o_id, o_name, o_tel, o_address, w_waycode, o_time) SELECT o_id, o_name, o_tel, o_address, ?, o_time FROM orders WHERE o_id = ?;";
 		PreparedStatement pStmt = null;
 		String address = selectAddress(o_id);
-		System.out.println(address);
+		LOG.info(address);
 		String add = address.substring(0, 2);
-		System.out.println(add);
+		LOG.info(add);
 		String w_waycode = null;
 
 		if (add.equals("서울") || add.equals("경기")) {
@@ -179,14 +181,14 @@ public class OrdersDAO {
 		PreparedStatement pStmt = null;
 		String w_time = null;
 		String o_time = oDto.getO_time();
-		System.out.println(o_time);
+		LOG.info(o_time);
 
 		if (compareTime(o_time).after(currentTime("day")))
 			w_time = timechangeString(currentTime("night"));
 		else
 			w_time = timechangeString(currentTime("day"));
 
-		System.out.println(w_time);
+		LOG.info(w_time);
 
 		try {
 			pStmt = conn.prepareStatement(query);
@@ -214,14 +216,14 @@ public class OrdersDAO {
 		PreparedStatement pStmt = null;
 		String w_time = null;
 		String o_time = nwDto.getO_time();
-		System.out.println(o_time);
+		LOG.info(o_time);
 
 		if (compareTime(o_time).after(currentTime("day")))
 			w_time = timechangeString(currentTime("night"));
 		else
 			w_time = timechangeString(currentTime("day"));
 
-		System.out.println(w_time);
+		LOG.info(w_time);
 
 		try {
 			pStmt = conn.prepareStatement(query);
@@ -257,7 +259,7 @@ public class OrdersDAO {
 		else
 			time1 += " 10:00";
 
-		System.out.println(time1);
+		LOG.info(time1);
 
 		try {
 			time = format2.parse(time1);
@@ -330,7 +332,7 @@ public class OrdersDAO {
 				oDto.setO_address(rs.getString(4));
 				oDto.setO_time(rs.getString(5));
 				oDto.setCount(rs.getInt(6));
-				System.out.println(oDto.toString());
+				LOG.info(oDto.toString());
 				list.add(oDto);
 			}
 		} catch (Exception e) {
@@ -365,7 +367,7 @@ public class OrdersDAO {
 				oDto.setO_address(rs.getString(4));
 				oDto.setO_time(rs.getString(5));
 				oDto.setCount(rs.getInt(6));
-				System.out.println(oDto.toString());
+				LOG.info(oDto.toString());
 				list.add(oDto);
 			}
 		} catch (Exception e) {
@@ -410,7 +412,7 @@ public class OrdersDAO {
 				oDto.setO_address(rs.getString(4));
 				oDto.setO_time(rs.getString(5));
 				oDto.setCount(rs.getInt(6));
-				System.out.println(oDto.toString());
+				LOG.info(oDto.toString());
 				list.add(oDto);
 			}
 		} catch (Exception e) {
@@ -498,7 +500,7 @@ public class OrdersDAO {
 				doDto.setP_id(rs.getInt(1));
 				doDto.setP_name(rs.getString(2));
 				doDto.setO_quantity(rs.getInt(3));
-				System.out.println(doDto.toString());
+				LOG.info(doDto.toString());
 				list.add(doDto);
 			}
 
@@ -546,7 +548,7 @@ public class OrdersDAO {
 		int quantity = selectQuentity(doDto.getP_id()) - doDto.getO_quantity();
 
 		if (quantity <= 0) {
-			System.out.println("수량부족");
+			LOG.info("수량부족");
 			return false;
 		} else {
 			return true;
@@ -558,7 +560,7 @@ public class OrdersDAO {
 		int quantity = selectQuentity(doDto.getP_id());
 
 		if (quantity < 10) {
-			System.out.println("발주신청요구");
+			LOG.info("발주신청요구");
 			return true;
 		} else {
 			return false;
@@ -595,7 +597,7 @@ public class OrdersDAO {
 				oDto.setO_address(rs.getString(4));
 				oDto.setO_time(rs.getString(5));
 				oDto.setCount(rs.getInt(6));
-				System.out.println(oDto.toString());
+				LOG.info(oDto.toString());
 				list.add(oDto);
 			}
 		} catch (Exception e) {
@@ -640,7 +642,7 @@ public class OrdersDAO {
 				oDto.setO_address(rs.getString(4));
 				oDto.setO_time(rs.getString(5));
 				oDto.setCount(rs.getInt(6));
-				System.out.println(oDto.toString());
+				LOG.info(oDto.toString());
 				list.add(oDto);
 			}
 		} catch (Exception e) {
@@ -685,7 +687,7 @@ public class OrdersDAO {
 				oDto.setO_address(rs.getString(4));
 				oDto.setO_time(rs.getString(5));
 				oDto.setCount(rs.getInt(6));
-				System.out.println(oDto.toString());
+				LOG.info(oDto.toString());
 				list.add(oDto);
 			}
 		} catch (Exception e) {
@@ -730,7 +732,7 @@ public class OrdersDAO {
 				oDto.setO_address(rs.getString(4));
 				oDto.setO_time(rs.getString(5));
 				oDto.setCount(rs.getInt(6));
-				System.out.println(oDto.toString());
+				LOG.info(oDto.toString());
 				list.add(oDto);
 			}
 		} catch (Exception e) {
@@ -775,7 +777,7 @@ public class OrdersDAO {
 				oDto.setO_address(rs.getString(4));
 				oDto.setO_time(rs.getString(5));
 				oDto.setCount(rs.getInt(6));
-				System.out.println(oDto.toString());
+				LOG.info(oDto.toString());
 				list.add(oDto);
 			}
 		} catch (Exception e) {
@@ -825,7 +827,7 @@ public class OrdersDAO {
 				+ "from orders as o inner join orders_detail as d on o.o_id = d.o_id where o.o_time between ?  and ?  group by o.o_id  order by o.o_id desc;";
 		PreparedStatement pStmt = null;
 		List<OrdersDTO> list = new ArrayList<OrdersDTO>();
-		System.out.println(date1 + " " + date2);
+		LOG.info(date1 + " " + date2);
 
 		try {
 			pStmt = conn.prepareStatement(sql);
@@ -841,7 +843,7 @@ public class OrdersDAO {
 				oDto.setO_address(rs.getString(4));
 				oDto.setO_time(rs.getString(5));
 				oDto.setCount(rs.getInt(6));
-				System.out.println("기간설정" + oDto.toString());
+				LOG.info("기간설정" + oDto.toString());
 				list.add(oDto);
 			}
 		} catch (Exception e) {
@@ -901,7 +903,7 @@ public class OrdersDAO {
 				oDto.setO_time(rs.getString(2));
 				oDto.setTotal(rs.getInt(3));
 				oDto.setShippay(rs.getInt(4));
-				System.out.println(oDto.toString());
+				LOG.info(oDto.toString());
 				list.add(oDto);
 			}
 		} catch (Exception e) {
@@ -939,7 +941,7 @@ public class OrdersDAO {
 				doDto.setP_count(rs.getInt(4));
 				doDto.setP_total(rs.getInt(5));
 				doDto.setTotal(rs.getInt(6));
-				System.out.println(doDto.toString());
+				LOG.info(doDto.toString());
 				list.add(doDto);
 			}
 		} catch (Exception e) {
@@ -1007,7 +1009,7 @@ public class OrdersDAO {
 					oDto.setO_time(rs.getString(2));
 					oDto.setTotal(rs.getInt(3));
 					oDto.setShippay(rs.getInt(4));
-					System.out.println(oDto.toString());
+					LOG.info(oDto.toString());
 					list.add(oDto);
 				}
 			} catch (Exception e) {
@@ -1044,7 +1046,7 @@ public class OrdersDAO {
 					doDto.setP_count(rs.getInt(4));
 					doDto.setP_total(rs.getInt(5));
 					doDto.setTotal(rs.getInt(6));
-					System.out.println(doDto.toString());
+					LOG.info(doDto.toString());
 					list.add(doDto);
 				}
 			} catch (Exception e) {

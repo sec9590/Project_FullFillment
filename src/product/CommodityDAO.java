@@ -18,8 +18,11 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class CommodityDAO {
+	private static final Logger LOG = LoggerFactory.getLogger(CommodityDAO.class);
 	private Connection conn;
 
 	private static final String USERNAME = "javauser";
@@ -52,7 +55,7 @@ public class CommodityDAO {
 				cDto.setC_basic(rs.getInt(1));
 				cDto.setP_id(rs.getInt(2));
 				cDto.setC_out(rs.getInt(3));		
-				System.out.println(cDto.toString());
+				LOG.info(cDto.toString());
 				list.add(cDto);
 			}
 
@@ -87,7 +90,7 @@ public class CommodityDAO {
 					cDto.setP_id(rs.getInt(2));
 					cDto.setP_name(rs.getString(3));
 					cDto.setC_out(rs.getInt(4));		
-					System.out.println(cDto.toString());
+					LOG.info(cDto.toString());
 					list.add(cDto);
 				}
 
@@ -178,7 +181,7 @@ public class CommodityDAO {
 			
 			if(p_id == id)
 				basic = close; //지난달 기말재고
-			System.out.println("지난달 상품 : " + p_id + " 기말재고: " +  basic);
+			LOG.info("지난달 상품 : " + p_id + " 기말재고: " +  basic);
 		}
 		
 		try {
@@ -242,7 +245,7 @@ public class CommodityDAO {
 		cal.set(Calendar.MONTH,  Integer.parseInt(date.substring(5,7))-1);
 		cal.add ( cal.MONTH, -1 ); //이전달
 		String time = df.format(cal.getTime());
-		System.out.println("이전달 : " + time);   
+		LOG.info("이전달 : " + time);   
 		
 		return time;
 	}
@@ -255,7 +258,7 @@ public class CommodityDAO {
 		cal.set(Calendar.MONTH,  Integer.parseInt(date.substring(5,7))-1);
 		cal.add ( cal.MONTH, +1 ); //이전달 플러스
 		String time = df.format(cal.getTime());
-		System.out.println("이전달+1 : " + time);   
+		LOG.info("이전달+1 : " + time);   
 		
 		return time;
 	}
@@ -266,7 +269,7 @@ public class CommodityDAO {
 		PreparedStatement pStmt = null;
 		CommodityDTO cDto = new CommodityDTO();
 		c_time = lastMonth(c_time);
-		System.out.println("전달 기말재고 날짜 : " + c_time);
+		LOG.info("전달 기말재고 날짜 : " + c_time);
 		
 		try {
 			pStmt = conn.prepareStatement(query);
@@ -381,7 +384,7 @@ public class CommodityDAO {
 	// 재고가 확정 되어있는지 확인
 	public boolean checkInsert(String date) {
 		if(checkmonth(date)==null) {
-			System.out.println("없다.");
+			LOG.info("없다.");
 			return true;
 		}else
 			return false;
@@ -435,7 +438,7 @@ public class CommodityDAO {
 				cDto.setC_in(rs.getInt(3));
 				cDto.setC_out(rs.getInt(4));
 				cDto.setC_close(rs.getInt(5));
-				System.out.println(cDto.toString());
+				LOG.info(cDto.toString());
 				list.add(cDto);
 			}
 
@@ -470,7 +473,7 @@ public class CommodityDAO {
 				cDto.setC_in(rs.getInt(3));
 				cDto.setC_out(rs.getInt(4));
 				cDto.setC_close(rs.getInt(5));
-				System.out.println(cDto.toString());
+				LOG.info(cDto.toString());
 				list.add(cDto);
 			}
 

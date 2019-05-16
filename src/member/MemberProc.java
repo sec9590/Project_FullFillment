@@ -7,18 +7,18 @@ import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.jasper.tagplugins.jstl.core.Out;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 @WebServlet("/memberProcServlet")
 public class MemberProc extends HttpServlet {
+	private static final Logger LOG = LoggerFactory.getLogger(MemberProc.class);
 	private static final long serialVersionUID = 1L;
        
     public MemberProc() {
@@ -123,7 +123,7 @@ public class MemberProc extends HttpServlet {
 					break;
 				}
 			
-				System.out.println("로그인 성공");
+				LOG.info("로그인성공");
 				
 			} else {
 				request.setAttribute("message", errorMessage);
@@ -153,7 +153,7 @@ public class MemberProc extends HttpServlet {
 			m_job = request.getParameter("m_job");
 			m_field = request.getParameter("m_field");
 			member = new MemberDTO(m_id, m_password, m_name, m_tel, m_job, m_field);
-			System.out.println(member.toString());
+			LOG.trace(member.toString());
 			
 			mDao = new MemberDAO();
 			mDao.insertMember(member);

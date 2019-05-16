@@ -8,10 +8,11 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import product.OrdersDTO;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class MemberDAO {
-
+	private static final Logger LOG = LoggerFactory.getLogger(MemberDAO.class);
 	public static final int ID_PASSWORD_MATCH = 1;
 	public static final int ID_DOES_NOT_EXIST = 2;
 	public static final int PASSWORD_IS_WRONG = 3;

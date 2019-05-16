@@ -11,9 +11,13 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+
 public class WaybillDAO {
 	private Connection conn;
-
+	private static final Logger LOG = LoggerFactory.getLogger(WaybillDAO.class);
 	private static final String USERNAME = "javauser";
 	private static final String PASSWORD = "javapass";
 	private static final String URL = "jdbc:mysql://localhost:3306/yellow?verifyServerCertificate=false&useSSL=false";
@@ -340,7 +344,7 @@ public class WaybillDAO {
 				wDto.setO_time(rs.getString(7).substring(2, 16));
 				wDto.setW_time(rs.getString(8).substring(2, 16));
 				list.add(wDto);
-				System.out.println(wDto.toString());
+				LOG.info(wDto.toString());
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -371,7 +375,7 @@ public class WaybillDAO {
 				wDto.setCount(rs.getInt(3));
 				wDto.setW_waycode(rs.getString(4));
 				list.add(wDto);
-				System.out.println(wDto.toString());
+				LOG.info(wDto.toString());
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -395,7 +399,7 @@ public class WaybillDAO {
 			pStmt = conn.prepareStatement(query);
 			pStmt.setString(1, w_waycode);
 			w_time = w_time + "%";
-			System.out.println("운송시간 : " + w_time);
+			LOG.info("운송시간 : " + w_time);
 			pStmt.setString(2, w_time);
 			ResultSet rs = pStmt.executeQuery();
 
@@ -408,7 +412,7 @@ public class WaybillDAO {
 				wDto.setO_address(rs.getString(5));
 				wDto.setCount(rs.getInt(6));
 				list.add(wDto);
-				System.out.println(wDto.toString());
+				LOG.info(wDto.toString());
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -429,7 +433,7 @@ public class WaybillDAO {
 		String query = "select * from waybill where o_time between ? and ?;";
 		PreparedStatement pStmt = null;
 		List<WaybillDTO> list = new ArrayList<WaybillDTO>();
-		System.out.println(date1 + " " + date2);
+		LOG.info(date1 + " " + date2);
 		try {
 			pStmt = conn.prepareStatement(query);
 			pStmt.setString(1, date1);
@@ -447,7 +451,7 @@ public class WaybillDAO {
 				wDto.setO_time(rs.getString(7).substring(2, 16));
 				wDto.setW_time(rs.getString(8).substring(2, 16));
 				list.add(wDto);
-				System.out.println("한달" + wDto.toString());
+				LOG.info("한달" + wDto.toString());
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -486,7 +490,7 @@ public class WaybillDAO {
 			String query = "select m.m_name, w.w_time, count(*), w.w_waycode from waybill as w inner join member as m on binary(m.m_field) = binary(w.w_waycode) where w.w_time between ? and ? group by w.w_time, w.w_waycode;";
 			PreparedStatement pStmt = null;
 			List<WaybillDTO> list = new ArrayList<WaybillDTO>();
-			System.out.println(date1 + " " + date2);
+			LOG.info(date1 + " " + date2);
 			try {
 				pStmt = conn.prepareStatement(query);
 				pStmt.setString(1, date1);
