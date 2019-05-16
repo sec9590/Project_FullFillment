@@ -712,7 +712,7 @@ public class OrdersProc extends HttpServlet {
 			System.out.println(date2);
 			
 			oDao = new OrdersDAO();
-			shopListall = oDao.selectShop();
+			shopListall = oDao.selectShopTime(date1, date2);
 
 			for (OrdersDTO shop : shopListall) {
 				int sum = 0;
@@ -765,7 +765,7 @@ public class OrdersProc extends HttpServlet {
 			System.out.println(date2);
 			
 			oDao = new OrdersDAO();
-			shopListall = oDao.selectShop();
+			shopListall = oDao.selectShopTime(date1, date2);
 
 			for (OrdersDTO shop : shopListall) {
 				int sum = 0;

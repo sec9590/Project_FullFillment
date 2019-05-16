@@ -12,6 +12,9 @@
     <link rel="stylesheet" href="css/core-style.css">
     <link rel="stylesheet" href="css/style.css">
 <style>
+	tr.space {
+	  margin-top:10px;
+	}
 	input[type=submit]{
 	  display: inline-block;
 	  width: 650px;
@@ -116,12 +119,12 @@
 
                                 <div class="col-12">
                                 	<table>
-                                		<tr>
+                                		<tr class="space">
                                 			<th><label>분    류</label></th>
                                 			<td><label><input type="radio" name="m_job" value="1" >&nbsp;구매처</label></td>
                                 			<td><label><input type="radio" name="m_job" value="2" >&nbsp;운송회사</label></td>
                                 		</tr>
-                                		<tr>
+                                		<tr  class="space">
                                 			<th><label>구매처 선택 - 거래 항목</label></th>
                                 		</tr>
                                 		<tr>
@@ -131,7 +134,7 @@
                                 			<td><label><input type="radio" name="m_field" value="D" >&nbsp;수납장</label></td>
                                 			<td><label><input type="radio" name="m_field" value="E" >&nbsp;조명/리빙</label></td>
                                 		</tr>
-                                		<tr>
+                                		<tr class="space">
                                 			<th><label>운송회사 선택 - 운송 지역</label></th>
                                 		</tr>
                                 		<tr>

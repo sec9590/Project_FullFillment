@@ -886,7 +886,7 @@ public class OrdersDAO {
 
 	// 쇼핑몰 대금청구 목록	
 	public List<OrdersDTO> selectShop() {
-		String query = "select shopcode, date_format(o_time, '%Y-%m-%d %H:%i'), total, shippay from orders group by o_time;";
+		String query = "select shopcode, date_format(o_time, '%Y-%m-%d %H:%i'), total, shippay from orders group by date_format(o_time, '%Y-%m-%d %H:%i');";
 		PreparedStatement pStmt = null;
 		List<OrdersDTO> list = new ArrayList<OrdersDTO>();
 		
@@ -989,6 +989,40 @@ public class OrdersDAO {
 			return list;
 		}
 		
+	// 쇼핑몰 월별 대금청구 목록	
+		public List<OrdersDTO> selectShopTime(String date1, String date2) {
+			String query = "select shopcode, date_format(o_time, '%Y-%m-%d'), total, shippay from orders where o_time between ? and ? group by date_format(o_time, '%Y-%m-%d');";
+			PreparedStatement pStmt = null;
+			List<OrdersDTO> list = new ArrayList<OrdersDTO>();
+			
+			try {
+				pStmt = conn.prepareStatement(query);
+				pStmt.setString(1, date1);
+				pStmt.setString(2, date2);
+				ResultSet rs = pStmt.executeQuery();
+
+				while (rs.next()) {
+					OrdersDTO oDto = new OrdersDTO();
+					oDto.setShopcode(rs.getString(1));
+					oDto.setO_time(rs.getString(2));
+					oDto.setTotal(rs.getInt(3));
+					oDto.setShippay(rs.getInt(4));
+					System.out.println(oDto.toString());
+					list.add(oDto);
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				try {
+					if (pStmt != null && !pStmt.isClosed())
+						pStmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace();
+				}
+			}
+			return list;
+		}
+	
 	// 쇼핑몰 월별 대금청구 상세대금목록
 		public List<DetailOrderDTO> selectShopDetailTime(String date1, String date2) {
 			String query = "select d.p_id, d.p_name, p.p_price, sum(d.o_quantity), p.p_price*sum(d.o_quantity) as '총가격', total from orders_detail as d, product as p, orders as o where d.o_id=o.o_id and d.p_id = p.p_id and o.o_time between ? and ? group by d.p_id;\r\n" + 

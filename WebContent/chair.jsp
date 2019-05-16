@@ -143,7 +143,7 @@
                         <div class="single-product-wrapper">
                             <!-- Product Image -->
                             <div class="product-img">
-                                <img src="img/bg-img/2.jpg" alt="">
+                                <img src="img/bg-img/2.JPG" alt="">
                             </div>
 
                             <!-- Product Description -->
