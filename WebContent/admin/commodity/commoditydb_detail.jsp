@@ -126,7 +126,7 @@ button:hover {
 				</h4>
 				<div style="float: right; margin-left:600px">
 					<button type="button" 
-						onclick="location.href='FileProcServlet?action=download&date=${requestScope.date}'">다운로드</button>
+						onclick="location.href='FileProcServlet?action=down&date=${requestScope.date}'">다운로드</button>
 				</div>
 				<div class="col-12 col-sm-6 col-md-12 col-xl-15">
 					<div class="single-product-wrapper">

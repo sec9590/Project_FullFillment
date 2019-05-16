@@ -9,6 +9,17 @@ public class CommodityDTO {
 	private int c_in; // 입고
 	private int c_out; // 출고
 	private String c_time;
+	private String p_name;
+	
+	
+
+	public String getP_name() {
+		return p_name;
+	}
+
+	public void setP_name(String p_name) {
+		this.p_name = p_name;
+	}
 
 	public int getC_id() {
 		return c_id;

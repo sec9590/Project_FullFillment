@@ -135,7 +135,7 @@ h4 {
 		<!-- Header Area End -->
 
 		<div class="amado_product_area section-padding-100"	style="margin: auto;">
-			<div class="container-fluid" style="margin-top:-100px">
+			<div class="container-fluid" style="margin-top:-50px">
 				<div align=center style="margin-left: -120px;">
 					<form method="post" enctype="multipart/form-data"
 						action="OrdersProcServlet?action=down">

@@ -1,7 +1,12 @@
 package product;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.Reader;
+import java.io.Writer;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -286,7 +291,7 @@ public class CommodityDAO {
 	}	
 	
 	// 이번달 기말재고 구하기
-		public String checkNow(String c_time) {
+	public String checkNow(String c_time) {
 			String query = "select c_time from commodity where c_time = ? group by c_time";
 			PreparedStatement pStmt = null;
 			CommodityDTO cDto = new CommodityDTO();		
@@ -445,6 +450,7 @@ public class CommodityDAO {
 		}
 		return list;
 	}
+	
 	//상세 조회
 	public List<CommodityDTO> selectCommodityDetail(String c_time) {
 		String query = "select p_id, c_basic, c_in, c_out, c_close from commodity where c_time = ?;";
@@ -480,6 +486,7 @@ public class CommodityDAO {
 		return list;
 	}
 	
+	//사용x 클라이언에게 내보내는것
 	public String prepareDownload(String c_time) {
 		List<CommodityDTO> cDtoList = selectCommodityDetail(c_time);
 		StringBuffer sb = new StringBuffer();
@@ -502,5 +509,56 @@ public class CommodityDAO {
 			e.printStackTrace();
 		}
 		return sb.toString();
+	}
+	
+	//파일 쓰기 (서버에 저장)
+	public void writeCSV(String month) {
+		Writer writer = null;
+		BufferedWriter bw = null;
+		List<CommodityDTO> cDtoList = selectCommodityDetail(month);
+		try {
+			writer = new FileWriter("c:/Temp/Inventories/" + month + ".csv");
+			bw = new BufferedWriter(writer);
+			String head = "제품코드,기초재고,입고,출고,기말재고\r\n";
+			bw.write(head);		
+			for (CommodityDTO cDto: cDtoList) {
+				String line = cDto.getP_id() + "," + cDto.getC_basic() + "," + cDto.getC_in() + ","
+						+ cDto.getC_out() + "," + cDto.getC_close() + "\r\n";
+				bw.write(line);
+				
+			}
+			bw.flush();
+			bw.close();
+			writer.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	//파일 읽기
+	public List<CommodityDTO> readCSV(String month) {
+		List<CommodityDTO> iList = new ArrayList<CommodityDTO>();
+		Reader reader = null;
+		BufferedReader br = null;
+		String line = null;
+		try {
+			reader = new FileReader("c:/Temp/Inventories/" + month + ".csv");
+			br = new BufferedReader(reader);
+			while ((line = br.readLine()) != null) {				
+				CommodityDTO iDto = new CommodityDTO();
+				String str[] = line.split(",");
+				iDto.setP_id(Integer.parseInt(str[0]));
+				iDto.setC_basic(Integer.parseInt(str[1]));
+				iDto.setC_in(Integer.parseInt(str[2]));
+				iDto.setC_out(Integer.parseInt(str[3]));
+				iDto.setC_close(Integer.parseInt(str[4]));
+				iList.add(iDto);
+			}
+			br.close();
+			reader.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return iList;
 	}
 }
