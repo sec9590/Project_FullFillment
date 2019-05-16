@@ -8,6 +8,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import product.OrdersDTO;
+
 public class MemberDAO {
 
 	public static final int ID_PASSWORD_MATCH = 1;
@@ -181,6 +183,72 @@ public class MemberDAO {
 			}
 		}	
     }
+    
+    // 페이지별 회원목록
+ 	public List<MemberDTO> memberAll(int page) {
+ 		int offset = 0;
+ 		String sql = null;
+ 		if (page == 0) {
+ 			sql = "select m_id, m_name, m_tel, m_job, m_field from member order by m_id;";
+ 		} else {
+ 			sql = "select m_id, m_name, m_tel, m_job, m_field from member order by m_id limit ?, 10;";
+ 			offset = (page - 1) * 10;
+ 		}
+ 		PreparedStatement pStmt = null;
+ 		List<MemberDTO> list = new ArrayList<MemberDTO>();
+
+ 		try {
+ 			pStmt = conn.prepareStatement(sql);
+ 			if (page != 0)
+ 				pStmt.setInt(1, offset);
+ 			ResultSet rs = pStmt.executeQuery();
+
+ 			while (rs.next()) {
+ 				MemberDTO mDto = new MemberDTO();
+ 				mDto.setM_id(rs.getString(1));
+ 				mDto.setM_name(rs.getString(2));
+ 				mDto.setM_tel(rs.getString(3));
+ 				mDto.setM_job(rs.getString(4));
+ 				mDto.setM_field(rs.getString(5));
+ 				list.add(mDto);
+ 			}
+ 		} catch (Exception e) {
+ 			e.printStackTrace();
+ 		} finally {
+ 			try {
+ 				if (pStmt != null && !pStmt.isClosed())
+ 					pStmt.close();
+ 			} catch (SQLException se) {
+ 				se.printStackTrace();
+ 			}
+ 		}
+ 		return list;
+ 	}
+    
+ 	// 페이지위한 개수
+ 	public int getCount() {
+ 		String query = "select count(*) from orders;";
+ 		PreparedStatement pStmt = null;
+ 		int count = 0;
+ 		try {
+ 			pStmt = conn.prepareStatement(query);
+ 			ResultSet rs = pStmt.executeQuery();
+ 			while (rs.next()) {
+ 				count = rs.getInt(1);
+ 			}
+ 			rs.close();
+ 		} catch (Exception e) {
+ 			e.printStackTrace();
+ 		} finally {
+ 			try {
+ 				if (pStmt != null && !pStmt.isClosed())
+ 					pStmt.close();
+ 			} catch (SQLException se) {
+ 				se.printStackTrace();
+ 			}
+ 		}
+ 		return count;
+ 	}
     
     public void close() {
     	try {

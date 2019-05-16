@@ -15,7 +15,7 @@
 <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
 <!-- Title  -->
-<title>Yellow Container : commodity</title>
+<title>Yellow Container : member_list</title>
 
 <!-- Favicon  -->
 <link rel="icon" href="img/core-img/favicon.ico">
@@ -105,8 +105,8 @@ button:hover {
 		</div>
 		<!-- Amado Nav --> <nav class="amado-nav">
 		<li><a href="index.jsp">HOME</a></li>
-		<li><a href="memberProcServlet?action=member&page=1">회원목록</a></li>
-		<li class="active"><a href="OrdersProcServlet?action=productlist">재고내역</a></li>
+		<li class="active"><a href="memberProcServlet?action=member&page=1">회원목록</a></li>
+		<li><a href="OrdersProcServlet?action=productlist">재고내역</a></li>
 		<li><a href="order.jsp">주문하기</a></li>
 		<li><a href="OrdersProcServlet?action=orderAll&page=1">주문내역</a></li>
 		<li><a href="OrdersProcServlet?action=orderhistoryall">발주내역</a></li>
@@ -118,36 +118,98 @@ button:hover {
 
 		<div class="amado_product_area section-padding-100">
 			<div class="row">
-				<h4>재고 DB</h4>				
+			<div style="width: 100%; position: relative;">
+				<h4>회원목록</h4>
+				
+				</div>
 				<div class="col-12 col-sm-6 col-md-12 col-xl-15">
 					<div class="single-product-wrapper">
 						<table class="table table-hover">
 							<thead>
 								<tr>
-									<th>yyyy-mm</th>
-									<th>총 기초재고</th>
-									<th style="color : blue">총 입고</th>
-									<th style="color : red">총 출고</th>
-									<th>총 기말재고</th>
+									<th>아이디</th>
+									<th>이름</th>
+									<th>전화번호</th>
+									<th>직업</th>
+									<th>분류</th>
+									<th>배송지</th>
+	
 								</tr>
 							</thead>
 							<tbody>
 							<tbody>
-								<c:set var="clist" value="${requestScope.cDtoList}" />
-								<c:forEach var="c" items="${clist}">
+								<c:set var="mAll" value="${requestScope.memberAll}" />
+								<c:forEach var="all" items="${mAll}">
 									<tr>
-										<td><a
-											href="CommodityProcServlet?action=commoditydbdetail&date=${c.c_time}">${c.c_time}</a></td>
-										<td>${c.c_basic}</td>
-										<td>${c.c_in}</td>
-										<td>${c.c_out}</td>
-										<td>${c.c_close}</td>
+										<td>${all.m_id}</td>
+										<td>${all.m_name}</td>
+										<td>${all.m_tel }</td>
+										<c:choose>
+											<c:when test="${all.m_job == 1}">
+												<td>구매처</td>
+													<c:choose>
+														<c:when test="${all.m_field == 'A' }">
+															<td>의자</td>
+														</c:when>
+														<c:when test="${all.m_field == 'B' }">
+															<td>침대</td>
+														</c:when>
+														<c:when test="${all.m_field == 'C' }">
+															<td>테이블</td>
+														</c:when>
+														<c:when test="${all.m_field == 'D' }">
+															<td>수납장</td>
+														</c:when>
+														<c:when test="${all.m_field == 'E' }">
+															<td>조명/리빙</td>
+														</c:when>
+													</c:choose>
+													<td></td>
+											</c:when>
+											<c:when test="${all.m_job == 2}">
+												<td>운송회사</td>
+												<td></td>
+												<c:choose>
+														<c:when test="${all.m_field == 'a' }">
+															<td>서울/경기</td>
+														</c:when>
+														<c:when test="${all.m_field == 'b' }">
+															<td>대전/세종/충청</td>
+														</c:when>
+														<c:when test="${all.m_field == 'c' }">
+															<td>광주/전라</td>
+														</c:when>
+														<c:when test="${all.m_field == 'd' }">
+															<td>부산/울산/대구/경상</td>
+														</c:when>
+														<c:when test="${all.m_field == 'e' }">
+															<td>강원</td>
+														</c:when>
+													</c:choose>
+											</c:when>
+											<c:when test="${all.m_job == 0}">
+												<td>관리자</td>
+											</c:when>
+											<c:when test="${product.p_quantity >= 10}">
+												<td>${product.p_quantity}</td>
+											</c:when>
+											<c:when test="${product.p_quantity >= 10}">
+												<td>${product.p_quantity}</td>
+											</c:when>
+										</c:choose>
 									</tr>
 								</c:forEach>
 							</tbody>
 							</tbody>
 						</table>
-					</div>
+					
+					<div align=center>
+							<c:set var="pageList" value="${requestScope.pageList}" />
+							<c:forEach var="pageNo" items="${pageList}">
+								${pageNo}
+							</c:forEach>
+						</div>
+						</div>
 				</div>
 			</div>
 		</div>
@@ -155,7 +217,8 @@ button:hover {
 	<!-- ##### Main Content Wrapper End ##### -->
 
 	<!-- ##### Footer Area Start ##### -->
-	<footer class="footer_area clearfix" style="padding:10px;">
+	<footer class="footer_area clearfix"
+		style="padding:10px;">
 	<div class="container" style="text-align: center">
 		<span style="color: white"> Copyright &copy;<script>
 			document.write(new Date().getFullYear());

@@ -22,7 +22,6 @@
     <link rel="stylesheet" type="text/css" href="css/main.css">
 
   <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
   <!--===============================================================================================-->
     <link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
   <!--===============================================================================================-->
@@ -139,7 +138,7 @@
     <!-- ##### Main Content Wrapper End ##### -->
     
 <!-- ##### Footer Area Start ##### -->
-	<footer class="footer_area clearfix" style="padding:10px; position:absolute; bottom:0; width:100%">
+	<footer class="footer_area clearfix" style="padding:10px;">
 	<div class="container" style="text-align:center">		
 				<span style="color:white">					
 						Copyright &copy;<script>

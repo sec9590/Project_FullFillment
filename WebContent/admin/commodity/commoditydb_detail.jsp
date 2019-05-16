@@ -108,6 +108,7 @@ button:hover {
 		</div>
 		<!-- Amado Nav --> <nav class="amado-nav">
 		<li><a href="index.jsp">HOME</a></li>
+		<li><a href="memberProcServlet?action=member&page=1">회원목록</a></li>
 		<li class="active"><a href="OrdersProcServlet?action=productlist">재고내역</a></li>
 		<li><a href="order.jsp">주문하기</a></li>
 		<li><a href="OrdersProcServlet?action=orderAll&page=1">주문내역</a></li>
@@ -120,13 +121,15 @@ button:hover {
 
 		<div class="amado_product_area section-padding-100">
 			<div class="row">
+			<div style="width:100%; position:relative;">
 				<h4>
 					<span style="color: #fbb710; font-size: 1em; font-weight: bold">
 						${requestScope.date} </span>&nbsp;재고 DB
 				</h4>
-				<div style="float: right; margin-left:600px">
+				<div style="float: right;">
 					<button type="button" 
 						onclick="location.href='FileProcServlet?action=down&date=${requestScope.date}'">다운로드</button>
+				</div>
 				</div>
 				<div class="col-12 col-sm-6 col-md-12 col-xl-15">
 					<div class="single-product-wrapper">

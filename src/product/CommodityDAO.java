@@ -71,7 +71,7 @@ public class CommodityDAO {
 	
 	// 월별 운송된 상품에서 출고된 상품갯수
 	public List<CommodityDTO> selectcommodityOutTime(String date1, String date2) {
-			String query = "select 15, d.p_id, sum(d.o_quantity) from waybill as w , orders_detail as d, orders as o where o.o_id = w.o_id and o.o_id = d.o_id and w.w_time between ? and ? group by d.p_id;";
+			String query = "select 15, d.p_id, d.p_name, sum(d.o_quantity) from waybill as w , orders_detail as d, orders as o where o.o_id = w.o_id and o.o_id = d.o_id and w.w_time between ? and ? group by d.p_id;";
 			PreparedStatement pStmt = null;
 			List<CommodityDTO> list = new ArrayList<CommodityDTO>();
 		
@@ -85,7 +85,8 @@ public class CommodityDAO {
 					CommodityDTO cDto = new CommodityDTO();
 					cDto.setC_basic(rs.getInt(1));
 					cDto.setP_id(rs.getInt(2));
-					cDto.setC_out(rs.getInt(3));		
+					cDto.setP_name(rs.getString(3));
+					cDto.setC_out(rs.getInt(4));		
 					System.out.println(cDto.toString());
 					list.add(cDto);
 				}

@@ -202,6 +202,7 @@ table.ui-datepicker-calendar {
 		</div>
 		<!-- Amado Nav --> <nav class="amado-nav">
 		<li><a href="index.jsp">HOME</a></li>
+		<li><a href="memberProcServlet?action=member&page=1">회원목록</a></li>
 		<li class="active"><a href="OrdersProcServlet?action=productlist">재고내역</a></li>
 		<li><a href="order.jsp">주문하기</a></li>
 		<li><a href="OrdersProcServlet?action=orderAll&page=1">주문내역</a></li>
@@ -216,8 +217,7 @@ table.ui-datepicker-calendar {
 			<div class="row">
 				<div style="width: 100%; position: relative;">
 					<h4>
-						<span style="color: #fbb810; font-weight: bold">${dateInventory}</span>
-						재고정산
+						<span style="color: #fbb810; font-weight: bold">${dateInventory}</span> 재고정산 내역
 					</h4>
 					<div
 						style="float: right; padding-bottom: 10px; position: relative;">
@@ -237,6 +237,7 @@ table.ui-datepicker-calendar {
 							<thead>
 								<tr>
 									<th>제품코드</th>
+									<th>제품명</th>
 									<th>기초재고</th>
 									<th>입고</th>
 									<th>출고</th>
@@ -248,6 +249,7 @@ table.ui-datepicker-calendar {
 								<c:forEach var="c" items="${clist}">
 									<tr>
 										<td>${c.p_id}</td>
+										<td style="text-align:left">${c.p_name }</td>
 										<td>${c.c_basic}</td>
 										<td>${c.c_in}</td>
 										<td>${c.c_out}</td>

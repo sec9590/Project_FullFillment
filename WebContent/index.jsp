@@ -131,10 +131,7 @@
                  <!-- Single Catagory -2 -->
                 <div class="single-products-catagory clearfix">
                     <a href="#">
-<<<<<<< Updated upstream
                         <img src="img/bg-img/2.JPG" alt="">
-=======
-                        <img src="img/bg-img/2jpg.jpg" alt="">
                         <!-- Hover Content -->
                         <div class="hover-content">
                             <div class="line"></div>
@@ -147,7 +144,6 @@
                 <div class="single-products-catagory clearfix">
                     <a href="#">
                         <img src="img/bg-img/2.jpg" alt="">
->>>>>>> Stashed changes
                         <!-- Hover Content -->
                         <div class="hover-content">
                             <div class="line"></div>
@@ -523,7 +519,6 @@
                 </div>
             </div>
         </div>
-        <!-- Product Catagories Area End -->
     </div>
     <!-- ##### Main Content Wrapper End ##### -->
 

@@ -121,6 +121,7 @@ button:hover {
 
 		<!-- Amado Nav --> <nav class="amado-nav">
 		<li><a href="index.jsp">HOME</a></li>
+		<li><a href="memberProcServlet?action=member&page=1">회원목록</a></li>
 		<li><a href="OrdersProcServlet?action=productlist">재고내역</a></li>
 		<li><a href="order.jsp">주문하기</a></li>
 		<li><a href="OrdersProcServlet?action=orderAll&page=1">주문내역</a></li>
@@ -190,8 +191,7 @@ button:hover {
 	<!-- ##### Main Content Wrapper End ##### -->
 
 	<!-- ##### Footer Area Start ##### -->
-	<footer class="footer_area clearfix"
-		style="padding:10px; position:absolute; bottom:0; width:100%">
+	<footer class="footer_area clearfix" style="padding:10px; margin-bottom:0;">
 	<div class="container" style="text-align: center">
 		<span style="color: white"> Copyright &copy;<script>
 			document.write(new Date().getFullYear());

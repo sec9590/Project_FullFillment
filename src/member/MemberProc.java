@@ -1,14 +1,20 @@
 package member;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import org.apache.jasper.tagplugins.jstl.core.Out;
+
 
 
 @WebServlet("/memberProcServlet")
@@ -41,6 +47,22 @@ public class MemberProc extends HttpServlet {
 		String m_job = null;
 		String m_field = null;
 		String field = null;
+		String page = null;
+		int pagecount = 0;
+		int curPage = 0;
+		int pageNo = 0;
+		List<String> pageList = new ArrayList<String>();
+		/*Cookie[] cookies = null;
+		String cookieId = null;*/
+		
+		/*if(!action.equals("login")) {
+			cookies = request.getCookies();
+			for (Cookie cookie: cookies) {
+				if (cookie.getName().equals("Yellow"))
+					cookieId = cookie.getValue();
+			} 
+			request.setAttribute("cookieId", cookieId);
+		}*/
 		
 		switch(action) {
 		case "login" :
@@ -65,6 +87,17 @@ public class MemberProc extends HttpServlet {
 			
 			if (result == MemberDAO.ID_PASSWORD_MATCH) {
 				member = mDao.searchById(m_id);
+				/*cookieId = member.getM_id();
+				Cookie cookie = new Cookie("Yellow", cookieId);
+				cookie.setPath("/project02/admin/");
+				response.addCookie(cookie);
+				System.out.println("coo : " + cookie);
+				request.setAttribute("cookieId", cookieId);
+				session.setAttribute(cookieId + "memberId", m_id);
+				session.setAttribute(cookieId + "memberName", member.getM_name());
+				session.setAttribute(cookieId + "memberJob", member.getM_job());
+				session.setAttribute(cookieId + "memberField", member.getM_field());*/
+				
 				session.setAttribute("memberId", m_id);
 				session.setAttribute("memberName", member.getM_name());
 				session.setAttribute("memberJob", member.getM_job());
@@ -73,6 +106,11 @@ public class MemberProc extends HttpServlet {
 				String pg = member.getM_job();
 				switch(pg) {
 				case "0" :
+					/*cookies = request.getCookies();
+					for(Cookie cook : cookies) {
+						if(cook.getName().equals("memberName"))
+							cookieId = cook.getValue();
+					}*/
 					response.sendRedirect("OrdersProcServlet?action=productlist");
 					break;
 				case "1" :
@@ -97,6 +135,12 @@ public class MemberProc extends HttpServlet {
 			break;
 			
 		case "logout":			// 로그아웃할 때
+			/*cookies = request.getCookies();
+			for (Cookie cookie: cookies) {
+				cookie.setMaxAge(0);
+				response.addCookie(cookie);
+			}*/
+
 			session.invalidate();
 			response.sendRedirect("index.jsp");
 			break;
@@ -118,6 +162,35 @@ public class MemberProc extends HttpServlet {
 			mDao.close();
 			break;
 			
+		// 회원목록 조회
+		case "member":
+			if (!request.getParameter("page").equals("")) {
+				curPage = Integer.parseInt(request.getParameter("page"));
+			}
+			mDao = new MemberDAO();
+			pagecount = mDao.getCount();
+			if (pagecount == 0) // 데이터가 없을 때 대비
+				pagecount = 1;
+			pageNo = (int) Math.ceil(pagecount / 10.0);
+			if (curPage > pageNo) // 경계선에 걸렸을 때 대비
+				curPage--;
+			session.setAttribute("currentMemberPage", curPage);
+			// 리스트 페이지의 하단 페이지 데이터 만들어 주기
+			page = null;
+			page = "<a href=#>&laquo;</a>&nbsp;";
+			pageList.add(page);
+			for (int i = 1; i <= pageNo; i++) {
+				page = "&nbsp;<a href=memberProcServlet?action=member&page=" + i + ">" + i + "</a>&nbsp;";
+				pageList.add(page);
+			}
+			page = "&nbsp;<a href=#>&raquo;</a>";
+			pageList.add(page);
+			
+			List<MemberDTO> memberAll = mDao.memberAll(curPage);
+			request.setAttribute("memberAll", memberAll);
+			request.setAttribute("pageList", pageList);
+			rd = request.getRequestDispatcher("admin/member_list.jsp");
+			rd.forward(request, response);
 		}
 	}
 	
