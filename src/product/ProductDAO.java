@@ -332,6 +332,44 @@ public class ProductDAO {
 		}
 		return list;
 	}
+	
+	// 월별 발주내역
+		public List<BuyingDTO> selectOrderhistoryAllTime(String date1, String date2, String field) {
+			String query = "select b_id, p_id, p_name, p_price, p_quantity, date_format(b_time, '%Y-%m-%d %H:%i') from buying where buycode = ? and b_time between ? and ?;";
+			PreparedStatement pStmt = null;
+			List<BuyingDTO> list = new ArrayList<BuyingDTO>();
+			LOG.info(date1 + " " + date2);
+			try {
+				pStmt = conn.prepareStatement(query);
+				pStmt.setString(1, field);
+				pStmt.setString(2, date1);
+				pStmt.setString(3, date2);
+				ResultSet rs = pStmt.executeQuery();
+
+				while (rs.next()) {
+					BuyingDTO bDto = new BuyingDTO();
+					bDto.setB_id(rs.getInt(1));
+					bDto.setP_id(rs.getInt(2));
+					bDto.setP_name(rs.getString(3));
+					bDto.setP_price(rs.getString(4));
+					bDto.setP_quantity(rs.getInt(5));
+					bDto.setB_time(rs.getString(6));
+					list.add(bDto);
+					LOG.info(bDto.toString());
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				try {
+					if (pStmt != null && !pStmt.isClosed())
+						pStmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace();
+				}
+			}
+			return list;
+		}
+
 
 	// 발주db에 상품번호 확인
 	public List<BuyingDTO> selectBuyingAll() {

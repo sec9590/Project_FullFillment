@@ -521,6 +521,7 @@ public class OrdersProc extends HttpServlet {
 			pDto = new ProductDTO();
 			buyingall = pDao.selectBuyingAll(field);
 			request.setAttribute("buyingall", buyingall);
+			request.setAttribute("field", field);
 			rd = request.getRequestDispatcher("buying/buyingall.jsp");
 			rd.forward(request, response);
 			break;
@@ -535,12 +536,14 @@ public class OrdersProc extends HttpServlet {
 			LOG.info(date2);
 			
 			field = request.getParameter("field");
+			System.out.println("바이코드" + field);
 			pDao = new ProductDAO();
 			pDto = new ProductDTO();
 			
-			buyingall = pDao.selectOrderhistoryAllTime(date1, date2);
+			buyingall = pDao.selectOrderhistoryAllTime(date1, date2, field);
 			request.setAttribute("dateInventory", date);
 			request.setAttribute("buyingall", buyingall);
+			request.setAttribute("field", field);
 			rd = request.getRequestDispatcher("buying/buyingall_selectTime.jsp");
 			rd.forward(request, response);
 			break;			

@@ -115,6 +115,7 @@ public class MemberProc extends HttpServlet {
 					break;
 				case "1" :
 					field = "OrdersProcServlet?action=buyinglist&field=" + member.getM_field();
+					request.setAttribute("field", member.getM_field());
 					response.sendRedirect(field);
 					break;
 				case "2" :
