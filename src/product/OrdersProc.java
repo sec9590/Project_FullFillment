@@ -251,8 +251,7 @@ public class OrdersProc extends HttpServlet {
 		case "nowaybill":
 			wDao = new WaybillDAO();
 			oDao = new OrdersDAO();
-			update = false;
-
+			update = false;						
 			List<NoWaybillDTO> noWaybillAll = wDao.selectNoWaybillAll();
 
 			for (NoWaybillDTO nDto : noWaybillAll) {
@@ -273,9 +272,9 @@ public class OrdersProc extends HttpServlet {
 					}
 					oDao.insertWaybill(nDto.getO_id());
 					oDao.updateWaybillTime(nDto);
-					wDao.deleteNoWaybill(nDto);
+					wDao.deleteNoWaybill(nDto);					
 					msg = "운송처리되었습니다.";
-				} else {
+				} else {					
 					msg = "재고가 부족한 항목이 있습니다.";
 				}
 			}
@@ -371,6 +370,15 @@ public class OrdersProc extends HttpServlet {
 			pageList.add(page);
 
 			orderAll = oDao.selectOrderAll(curPage);
+			for(OrdersDTO o : orderAll) {
+				if(oDao.IsWaybill(o.getO_id())) {
+					request.setAttribute("waybill", true);
+					o.setStatus("운송");
+				}else {
+					request.setAttribute("waybill", false);
+					o.setStatus("지연");
+				}
+			}
 			request.setAttribute("orderAllList", orderAll);
 			request.setAttribute("pageList", pageList);
 			rd = request.getRequestDispatcher("admin/order/sales.jsp");

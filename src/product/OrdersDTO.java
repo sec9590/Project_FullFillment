@@ -13,9 +13,21 @@ public class OrdersDTO {
 	private String shopcode;
 	private int total;
 	private int shippay;
+	private String status;
 	
 	
 	
+	
+	public String getStatus() {
+		return status;
+	}
+
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+
 	public int getShippay() {
 		return shippay;
 	}

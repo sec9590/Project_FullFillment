@@ -49,46 +49,49 @@
 	href="vendor/daterangepicker/daterangepicker.css">
 <!--===============================================================================================-->
 
-<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet"
+	href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 
 <script>
-// 즉시실행함수
-  $( function() {
-	//달력 옵션 설정
-	$.datepicker.regional['ko'] = {
-		  closeText: '닫기',
-		  prevText: '이전달',
-		  nextText: '다음달',
-		  currentText: '오늘',
-		  monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
-		  monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
-		  dayNames: ['일','월','화','수','목','금','토'],
-		  dayNamesShort: ['일','월','화','수','목','금','토'],
-		  dayNamesMin: ['일','월','화','수','목','금','토'],
-		  weekHeader: 'Wk',
-		  dateFormat: 'yy-mm-dd',
-		  firstDay: 0,
-		  isRTL: false,
-		  duration:200,
-		  showAnim:'show',
-		  showMonthAfterYear: true,
-		  yearSuffix:'년'
-		 };
-		 
-		 $.datepicker.setDefaults($.datepicker.regional['ko']);
-	
-	// 실질적인 달력생성 부분
-	 $('#schDate').datepicker({
-        changeMonth: false,
-        changeYear: false,
-        defaultDate:$('#schDate').val()
-    });
-	
-  } );
- </script>
+	// 즉시실행함수
+	$(function() {
+		//달력 옵션 설정
+		$.datepicker.regional['ko'] = {
+			closeText : '닫기',
+			prevText : '이전달',
+			nextText : '다음달',
+			currentText : '오늘',
+			monthNames : [ '1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월',
+					'9월', '10월', '11월', '12월' ],
+			monthNamesShort : [ '1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월',
+					'9월', '10월', '11월', '12월' ],
+			dayNames : [ '일', '월', '화', '수', '목', '금', '토' ],
+			dayNamesShort : [ '일', '월', '화', '수', '목', '금', '토' ],
+			dayNamesMin : [ '일', '월', '화', '수', '목', '금', '토' ],
+			weekHeader : 'Wk',
+			dateFormat : 'yy-mm-dd',
+			firstDay : 0,
+			isRTL : false,
+			duration : 200,
+			showAnim : 'show',
+			showMonthAfterYear : true,
+			yearSuffix : '년'
+		};
+
+		$.datepicker.setDefaults($.datepicker.regional['ko']);
+
+		// 실질적인 달력생성 부분
+		$('#schDate').datepicker({
+			changeMonth : false,
+			changeYear : false,
+			defaultDate : $('#schDate').val()
+		});
+
+	});
+</script>
 <style>
 h4 {
 	margin-left: 15px;
@@ -98,7 +101,8 @@ h4 {
 th {
 	text-align: center;
 }
-input[type=submit]{
+
+input[type=submit] {
 	background-color: #fbb810;
 	-moz-border-radius: 15px;
 	-webkit-border-radius: 15px;
@@ -107,11 +111,10 @@ input[type=submit]{
 	color: #ffffff;
 	font-family: Arial;
 	font-weight: bold;
-	font-size:13px;
+	font-size: 13px;
 	padding: 5px 10px;
 	text-decoration: none;
 }
-
 </style>
 </head>
 
@@ -135,81 +138,89 @@ input[type=submit]{
 		</div>
 
 		<!-- Header Area Start -->
-		<header class="header-area clearfix"> <!-- Close Icon -->
-		<!-- Logo -->
+		<header class="header-area clearfix"> <!-- Close Icon --> <!-- Logo -->
 		<div class="logo">
 			<a href="index.jsp"><img src="img/core-img/logo.png" alt=""></a>
 			<div style="text-align: center">
 				${memberName} <a href="/project02/memberProcServlet?action=logout">로그아웃</a>
 			</div>
 		</div>
-		<!-- Amado Nav --> 
-		<nav class="amado-nav">
-        	<li><a href="index.jsp">HOME</a></li>
-        	<li><a href="memberProcServlet?action=member&page=1">회원목록</a></li>
-            <li><a href="OrdersProcServlet?action=productlist">재고내역</a></li>
-            <li><a href="order.jsp">주문하기</a></li>
-            <li class="active"><a href="OrdersProcServlet?action=orderAll&page=1">주문내역</a></li>
-            <li><a href="OrdersProcServlet?action=orderhistoryall">발주내역</a></li>
-            <li><a href="WaybillProcServlet?action=waybilllist&page=1">운송내역</a></li>
-            <li><a href="WaybillProcServlet?action=nowaybilllist">미운송내역</a></li>
-            <li><a href="OrdersProcServlet?action=grossprofit">매출 총 이익</a></li>
-        </nav>
-        </header>
+		<!-- Amado Nav --> <nav class="amado-nav">
+		<li><a href="index.jsp">HOME</a></li>
+		<li><a href="memberProcServlet?action=member&page=1">회원목록</a></li>
+		<li><a href="OrdersProcServlet?action=productlist">재고내역</a></li>
+		<li><a href="order.jsp">주문하기</a></li>
+		<li class="active"><a
+			href="OrdersProcServlet?action=orderAll&page=1">주문내역</a></li>
+		<li><a href="OrdersProcServlet?action=orderhistoryall">발주내역</a></li>
+		<li><a href="WaybillProcServlet?action=waybilllist&page=1">운송내역</a></li>
+		<li><a href="WaybillProcServlet?action=nowaybilllist">미운송내역</a></li>
+		<li><a href="OrdersProcServlet?action=grossprofit">매출 총 이익</a></li>
+		</nav> </header>
 		<!-- Header Area End -->
 
 		<div class="amado_product_area section-padding-100">
-			<div class="row" >
-			<div style="width:100%; position:relative;">
-				<h4>총 주문내역</h4>
-				
-					<div style="float:right; padding-bottom:10px;">
-					<form action="OrdersProcServlet?action=selecttime&page=1" method="post">
-					<input type="text" id="schDate" name="dateInventory" value="#" style="border-bottom:1px solid #cccccc;">
-					<input type="submit" style="background-color: #fbb810; border: none" value="검색"> 
-					</form>
+			<div class="row">
+				<div style="width: 100%; position: relative;">
+					<h4>총 주문내역</h4>
+
+					<div style="float: right; padding-bottom: 10px;">
+						<form action="OrdersProcServlet?action=selecttime&page=1"
+							method="post">
+							<input type="text" id="schDate" name="dateInventory" value="#"
+								style="border-bottom: 1px solid #cccccc;"> <input
+								type="submit" style="background-color: #fbb810; border: none"
+								value="검색">
+						</form>
 					</div>
-				</div>				
+				</div>
 				<!-- Single Product Area -->
-						<table class="table table-hover" >
-							<thead>
-								<tr>
-									<th>주문번호</th>
-									<th>이름</th>
-									<th>전화번호</th>
-									<th>주소</th>
-									<th>주문개수</th>
-									<th>주문시간</th>
-								</tr>
-							</thead>
-							<tbody>
-								<c:set var="orderAll" value="${requestScope.orderAllList}" />
-								<c:forEach var="order" items="${orderAll}">
-									<tr height="30">
-										<td style="text-align: center"><a
-											href="OrdersProcServlet?action=detail&name=${order.o_name}&id=${order.o_id}">${order.o_id}</a>
-										</td>
-										<td style="text-align: center">${order.o_name}</td>
-										<td style="text-align: center">${order.o_tel}</td>
-										<td>${order.o_address}</td>
-										<td style="text-align: center">${order.count}</td>
-										<td style="text-align: center">${order.o_time}</td>
-									</tr>
-								</c:forEach>
-							</tbody>
-						</table>
-					</div>
-					<div align=center style = "margin-left : 200px">
-							<c:set var="pageList" value="${requestScope.pageList}" />
-							<c:forEach var="pageNo" items="${pageList}">
+				<table class="table table-hover">
+					<thead>
+						<tr>
+							<th>주문번호</th>
+							<th>이름</th>
+							<th>전화번호</th>
+							<th>주소</th>
+							<th>주문개수</th>
+							<th>주문시간</th>
+							<th>주문상태</th>
+						</tr>
+					</thead>
+					<tbody>
+						<c:set var="orderAll" value="${requestScope.orderAllList}" />
+						<c:forEach var="order" items="${orderAll}">
+							<tr height="30">
+								<td style="text-align: center"><a
+									href="OrdersProcServlet?action=detail&name=${order.o_name}&id=${order.o_id}">${order.o_id}</a>
+								</td>
+								<td style="text-align: center">${order.o_name}</td>
+								<td style="text-align: center">${order.o_tel}</td>
+								<td>${order.o_address}</td>
+								<td style="text-align: center">${order.count}</td>
+								<td style="text-align: center">${order.o_time}</td>
+								<c:if test="${order.status eq '운송'}">
+									<td style="color : blue; text-align: center; font-weight:bold">${order.status}</td>
+								</c:if>
+								<c:if test="${order.status eq '지연'}">
+									<td style="color : red; text-align: center; font-weight:bold">${order.status}</td>
+								</c:if>
+							</tr>
+						</c:forEach>
+					</tbody>
+				</table>
+			</div>
+			<div align=center style="margin-left: 200px">
+				<c:set var="pageList" value="${requestScope.pageList}" />
+				<c:forEach var="pageNo" items="${pageList}">
 								${pageNo}
 							</c:forEach>
-						</div>
-				</div>
 			</div>
+		</div>
+	</div>
 	<!-- ##### Main Content Wrapper End ##### -->
 
- <%@ include file="/footer.jspf" %>
+	<%@ include file="/footer.jspf"%>
 	<script src="js/main.js"></script>
 
 	<!-- ##### jQuery (Necessary for All JavaScript Plugins) ##### -->
@@ -221,6 +232,6 @@ input[type=submit]{
 	<script src="js/plugins.js"></script>
 	<!-- Active js -->
 	<script src="js/active.js"></script>
-	
+
 </body>
 </html>

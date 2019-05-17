@@ -426,7 +426,6 @@ public class WaybillDAO {
 		}
 		return list;
 	}
-
 	
 	// 운송회사에 따른 운송내역, 관리자 월별 운송내역
 	public List<WaybillDTO> selectWaybill(String date1, String date2) {
@@ -483,10 +482,9 @@ public class WaybillDAO {
 		String str = format1.format(time);
 		return str;
 	}
-	
-	
+		
 	// 운송회사 전체 대금청구
-		public List<WaybillDTO> selectShipprofitAll(String date1, String date2) {
+	public List<WaybillDTO> selectShipprofitAll(String date1, String date2) {
 			String query = "select m.m_name, w.w_time, count(*), w.w_waycode from waybill as w inner join member as m on binary(m.m_field) = binary(w.w_waycode) where w.w_time between ? and ? group by w.w_time, w.w_waycode;";
 			PreparedStatement pStmt = null;
 			List<WaybillDTO> list = new ArrayList<WaybillDTO>();
@@ -519,6 +517,67 @@ public class WaybillDAO {
 			return list;
 		}	
 
+	public boolean selectwaybill(int o_id) {
+		String query = "select o_id from waybill where o_id = ?;";
+		PreparedStatement pStmt = null;
+		int count = 0;
+		try {
+			pStmt = conn.prepareStatement(query);
+			pStmt.setInt(1, o_id);
+			ResultSet rs = pStmt.executeQuery();
+			while (rs.next()) {
+				count = rs.getInt(1);
+			}
+			rs.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (pStmt != null && !pStmt.isClosed())
+					pStmt.close();
+			} catch (SQLException se) {
+				se.printStackTrace();
+			}
+		}
+
+		if(count == 0)
+			return false;
+		else
+			return true;
+		
+	}
+	
+	public boolean selectnowaybill(int o_id) {
+		String query = "select o_id from no_waybill where o_id = ?;";
+		PreparedStatement pStmt = null;
+		int count = 0;
+		try {
+			pStmt = conn.prepareStatement(query);
+			pStmt.setInt(1, o_id);
+			ResultSet rs = pStmt.executeQuery();
+			while (rs.next()) {
+				count = rs.getInt(1);
+			}
+			rs.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (pStmt != null && !pStmt.isClosed())
+					pStmt.close();
+			} catch (SQLException se) {
+				se.printStackTrace();
+			}
+		}
+
+		if(count == 0)
+			return false;
+		else
+			return true;
+		
+	}
+
+	
 	public void close() {
 		try {
 			if (conn != null && !conn.isClosed())

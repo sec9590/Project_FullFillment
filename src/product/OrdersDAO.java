@@ -1062,6 +1062,34 @@ public class OrdersDAO {
 			return list;
 		}
 		
+		// 운송상태 확인
+		public boolean IsWaybill(int o_id) {
+			String query = "select w_id from waybill where o_id = ?";
+			PreparedStatement pStmt = null;
+			int count = 0;
+			try {
+				pStmt = conn.prepareStatement(query);				
+				pStmt.setInt(1, o_id);
+				ResultSet rs = pStmt.executeQuery();
+				while (rs.next()) {
+					count = rs.getInt(1);
+				}
+				rs.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				try {
+					if (pStmt != null && !pStmt.isClosed())
+						pStmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace();
+				}
+			}
+			if(count == 0)
+				return false;
+			else
+				return true;
+		}
 		
 	public void close() {
 		try {

@@ -224,10 +224,10 @@ table.ui-datepicker-calendar {
 						</c:if>						
 						<c:if test="${requestScope.last == null}">
 							<span style="font-size: 0.8em; font-weight: normal; color: red;">
-							(전달 재고처리 X)</span>
+							(전달 재고처리 X - 전달을 먼저 처리해주세요.)</span>
 						</c:if>
 						<c:if test="${requestScope.last == 1}">
-							<span style="font-size: 0.8em; font-weight: normal; color: blue;">(전달	재고처리 o)</span>
+							<span style="font-size: 0.8em; font-weight: normal; color: blue;">(전달	재고처리 o - 이번달 재고처리 해주세요.)</span>
 						</c:if>
 					</h4>
 					<div

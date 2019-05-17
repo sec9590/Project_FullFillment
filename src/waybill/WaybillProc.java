@@ -15,6 +15,8 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import product.OrdersDAO;
+import product.OrdersDTO;
 
 /**
  * Servlet implementation class OrdersProc
@@ -46,6 +48,8 @@ public class WaybillProc extends HttpServlet {
 		WaybillDAO wDao = null;
 		WaybillDTO wDto = null;
 		NoWaybillDTO nwDto = null;
+		OrdersDAO oDao = null;
+		List<OrdersDTO> orderAll = null;
 		List<WaybillDTO> wayList = null;
 		List<NoWaybillDTO> nwayList = null;
 		request.setCharacterEncoding("UTF-8");
@@ -137,7 +141,7 @@ public class WaybillProc extends HttpServlet {
 				wayList = wDao.selectAdd1(add2);
 				break;
 			}
-			
+
 			request.setAttribute("wayList", wayList);
 			rd = request.getRequestDispatcher("admin/shipping/shipping.jsp");
 			rd.forward(request, response);
@@ -146,7 +150,14 @@ public class WaybillProc extends HttpServlet {
 		case "nowaybilllist":
 			wDao = new WaybillDAO();
 			nwDto = new NoWaybillDTO();
+			oDao = new OrdersDAO();
+			
+			orderAll = oDao.selectOrderAll();
 
+			for (OrdersDTO o : orderAll) {
+				if (!wDao.selectwaybill(o.getO_id()) && !wDao.selectnowaybill(o.getO_id()))
+					oDao.insertNoWaybill(o.getO_id());
+			}
 			nwayList = wDao.selectNoWaybillAll();
 			if (nwayList.size() == 0) {
 				nwayList = null;
@@ -170,7 +181,7 @@ public class WaybillProc extends HttpServlet {
 			rd = request.getRequestDispatcher("carrier/carrier.jsp");
 			rd.forward(request, response);
 			break;
-			
+
 		// 발주 가격 내역
 		case "shipprofitAll":
 			wDao = new WaybillDAO();
@@ -181,24 +192,24 @@ public class WaybillProc extends HttpServlet {
 			rd = request.getRequestDispatcher("admin/grossprofit/grossprofit_ship.jsp");
 			rd.forward(request, response);
 			break;
-			
+
 		case "shipprofit_detail":
 			wDao = new WaybillDAO();
 			wDto = new WaybillDTO();
-			
+
 			String w_time = request.getParameter("w_time");
 			String waycode = request.getParameter("waycode");
 			String w_name = request.getParameter("w_name");
-			
+
 			List<WaybillDTO> shipProfit_detail = wDao.shipprofit(w_time, waycode);
 			request.setAttribute("waycode", waycode);
 			request.setAttribute("w_name", w_name);
 			request.setAttribute("shipList_detail", shipProfit_detail);
 			rd = request.getRequestDispatcher("admin/grossprofit/grossprofit_ship_detail.jsp");
 			rd.forward(request, response);
-			
-		// 운송회사별 월단위 운송 내역	
-		case "selectWaybill": 
+
+			// 운송회사별 월단위 운송 내역
+		case "selectWaybill":
 			wDao = new WaybillDAO();
 			date = request.getParameter("dateInventory");
 			LOG.info(date);
@@ -206,7 +217,7 @@ public class WaybillProc extends HttpServlet {
 			LOG.info(date1);
 			date2 = date + "-31 23:59";
 			LOG.info(date2);
-			
+
 			wayList = wDao.selectWaybill(date1, date2);
 			LOG.info("기간설정 달력");
 			request.setAttribute("dateInventory", date);
@@ -214,9 +225,9 @@ public class WaybillProc extends HttpServlet {
 			rd = request.getRequestDispatcher("carrier/carrier_selectTime.jsp");
 			rd.forward(request, response);
 			break;
-			
-		// 관리자 페이지 월단위 운송 내역	
-		case "selectShipping": 
+
+		// 관리자 페이지 월단위 운송 내역
+		case "selectShipping":
 			wDao = new WaybillDAO();
 			date = request.getParameter("dateInventory");
 			LOG.info(date);
@@ -224,38 +235,38 @@ public class WaybillProc extends HttpServlet {
 			LOG.info(date1);
 			date2 = date + "-31 23:59";
 			LOG.info(date2);
-			
+
 			wayList = wDao.selectWaybill(date1, date2);
 			LOG.info("기간설정 달력");
 			request.setAttribute("dateInventory", date);
 			request.setAttribute("wayList", wayList);
 			rd = request.getRequestDispatcher("admin/shipping/shipping_selectTime.jsp");
 			rd.forward(request, response);
-			break;		
-			
-		case "shipselectTime": 
+			break;
+
+		case "shipselectTime":
 			date = request.getParameter("dateInventory");
 			LOG.info(date);
 			date1 = date + "-01 00:00";
 			LOG.info(date1);
 			date2 = date + "-31 23:59";
 			LOG.info(date2);
-			
+
 			wDao = new WaybillDAO();
 			wDto = new WaybillDTO();
 
 			shipProfit = wDao.selectShipprofitAll(date1, date2);
-			for(WaybillDTO waydto : shipProfit) {
+			for (WaybillDTO waydto : shipProfit) {
 				shiptotal += waydto.getCount() * 10000;
 			}
-			
+
 			LOG.info("운송회사 한달 내역");
 			request.setAttribute("dateInventory", date);
 			request.setAttribute("shipProfit", shipProfit);
 			rd = request.getRequestDispatcher("admin/grossprofit/grossprofit_ship_selectTime.jsp");
 			rd.forward(request, response);
-			break;		
-			
+			break;
+
 		}
 	}
 
