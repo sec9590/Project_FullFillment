@@ -88,7 +88,7 @@
 	});
 </script>
 <style>
-th {
+th, td {
 	text-align: center;
 }
 
@@ -156,8 +156,7 @@ table.ui-datepicker-calendar {
 		</ul>
 		</nav> </header>
 
-		<div class="amado_product_area section-padding-100 clearfix"
-			style="margin: auto">
+		<div class="amado_product_area section-padding-100 clearfix" style="margin: auto">
 			<div class="row">
 				<div style="width: 100%; position: relative;">
 					<h4>
