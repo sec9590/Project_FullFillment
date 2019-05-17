@@ -271,7 +271,7 @@ table.ui-datepicker-calendar {
 	<!-- ##### Main Content Wrapper End ##### -->
 
 <!-- ##### Footer Area Start ##### -->     
-<%@ include file="/admin/commodity/footer.jspf" %>   
+<%@ include file="/footer.jspf" %>   
 <!-- ##### Footer Area End ##### -->
 
 

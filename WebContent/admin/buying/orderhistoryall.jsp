@@ -238,7 +238,7 @@ button{
 <!-- ##### Main Content Wrapper End ##### -->
 
 <!-- ##### Footer Area Start ##### -->     
-<%@ include file="/footer.jspf" %>
+<%@ include file="/footer.jspf" %>  
 <!-- ##### Footer Area End ##### -->
     <!-- ##### jQuery (Necessary for All JavaScript Plugins) ##### -->
     <!-- Popper js -->
