@@ -215,18 +215,9 @@ input[type=submit]{
 	</div>
 	<!-- ##### Main Content Wrapper End ##### -->
 
-	<!-- ##### Footer Area Start ##### -->
-	<footer class="footer_area clearfix"
-		style="padding:10px;">
-	<div class="container" style="text-align: center">
-		<span style="color: white"> Copyright &copy;<script>
-			document.write(new Date().getFullYear());
-		</script> All rights reserved | YeonA & SeEun & MinJi
-		</span>
-
-	</div>
-	</footer>
-	<!-- ##### Footer Area End ##### -->
+<!-- ##### Footer Area Start ##### -->     
+<%@ include file="/admin/commodity/footer.jspf" %>   
+<!-- ##### Footer Area End ##### -->
 
 
 	<!-- ##### jQuery (Necessary for All JavaScript Plugins) ##### -->

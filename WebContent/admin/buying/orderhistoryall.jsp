@@ -237,19 +237,9 @@ button{
 </div>
 <!-- ##### Main Content Wrapper End ##### -->
 
-<!-- ##### Footer Area Start ##### -->
-	<footer class="footer_area clearfix" style="padding:10px;  margin-bottom:0;">
-	<div class="container" style="text-align:center">		
-				<span style="color:white">					
-						Copyright &copy;<script>
-							document.write(new Date().getFullYear());
-						</script>
-						All rights reserved | YeonA & SeEun & MinJi
-						</span>
-					
-			</div>			
-	</footer>
-	<!-- ##### Footer Area End ##### -->
+<!-- ##### Footer Area Start ##### -->     
+<%@ include file="/footer.jspf" %>
+<!-- ##### Footer Area End ##### -->
     <!-- ##### jQuery (Necessary for All JavaScript Plugins) ##### -->
     <!-- Popper js -->
     <script src="js/popper.min.js"></script>

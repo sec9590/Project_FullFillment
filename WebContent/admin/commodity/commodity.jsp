@@ -166,17 +166,9 @@ button:hover {
 
 	<!-- ##### Main Content Wrapper End ##### -->
 
-	<!-- ##### Footer Area Start ##### -->
-	<footer class="footer_area clearfix"
-		style="padding:10px; position:absolute; margin-bottom:0px; width:100%">
-	<div class="container" style="text-align: center">
-		<span style="color: white"> Copyright &copy;<script>
-			document.write(new Date().getFullYear());
-		</script> All rights reserved | YeonA & SeEun & MinJi
-		</span>
-
-	</div>
-	</footer>
+<!-- ##### Footer Area Start ##### -->     
+<%@ include file="/admin/commodity/footer.jspf" %>     
+<!-- ##### Footer Area End ##### -->
 	<!-- ##### Footer Area End ##### -->
 
 	<!--===============================================================================================-->
