@@ -155,10 +155,13 @@ public class CommodityProc extends HttpServlet {
 				coDto.setC_close(close);
 			}
 			System.out.println("전달 채고처리 : " + cDao.checkNow(lastmonth) );
+			if(!lastmonth.equals("2019-02")) {
 			if(cDao.checkNow(lastmonth) == null)
 				request.setAttribute("last", null);
 			else
 				request.setAttribute("last", 1);
+			} else 
+				request.setAttribute("last", 2);
 			request.setAttribute("dateInventory", date);
 			request.setAttribute("commodityList", cDtoList);
 			rd = request.getRequestDispatcher("admin/commodity/commodity_detail.jsp");

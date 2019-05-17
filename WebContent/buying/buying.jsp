@@ -141,7 +141,7 @@ th, td {
 	</div>
 	<!-- ##### Main Content Wrapper End ##### -->
 
-<%@ include file="/footer.jspf" %>
+	<%@ include file="/footer.jspf" %>
 
 	<!-- ##### jQuery (Necessary for All JavaScript Plugins) ##### -->
 	<script src="js/jquery/jquery-2.2.4.min.js"></script>

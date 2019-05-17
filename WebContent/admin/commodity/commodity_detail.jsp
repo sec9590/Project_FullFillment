@@ -218,7 +218,10 @@ table.ui-datepicker-calendar {
 				<div style="width: 100%; position: relative;">
 					<h4>
 						<span style="color: #fbb810; font-weight: bold">${dateInventory}</span>
-						재고정산 내역						
+						재고정산 내역
+						<c:if test="${requestScope.last == 2}">
+							
+						</c:if>						
 						<c:if test="${requestScope.last == null}">
 							<span style="font-size: 0.8em; font-weight: normal; color: red;">
 							(전달 재고처리 X)</span>

@@ -184,8 +184,6 @@ table.ui-datepicker-calendar { display:none; }
 		<!-- Product Details Area End -->
 	<!-- ##### Main Content Wrapper End ##### -->
 
-
-
 <%@ include file="/footer.jspf" %>
 	<!-- ##### jQuery (Necessary for All JavaScript Plugins) ##### -->
 	<!-- Popper js -->

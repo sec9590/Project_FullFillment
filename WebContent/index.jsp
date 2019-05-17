@@ -132,7 +132,7 @@
                  <!-- Single Catagory -2 -->
                 <div class="single-products-catagory clearfix">
                     <a href="#">
-                        <img src="img/bg-img/2.JPG" alt="">
+                        <img src="img/bg-img/2.jpg" alt="">
                         <!-- Hover Content -->
                         <div class="hover-content">
                             <div class="line"></div>
