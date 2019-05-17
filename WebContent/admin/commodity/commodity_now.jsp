@@ -189,6 +189,7 @@ input[type=submit]{
 							<thead>
 								<tr>									
 									<th>제품코드</th>
+									<th>제품이름</th>
 									<th>기초재고</th>
 									<th>입고</th>
 									<th>출고</th>
@@ -200,6 +201,7 @@ input[type=submit]{
 								<c:forEach var="c" items="${clist}">
 									<tr>
 										<td>${c.p_id}</td>
+										<td style="text-align:left">${c.p_name }</td>
 										<td>${c.c_basic}</td>
 										<td>${c.c_in}</td>
 										<td>${c.c_out}</td>

@@ -203,12 +203,12 @@ button:hover {
 							</tbody>
 						</table>
 					
+					</div>
 					<div align=center>
 							<c:set var="pageList" value="${requestScope.pageList}" />
 							<c:forEach var="pageNo" items="${pageList}">
 								${pageNo}
 							</c:forEach>
-						</div>
 						</div>
 				</div>
 			</div>

@@ -142,7 +142,7 @@ public class CommodityProc extends HttpServlet {
 			lastmonth = cDao.lastMonth(date);
 			lastdate1 = lastmonth + "-01 00:00";
 			LOG.info("지난달 : " + lastmonth);
-
+		
 			cDtoList = cDao.selectcommodityOutTime(date1, date2); // 출고, 기초재고, 상품id
 			for (CommodityDTO coDto : cDtoList) {
 				p_id = coDto.getP_id();
@@ -154,6 +154,11 @@ public class CommodityProc extends HttpServlet {
 				close = coDto.getC_basic() + coDto.getC_in() - coDto.getC_out();
 				coDto.setC_close(close);
 			}
+			System.out.println("전달 채고처리 : " + cDao.checkNow(lastmonth) );
+			if(cDao.checkNow(lastmonth) == null)
+				request.setAttribute("last", null);
+			else
+				request.setAttribute("last", 1);
 			request.setAttribute("dateInventory", date);
 			request.setAttribute("commodityList", cDtoList);
 			rd = request.getRequestDispatcher("admin/commodity/commodity_detail.jsp");
@@ -187,6 +192,7 @@ public class CommodityProc extends HttpServlet {
 							ok = true;
 							p_id = coDto.getP_id();
 							coDto.setP_id(p_id);
+							coDto.setP_name(cDao.productname(p_id));
 							basic = cDao.checkClose(p_id, date);
 							if (basic == 0)
 								basic = 15;
@@ -208,6 +214,7 @@ public class CommodityProc extends HttpServlet {
 
 						ncDto.setC_basic(15);
 						ncDto.setP_id(p_id);
+						ncDto.setP_name(cDao.productname(p_id));
 						if (cDao.selectcommodityInTime(date1, date2, p_id) == 0) {
 							ncDto.setC_in(0);
 						} else {
@@ -242,7 +249,7 @@ public class CommodityProc extends HttpServlet {
 
 		case "commoditydbselect":
 			cDao = new CommodityDAO();
-			cDtoList = cDao.selectCommodityAll();
+			cDtoList = cDao.commodityAll();
 			request.setAttribute("cDtoList", cDtoList);
 			rd = request.getRequestDispatcher("admin/commodity/commoditydb.jsp");
 			rd.forward(request, response);			

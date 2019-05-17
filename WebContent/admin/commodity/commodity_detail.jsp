@@ -217,7 +217,15 @@ table.ui-datepicker-calendar {
 			<div class="row">
 				<div style="width: 100%; position: relative;">
 					<h4>
-						<span style="color: #fbb810; font-weight: bold">${dateInventory}</span> 재고정산 내역
+						<span style="color: #fbb810; font-weight: bold">${dateInventory}</span>
+						재고정산 내역						
+						<c:if test="${requestScope.last == null}">
+							<span style="font-size: 0.8em; font-weight: normal; color: red;">
+							(전달 재고처리 X)</span>
+						</c:if>
+						<c:if test="${requestScope.last == 1}">
+							<span style="font-size: 0.8em; font-weight: normal; color: blue;">(전달	재고처리 o)</span>
+						</c:if>
 					</h4>
 					<div
 						style="float: right; padding-bottom: 10px; position: relative;">
@@ -249,7 +257,7 @@ table.ui-datepicker-calendar {
 								<c:forEach var="c" items="${clist}">
 									<tr>
 										<td>${c.p_id}</td>
-										<td style="text-align:left">${c.p_name }</td>
+										<td style="text-align: left">${c.p_name }</td>
 										<td>${c.c_basic}</td>
 										<td>${c.c_in}</td>
 										<td>${c.c_out}</td>
@@ -260,7 +268,8 @@ table.ui-datepicker-calendar {
 						</table>
 						<br>
 						<div align=center>
-							<a href="CommodityProcServlet?action=commodityDB&date=${dateInventory}"
+							<a
+								href="CommodityProcServlet?action=commodityDB&date=${dateInventory}"
 								class="myButton">재고정산</a>
 						</div>
 					</div>
@@ -270,9 +279,9 @@ table.ui-datepicker-calendar {
 	</div>
 	<!-- ##### Main Content Wrapper End ##### -->
 
-<!-- ##### Footer Area Start ##### -->     
-<%@ include file="/footer.jspf" %>   
-<!-- ##### Footer Area End ##### -->
+	<!-- ##### Footer Area Start ##### -->
+	<%@ include file="/footer.jspf"%>
+	<!-- ##### Footer Area End ##### -->
 
 
 	<!-- ##### jQuery (Necessary for All JavaScript Plugins) ##### -->

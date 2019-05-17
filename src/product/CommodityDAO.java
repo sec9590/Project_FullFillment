@@ -41,20 +41,23 @@ public class CommodityDAO {
 
 	// 이번달 운송된 상품에서 출고된 상품갯수
 	public List<CommodityDTO> selectcommodityOut() {
-		String query = "select 15, d.p_id, sum(d.o_quantity) from waybill as w , orders_detail as d, orders as o where o.o_id = w.o_id and o.o_id = d.o_id and (w.w_time > last_day(now() - interval 1 month) and w.w_time <= last_day(now())) group by d.p_id;";
+		String query = "select 15, d.p_id, d.p_name, sum(d.o_quantity) from waybill as w , orders_detail as d, orders as o where o.o_id = w.o_id and o.o_id = d.o_id and (w.w_time > last_day(now() - interval 1 month) and w.w_time <= last_day(now())) group by d.p_id;";
 		PreparedStatement pStmt = null;
 		List<CommodityDTO> list = new ArrayList<CommodityDTO>();
 
 		try {
-			pStmt = conn.prepareStatement(query);
-			
+			pStmt = conn.prepareStatement(query);			
 			ResultSet rs = pStmt.executeQuery();
 
 			while (rs.next()) {
 				CommodityDTO cDto = new CommodityDTO();
 				cDto.setC_basic(rs.getInt(1));
-				cDto.setP_id(rs.getInt(2));
-				cDto.setC_out(rs.getInt(3));		
+				int p_id = rs.getInt(2);
+				cDto.setP_id(rs.getInt(2));	
+				String name = productname(p_id);
+				System.out.println("p_id : " + p_id + " p_name" + name);				
+				cDto.setP_name(name);
+				cDto.setC_out(rs.getInt(4));		
 				LOG.info(cDto.toString());
 				list.add(cDto);
 			}
@@ -87,8 +90,11 @@ public class CommodityDAO {
 				while (rs.next()) {
 					CommodityDTO cDto = new CommodityDTO();
 					cDto.setC_basic(rs.getInt(1));
-					cDto.setP_id(rs.getInt(2));
-					cDto.setP_name(rs.getString(3));
+					int p_id = rs.getInt(2);
+					cDto.setP_id(rs.getInt(2));	
+					String name = productname(p_id);
+					System.out.println("p_id : " + p_id + " p_name" + name);				
+					cDto.setP_name(name);					
 					cDto.setC_out(rs.getInt(4));		
 					LOG.info(cDto.toString());
 					list.add(cDto);
@@ -354,18 +360,19 @@ public class CommodityDAO {
 
 	// 재고 db삽입
 	public void insertCommodity(CommodityDTO cDto) {
-		String query = "INSERT INTO commodity(p_id, c_basic, c_in, c_out, c_close, c_time) values (?, ?, ?, ?, ?, ?);";
+		String query = "INSERT INTO commodity(p_id, p_name, c_basic, c_in, c_out, c_close, c_time) values (?, ?, ?, ?, ?, ?, ?);";
 		PreparedStatement pStmt = null;
 
 		try {
 			pStmt = conn.prepareStatement(query);
 
 			pStmt.setInt(1, cDto.getP_id());
-			pStmt.setInt(2, cDto.getC_basic());
-			pStmt.setInt(3, cDto.getC_in());
-			pStmt.setInt(4, cDto.getC_out());
-			pStmt.setInt(5, cDto.getC_close());
-			pStmt.setString(6, cDto.getC_time());
+			pStmt.setString(2, cDto.getP_name());
+			pStmt.setInt(3, cDto.getC_basic());
+			pStmt.setInt(4, cDto.getC_in());
+			pStmt.setInt(5, cDto.getC_out());
+			pStmt.setInt(6, cDto.getC_close());
+			pStmt.setString(7, cDto.getC_time());
 
 			pStmt.executeUpdate();
 
@@ -420,15 +427,14 @@ public class CommodityDAO {
 		return list;
 	}
 	
-	//재고db총
-	public List<CommodityDTO> selectCommodityAll() {
+	
+	public List<CommodityDTO> commodityAll() {
 		String query = "select c_time, sum(c_basic), sum(c_in), sum(c_out), sum(c_close) from commodity group by c_time;";
 		PreparedStatement pStmt = null;
 		List<CommodityDTO> list = new ArrayList<CommodityDTO>();
 
 		try {
-			pStmt = conn.prepareStatement(query);
-			
+			pStmt = conn.prepareStatement(query);			
 			ResultSet rs = pStmt.executeQuery();
 
 			while (rs.next()) {
@@ -438,7 +444,6 @@ public class CommodityDAO {
 				cDto.setC_in(rs.getInt(3));
 				cDto.setC_out(rs.getInt(4));
 				cDto.setC_close(rs.getInt(5));
-				LOG.info(cDto.toString());
 				list.add(cDto);
 			}
 
@@ -453,11 +458,11 @@ public class CommodityDAO {
 			}
 		}
 		return list;
-	}
+	}	
 	
 	//상세 조회
 	public List<CommodityDTO> selectCommodityDetail(String c_time) {
-		String query = "select p_id, c_basic, c_in, c_out, c_close from commodity where c_time = ?;";
+		String query = "select p_id, p_name, c_basic, c_in, c_out, c_close from commodity where c_time = ?;";
 		PreparedStatement pStmt = null;
 		List<CommodityDTO> list = new ArrayList<CommodityDTO>();
 
@@ -469,10 +474,11 @@ public class CommodityDAO {
 			while (rs.next()) {
 				CommodityDTO cDto = new CommodityDTO();
 				cDto.setP_id(rs.getInt(1));
-				cDto.setC_basic(rs.getInt(2));
-				cDto.setC_in(rs.getInt(3));
-				cDto.setC_out(rs.getInt(4));
-				cDto.setC_close(rs.getInt(5));
+				cDto.setP_name(rs.getString(2));
+				cDto.setC_basic(rs.getInt(3));
+				cDto.setC_in(rs.getInt(4));
+				cDto.setC_out(rs.getInt(5));
+				cDto.setC_close(rs.getInt(6));
 				LOG.info(cDto.toString());
 				list.add(cDto);
 			}
@@ -523,10 +529,10 @@ public class CommodityDAO {
 		try {
 			writer = new FileWriter("c:/Temp/Inventories/" + month + ".csv");
 			bw = new BufferedWriter(writer);
-			String head = "제품코드,기초재고,입고,출고,기말재고\r\n";
+			String head = "제품코드,제품이름,기초재고,입고,출고,기말재고\r\n";
 			bw.write(head);		
 			for (CommodityDTO cDto: cDtoList) {
-				String line = cDto.getP_id() + "," + cDto.getC_basic() + "," + cDto.getC_in() + ","
+				String line = cDto.getP_id() + "," + cDto.getP_name() + "," + cDto.getC_basic() + "," + cDto.getC_in() + ","
 						+ cDto.getC_out() + "," + cDto.getC_close() + "\r\n";
 				bw.write(line);
 				
@@ -552,10 +558,11 @@ public class CommodityDAO {
 				CommodityDTO iDto = new CommodityDTO();
 				String str[] = line.split(",");
 				iDto.setP_id(Integer.parseInt(str[0]));
-				iDto.setC_basic(Integer.parseInt(str[1]));
-				iDto.setC_in(Integer.parseInt(str[2]));
-				iDto.setC_out(Integer.parseInt(str[3]));
-				iDto.setC_close(Integer.parseInt(str[4]));
+				iDto.setP_name(str[1]);
+				iDto.setC_basic(Integer.parseInt(str[2]));
+				iDto.setC_in(Integer.parseInt(str[3]));
+				iDto.setC_out(Integer.parseInt(str[4]));
+				iDto.setC_close(Integer.parseInt(str[5]));
 				iList.add(iDto);
 			}
 			br.close();
@@ -565,4 +572,31 @@ public class CommodityDAO {
 		}
 		return iList;
 	}
+
+	public String productname(int p_id) {
+		String query = "select p_name from product where p_id = ?";
+		PreparedStatement pStmt = null;
+		ProductDTO pDto = new ProductDTO();
+		
+		try {
+			pStmt = conn.prepareStatement(query);
+			pStmt.setInt(1, p_id);
+			ResultSet rs = pStmt.executeQuery();
+
+			while (rs.next()) {
+				pDto.setP_name(rs.getString(1));
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (pStmt != null && !pStmt.isClosed())
+					pStmt.close();
+			} catch (SQLException se) {
+				se.printStackTrace();
+			}
+		}
+		return pDto.getP_name();
+	}	
 }

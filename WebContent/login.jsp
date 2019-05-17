@@ -134,7 +134,6 @@
                 </div>
 
           </div>
-          </div>
     <!-- ##### Main Content Wrapper End ##### -->
     
    <%@ include file="footer.jspf" %>
