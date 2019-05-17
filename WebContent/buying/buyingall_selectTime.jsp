@@ -109,6 +109,9 @@ table.ui-datepicker-calendar { display:none; }
 				</div>
 			</div>
 			<!-- Navbar Toggler -->
+			<div class="amado-navbar-toggler">
+				<span></span><span></span><span></span>
+			</div>
 		</div>
 
 		<!-- Header Area Start -->
@@ -139,9 +142,7 @@ table.ui-datepicker-calendar { display:none; }
 
 
 		<!-- 테이블 -->
-		<div class="amado_product_area section-padding-100 clearfix" style="margin:auto">
-		<div class="row">
-				<div style="width: 100%; position: relative;">
+		<div class="single-product-area section-padding-100 clearfix" style="margin: auto">
 			<h4>
 				<span style="color: #fbb810; font-weight: bold">${memberName}</span> 님 발주내역 (${dateInventory})
 			</h4>
@@ -151,9 +152,7 @@ table.ui-datepicker-calendar { display:none; }
 					<input type="submit" style="background-color: #fbb810; border: none" value="검색"> 
 					</form>
 				</div>
-				</div>
-			<div class="col-12 col-sm-6 col-md-12 col-xl-15">
-					<div class="single-product-wrapper">
+			<div class="container-fluid">
 							<table class="table table-hover">
 								<thead>
 									<tr>
@@ -182,9 +181,7 @@ table.ui-datepicker-calendar { display:none; }
 					</div>
 				</div>
 			</div>
-			</div>
-			</div>
-
+		<!-- Product Details Area End -->
 	<!-- ##### Main Content Wrapper End ##### -->
 
 

@@ -99,11 +99,13 @@ th, td {
 
 
 		<!-- 테이블 -->
-		<div class="amado_product_area section-padding-100 clearfix" style="margin:auto">
-		<div class="row">
-			<h4 style="padding-bottom:20px;"><span style="color:#fbb810; font-weight:bold;">${memberName}</span>님 발주요청내역 (${requestScope.currentTime})</h4>
-			<div class="col-12 col-sm-6 col-md-12 col-xl-15">
-	            <div class="single-product-wrapper">
+		<div class="single-product-area section-padding-100 clearfix" style="margin: auto">
+			<h4><span style="color:#fbb810; font-weight:bold">${memberName}</span>님 발주요청내역 (${requestScope.currentTime})</h4>
+			<br>
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-12">
+						<nav aria-label="breadcrumb">
 							<table class="table table-hover">
 								<thead>
 									<tr>
@@ -125,6 +127,7 @@ th, td {
 									</c:forEach>
 								</tbody>
 							</table>
+						</nav>
 						<% if(request.getAttribute("buyingList") != null){ %>
 						<div align=center>
 							<a href="OrdersProcServlet?action=buying&field=${memberField}" class="myButton">발주완료</a>
@@ -134,8 +137,8 @@ th, td {
 				</div>
 			</div>
 		</div>
-		</div>
 		<!-- Product Details Area End -->
+	</div>
 	<!-- ##### Main Content Wrapper End ##### -->
 
 	<%@ include file="/footer.jspf" %>
