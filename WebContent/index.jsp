@@ -132,18 +132,6 @@
                  <!-- Single Catagory -2 -->
                 <div class="single-products-catagory clearfix">
                     <a href="#">
-                        <img src="img/bg-img/2.JPG" alt="">
-                        <!-- Hover Content -->
-                        <div class="hover-content">
-                            <div class="line"></div>
-                            <p>From 180,000won</p>
-                            <h4>LILLBERG 1인소파</h4>
-                        </div>
-                    </a>
-                </div>
-                   <!-- Single Catagory -2 -->
-                <div class="single-products-catagory clearfix">
-                    <a href="#">
                         <img src="img/bg-img/2.jpg" alt="">
                         <!-- Hover Content -->
                         <div class="hover-content">
@@ -152,7 +140,8 @@
                             <h4>LILLBERG 1인소파</h4>
                         </div>
                     </a>
-                </div>
+                </div>       
+   
                 
                 <!-- Single Catagory -3 -->
                 <div class="single-products-catagory clearfix">
@@ -525,19 +514,7 @@
     <!-- ##### Main Content Wrapper End ##### -->
 
 
-   <!-- ##### Footer Area Start ##### -->
-	<footer class="footer_area clearfix" style="padding:10px; position:absolute; margin-bottom:0; width:100%">
-	<div class="container" style="text-align:center">		
-				<span style="color:white">					
-						Copyright &copy;<script>
-							document.write(new Date().getFullYear());
-						</script>
-						All rights reserved | YeonA & SeEun & MinJi
-						</span>
-					
-			</div>			
-	</footer>
-	<!-- ##### Footer Area End ##### -->
+   <%@ include file="footer.jspf" %>
 	
     <!-- ##### jQuery (Necessary for All JavaScript Plugins) ##### -->
     <script src="js/jquery/jquery-2.2.4.min.js"></script>

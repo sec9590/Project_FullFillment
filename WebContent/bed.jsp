@@ -232,19 +232,8 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    
-                    <div class="col-12 col-sm-6 col-md-12 col-xl-6">
-                        <div class="single-product-wrapper">
-                            <!-- Product Image -->
-                            <div class="product-img">
-                                <img src="img/bg-img/13.jpg" alt="">
-                            </div>
-
-                            
-                        </div>
-                    </div>
-
+                    </div>                   
+                   
 
 
                 </div>
@@ -252,19 +241,7 @@
                 </div>
                 </div>
 
-   <!-- ##### Footer Area Start ##### -->
-	<footer class="footer_area clearfix" style="padding:10px; position:absolute; margin-bottom:0; width:100%">
-	<div class="container" style="text-align:center">		
-				<span style="color:white">					
-						Copyright &copy;<script>
-							document.write(new Date().getFullYear());
-						</script>
-						All rights reserved | YeonA & SeEun & MinJi
-						</span>
-					
-			</div>			
-	</footer>
-	<!-- ##### Footer Area End ##### -->
+    <%@ include file="footer.jspf" %>
 	
     <!-- ##### jQuery (Necessary for All JavaScript Plugins) ##### -->
     <script src="js/jquery/jquery-2.2.4.min.js"></script>
