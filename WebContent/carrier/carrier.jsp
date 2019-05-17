@@ -134,7 +134,7 @@ table.ui-datepicker-calendar { display:none; }
 	    <div style="width:100%; position:relative;">
 	     <h4><span style="color:#fbb810; font-weight:bold">${memberName}</span>님 운송내역</h4>
 				<div style="float:right; padding-bottom:10px;">
-					<form action="WaybillProcServlet?action=selectWaybill" method="post" autocomplete=off>
+					<form action="WaybillProcServlet?action=selectWaybill&field=${requestScope.field}" method="post" autocomplete=off>
 					<input type="text" id="sdate" name="dateInventory" value="#" style="border-bottom:1px solid #cccccc;">
 					<input type="submit" style="background-color: #fbb810; border: none" value="검색"> 
 					</form>

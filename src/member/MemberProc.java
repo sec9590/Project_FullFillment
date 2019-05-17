@@ -119,6 +119,7 @@ public class MemberProc extends HttpServlet {
 					break;
 				case "2" :
 					field = "WaybillProcServlet?action=carrierlist&field=" + member.getM_field();
+					request.setAttribute("field", member.getM_field());
 					response.sendRedirect(field);
 					break;
 				}

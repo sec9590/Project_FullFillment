@@ -177,6 +177,7 @@ public class WaybillProc extends HttpServlet {
 
 			List<WaybillDTO> carrierList = wDao.selectCarrierAll(field);
 			request.setAttribute("carrierList", carrierList);
+			request.setAttribute("field", field);
 			LOG.info("운송회사");
 			rd = request.getRequestDispatcher("carrier/carrier.jsp");
 			rd.forward(request, response);
@@ -217,11 +218,12 @@ public class WaybillProc extends HttpServlet {
 			LOG.info(date1);
 			date2 = date + "-31 23:59";
 			LOG.info(date2);
-
-			wayList = wDao.selectWaybill(date1, date2);
+			field = request.getParameter("field");
+			wayList = wDao.selectWaybill(date1, date2, field);
 			LOG.info("기간설정 달력");
 			request.setAttribute("dateInventory", date);
 			request.setAttribute("wayList", wayList);
+			request.setAttribute("field", field);
 			rd = request.getRequestDispatcher("carrier/carrier_selectTime.jsp");
 			rd.forward(request, response);
 			break;
