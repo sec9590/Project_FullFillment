@@ -253,6 +253,7 @@ public class OrdersProc extends HttpServlet {
 			oDao = new OrdersDAO();
 			update = false;
 			List<NoWaybillDTO> noWaybillAll = wDao.selectNoWaybillAll();
+			
 			String m = "";
 			boolean message = true;
 			String pid = "";
