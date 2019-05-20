@@ -20,14 +20,23 @@ import javax.servlet.http.HttpSession;
 @WebServlet("/FileProcServlet")
 public class FileProc extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+<<<<<<< Updated upstream
+=======
+  
+>>>>>>> Stashed changes
 
 	public FileProc() {
 		super();
 	}
 
+<<<<<<< Updated upstream
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
+=======
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	
+>>>>>>> Stashed changes
 		request.setCharacterEncoding("UTF-8");
 		FileInputStream fis = null;
 		BufferedOutputStream bos = null;
@@ -50,6 +59,7 @@ public class FileProc extends HttpServlet {
 		case "down":
 			cDao = new CommodityDAO();
 			String date = request.getParameter("date");
+<<<<<<< Updated upstream
 
 			cDao.writeCSV(date);
 			cDao.readCSV(date);
@@ -65,6 +75,45 @@ public class FileProc extends HttpServlet {
 			break;
 		}			
 }
+=======
+			sb = cDao.prepareDownload(date);
+			client = request.getHeader("User-Agent");
+			// 파일 다운로드 헤더 지정
+			response.reset() ;
+			response.setContentType("application/octet-stream");
+			response.setHeader("Content-Description", "JSP Generated Data");
+			
+			if(client.indexOf("MSIE") != -1) {		// Internet Explorer
+				response.setHeader ("Content-Disposition", "attachment; filename=commodity.csv");
+			} else {			// IE 이외
+				response.setHeader("Content-Disposition", "attachment; filename=\"commodity.csv\"");
+				response.setHeader("Content-Type", "application/octet-stream; charset=utf-8");
+			}
+		
+			file = new File("C:\\Temp\\commodity\\commodity.csv");
+			response.setHeader ("Content-Length", "" + file.length());
+			try {
+				fis = new FileInputStream(file);
+				bis = new BufferedInputStream(fis);
+				bos = new BufferedOutputStream(response.getOutputStream());
+				byte[] bytes = new byte[1024];
+				while ((length = bis.read(bytes)) != -1) {
+				
+					bos.write(bytes, 0, length);
+				}
+				bos.flush();
+				bos.close();
+				bis.close();
+				fis.close();
+			} catch (IllegalStateException e1) {
+				
+			} catch (Exception e) {
+			}
+			break;
+		}
+		
+	}
+>>>>>>> Stashed changes
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {

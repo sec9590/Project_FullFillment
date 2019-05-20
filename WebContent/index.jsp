@@ -132,6 +132,18 @@
                  <!-- Single Catagory -2 -->
                 <div class="single-products-catagory clearfix">
                     <a href="#">
+                        <img src="img/bg-img/2jpg.jpg" alt="">
+                        <!-- Hover Content -->
+                        <div class="hover-content">
+                            <div class="line"></div>
+                            <p>From 180,000won</p>
+                            <h4>LILLBERG 1인소파</h4>
+                        </div>
+                    </a>
+                </div>
+                   <!-- Single Catagory -2 -->
+                <div class="single-products-catagory clearfix">
+                    <a href="#">
                         <img src="img/bg-img/2.jpg" alt="">
                         <!-- Hover Content -->
                         <div class="hover-content">
@@ -140,8 +152,12 @@
                             <h4>LILLBERG 1인소파</h4>
                         </div>
                     </a>
+<<<<<<< Updated upstream
                 </div>       
    
+=======
+                </div>
+>>>>>>> Stashed changes
                 
                 <!-- Single Catagory -3 -->
                 <div class="single-products-catagory clearfix">
