@@ -510,7 +510,30 @@ public class ProductDAO {
 			}
 			return list;
 		}	
-
+		// 페이지위한 개수
+		public int getCount() {
+			String query = "select count(*) from orders;";
+			PreparedStatement pStmt = null;
+			int count = 0;
+			try {
+				pStmt = conn.prepareStatement(query);
+				ResultSet rs = pStmt.executeQuery();
+				while (rs.next()) {
+					count = rs.getInt(1);
+				}
+				rs.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				try {
+					if (pStmt != null && !pStmt.isClosed())
+						pStmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace();
+				}
+			}
+			return count;
+		}
 	public void close() {
 		try {
 			if (conn != null && !conn.isClosed())
