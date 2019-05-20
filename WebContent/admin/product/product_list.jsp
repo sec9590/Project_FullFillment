@@ -106,8 +106,8 @@ button:hover {
 		<!-- Amado Nav --> <nav class="amado-nav">
 		<li><a href="index.jsp">HOME</a></li>
 		<li><a href="memberProcServlet?action=member&page=1">회원목록</a></li>
-		<li><a href="ProductProcServlet?action=procuctlist&page=1">상품목록</a></li>
-		<li class="active"><a href="OrdersProcServlet?action=productlist">재고내역</a></li>
+		<li class="active"><a href="ProductProcServlet?action=procuctlist&page=1">상품목록</a></li>
+		<li><a href="OrdersProcServlet?action=productlist">재고내역</a></li>
 		<li><a href="order.jsp">주문하기</a></li>
 		<li><a href="OrdersProcServlet?action=orderAll&page=1">주문내역</a></li>
 		<li><a href="OrdersProcServlet?action=orderhistoryall">발주내역</a></li>
@@ -120,12 +120,10 @@ button:hover {
 		<div class="amado_product_area section-padding-100">
 			<div class="row">
 			<div style="width: 100%; position: relative;">
-				<h4>재고내역</h4>
+				<h4>상품목록</h4>
 				<div style="float: right;">
 				<button type="button"
-						onclick="location.href='CommodityProcServlet?action=commoditydbselect'">재고DB</button>
-					<button type="button"
-						onclick="location.href='CommodityProcServlet?action=commodity'">재고정산</button>
+						onclick="location.href='ProductProcServlet?action=insert'">상품추가</button>
 				</div>
 				</div>
 				<div class="col-12 col-sm-6 col-md-12 col-xl-15">
@@ -135,8 +133,10 @@ button:hover {
 								<tr>
 									<th>제품코드</th>
 									<th>제품명</th>
+									<th>제품사진</th>
 									<th>가격</th>
 									<th>수량</th>
+									<th>제품코드</th>
 								</tr>
 							</thead>
 							<tbody>
