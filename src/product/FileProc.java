@@ -1,4 +1,4 @@
-package product;
+/*package product;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -20,23 +20,14 @@ import javax.servlet.http.HttpSession;
 @WebServlet("/FileProcServlet")
 public class FileProc extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-<<<<<<< Updated upstream
-=======
   
->>>>>>> Stashed changes
 
 	public FileProc() {
 		super();
 	}
 
-<<<<<<< Updated upstream
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		
-=======
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
->>>>>>> Stashed changes
 		request.setCharacterEncoding("UTF-8");
 		FileInputStream fis = null;
 		BufferedOutputStream bos = null;
@@ -59,7 +50,6 @@ public class FileProc extends HttpServlet {
 		case "down":
 			cDao = new CommodityDAO();
 			String date = request.getParameter("date");
-<<<<<<< Updated upstream
 
 			cDao.writeCSV(date);
 			cDao.readCSV(date);
@@ -75,7 +65,6 @@ public class FileProc extends HttpServlet {
 			break;
 		}			
 }
-=======
 			sb = cDao.prepareDownload(date);
 			client = request.getHeader("User-Agent");
 			// 파일 다운로드 헤더 지정
@@ -113,11 +102,10 @@ public class FileProc extends HttpServlet {
 		}
 		
 	}
->>>>>>> Stashed changes
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		doGet(request, response);
 	}
 
-}
+}*/

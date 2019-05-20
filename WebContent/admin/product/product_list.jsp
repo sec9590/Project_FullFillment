@@ -15,7 +15,7 @@
 <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
 <!-- Title  -->
-<title>Yellow Container : commodity</title>
+<title>Yellow Container : product_list</title>
 
 <!-- Favicon  -->
 <link rel="icon" href="img/core-img/favicon.ico">
@@ -106,7 +106,7 @@ button:hover {
 		<!-- Amado Nav --> <nav class="amado-nav">
 		<li><a href="index.jsp">HOME</a></li>
 		<li><a href="memberProcServlet?action=member&page=1">회원목록</a></li>
-		<li class="active"><a href="ProductProcServlet?action=procuctlist&page=1">상품목록</a></li>
+		<li class="active"><a href="ProductProcServlet?action=product_list&page=1">제품목록</a></li>
 		<li><a href="OrdersProcServlet?action=productlist">재고내역</a></li>
 		<li><a href="order.jsp">주문하기</a></li>
 		<li><a href="OrdersProcServlet?action=orderAll&page=1">주문내역</a></li>
@@ -120,10 +120,10 @@ button:hover {
 		<div class="amado_product_area section-padding-100">
 			<div class="row">
 			<div style="width: 100%; position: relative;">
-				<h4>상품목록</h4>
+				<h4>제품목록</h4>
 				<div style="float: right;">
 				<button type="button"
-						onclick="location.href='ProductProcServlet?action=insert'">상품추가</button>
+						onclick="location.href='ProductProcServlet?action=insert'">제품추가</button>
 				</div>
 				</div>
 				<div class="col-12 col-sm-6 col-md-12 col-xl-15">
@@ -135,8 +135,7 @@ button:hover {
 									<th>제품명</th>
 									<th>제품사진</th>
 									<th>가격</th>
-									<th>수량</th>
-									<th>제품코드</th>
+									<th>구매처코드</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -146,19 +145,22 @@ button:hover {
 									<tr>
 										<td>${product.p_id}</td>
 										<td style="text-align: left">${product.p_name}</td>
+										<td>${product.p_img }</td>
 										<td><fmt:formatNumber value="${product.p_price}"
 												pattern="#,###" /></td>
-										<c:if test="${product.p_quantity < 10}">
-											<td style="color: red; font-weight: bold">${product.p_quantity}</td>
-										</c:if>
-										<c:if test="${product.p_quantity >= 10}">
-											<td>${product.p_quantity}</td>
-										</c:if>
+												
+										<td>${product.buycode }</td>
 									</tr>
 								</c:forEach>
 							</tbody>
 							</tbody>
 						</table>
+					</div>
+					<div align=center style="margin-left: 200px">
+						<c:set var="pageList" value="${requestScope.pageList}" />
+						<c:forEach var="pageNo" items="${pageList}">
+										${pageNo}
+							</c:forEach>
 					</div>
 				</div>
 			</div>

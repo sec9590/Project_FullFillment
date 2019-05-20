@@ -63,6 +63,47 @@ public class ProductDAO {
 		}
 		return list;
 	}
+	
+	// 상품목록
+		public List<ProductDTO> productAll(int page) {
+			int offset = 0;
+			String sql = null;
+			if (page == 0) {
+				sql = "select p_id, p_name, p_img, p_price, buycode from product;";
+			} else {
+				sql = "select p_id, p_name, p_img, p_price, buycode from product limit ?, 10;";
+				offset = (page - 1) * 10;
+			}
+			PreparedStatement pStmt = null;
+			List<ProductDTO> list = new ArrayList<ProductDTO>();
+			try {
+				pStmt = conn.prepareStatement(sql);
+				if (page != 0)
+					pStmt.setInt(1, offset);
+				ResultSet rs = pStmt.executeQuery();
+
+				while (rs.next()) {
+					ProductDTO pDto = new ProductDTO();
+					pDto.setP_id(rs.getInt(1));
+					pDto.setP_name(rs.getString(2));
+					pDto.setP_img(rs.getString(3));
+					pDto.setP_price(rs.getString(4));
+					pDto.setBuycode(rs.getString(5));
+					LOG.info(pDto.toString());
+					list.add(pDto);
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				try {
+					if (pStmt != null && !pStmt.isClosed())
+						pStmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace();
+				}
+			}
+			return list;
+		}
 
 	// 10개미만 떨어진 상품목록(상품db)
 	public List<ProductDTO> selectBuying(String code) {
