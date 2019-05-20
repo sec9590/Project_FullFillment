@@ -214,8 +214,10 @@ public class CommodityProc extends HttpServlet {
 					if (!ok) {
 						p_id = pd.getP_id();
 						CommodityDTO ncDto = new CommodityDTO();
-
-						ncDto.setC_basic(15);
+						basic = cDao.checkClose(p_id, date);
+						if (basic == 0)
+							basic = 15;
+						ncDto.setC_basic(basic);
 						ncDto.setP_id(p_id);
 						ncDto.setP_name(cDao.productname(p_id));
 						if (cDao.selectcommodityInTime(date1, date2, p_id) == 0) {

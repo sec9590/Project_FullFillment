@@ -63,6 +63,7 @@ public class OrdersProc extends HttpServlet {
 		WaybillDTO wDto = null;
 		WaybillDAO wDao = null;
 		NoWaybillDTO nwDto = null;
+		GrossProfitDTO gDto = null;
 
 		BufferedReader br = null;
 		String msg = null;
@@ -108,11 +109,10 @@ public class OrdersProc extends HttpServlet {
 
 			/*
 			 * LOG.info("이름 : " + multipartRequest.getParameter("name") + "<br>");
-			 * LOG.info("파일 : " + multipartRequest.getParameter("file") + "<br>");
-			 * //null 값을 갖는다. LOG.info("업로드파일명 : " +
-			 * multipartRequest.getFilesystemName("file") + "<br>");
-			 * LOG.info("원래파일명 : " + multipartRequest.getOriginalFileName("file")
-			 * + "<br>");
+			 * LOG.info("파일 : " + multipartRequest.getParameter("file") + "<br>"); //null 값을
+			 * 갖는다. LOG.info("업로드파일명 : " + multipartRequest.getFilesystemName("file") +
+			 * "<br>"); LOG.info("원래파일명 : " + multipartRequest.getOriginalFileName("file") +
+			 * "<br>");
 			 */
 
 			File file = multipartRequest.getFile("file");
@@ -121,7 +121,7 @@ public class OrdersProc extends HttpServlet {
 
 			br = new BufferedReader(new InputStreamReader(new FileInputStream(file), "euc-kr"));
 			LOG.info("원래파일명 : " + multipartRequest.getOriginalFileName("file"));
-			String filename = multipartRequest.getOriginalFileName("file");			
+			String filename = multipartRequest.getOriginalFileName("file");
 			filename = filename.replaceAll(filename.substring(filename.length() - 4, filename.length()), "");
 
 			String line = null;
@@ -251,8 +251,11 @@ public class OrdersProc extends HttpServlet {
 		case "nowaybill":
 			wDao = new WaybillDAO();
 			oDao = new OrdersDAO();
-			update = false;						
+			update = false;
 			List<NoWaybillDTO> noWaybillAll = wDao.selectNoWaybillAll();
+			String m = "";
+			boolean message = true;
+			String pid = "";
 
 			for (NoWaybillDTO nDto : noWaybillAll) {
 				List<DetailOrderDTO> doDtoList = oDao.selectDetailOrder(nDto.getO_id());
@@ -262,6 +265,7 @@ public class OrdersProc extends HttpServlet {
 						update = true;
 					} else {
 						update = false;
+						pid += dDto.getP_id() + " ";
 						break;
 					}
 				}
@@ -272,12 +276,23 @@ public class OrdersProc extends HttpServlet {
 					}
 					oDao.insertWaybill(nDto.getO_id());
 					oDao.updateWaybillTime(nDto);
-					wDao.deleteNoWaybill(nDto);					
-					msg = "운송처리되었습니다.";
-				} else {					
-					msg = "재고가 부족한 항목이 있습니다.";
-				}
+					wDao.deleteNoWaybill(nDto);
+					m += nDto.getO_id() + " ";
+				} else {
+					message = false;
+				}				
 			}
+			
+			System.out.println(m);
+			System.out.println(pid);
+			
+			if(!m.equals("")) {
+				if(message)
+					msg = "주문번호 : " + m + " 운송되었습니다.";
+				else
+					msg = "주문번호 : " + m + " 운송되었습니다. 상품번호 : " + pid + " 상품이 부족합니다.";
+			} else
+				msg = "상품번호 : " + pid + "의 재고가 부족해 운송되지 않았습니다.";
 
 			url = "WaybillProcServlet?action=nowaybilllist&page=1";
 			request.setAttribute("message", msg);
@@ -343,8 +358,8 @@ public class OrdersProc extends HttpServlet {
 			request.setAttribute("ProductList", productList);
 			rd = request.getRequestDispatcher("admin/commodity/commodity.jsp");
 			rd.forward(request, response);
-			break;		
-		
+			break;
+
 		// 총 주문내역
 		case "orderAll":
 			if (!request.getParameter("page").equals("")) {
@@ -370,11 +385,11 @@ public class OrdersProc extends HttpServlet {
 			pageList.add(page);
 
 			orderAll = oDao.selectOrderAll(curPage);
-			for(OrdersDTO o : orderAll) {
-				if(oDao.IsWaybill(o.getO_id())) {
+			for (OrdersDTO o : orderAll) {
+				if (oDao.IsWaybill(o.getO_id())) {
 					request.setAttribute("waybill", true);
 					o.setStatus("운송");
-				}else {
+				} else {
 					request.setAttribute("waybill", false);
 					o.setStatus("지연");
 				}
@@ -470,7 +485,7 @@ public class OrdersProc extends HttpServlet {
 			rd = request.getRequestDispatcher("admin/buying/orderhistoryall.jsp");
 			rd.forward(request, response);
 			break;
-			
+
 		// 발주내역(월별)
 		case "selectOrders":
 			date = request.getParameter("dateInventory");
@@ -479,7 +494,7 @@ public class OrdersProc extends HttpServlet {
 			LOG.info(date1);
 			date2 = date + "-31 23:59";
 			LOG.info(date2);
-			
+
 			pDao = new ProductDAO();
 			pDto = new ProductDTO();
 			orderhistoryall = pDao.selectOrderhistoryAllTime(date1, date2);
@@ -525,7 +540,7 @@ public class OrdersProc extends HttpServlet {
 			rd = request.getRequestDispatcher("buying/buyingall.jsp");
 			rd.forward(request, response);
 			break;
-			
+
 		// 구매처 월별 내역
 		case "buyingselectall":
 			date = request.getParameter("dateInventory");
@@ -534,20 +549,19 @@ public class OrdersProc extends HttpServlet {
 			LOG.info(date1);
 			date2 = date + "-31 23:59";
 			LOG.info(date2);
-			
+
 			field = request.getParameter("field");
 			System.out.println("바이코드" + field);
 			pDao = new ProductDAO();
 			pDto = new ProductDTO();
-			
+
 			buyingall = pDao.selectOrderhistoryAllTime(date1, date2, field);
 			request.setAttribute("dateInventory", date);
 			request.setAttribute("buyingall", buyingall);
 			request.setAttribute("field", field);
 			rd = request.getRequestDispatcher("buying/buyingall_selectTime.jsp");
 			rd.forward(request, response);
-			break;			
-			
+			break;
 
 		// 발주처리
 		case "buying":
@@ -657,7 +671,7 @@ public class OrdersProc extends HttpServlet {
 		// 발주 가격 상세 내역
 		case "buyingprofit_detail":
 			pDao = new ProductDAO();
-			bDto = new BuyingDTO();
+					
 			String b_time = request.getParameter("b_time");
 			String buycode = request.getParameter("buycode");
 			String b_name = request.getParameter("b_name");
@@ -669,17 +683,19 @@ public class OrdersProc extends HttpServlet {
 			rd = request.getRequestDispatcher("admin/grossprofit/grossprofit_buying_detail.jsp");
 			rd.forward(request, response);
 			break;
-		
-			//매출총이익
+
+		// 매출총이익
 		case "grossprofit":
 			oDao = new OrdersDAO();
-
+			pDao = new ProductDAO();			
+			wDao = new WaybillDAO();			
+			
 			shopListall = oDao.selectShop();
 
 			for (OrdersDTO shop : shopListall) {
 				int sum = 0;
 				int shippay = 0;
-				
+
 				List<DetailOrderDTO> shopList_total = oDao.selectShopDetail(shop.getO_time(), shop.getShopcode());
 
 				for (DetailOrderDTO dDto : shopList_total) {
@@ -692,46 +708,46 @@ public class OrdersProc extends HttpServlet {
 				shop.setShippay(shippay);
 				shoptotal += (sum + shippay);
 			}
+
 			
-			pDao = new ProductDAO();
 			bDto = new BuyingDTO();
 			buyingProfitall = pDao.buyingprofitAll();
-			for(BuyingDTO buydto : buyingProfitall) {
+			for (BuyingDTO buydto : buyingProfitall) {
 				buyingtotal += buydto.getTotal();
 			}
+
 			
-			wDao = new WaybillDAO();
 			wDto = new WaybillDTO();
 
 			shipProfit = wDao.shipprofitAll();
-			for(WaybillDTO waydto : shipProfit) {
+			for (WaybillDTO waydto : shipProfit) {
 				shiptotal += waydto.getCount() * 10000;
 			}
-			
+
 			request.setAttribute("shoptotal", shoptotal);
 			request.setAttribute("buyingtotal", buyingtotal);
 			request.setAttribute("shiptotal", shiptotal);
+
 			rd = request.getRequestDispatcher("admin/grossprofit/grossprofitAll.jsp");
 			rd.forward(request, response);
 			break;
-			
-			
-		// 매출 총이익 페이지 월단위 내역	
-		case "selectGrossprofit": 
+
+		// 매출 총이익 페이지 월단위 내역
+		case "selectGrossprofit":
 			date = request.getParameter("dateInventory");
 			LOG.info(date);
 			date1 = date + "-01 00:00";
 			LOG.info(date1);
 			date2 = date + "-31 23:59";
 			LOG.info(date2);
-			
+
 			oDao = new OrdersDAO();
 			shopListall = oDao.selectShopTime(date1, date2);
 
 			for (OrdersDTO shop : shopListall) {
 				int sum = 0;
 				int shippay = 0;
-				
+
 				List<DetailOrderDTO> shopList_total = oDao.selectShopDetailTime(date1, date2);
 
 				for (DetailOrderDTO dDto : shopList_total) {
@@ -744,23 +760,22 @@ public class OrdersProc extends HttpServlet {
 				shop.setShippay(shippay);
 				shoptotal += (sum + shippay);
 			}
-			
+
 			pDao = new ProductDAO();
 			bDto = new BuyingDTO();
 			buyingProfitall = pDao.selectBuyingprofitAll(date1, date2);
-			for(BuyingDTO buydto : buyingProfitall) {
+			for (BuyingDTO buydto : buyingProfitall) {
 				buyingtotal += buydto.getTotal();
 			}
-			
+
 			wDao = new WaybillDAO();
 			wDto = new WaybillDTO();
 
 			shipProfit = wDao.selectShipprofitAll(date1, date2);
-			for(WaybillDTO waydto : shipProfit) {
+			for (WaybillDTO waydto : shipProfit) {
 				shiptotal += waydto.getCount() * 10000;
 			}
-			
-			
+
 			LOG.info("기간설정 달력");
 			request.setAttribute("dateInventory", date);
 			request.setAttribute("shoptotal", shoptotal);
@@ -768,23 +783,23 @@ public class OrdersProc extends HttpServlet {
 			request.setAttribute("shiptotal", shiptotal);
 			rd = request.getRequestDispatcher("admin/grossprofit/grossprofitAll_selectTime.jsp");
 			rd.forward(request, response);
-			break;	
-			
-		case "shopSelectTime": 
+			break;
+
+		case "shopSelectTime":
 			date = request.getParameter("dateInventory");
 			LOG.info(date);
 			date1 = date + "-01 00:00";
 			LOG.info(date1);
 			date2 = date + "-31 23:59";
 			LOG.info(date2);
-			
+
 			oDao = new OrdersDAO();
 			shopListall = oDao.selectShopTime(date1, date2);
 
 			for (OrdersDTO shop : shopListall) {
 				int sum = 0;
 				int shippay = 0;
-				
+
 				List<DetailOrderDTO> shopList_total = oDao.selectShopDetailTime(date1, date2);
 
 				for (DetailOrderDTO dDto : shopList_total) {
@@ -797,40 +812,37 @@ public class OrdersProc extends HttpServlet {
 				shop.setShippay(shippay);
 				shoptotal += (sum + shippay);
 			}
-			
-	
+
 			LOG.info("쇼핑몰 한달 내역");
 			request.setAttribute("dateInventory", date);
 			request.setAttribute("shopList", shopListall);
 			request.setAttribute("shoptotal", shoptotal);
 			rd = request.getRequestDispatcher("admin/grossprofit/grossprofit_shop_selectTime.jsp");
 			rd.forward(request, response);
-			break;	
-			
-		case "buyingselectTime": 
+			break;
+
+		case "buyingselectTime":
 			date = request.getParameter("dateInventory");
 			LOG.info(date);
 			date1 = date + "-01 00:00";
 			LOG.info(date1);
 			date2 = date + "-31 23:59";
 			LOG.info(date2);
-			
+
 			pDao = new ProductDAO();
 			bDto = new BuyingDTO();
 			buyingProfitall = pDao.selectBuyingprofitAll(date1, date2);
-			for(BuyingDTO buydto : buyingProfitall) {
+			for (BuyingDTO buydto : buyingProfitall) {
 				buyingtotal += buydto.getTotal();
 			}
-			
+
 			LOG.info("구매처 한달 내역");
 			request.setAttribute("dateInventory", date);
 			request.setAttribute("buyingProfit", buyingProfitall);
 			rd = request.getRequestDispatcher("admin/grossprofit/grossprofit_buying_selectTime.jsp");
 			rd.forward(request, response);
-			break;	
-			
-		
-			
+			break;
+
 		}
 	}
 }
