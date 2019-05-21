@@ -62,9 +62,9 @@ th, td {
 		<div class="mobile-nav">
 			<!-- Navbar Brand -->
 			<div class="amado-navbar-brand">
-				<a href="index.jsp"><img src="img/core-img/logo.png" alt=""></a>
+				<a href="OrdersProcServlet?action=index"><img src="img/core-img/logo.png" alt=""></a>
 				<div style="text-align: center">
-					${memberName} <a href="/project02/memberProcServlet?action=logout">로그아웃</a>
+					<%=session.getAttribute(request.getAttribute("cookieId")+"memberName")%> <a href="/project02/memberProcServlet?action=logout">로그아웃</a>
 				</div>
 			</div>
 			<!-- Navbar Toggler -->
@@ -81,17 +81,17 @@ th, td {
 			</div>
 			<!-- Logo -->
 			<div class="logo">
-				<a href="index.jsp"><img src="img/core-img/logo.png" alt=""></a>
+				<a href="OrdersProcServlet?action=index"><img src="img/core-img/logo.png" alt=""></a>
 				<div style="text-align: center">
-					${memberName} <a href="/project02/memberProcServlet?action=logout">로그아웃</a>
+					<%=session.getAttribute(request.getAttribute("cookieId")+"memberName")%> <a href="/project02/memberProcServlet?action=logout">로그아웃</a>
 				</div>
 			</div>
 			<!-- Amado Nav -->
 			<nav class="amado-nav">
 				<ul>
-					<li><a href="index.jsp">Home</a></li>
-					<li class="active"><a href="OrdersProcServlet?action=buyinglist&field=${memberField}">발주신청</a></li>
-					<li><a href="OrdersProcServlet?action=buyingall&field=${memberField}">발주내역</a></li>
+					<li><a href="OrdersProcServlet?action=index">Home</a></li>
+					<li class="active"><a href="OrdersProcServlet?action=buyinglist">발주신청</a></li>
+					<li><a href="OrdersProcServlet?action=buyingall">발주내역</a></li>
 				</ul>
 			</nav>
 		</header>
@@ -100,7 +100,7 @@ th, td {
 
 		<!-- 테이블 -->
 		<div class="single-product-area section-padding-100 clearfix" style="margin: auto">
-			<h4><span style="color:#fbb810; font-weight:bold">${memberName}</span>님 발주요청내역 (${requestScope.currentTime})</h4>
+			<h4><span style="color:#fbb810; font-weight:bold"><%=session.getAttribute(request.getAttribute("cookieId")+"memberName")%></span>님 발주요청내역 (${requestScope.currentTime})</h4>
 			<br>
 			<div class="container-fluid">
 				<div class="row">

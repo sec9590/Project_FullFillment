@@ -992,7 +992,7 @@ public class OrdersDAO {
 		}
 		
 	// 쇼핑몰 월별 대금청구 목록	
-		public List<OrdersDTO> selectShopTime(String date1, String date2) {
+	public List<OrdersDTO> selectShopTime(String date1, String date2) {
 			String query = "select shopcode, date_format(o_time, '%Y-%m-%d'), total, shippay from orders where o_time between ? and ? group by date_format(o_time, '%Y-%m-%d');";
 			PreparedStatement pStmt = null;
 			List<OrdersDTO> list = new ArrayList<OrdersDTO>();
@@ -1026,7 +1026,7 @@ public class OrdersDAO {
 		}
 	
 	// 쇼핑몰 월별 대금청구 상세대금목록
-		public List<DetailOrderDTO> selectShopDetailTime(String date1, String date2) {
+	public List<DetailOrderDTO> selectShopDetailTime(String date1, String date2) {
 			String query = "select d.p_id, d.p_name, p.p_price, sum(d.o_quantity), p.p_price*sum(d.o_quantity) as '총가격', total from orders_detail as d, product as p, orders as o where d.o_id=o.o_id and d.p_id = p.p_id and o.o_time between ? and ? group by d.p_id;\r\n" + 
 					";";
 			PreparedStatement pStmt = null;
@@ -1062,8 +1062,8 @@ public class OrdersDAO {
 			return list;
 		}
 		
-		// 운송상태 확인
-		public boolean IsWaybill(int o_id) {
+	// 운송상태 확인
+	public boolean IsWaybill(int o_id) {
 			String query = "select w_id from waybill where o_id = ?";
 			PreparedStatement pStmt = null;
 			int count = 0;

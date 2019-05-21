@@ -13,6 +13,7 @@ import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -96,8 +97,53 @@ public class OrdersProc extends HttpServlet {
 		String date = null;
 		String date1 = null;
 		String date2 = null;
-
+		String cookieId = null;
+	
+		// 세션이 만료되었으면 다시 로그인하게 만들어 줌
+		Cookie[] cookies = request.getCookies();
+		for (Cookie cookie: cookies) {
+			LOG.trace("{}, {}", cookie.getName(), cookie.getValue());
+			if (cookie.getName().equals("Yellow")) {
+				cookieId = cookie.getValue();
+				break;
+			}
+		}
+		System.out.println("쿠키" + cookieId);
+		request.setAttribute("cookieId", cookieId);
+		
+		/*
+		LOG.trace("{}, {}", cookieId, (String)session.getAttribute(cookieId+"memberName"));
+		request.setAttribute("cookieId", cookieId);
+		try {
+			if (session.getAttribute(cookieId+"memberName") == null) {
+				LOG.debug("Session timed-out!!!");
+				action = "timeout";
+			}
+		} catch (IllegalStateException e) {
+			LOG.info("IllegalStateException occurred!!!");
+		}
+		*/
+		
+	
 		switch (action) {
+		case "index":
+			rd = request.getRequestDispatcher("index.jsp");
+			rd.forward(request, response);			
+			break;
+		
+		case "order":
+			rd = request.getRequestDispatcher("order.jsp");
+			rd.forward(request, response);			
+			break;
+			
+		case "timeout":		// 강제 로그아웃 당하는 경우
+			msg = "30분 동안 액션이 없어서 로그아웃 되었습니다.";
+			request.setAttribute("message", msg);
+			request.setAttribute("url", "login.jsp");
+			rd = request.getRequestDispatcher("alertMsg.jsp");
+			rd.forward(request, response);
+			break;
+			
 		// 파일 다운하고 주문하기
 		case "down":
 			String saveDir = "C:\\Temp\\Invoices\\Backup\\";
@@ -253,7 +299,7 @@ public class OrdersProc extends HttpServlet {
 			oDao = new OrdersDAO();
 			update = false;
 			List<NoWaybillDTO> noWaybillAll = wDao.selectNoWaybillAll();
-			
+
 			String m = "";
 			boolean message = true;
 			String pid = "";
@@ -281,14 +327,14 @@ public class OrdersProc extends HttpServlet {
 					m += nDto.getO_id() + " ";
 				} else {
 					message = false;
-				}				
+				}
 			}
-			
+
 			System.out.println(m);
 			System.out.println(pid);
-			
-			if(!m.equals("")) {
-				if(message)
+
+			if (!m.equals("")) {
+				if (message)
 					msg = "주문번호 : " + m + " 운송되었습니다.";
 				else
 					msg = "주문번호 : " + m + " 운송되었습니다. 상품번호 : " + pid + " 상품이 부족합니다.";
@@ -507,7 +553,7 @@ public class OrdersProc extends HttpServlet {
 
 		// 구매처에따른 발주 신청내역
 		case "buyinglist":
-			field = request.getParameter("field");
+			field = (String) session.getAttribute(request.getAttribute("cookieId")+"memberField");
 			pDao = new ProductDAO();
 			bDto = new BuyingDTO();
 			buyingList = pDao.selectBuying(field);
@@ -532,7 +578,7 @@ public class OrdersProc extends HttpServlet {
 
 		// 구매처에따른 발주 신청 전체 내역
 		case "buyingall":
-			field = request.getParameter("field");
+			field = (String) session.getAttribute(request.getAttribute("cookieId")+"memberField");
 			pDao = new ProductDAO();
 			pDto = new ProductDTO();
 			buyingall = pDao.selectBuyingAll(field);
@@ -566,7 +612,7 @@ public class OrdersProc extends HttpServlet {
 
 		// 발주처리
 		case "buying":
-			field = request.getParameter("field");
+			field = (String) session.getAttribute(request.getAttribute("cookieId")+"memberField");
 
 			pDao = new ProductDAO();
 			bDto = new BuyingDTO();
@@ -672,7 +718,7 @@ public class OrdersProc extends HttpServlet {
 		// 발주 가격 상세 내역
 		case "buyingprofit_detail":
 			pDao = new ProductDAO();
-					
+
 			String b_time = request.getParameter("b_time");
 			String buycode = request.getParameter("buycode");
 			String b_name = request.getParameter("b_name");
@@ -688,9 +734,9 @@ public class OrdersProc extends HttpServlet {
 		// 매출총이익
 		case "grossprofit":
 			oDao = new OrdersDAO();
-			pDao = new ProductDAO();			
-			wDao = new WaybillDAO();			
-			
+			pDao = new ProductDAO();
+			wDao = new WaybillDAO();
+
 			shopListall = oDao.selectShop();
 
 			for (OrdersDTO shop : shopListall) {
@@ -710,14 +756,12 @@ public class OrdersProc extends HttpServlet {
 				shoptotal += (sum + shippay);
 			}
 
-			
 			bDto = new BuyingDTO();
 			buyingProfitall = pDao.buyingprofitAll();
 			for (BuyingDTO buydto : buyingProfitall) {
 				buyingtotal += buydto.getTotal();
 			}
 
-			
 			wDto = new WaybillDTO();
 
 			shipProfit = wDao.shipprofitAll();

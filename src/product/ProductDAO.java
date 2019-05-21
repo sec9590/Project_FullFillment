@@ -65,7 +65,7 @@ public class ProductDAO {
 	}
 	
 	// 상품목록
-		public List<ProductDTO> productAll(int page) {
+	public List<ProductDTO> productAll(int page) {
 			int offset = 0;
 			String sql = null;
 			if (page == 0) {
@@ -138,7 +138,7 @@ public class ProductDAO {
 	}
 
 	// 10개미만 떨어진 상품목록(공지사항)
-		public List<ProductDTO> BuyingALL() {
+	public List<ProductDTO> BuyingALL() {
 			String query = "select p_name from product where p_quantity < 10;";
 			PreparedStatement pStmt = null;
 			List<ProductDTO> list = new ArrayList<ProductDTO>();
@@ -221,7 +221,7 @@ public class ProductDAO {
 	}
 
 	// 운송처리위한 현재시간 변환
-	public static String currentTime() {
+	public String currentTime() {
 		SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
 
 		Calendar cal = Calendar.getInstance();
@@ -375,7 +375,7 @@ public class ProductDAO {
 	}
 	
 	// 월별 발주내역
-		public List<BuyingDTO> selectOrderhistoryAllTime(String date1, String date2, String field) {
+	public List<BuyingDTO> selectOrderhistoryAllTime(String date1, String date2, String field) {
 			String query = "select b_id, p_id, p_name, p_price, p_quantity, date_format(b_time, '%Y-%m-%d %H:%i') from buying where buycode = ? and b_time between ? and ?;";
 			PreparedStatement pStmt = null;
 			List<BuyingDTO> list = new ArrayList<BuyingDTO>();
@@ -410,7 +410,6 @@ public class ProductDAO {
 			}
 			return list;
 		}
-
 
 	// 발주db에 상품번호 확인
 	public List<BuyingDTO> selectBuyingAll() {
@@ -519,7 +518,7 @@ public class ProductDAO {
 	}
 	
 	// 발주 대금 월별 계산
-		public List<BuyingDTO> selectBuyingprofitAll(String date1, String date2) {
+	public List<BuyingDTO> selectBuyingprofitAll(String date1, String date2) {
 			String query = "select m.m_name, b.b_time, sum(b.p_price * b.p_quantity), b.buycode from buying as b, member as m where binary(m.m_field) = binary(b.buycode) and b.b_time between ? and ? group by b.buycode, b.b_time;";
 			PreparedStatement pStmt = null;
 			List<BuyingDTO> list = new ArrayList<BuyingDTO>();
@@ -551,8 +550,9 @@ public class ProductDAO {
 			}
 			return list;
 		}	
-		// 페이지위한 개수
-		public int getCount() {
+	
+	// 페이지위한 개수
+	public int getCount() {
 			String query = "select count(*) from orders;";
 			PreparedStatement pStmt = null;
 			int count = 0;
@@ -575,6 +575,34 @@ public class ProductDAO {
 			}
 			return count;
 		}
+	
+	//상품추가
+	public void insertProduct(ProductDTO pDto) {
+		String query = "insert into product(p_name, p_img, p_price, p_quantity, buycode) values (?, ?, ?, ?, ?);";
+		PreparedStatement pStmt = null;
+
+		try {
+			pStmt = conn.prepareStatement(query);
+
+			pStmt.setString(1, pDto.getP_name());
+			pStmt.setString(2, pDto.getP_img());
+			pStmt.setString(3, pDto.getP_price());
+			pStmt.setInt(4, pDto.getP_quantity());
+			pStmt.setString(5, pDto.getBuycode());
+
+			pStmt.executeUpdate();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (pStmt != null && !pStmt.isClosed())
+					pStmt.close();
+			} catch (SQLException se) {
+				se.printStackTrace();
+			}
+		}
+	}
 	public void close() {
 		try {
 			if (conn != null && !conn.isClosed())

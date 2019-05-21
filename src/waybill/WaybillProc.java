@@ -7,6 +7,7 @@ import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -66,8 +67,28 @@ public class WaybillProc extends HttpServlet {
 		int shiptotal = 0;
 
 		List<String> pageList = new ArrayList<String>();
+		
+		String cookieId = null;
+		
+		// 세션이 만료되었으면 다시 로그인하게 만들어 줌
+		Cookie[] cookies = request.getCookies();
+		for (Cookie cookie: cookies) {
+			LOG.trace("{}, {}", cookie.getName(), cookie.getValue());
+			if (cookie.getName().equals("Yellow")) {
+				cookieId = cookie.getValue();
+				break;
+			}
+		}
+		System.out.println("쿠키" + cookieId);
+		request.setAttribute("cookieId", cookieId);
 
 		switch (action) {
+		
+		case "carrier":
+			rd = request.getRequestDispatcher("carrier/carrier.jsp");
+			rd.forward(request, response);		
+			break;
+			
 		case "waybilllist":
 			if (!request.getParameter("page").equals("")) {
 				curPage = Integer.parseInt(request.getParameter("page"));
@@ -171,7 +192,7 @@ public class WaybillProc extends HttpServlet {
 
 		// 운송회사에 따른 운송내역
 		case "carrierlist":
-			String field = request.getParameter("field");
+			String field = (String) session.getAttribute(request.getAttribute("cookieId")+"memberField");
 			wDao = new WaybillDAO();
 			wDto = new WaybillDTO();
 

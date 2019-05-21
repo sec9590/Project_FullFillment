@@ -8,9 +8,17 @@ public class ProductDTO {
 	private int p_quantity;
 	private String buycode;
 	
-	public ProductDTO() {
-	}
 	
+	
+	public ProductDTO(String p_name, String p_img, String p_price, int p_quantity, String buycode) {
+		super();
+		this.p_name = p_name;
+		this.p_img = p_img;
+		this.p_price = p_price;
+		this.p_quantity = p_quantity;
+		this.buycode = buycode;
+	}
+
 	public ProductDTO(int p_id, String p_name, String p_img, String p_price, int p_quantity, String buycode) {
 		super();
 		this.p_id = p_id;
@@ -19,6 +27,10 @@ public class ProductDTO {
 		this.p_price = p_price;
 		this.p_quantity = p_quantity;
 		this.buycode = buycode;
+	}
+
+	public ProductDTO() {
+		// TODO Auto-generated constructor stub
 	}
 
 	public int getP_id() {

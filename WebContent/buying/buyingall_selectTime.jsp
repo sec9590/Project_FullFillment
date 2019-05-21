@@ -96,16 +96,16 @@ table.ui-datepicker-calendar { display:none; }
 </head>
 
 <body>
-	<!-- ##### Main Content Wrapper Start ##### -->
+		<!-- ##### Main Content Wrapper Start ##### -->
 	<div class="main-content-wrapper d-flex clearfix">
 
 		<!-- Mobile Nav (max width 767px)-->
 		<div class="mobile-nav">
 			<!-- Navbar Brand -->
 			<div class="amado-navbar-brand">
-				<a href="index.jsp"><img src="img/core-img/logo.png" alt=""></a>
+				<a href="OrdersProcServlet?action=index"><img src="img/core-img/logo.png" alt=""></a>
 				<div style="text-align: center">
-					${memberName} <a href="/project02/memberProcServlet?action=logout">로그아웃</a>
+					<%=session.getAttribute(request.getAttribute("cookieId")+"memberName")%> <a href="/project02/memberProcServlet?action=logout">로그아웃</a>
 				</div>
 			</div>
 			<!-- Navbar Toggler -->
@@ -122,19 +122,17 @@ table.ui-datepicker-calendar { display:none; }
 			</div>
 			<!-- Logo -->
 			<div class="logo">
-				<a href="index.jsp"><img src="img/core-img/logo.png" alt=""></a>
+				<a href="OrdersProcServlet?action=index"><img src="img/core-img/logo.png" alt=""></a>
 				<div style="text-align: center">
-					${memberName} <a href="/project02/memberProcServlet?action=logout">로그아웃</a>
+					<%=session.getAttribute(request.getAttribute("cookieId")+"memberName")%> <a href="/project02/memberProcServlet?action=logout">로그아웃</a>
 				</div>
 			</div>
 			<!-- Amado Nav -->
 			<nav class="amado-nav">
 				<ul>
-					<li><a href="index.jsp">Home</a></li>
-					<li><a
-						href="OrdersProcServlet?action=buyinglist&field=${memberField}">발주신청</a></li>
-					<li class="active"><a
-						href="OrdersProcServlet?action=buyingall&field=${memberField}">발주내역</a></li>
+					<li><a href="OrdersProcServlet?action=index">Home</a></li>
+					<li><a href="OrdersProcServlet?action=buyinglist">발주신청</a></li>
+					<li class="active"><a href="OrdersProcServlet?action=buyingall">발주내역</a></li>
 				</ul>
 			</nav>
 		</header>
@@ -144,7 +142,7 @@ table.ui-datepicker-calendar { display:none; }
 		<!-- 테이블 -->
 		<div class="single-product-area section-padding-100 clearfix" style="margin: auto">
 			<h4>
-				<span style="color: #fbb810; font-weight: bold">${memberName}</span> 님 발주내역 (${dateInventory})
+				<span style="color: #fbb810; font-weight: bold"><%=session.getAttribute(request.getAttribute("cookieId")+"memberName")%></span> 님 발주내역 (${dateInventory})
 			</h4>
 			<div style="float:right; padding-bottom:10px;">
 					<form action="OrdersProcServlet?action=buyingselectall&field=${requestScope.field}" method="post" autocomplete=off>

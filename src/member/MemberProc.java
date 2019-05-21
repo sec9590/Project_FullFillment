@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.Cookie;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -52,17 +53,18 @@ public class MemberProc extends HttpServlet {
 		int curPage = 0;
 		int pageNo = 0;
 		List<String> pageList = new ArrayList<String>();
-		/*Cookie[] cookies = null;
-		String cookieId = null;*/
+		Cookie[] cookies = null;
+		String cookieId = null;
+		String url = null;
 		
-		/*if(!action.equals("login")) {
+		if(!action.equals("login")) {
 			cookies = request.getCookies();
 			for (Cookie cookie: cookies) {
 				if (cookie.getName().equals("Yellow"))
 					cookieId = cookie.getValue();
 			} 
 			request.setAttribute("cookieId", cookieId);
-		}*/
+		}
 		
 		switch(action) {
 		case "login" :
@@ -74,6 +76,7 @@ public class MemberProc extends HttpServlet {
 			mDao = new MemberDAO();
 			int result = mDao.verifyIdPassword(m_id, m_password);
 			String errorMessage = null;
+			
 			switch (result) {
 			case MemberDAO.ID_PASSWORD_MATCH:
 				break;
@@ -87,45 +90,51 @@ public class MemberProc extends HttpServlet {
 			
 			if (result == MemberDAO.ID_PASSWORD_MATCH) {
 				member = mDao.searchById(m_id);
-				/*cookieId = member.getM_id();
+				cookieId = member.getM_id();
 				Cookie cookie = new Cookie("Yellow", cookieId);
-				cookie.setPath("/project02/admin/");
+								
+				/*session.setAttribute("memberId", m_id);
+				session.setAttribute("memberName", member.getM_name());
+				session.setAttribute("memberJob", member.getM_job());
+				session.setAttribute("memberField", member.getM_field());*/
+				
+				String pg = member.getM_job();		
+								
+				switch(pg) {
+				case "0" :				
+					cookie.setPath("/project02/");
+					url = "admin/index.jsp";
+					
+					break;
+				case "1" :
+					cookie.setPath("/project02/");
+					field = "OrdersProcServlet?action=buyinglist&field=" + member.getM_field();
+					request.setAttribute("field", member.getM_field());				
+					/*rd = request.getRequestDispatcher("buying/index.jsp");
+					rd.forward(request, response);*/
+					url = "buying/index.jsp";				
+					break;
+				case "2" :
+					cookie.setPath("/project02/");
+					field = "WaybillProcServlet?action=carrierlist&field=" + member.getM_field();
+					request.setAttribute("field", member.getM_field());
+					/*rd = request.getRequestDispatcher("carrier/index.jsp");
+					rd.forward(request, response);*/
+					url = "carrier/index.jsp";		
+					break;
+				}
+				LOG.info("로그인성공");							
 				response.addCookie(cookie);
 				System.out.println("coo : " + cookie);
-				request.setAttribute("cookieId", cookieId);
+				// request.setAttribute("cookieId", cookieId);
 				session.setAttribute(cookieId + "memberId", m_id);
 				session.setAttribute(cookieId + "memberName", member.getM_name());
 				session.setAttribute(cookieId + "memberJob", member.getM_job());
-				session.setAttribute(cookieId + "memberField", member.getM_field());*/
+				session.setAttribute(cookieId + "memberField", member.getM_field());
+				System.out.println("이름 : " + member.getM_name());
+				System.out.println("필드 : " + member.getM_field());
 				
-				session.setAttribute("memberId", m_id);
-				session.setAttribute("memberName", member.getM_name());
-				session.setAttribute("memberJob", member.getM_job());
-				session.setAttribute("memberField", member.getM_field());
-				
-				String pg = member.getM_job();
-				switch(pg) {
-				case "0" :
-					/*cookies = request.getCookies();
-					for(Cookie cook : cookies) {
-						if(cook.getName().equals("memberName"))
-							cookieId = cook.getValue();
-					}*/
-					response.sendRedirect("OrdersProcServlet?action=productlist");
-					break;
-				case "1" :
-					field = "OrdersProcServlet?action=buyinglist&field=" + member.getM_field();
-					request.setAttribute("field", member.getM_field());
-					response.sendRedirect(field);
-					break;
-				case "2" :
-					field = "WaybillProcServlet?action=carrierlist&field=" + member.getM_field();
-					request.setAttribute("field", member.getM_field());
-					response.sendRedirect(field);
-					break;
-				}
-			
-				LOG.info("로그인성공");
+				response.sendRedirect(url);
 				
 			} else {
 				request.setAttribute("message", errorMessage);
@@ -137,13 +146,19 @@ public class MemberProc extends HttpServlet {
 			break;
 			
 		case "logout":			// 로그아웃할 때
-			/*cookies = request.getCookies();
+			cookies = request.getCookies();
+			cookieId = null;
 			for (Cookie cookie: cookies) {
+				if (cookie.getName().equals("Yellow"))
+					cookieId = cookie.getValue();
 				cookie.setMaxAge(0);
 				response.addCookie(cookie);
-			}*/
-
-			session.invalidate();
+			}
+			session.removeAttribute(cookieId+"memberId");
+			session.removeAttribute(cookieId+"memberName");
+			session.removeAttribute(cookieId+"memberJob");
+			session.removeAttribute(cookieId+"memberField");
+			//session.invalidate();
 			response.sendRedirect("index.jsp");
 			break;
 			

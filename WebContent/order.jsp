@@ -91,12 +91,70 @@ h4 {
 	position: relative;
 	top: 1px;
 }
+
+.filebox input[type="file"] {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+	border: 0;
+}
+
+.filebox label {
+	display: inline-block;
+	padding: .5em .75em;
+	color: #999;
+	font-size: inherit;
+	line-height: normal;
+	background-color: #fdfdfd;
+	cursor: pointer;
+	border: 1px solid #ebebeb;
+	border-bottom-color: #e2e2e2;
+	border-radius: .25em;
+}
+.filebox .obutton{
+display: inline-block;
+	padding: .5em .75em;
+	color: #999;
+	font-size: inherit;
+	line-height: normal;
+	background-color: #fdfdfd;
+	cursor: pointer;
+	border: 1px solid #ebebeb;
+	border-bottom-color: #e2e2e2;
+	border-radius: .25em;
+}
+
+/* named upload */
+.filebox .upload-name {
+	display: inline-block;
+	padding: .5em .75em;
+	font-size: inherit;
+	font-family: inherit;
+	line-height: normal;
+	vertical-align: middle;
+	background-color: #f5f5f5;
+	border: 1px solid #ebebeb;
+	border-bottom-color: #e2e2e2;
+	border-radius: .25em;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+}
+
+.filebox.bs3-primary label {
+	color: #fff;
+	background-color: #337ab7;
+	border-color: #2e6da4;
+}
 </style>
 </head>
 
 <body>
 
-	<!-- ##### Main Content Wrapper Start ##### -->
 	<div class="main-content-wrapper d-flex clearfix">
 		<!-- Mobile Nav (max width 767px)-->
 		<div class="mobile-nav">
@@ -104,7 +162,7 @@ h4 {
 			<div class="amado-navbar-brand">
 				<a href="index.jsp"><img src="img/core-img/logo.png" alt=""></a>
 				<div style="text-align: center">
-					${memberName} <a href="/project02/memberProcServlet?action=logout">로그아웃</a>
+					<%=session.getAttribute(request.getAttribute("cookieId")+"memberName")%> <a href="/project02/memberProcServlet?action=logout">로그아웃</a>
 				</div>
 			</div>
 			<!-- Navbar Toggler -->
@@ -119,14 +177,16 @@ h4 {
 		<div class="logo">
 			<a href="index.jsp"><img src="img/core-img/logo.png" alt=""></a>
 			<div style="text-align: center">
-				${memberName} <a href="/project02/memberProcServlet?action=logout">로그아웃</a>
+				<%=session.getAttribute(request.getAttribute("cookieId")+"memberName")%> <a href="/project02/memberProcServlet?action=logout">로그아웃</a>
 			</div>
 		</div>
 		<!-- Amado Nav --> <nav class="amado-nav">
 		<li><a href="index.jsp">HOME</a></li>
 		<li><a href="memberProcServlet?action=member&page=1">회원목록</a></li>
+		<li><a
+			href="ProductProcServlet?action=product_list&page=1">제품목록</a></li>
 		<li><a href="OrdersProcServlet?action=productlist">재고내역</a></li>
-		<li class="active"><a href="order.jsp">주문하기</a></li>
+		<li class="active"><a href="OrdersProcServlet?action=order">주문하기</a></li>
 		<li><a href="OrdersProcServlet?action=orderAll&page=1">주문내역</a></li>
 		<li><a href="OrdersProcServlet?action=orderhistoryall">발주내역</a></li>
 		<li><a href="WaybillProcServlet?action=waybilllist&page=1">운송내역</a></li>
@@ -135,15 +195,14 @@ h4 {
 		</nav> </header>
 		<!-- Header Area End -->
 
-		<div class="amado_product_area section-padding-100"	style="margin: auto;">
-			<div class="container-fluid" style="margin-top:-50px">
-				<div align=center style="margin-left: -120px;">
-					<form method="post" enctype="multipart/form-data"
-						action="OrdersProcServlet?action=down">
-						<input type="text" name="name" /> <input type="file" name="file" />
-						<input class="btn btn-warning"
-							style="background-color: #fbb810; border: none" type="submit"
-							value="주문하기" />
+		<div class="amado_product_area section-padding-100"
+			style="margin: auto;">
+			<div class="container-fluid">
+				<div align=center style="margin-left: -30px;" class="filebox">
+					<form method="post" enctype="multipart/form-data" action="OrdersProcServlet?action=down">
+						<input type="text" size = 30 id="file_route" class="upload-name" readonly="readonly" title="File Route" name="name">&nbsp;&nbsp; 
+						<label for="ex_filename">업로드</label> <input type="file" id="ex_filename"	name="file" class="upload-hidden" onchange="javascript:document.getElementById('file_route').value=this.value">
+						&nbsp;<input class="obutton"  type="submit"value="주문하기" />
 					</form>
 				</div>
 				<BR> <BR>
@@ -200,7 +259,7 @@ h4 {
 
 	<!-- ##### Main Content Wrapper End ##### -->
 
-  <%@ include file="footer.jspf" %>
+	<%@ include file="footer.jspf"%>
 
 	<!--===============================================================================================-->
 	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>

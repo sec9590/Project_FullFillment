@@ -126,9 +126,9 @@ table.ui-datepicker-calendar {
 		<div class="mobile-nav">
 			<!-- Navbar Brand -->
 			<div class="amado-navbar-brand">
-				<a href="index.jsp"><img src="img/core-img/logo.png" alt=""></a>
+				<a href="OrdersProcServlet?action=index"><img src="img/core-img/logo.png" alt=""></a>
 				<div style="text-align: center">
-					${memberName} <a href="/project02/memberProcServlet?action=logout">로그아웃</a>
+					<%=session.getAttribute(request.getAttribute("cookieId")+"memberName")%> <a href="/project02/memberProcServlet?action=logout">로그아웃</a>
 				</div>
 			</div>
 			<!-- Navbar Toggler -->
@@ -138,30 +138,33 @@ table.ui-datepicker-calendar {
 		</div>
 
 		<!-- Header Area Start -->
-		<header class="header-area clearfix"> <!-- Close Icon -->
-		<div class="nav-close">
-			<i class="fa fa-close" aria-hidden="true"></i>
-		</div>
-		<!-- Logo -->
-		<div class="logo">
-			<a href="index.jsp"><img src="img/core-img/logo.png" alt=""></a>
-			<div style="text-align: center">
-				${memberName} <a href="/project02/memberProcServlet?action=logout">로그아웃</a>
+		<header class="header-area clearfix">
+			<!-- Close Icon -->
+			<div class="nav-close">
+				<i class="fa fa-close" aria-hidden="true"></i>
 			</div>
-		</div>
-		<!-- Amado Nav --> <nav class="amado-nav">
-		<ul>
-			<li><a href="index.jsp">HOME</a></li>
-			<li class="active"><a href="carrier/carrier.jsp">CARRIER</a></li>
-		</ul>
-		</nav> </header>
+			<!-- Logo -->
+			<div class="logo">
+				<a href="OrdersProcServlet?action=index"><img src="img/core-img/logo.png" alt=""></a>
+				<div style="text-align: center">
+					<%=session.getAttribute(request.getAttribute("cookieId")+"memberName")%> <a href="/project02/memberProcServlet?action=logout">로그아웃</a>
+				</div>
+			</div>
+            <!-- Amado Nav -->
+            <nav class="amado-nav">
+                <ul>
+                  <li><a href="OrdersProcServlet?action=index">HOME</a></li>                 
+                   <li class="active"><a href="WaybillProcServlet?action=carrierlist">CARRIER</a></li>    
+                </ul>
+            </nav>        
+            </header>        
 
 		<div class="amado_product_area section-padding-100 clearfix"
 			style="margin: auto">
 			<div class="row">
 				<div style="width: 100%; position: relative;">
 					<h4>
-						<span style="color: #fbb810; font-weight: bold">${memberName}</span>님
+						<span style="color: #fbb810; font-weight: bold"><%=session.getAttribute(request.getAttribute("cookieId")+"memberName")%></span>님
 						운송내역
 					</h4>
 					<span style="margin-left: 20px;">${dateInventory} 운송내역</span>

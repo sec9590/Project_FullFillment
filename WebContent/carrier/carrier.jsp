@@ -88,43 +88,41 @@ table.ui-datepicker-calendar { display:none; }
 </head>
 <body>
  <!-- ##### Main Content Wrapper Start ##### -->
-    <div class="main-content-wrapper d-flex clearfix">
+	<div class="main-content-wrapper d-flex clearfix">
 
-        <!-- Mobile Nav (max width 767px)-->
-        <div class="mobile-nav">
-            <!-- Navbar Brand -->
-            <div class="amado-navbar-brand">
-                <a href="index.jsp"><img src="img/core-img/logo.png" alt=""></a>
-                <div style="text-align:center">
-	                ${memberName}
-					<a href="/project02/memberProcServlet?action=logout">로그아웃</a>
+		<!-- Mobile Nav (max width 767px)-->
+		<div class="mobile-nav">
+			<!-- Navbar Brand -->
+			<div class="amado-navbar-brand">
+				<a href="OrdersProcServlet?action=index"><img src="img/core-img/logo.png" alt=""></a>
+				<div style="text-align: center">
+					<%=session.getAttribute(request.getAttribute("cookieId")+"memberName")%> <a href="/project02/memberProcServlet?action=logout">로그아웃</a>
 				</div>
-            </div>
-            <!-- Navbar Toggler -->
-            <div class="amado-navbar-toggler">
-                <span></span><span></span><span></span>
-            </div>
-        </div>
+			</div>
+			<!-- Navbar Toggler -->
+			<div class="amado-navbar-toggler">
+				<span></span><span></span><span></span>
+			</div>
+		</div>
 
-        <!-- Header Area Start -->
-        <header class="header-area clearfix">
-            <!-- Close Icon -->
-            <div class="nav-close">
-                <i class="fa fa-close" aria-hidden="true"></i>
-            </div>
-            <!-- Logo -->
-            <div class="logo">
-                <a href="index.jsp"><img src="img/core-img/logo.png" alt=""></a>
-                <div style="text-align:center">
-	                ${memberName}
-					<a href="/project02/memberProcServlet?action=logout">로그아웃</a>
+		<!-- Header Area Start -->
+		<header class="header-area clearfix">
+			<!-- Close Icon -->
+			<div class="nav-close">
+				<i class="fa fa-close" aria-hidden="true"></i>
+			</div>
+			<!-- Logo -->
+			<div class="logo">
+				<a href="OrdersProcServlet?action=index"><img src="img/core-img/logo.png" alt=""></a>
+				<div style="text-align: center">
+					<%=session.getAttribute(request.getAttribute("cookieId")+"memberName")%> <a href="/project02/memberProcServlet?action=logout">로그아웃</a>
 				</div>
-            </div>
+			</div>
             <!-- Amado Nav -->
             <nav class="amado-nav">
                 <ul>
-                  <li><a href="index.jsp">HOME</a></li>                 
-                  <li class="active"><a href="carrier/carrier.jsp">CARRIER</a></li>  
+                  <li><a href="OrdersProcServlet?action=index">HOME</a></li>                 
+                  <li class="active"><a href="WaybillProcServlet?action=carrierlist">CARRIER</a></li>  
                 </ul>
             </nav>        
             </header>        
@@ -132,7 +130,7 @@ table.ui-datepicker-calendar { display:none; }
        <div class="amado_product_area section-padding-100 clearfix" style="margin:auto">
 	    <div class="row">
 	    <div style="width:100%; position:relative;">
-	     <h4><span style="color:#fbb810; font-weight:bold">${memberName}</span>님 운송내역</h4>
+	     <h4><span style="color:#fbb810; font-weight:bold"><%=session.getAttribute(request.getAttribute("cookieId")+"memberName")%></span>님 운송내역</h4>
 				<div style="float:right; padding-bottom:10px;">
 					<form action="WaybillProcServlet?action=selectWaybill&field=${requestScope.field}" method="post" autocomplete=off>
 					<input type="text" id="sdate" name="dateInventory" value="#" style="border-bottom:1px solid #cccccc;">

@@ -33,7 +33,7 @@
         <div class="mobile-nav">
             <!-- Navbar Brand -->
             <div class="amado-navbar-brand">
-                <a href="index.jsp"><img src="img/core-img/logo.png" alt=""></a>
+                <a href="OrdersProcServlet?action=index"><img src="img/core-img/logo.png" alt=""></a>
             </div>
             <!-- Navbar Toggler -->
             <div class="amado-navbar-toggler">
@@ -49,12 +49,13 @@
             </div>
             <!-- Logo -->
             <div class="logo">
-                <a href="index.jsp"><img src="img/core-img/logo.png" alt=""></a>
+                <a href="OrdersProcServlet?action=index"><img src="img/core-img/logo.png" alt=""></a>
                 <div style="text-align:center">
-	                ${memberName}
+	              
 	                <%
-	                	if(session.getAttribute("memberName") != null){
+	                	if(session.getAttribute(request.getAttribute("cookieId")+"memberName") != null){
 	                %>
+	                <%=session.getAttribute(request.getAttribute("cookieId")+"memberName")%>
 					<a href="/project02/memberProcServlet?action=logout">로그아웃</a>
 					<%
 	                	}
@@ -64,15 +65,16 @@
             <!-- Amado Nav -->
             <nav class="amado-nav">
               <ul>
-                    <li class="active"><a href="index.jsp">HOME</a></li>
+                    <li class="active"><a href="OrdersProcServlet?action=index">HOME</a></li>
                     <%
-                   	 	if(session.getAttribute("memberName") == null){
+                   	 	if(session.getAttribute(request.getAttribute("cookieId")+"memberName") == null){
                     %>
                     <li><a href="signup.jsp">SIGN UP</a></li>
                     <li><a href="login.jsp">LOGIN</a></li>
+                     <li><a href="product_list.jsp">PRODUCT</a></li>
                     <%
                    	 	} else {
-                   	 		String job = (String) session.getAttribute("memberJob");
+                   	 		String job = (String) session.getAttribute(request.getAttribute("cookieId")+"memberJob");
                    	 		if(job.equals("0")){
                     %>
                    		 <li><a href="OrdersProcServlet?action=productlist">ADMIN</a></li>
@@ -80,17 +82,17 @@
                    	 		} else if(job.equals("1")){
                    	 		
                    	%>
-                   			<li><a href="OrdersProcServlet?action=buyinglist&field=${memberField}">BUYING</a></li>
+                   			<li><a href="OrdersProcServlet?action=buyinglist">BUYING</a></li>
                    			
            			<%
            	 				} else {
            			%>
-                   			<li><a href="WaybillProcServlet?action=carrierlist&field=${memberField}">CARRIER</a></li>
+                   			<li><a href="WaybillProcServlet?action=carrierlist">CARRIER</a></li>
                     <%
            	 				}
                    	 		}
                     %>
-                    <li><a href="product_list.jsp">PRODUCT</a></li>
+                   
                 </ul>
             </nav>
                 <div style="margin-top:50px; margin-left:-40px; width:250px; padding: 10px 10px 10px 10px;">
@@ -132,7 +134,7 @@
                  <!-- Single Catagory -2 -->
                 <div class="single-products-catagory clearfix">
                     <a href="#">
-                        <img src="img/bg-img/2jpg.jpg" alt="">
+                        <img src="img/bg-img/2.jpg" alt="">
                         <!-- Hover Content -->
                         <div class="hover-content">
                             <div class="line"></div>

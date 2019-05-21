@@ -116,22 +116,18 @@ input[type=submit]{
 </head>
 
 <body>
-	<!-- ##### Main Content Wrapper Start ##### -->
-	<div class="main-content-wrapper d-flex clearfix">
-
+	
+		<div class="main-content-wrapper d-flex clearfix">
 		<!-- Mobile Nav (max width 767px)-->
 		<div class="mobile-nav">
 			<!-- Navbar Brand -->
 			<div class="amado-navbar-brand">
 				<a href="index.jsp"><img src="img/core-img/logo.png" alt=""></a>
 				<div style="text-align: center">
-					${memberName} <a href="/project02/memberProcServlet?action=logout">로그아웃</a>
+					<%=session.getAttribute(request.getAttribute("cookieId")+"memberName")%> <a href="/project02/memberProcServlet?action=logout">로그아웃</a>
 				</div>
 			</div>
 			<!-- Navbar Toggler -->
-			<div class="amado-navbar-toggler">
-				<span></span><span></span><span></span>
-			</div>
 		</div>
 
 		<!-- Header Area Start -->
@@ -143,15 +139,15 @@ input[type=submit]{
 		<div class="logo">
 			<a href="index.jsp"><img src="img/core-img/logo.png" alt=""></a>
 			<div style="text-align: center">
-				${memberName} <a href="/project02/memberProcServlet?action=logout">로그아웃</a>
+				<%=session.getAttribute(request.getAttribute("cookieId")+"memberName")%> <a href="/project02/memberProcServlet?action=logout">로그아웃</a>
 			</div>
 		</div>
-		<!-- Amado Nav --> 
 		<nav class="amado-nav">
         	<li><a href="index.jsp">HOME</a></li>
-        	<li><a href="memberProcServlet?action=member&page=1">회원목록</a></li>
+        	<li><a href="memberProcServlet?action=member&page=1">회원목록</a></li>	
+		<li><a href="ProductProcServlet?action=product_list&page=1">제품목록</a></li>
             <li><a href="OrdersProcServlet?action=productlist">재고내역</a></li>
-            <li><a href="order.jsp">주문하기</a></li>
+           <li><a href="OrdersProcServlet?action=order">주문하기</a></li>
             <li class="active"><a href="OrdersProcServlet?action=orderAll&page=1">주문내역</a></li>
             <li><a href="OrdersProcServlet?action=orderhistoryall">발주내역</a></li>
             <li><a href="WaybillProcServlet?action=waybilllist&page=1">운송내역</a></li>

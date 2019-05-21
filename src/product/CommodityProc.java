@@ -10,6 +10,7 @@ import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -84,6 +85,21 @@ public class CommodityProc extends HttpServlet {
 		String lastmonth = null;
 		String lastdate1 = null;
 		String lastdate2 = null;
+		
+		String cookieId = null;
+		
+		// 세션이 만료되었으면 다시 로그인하게 만들어 줌
+		Cookie[] cookies = request.getCookies();
+		for (Cookie cookie: cookies) {
+			LOG.trace("{}, {}", cookie.getName(), cookie.getValue());
+			if (cookie.getName().equals("Yellow")) {
+				cookieId = cookie.getValue();
+				break;
+			}
+		}
+		System.out.println("쿠키" + cookieId);
+		request.setAttribute("cookieId", cookieId);
+		
 
 		switch (action) {
 		// 이번달 재고정산

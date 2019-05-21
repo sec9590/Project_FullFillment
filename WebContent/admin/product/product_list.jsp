@@ -72,12 +72,22 @@ button {
 button:hover {
 	background-color: #333333;
 }
+
+td a {
+	color : black;
+}
+td a:visited{
+color : black;
+}
+td a:hover{
+color : #fbb710;
+}
+
 </style>
 </head>
 
 <body>
 
-	<!-- ##### Main Content Wrapper Start ##### -->
 	<div class="main-content-wrapper d-flex clearfix">
 		<!-- Mobile Nav (max width 767px)-->
 		<div class="mobile-nav">
@@ -85,7 +95,7 @@ button:hover {
 			<div class="amado-navbar-brand">
 				<a href="index.jsp"><img src="img/core-img/logo.png" alt=""></a>
 				<div style="text-align: center">
-					${memberName} <a href="/project02/memberProcServlet?action=logout">로그아웃</a>
+					<%=session.getAttribute(request.getAttribute("cookieId")+"memberName")%> <a href="/project02/memberProcServlet?action=logout">로그아웃</a>
 				</div>
 			</div>
 			<!-- Navbar Toggler -->
@@ -100,7 +110,7 @@ button:hover {
 		<div class="logo">
 			<a href="index.jsp"><img src="img/core-img/logo.png" alt=""></a>
 			<div style="text-align: center">
-				<%-- <%=session.getAttribute(request.getAttribute("cookieId")+"memberName")%> --%>${memberName} <a href="/project02/memberProcServlet?action=logout">로그아웃</a>
+				<%=session.getAttribute(request.getAttribute("cookieId")+"memberName")%> <a href="/project02/memberProcServlet?action=logout">로그아웃</a>
 			</div>
 		</div>
 		<!-- Amado Nav --> <nav class="amado-nav">
@@ -108,7 +118,7 @@ button:hover {
 		<li><a href="memberProcServlet?action=member&page=1">회원목록</a></li>
 		<li class="active"><a href="ProductProcServlet?action=product_list&page=1">제품목록</a></li>
 		<li><a href="OrdersProcServlet?action=productlist">재고내역</a></li>
-		<li><a href="order.jsp">주문하기</a></li>
+		<li><a href="OrdersProcServlet?action=order">주문하기</a></li>
 		<li><a href="OrdersProcServlet?action=orderAll&page=1">주문내역</a></li>
 		<li><a href="OrdersProcServlet?action=orderhistoryall">발주내역</a></li>
 		<li><a href="WaybillProcServlet?action=waybilllist&page=1">운송내역</a></li>
@@ -133,7 +143,6 @@ button:hover {
 								<tr>
 									<th>제품코드</th>
 									<th>제품명</th>
-									<th>제품사진</th>
 									<th>가격</th>
 									<th>구매처코드</th>
 								</tr>
@@ -144,8 +153,7 @@ button:hover {
 								<c:forEach var="product" items="${plist}">
 									<tr>
 										<td>${product.p_id}</td>
-										<td style="text-align: left">${product.p_name}</td>
-										<td>${product.p_img }</td>
+										<td style="text-align: left"><a class="gallery_img" href="${product.p_img}">${product.p_name}</a></td>									
 										<td><fmt:formatNumber value="${product.p_price}"
 												pattern="#,###" /></td>
 												
@@ -156,11 +164,9 @@ button:hover {
 							</tbody>
 						</table>
 					</div>
-					<div align=center style="margin-left: 200px">
+					<div align=center style="margin-left: 100px">
 						<c:set var="pageList" value="${requestScope.pageList}" />
-						<c:forEach var="pageNo" items="${pageList}">
-										${pageNo}
-							</c:forEach>
+						<c:forEach var="pageNo" items="${pageList}">${pageNo}</c:forEach>
 					</div>
 				</div>
 			</div>

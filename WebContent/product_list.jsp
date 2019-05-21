@@ -23,75 +23,7 @@
 </head>
 
 <body>   
-    <!-- ##### Main Content Wrapper Start ##### -->
-    <div class="main-content-wrapper d-flex clearfix">
-
-        <!-- Mobile Nav (max width 767px)-->
-        <div class="mobile-nav">
-            <!-- Navbar Brand -->
-            <div class="amado-navbar-brand">
-                <a href="index.jsp"><img src="img/core-img/logo.png" alt=""></a>
-            </div>
-            <!-- Navbar Toggler -->
-            <div class="amado-navbar-toggler">
-                <span></span><span></span><span></span>
-            </div>
-        </div>
-
-        <!-- Header Area Start -->
-        <header class="header-area clearfix">
-            <!-- Close Icon -->
-            <div class="nav-close">
-                <i class="fa fa-close" aria-hidden="true"></i>
-            </div>
-            <!-- Logo -->
-            <div class="logo">
-                <a href="index.jsp"><img src="img/core-img/logo.png" alt=""></a>
-                <div style="text-align:center">
-	                ${memberName}
-	                <%
-	                	if(session.getAttribute("memberName") != null){
-	                %>
-					<a href="/project02/memberProcServlet?action=logout">로그아웃</a>
-					<%
-	                	}
-					%>
-				</div>
-            </div>
-            <!-- Amado Nav -->
-            <nav class="amado-nav">
-              <ul>
-                    <li><a href="index.jsp">HOME</a></li>
-                    <%
-                   	 	if(session.getAttribute("memberName") == null){
-                    %>
-                    <li><a href="signup.jsp">SIGN UP</a></li>
-                    <li><a href="login.jsp">LOGIN</a></li>
-                    <%
-                   	 	} else {
-                   	 		String job = (String) session.getAttribute("memberJob");
-                   	 		if(job.equals("0")){
-                    %>
-                   		 <li><a href="OrdersProcServlet?action=productlist">ADMIN</a></li>
-                   	<%
-                   	 		} else if(job.equals("1")){
-                   	 		
-                   	%>
-                   			<li><a href="OrdersProcServlet?action=buyinglist&field=${memberField}">BUYING</a></li>
-                   			
-           			<%
-           	 				} else {
-           			%>
-                   			<li><a href="WaybillProcServlet?action=carrierlist&field=${memberField}">CARRIER</a></li>
-                    <%
-           	 				}
-                   	 		}
-                    %>
-                    <li class="active"><a href="product_list.jsp">PRODUCT</a></li>
-                </ul>
-            </nav>            
-        </header>
-        <!-- Header Area End -->
+ <%@ include file="header.jspf"%>
         <div class="shop_sidebar_area">
 			<div class="widget catagory mb-50">
                 <!-- Widget Title -->

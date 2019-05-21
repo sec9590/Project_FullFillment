@@ -92,97 +92,69 @@ button:hover {
 </head>
 
 <body>
+	<%@ include file="header.jspf"%>
 
-	<!-- ##### Main Content Wrapper Start ##### -->
-	<div class="main-content-wrapper d-flex clearfix">
-		<!-- Mobile Nav (max width 767px)-->
-		<div class="mobile-nav">
-			<!-- Navbar Brand -->
-			<div class="amado-navbar-brand">
-				<a href="index.jsp"><img src="img/core-img/logo.png" alt=""></a>
-				<div style="text-align: center">
-					${memberName} <a href="/project02/memberProcServlet?action=logout">로그아웃</a>
-				</div>
-			</div>
-			<!-- Navbar Toggler -->
-		</div>
+	<div class="amado_product_area section-padding-100">
+		<div class="row">
+			<h4>
+				<span style="color: #fbb810; font-weight: bold;">
+					"${requestScope.shopcode}" </span> 상세대금내역 <span
+					style="font-size: 0.8em; font-weight: normal;">(송장개수 :
+					${requestScope.shippay})</span>
+			</h4>
+			<br>
 
-		<!-- Header Area Start -->
-		<header class="header-area clearfix"> <!-- Close Icon -->
-		<div class="nav-close">
-			<i class="fa fa-close" aria-hidden="true"></i>
-		</div>
-		<!-- Logo -->
-		<div class="logo">
-			<a href="index.jsp"><img src="img/core-img/logo.png" alt=""></a>
-			<div style="text-align: center">
-				${memberName} <a href="/project02/memberProcServlet?action=logout">로그아웃</a>
-			</div>
-		</div>
-		<!-- Amado Nav --> <nav class="amado-nav">
-		<li><a href="index.jsp">HOME</a></li>
-		<li><a href="memberProcServlet?action=member&page=1">회원목록</a></li>
-        <li><a href="OrdersProcServlet?action=productlist">재고내역</a></li>
-            <li><a href="order.jsp">주문하기</a></li>
-            <li><a href="OrdersProcServlet?action=orderAll&page=1">주문내역</a></li>
-            <li><a href="OrdersProcServlet?action=orderhistoryall">발주내역</a></li>
-            <li><a href="WaybillProcServlet?action=waybilllist&page=1">운송내역</a></li>
-            <li><a href="WaybillProcServlet?action=nowaybilllist">미운송내역</a></li>
-            <li class="active"><a href="OrdersProcServlet?action=grossprofit">매출 총 이익</a></li>
-		</nav> </header>
-		<!-- Header Area End -->
-
-		<div class="amado_product_area section-padding-100">
-			<div class="row">
-				<h4>
-					<span style="color:#fbb810; font-weight:bold; "> "${requestScope.shopcode}" </span> 상세대금내역 
-					<span style="font-size:0.8em; font-weight:normal;">(송장개수 : ${requestScope.shippay})</span>
-				</h4>
-				<br>
-
-				<!-- Single Product Area -->
-				<div class="col-12 col-sm-6 col-md-12 col-xl-15">
-					<div class="single-product-wrapper">
-						<table class="table table-hover">
-							<thead>
+			<!-- Single Product Area -->
+			<div class="col-12 col-sm-6 col-md-12 col-xl-15">
+				<div class="single-product-wrapper">
+					<table class="table table-hover">
+						<thead>
+							<tr>
+								<th>상품코드</th>
+								<th>상품이름</th>
+								<th>상품가격</th>
+								<th>상품개수</th>
+								<th>총 가격</th>
+								<th>대금청구액</th>
+							</tr>
+						</thead>
+						<tbody>
+							<c:set var="slist" value="${requestScope.shopList_detail}" />
+							<c:set var="total" value="0" />
+							<c:forEach var="shop" items="${slist}">
 								<tr>
-									<th>상품코드</th>
-									<th>상품이름</th>
-									<th>상품가격</th>
-									<th>상품개수</th>
-									<th>총 가격</th>
-									<th>대금청구액</th>
+									<td>${shop.p_id}</td>
+									<td>${shop.p_name}</td>
+									<td><fmt:formatNumber value="${shop.p_price}"
+											pattern="#,###" /></td>
+									<td>${shop.p_count}</td>
+									<td style="color: blue"><fmt:formatNumber
+											value="${shop.p_total}" pattern="#,###" /></td>
+									<td style="color: red"><fmt:formatNumber
+											value="${shop.total}" pattern="#,###" /></td>
+									<c:set var="total" value="${total + shop.total}" />
 								</tr>
-							</thead>
-							<tbody>						
-								<c:set var="slist" value="${requestScope.shopList_detail}" />
-								<c:set var = "total" value = "0" />
-								<c:forEach var="shop" items="${slist}">
-									<tr>
-										<td>${shop.p_id}</td>
-										<td>${shop.p_name}</td>
-										<td><fmt:formatNumber value="${shop.p_price}" pattern="#,###" /></td>
-										<td>${shop.p_count}</td>
-										<td style="color:blue"><fmt:formatNumber value="${shop.p_total}" pattern="#,###" /></td>
-										<td style="color:red"><fmt:formatNumber value="${shop.total}" pattern="#,###" /></td>
-										<c:set var= "total" value="${total + shop.total}"/>
-									</tr>
-								</c:forEach>
-							</tbody>					
-						</table>
-						<br><br>
-						<div align=center>
-							<h5 style="font-weight:bold;">운송대금 : <span style="color:red;"><fmt:formatNumber value="${requestScope.shippay * 10000}" pattern="#,###" /></span>
-							&nbsp;/&nbsp;상품대금 : <span style="color:red;"><fmt:formatNumber value="${total + shop.total}" pattern="#,###" /></span></h5>
-						</div>
-					</div>					
+							</c:forEach>
+						</tbody>
+					</table>
+					<br>
+					<br>
+					<div align=center>
+						<h5 style="font-weight: bold;">
+							운송대금 : <span style="color: red;"><fmt:formatNumber
+									value="${requestScope.shippay * 10000}" pattern="#,###" /></span>
+							&nbsp;/&nbsp;상품대금 : <span style="color: red;"><fmt:formatNumber
+									value="${total + shop.total}" pattern="#,###" /></span>
+						</h5>
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
+	</div>
 
 	<!-- ##### Main Content Wrapper End ##### -->
-<%@ include file="/footer.jspf" %>
+	<%@ include file="/footer.jspf"%>
 
 	<!--===============================================================================================-->
 	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
