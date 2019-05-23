@@ -89,6 +89,4 @@ public class MemberDTO {
 		return "MemberDTO [m_id=" + m_id + ", m_password=" + m_password + ", m_name=" + m_name + ", m_tel=" + m_tel
 				+ ", m_job=" + m_job + ", m_field=" + m_field + "]";
 	}
-	
-	
 }
