@@ -7,7 +7,7 @@
 		<div class="mobile-nav">
 			<!-- Navbar Brand -->
 			<div class="amado-navbar-brand">
-				<a href="index.jsp"><img src="img/core-img/logo.png" alt=""></a>
+				<a href="OrdersProcServlet?action=index"><img src="img/core-img/logo.png" alt=""></a>
 				<div style="text-align: center">
 					<%=session.getAttribute(request.getAttribute("cookieId")+"memberName")%> <a href="/project02/memberProcServlet?action=logout">로그아웃</a>
 				</div>
@@ -22,7 +22,7 @@
 		</div>
 		<!-- Logo -->
 		<div class="logo">
-			<a href="index.jsp"><img src="img/core-img/logo.png" alt=""></a>
+			<a href="OrdersProcServlet?action=index"><img src="img/core-img/logo.png" alt=""></a>
 			<div style="text-align: center">
 				<%=session.getAttribute(request.getAttribute("cookieId")+"memberName")%> <a href="/project02/memberProcServlet?action=logout">로그아웃</a>
 			</div>

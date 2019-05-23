@@ -154,13 +154,12 @@ display: inline-block;
 </head>
 
 <body>
-
-	<div class="main-content-wrapper d-flex clearfix">
+<div class="main-content-wrapper d-flex clearfix">
 		<!-- Mobile Nav (max width 767px)-->
 		<div class="mobile-nav">
 			<!-- Navbar Brand -->
 			<div class="amado-navbar-brand">
-				<a href="index.jsp"><img src="img/core-img/logo.png" alt=""></a>
+				<a href="OrdersProcServlet?action=index"><img src="img/core-img/logo.png" alt=""></a>
 				<div style="text-align: center">
 					<%=session.getAttribute(request.getAttribute("cookieId")+"memberName")%> <a href="/project02/memberProcServlet?action=logout">로그아웃</a>
 				</div>
@@ -175,13 +174,13 @@ display: inline-block;
 		</div>
 		<!-- Logo -->
 		<div class="logo">
-			<a href="index.jsp"><img src="img/core-img/logo.png" alt=""></a>
+			<a href="OrdersProcServlet?action=index"><img src="img/core-img/logo.png" alt=""></a>
 			<div style="text-align: center">
 				<%=session.getAttribute(request.getAttribute("cookieId")+"memberName")%> <a href="/project02/memberProcServlet?action=logout">로그아웃</a>
 			</div>
 		</div>
 		<!-- Amado Nav --> <nav class="amado-nav">
-		<li><a href="index.jsp">HOME</a></li>
+		<li><a href="OrdersProcServlet?action=index">HOME</a></li>
 		<li><a href="memberProcServlet?action=member&page=1">회원목록</a></li>
 		<li><a
 			href="ProductProcServlet?action=product_list&page=1">제품목록</a></li>
