@@ -246,7 +246,7 @@ public class OrdersDAO {
 	}
 
 	// 운송처리위한 현재시간 변환
-	public static Date currentTime(String day) {
+	public Date currentTime(String day) {
 		SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
 		SimpleDateFormat format2 = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 		Date time = new Date();
