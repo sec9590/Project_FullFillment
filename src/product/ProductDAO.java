@@ -553,7 +553,7 @@ public class ProductDAO {
 	
 	// 페이지위한 개수
 	public int getCount() {
-			String query = "select count(*) from orders;";
+			String query = "select count(*) from product;";
 			PreparedStatement pStmt = null;
 			int count = 0;
 			try {
