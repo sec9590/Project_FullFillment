@@ -1,5 +1,6 @@
 # Project02 (190430~190517)
-### Fulfillment Service (창고시스템) 
+### Fulfillment Service (창고시스템)
+: JSP 와 Servlet으로 구현
 #### 팀원 : 노연아 천세은 홍민지 
 
 

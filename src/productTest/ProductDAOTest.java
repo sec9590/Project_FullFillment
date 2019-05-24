@@ -27,7 +27,6 @@ public class ProductDAOTest {
 	@Test
 	public void isBuying() {
 		assertEquals(false, pDao.isBuying(6));
-	}	
-		
-	
+	}		
 }
+

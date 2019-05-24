@@ -7,8 +7,7 @@ import java.util.List;
 
 import org.junit.Test;
 
-import member.MemberDAO;
-import member.MemberDTO;
+import member.*;
 
 public class MemberDAOTest {
 	private MemberDAO mDao = new MemberDAO();
